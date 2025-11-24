@@ -1,0 +1,208 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Oswald', sans-serif;
+}
+
+@font-face {
+    font-family: 'Majesty';
+    src: url(/fonts/FB-Free-Majesty-Goldera/Majesty\ Goldera.otf);
+}
+
+main.cadastro-screen {
+    height: 100vh;
+    background-image: url(https://cdn.pixabay.com/photo/2017/08/17/20/05/disney-2652684_1280.jpg);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    background: lightskyblue center center no-repeat;
+    background-size: cover;
+    transition: 0.2s;
+    place-items: center;
+}
+
+.form-container {
+  transform: scale(1.2);
+  justify-self: center;
+  grid-column: 2;
+  grid-row: 2;
+  width: auto;
+  height: auto;
+  background-color: #fff;
+  border: 1px outset rgba(0, 0, 0, 0.701);
+  box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 1px;
+  border-radius: 15px;
+  padding: 2% 4%;
+}
+
+.title {
+  font-family: 'Majesty';
+  text-align: center;
+  margin-bottom: 4%;
+  font-size: 2.8em;
+  font-weight: 400;
+  color: #222222;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 1%;
+}
+
+.input {
+  border-radius: 10px;
+  border: 1px outset #c0c0c0;
+  outline: 0 !important;
+  padding: 5%;
+}
+
+.page-link-label {
+  margin: 0;
+  color: rgb(0, 94, 255);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.115);
+  text-align: end;
+  font-size: 0.9em;
+  font-weight: 400;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.page-link-label:hover, .page-link-label:active {
+  color: rgb(61, 129, 247);
+}
+
+.form-btn {
+  font-size: 1.5em;
+  padding: 2px 0 4px 0;
+  border-radius: 20px;
+  border: 0 !important;
+  outline: 0 !important;
+  background: rgb(98, 169, 213);
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: 0.2s ease;
+}
+
+.form-btn:active {
+    transform: scale(0.96);
+  box-shadow: none;
+}
+
+.sign-up-label {
+  margin: 0;
+  margin-top: 10px;
+  font-size: 1.2em;
+  color: #504f4f;
+}
+
+.sign-up-link {
+  margin-left: 6px;
+  font-size: 1em;
+  color: rgb(0, 94, 255);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.115);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.sign-up-link:hover, .sign-up-link:active {
+  color: rgb(61, 129, 247);
+}
+
+.buttons-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.apple-login-button, .google-login-button {
+  border-radius: 20px;
+  padding: 1.5% 3.5% 2.5% 3.5%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+        rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 11px;
+  gap: 5px;
+  font-size: 1.2em;
+  transition: 0.2s ease;
+}
+
+.apple-login-button:active, .google-login-button:active {
+    transform: scale(0.96);
+}
+
+.apple-login-button {
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #000;
+}
+
+.google-login-button {
+  border: 2px solid #747474;
+}
+
+.apple-icon,
+    .google-icon {
+  font-size: 18px;
+  margin-bottom: 1px;
+}
+
+
+@media screen and (max-height: 568px) {
+main {
+    height: 100vh;
+    background-image: url(https://cdn.pixabay.com/photo/2017/08/17/20/05/disney-2652684_1280.jpg);
+    display: flex;
+    position: relative;
+    background: lightskyblue center center no-repeat;
+    background-size: cover;
+    transition: 0.5s;
+}
+
+div.form-container {
+    width: 80%;
+    position: absolute;
+    top: 42.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px outset rgba(0, 0, 0, 0.701);
+    box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 1px;
+    border-radius: 15px;
+    padding: 2% 4%;
+}
+
+.sign-up-link {
+    display: block;
+    margin: auto;
+  font-size: 1em;
+  color: rgb(0, 94, 255);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.115);
+  cursor: pointer;
+  font-weight: 800;
+}
+}
+
+@media screen and (min-height: 569px) and (min-width: 320px) and (max-width: 1024px) {
+main {
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 5vh 1fr 5vh;
+    place-items: center center;
+}
+
+div.form-container {
+    max-width: 80%;
+    transform: scale(1.1);
+    padding: 4% 5%;
+}
+}

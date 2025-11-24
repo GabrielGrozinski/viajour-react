@@ -1,0 +1,831 @@
+@font-face {
+    font-family: 'Majesty';
+    src: url(/fonts/FB-Free-Majesty-Goldera/Majesty\ Goldera.otf);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Oswald', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-image: linear-gradient(to bottom, #0244f9, #57adf8 25%);
+}
+
+body.ativado {
+    background-image: none;
+    background-color: #001c43;
+}
+
+header.header-fechado {
+    width: 100%;
+    padding: 20px 12px 12px;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+}
+
+header.header-fechado > i#menu-icone {
+    grid-column: 1;
+    justify-self: start;
+}
+
+header.header-fechado > i#user-icone {
+    grid-column: 3;
+    justify-self: end;
+}
+
+header.header-fechado > h1 {
+    font-family: 'Majesty';
+    letter-spacing: 2px;
+    font-weight: 300;
+    text-align: center;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+header.header-fechado i {
+    font-size: 2em;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    transition: 0.4s ease-in-out;
+}
+
+header.header-fechado i:active {
+    transform: scale(0.94);
+}
+
+/* ===== CARD DE ESTATÍSTICAS ===== */
+
+.stats-card {
+    width: 100%;
+    display: grid;
+    grid-row: 1fr 1fr;
+    padding: 30px 20px;
+    gap: 30px;
+}
+
+.stat-item {
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: 15% 20% 1fr;
+    align-items: center;
+}
+
+.stat-item i {
+    grid-column: 2;
+    font-size: 3em;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.stat-item .desc {
+    grid-column: 3;
+}
+
+.stat-item .value {
+    font-size: 1.6em;
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: lightyellow;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.stat-item .label {
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+main.main-fechado {
+    background-color: white;
+    padding-top: 20px;
+    padding-bottom: 100px;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr) auto auto;
+    place-content: center;
+    row-gap: 10px;
+    transition: all 0.4s;
+}
+
+main.main-fechado > div.icones {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    place-items: center;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    margin: 5px 14px 14px 15px;
+    padding-top: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+main.main-fechado > div.icones:active {
+    background-color: whitesmoke;
+}
+
+main.main-fechado > div.icones > i {
+    grid-row: 1;
+    font-size: 2.4em;
+    color: #0080ff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+main.main-fechado > div.icones > h4 {
+    grid-row: 2;
+    font-size: 1em;
+    text-align: center;
+    font-weight: 400;
+    color: rgb(1, 18, 43);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.12);
+}
+
+main.main-fechado > div.desc-app {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 1fr 1fr;
+    margin: 0 15px;
+    border-radius: 6px;
+    justify-content: start;
+    align-items: center;
+    line-height: 22px;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+    padding: 25px;
+    row-gap: 15px;
+    position: relative;
+}
+
+main.main-fechado > div.desc-app > p {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 1.4em;
+    font-weight: 400;
+    color: #222222;
+}
+
+main.main-fechado > div.desc-app > button.btn-instalar-app {
+    grid-row: 2;
+    grid-column: 1;
+    background-image: linear-gradient(to right, #5481ff, #47a7fb);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    padding: 5px 0 7px 0;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+main.main-fechado > div.desc-app > img {
+    position: absolute;
+    bottom: 0%;
+    right: 8.5%;
+    max-height: 130px;
+    max-width: 150px;
+}
+
+/* Aberto */
+
+header.header-aberto {
+    display: grid;
+    width: 100%;
+    padding: 10px 12px 14px 12px;
+    color: white;
+    display: none;
+    grid-template-columns: 15% 40% 1fr;
+    place-items: center start;
+}
+
+header.header-aberto > i#fechar-icone {
+    grid-column: 1;
+}
+
+header.header-aberto > h1 {
+    grid-column: 2;
+    font-family: 'Majesty';
+    letter-spacing: 2px;
+    font-weight: 300;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+header.header-aberto > article#moeda-item {
+    grid-column: 3;
+    display: flex;
+    background-color: #1d3a6d3d;
+    border-radius: 40px;
+    width: 100%;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 1.4em;
+    font-weight: 300;
+    cursor: pointer;
+    scale: 0.84;
+}
+
+header.header-aberto > article#moeda-item.ativado {
+    background-color: #1d3a6d8c;
+}
+
+header.header-aberto > article#moeda-item > img {
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+header.header-aberto > article#moeda-item > p, header.header-aberto > article#moeda-item > span#seta-moeda {
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.4);
+}
+
+span#seta-moeda {
+    display: inline-block;
+    font-size: 1em;
+    transform: rotate(90deg) translate(0%, -10%);
+    transition: 0.1s;
+    font-weight: 400;
+}
+
+span#seta-moeda.ativado {
+    transform: rotate(-90deg) translate(0%, 10%);
+}
+
+section#container-moeda-e-idioma {
+    opacity: 0;
+    height: 0;
+    display: flex;
+    flex-flow: row wrap;
+    row-gap: 10px;
+    justify-content: space-between;
+    justify-items: center;
+    pointer-events: none;
+    overflow: hidden;
+    transform: translateY(40px);
+    background-color: none;
+    transition: all 0.4s ease-in-out, opacity 1ms ease-out, background-color 1ms linear;
+}
+
+section#container-moeda-e-idioma.ativado {
+    height: auto;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    padding-bottom: 10px;
+    background-color: lightskyblue;
+    transition: all 1ms;
+}
+
+section#container-moeda-e-idioma > article {
+    width: 40%;
+    margin: 0 5%;
+    border-radius: 6px;
+    padding: 8px 0;
+    background-color: white;
+    transition: all 0.2s linear, background-color 200ms ease;
+}
+
+section#container-moeda-e-idioma > h2 {
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+article.idiomas-e-moedas-itens {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em;
+    font-weight: 400;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+section#container-moeda-e-idioma > article:active {
+    transform: scale(0.98);
+    background-color: rgb(241, 232, 232);
+}
+
+article.idiomas-e-moedas-itens > img {
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    margin-left: 5%;
+}
+
+article.idiomas-e-moedas-itens > p {
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.4);
+    margin-right: 5%;
+}
+
+hr#hr-header-main {
+    border: 1px solid rgba(158, 186, 250, 0.122);
+}
+
+section#section-instrucoes {
+    display: none;
+    margin: 10px 0;
+}
+
+section#section-instrucoes.ativado {
+    display: block;
+}
+
+section#section-instrucoes.ativado > div {
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+    padding-left: 4px;
+}
+
+section#section-instrucoes.ativado > div#div-ferramentas-ia > i {
+    color: lightblue;
+}
+
+section#section-instrucoes.ativado > div#div-custos > i {
+    color: lightgreen;
+}
+
+section#section-instrucoes.ativado > div#div-planejamento-pessoal > i {
+    color: rgb(214, 214, 103);
+}
+
+main.main-aberto {
+    display: none;
+}
+
+main.main-aberto.ativado {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 10px 5%;
+    justify-content: space-between;
+    row-gap: 30px;
+}
+
+main.main-aberto.ativado > article.itens-do-viajour {
+    width: 45%;
+    height: 100px;
+    border-radius: 10px;
+    background-color: #4851d745;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+main.main-aberto.ativado > article.itens-do-viajour > a {
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    padding-left: 10px;
+    padding-right: 5px;
+    position: relative;
+}
+
+main.main-aberto.ativado > article.itens-do-viajour > a > p {
+    font-size: 1.2em;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+main.main-aberto.ativado > article.itens-do-viajour > a > i.icones-referencia {
+    font-size: 1.8em;
+    color: whitesmoke;
+    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+main.main-aberto.ativado > article.itens-do-viajour > a > i.icones-ia {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    transform: translate(-20%, 30%);
+    color: lightblue;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+main.main-aberto.ativado > article.itens-do-viajour > a > i.icones-custo {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    transform: translate(-0%, 25%);
+    color: lightgreen;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+main.main-aberto.ativado > article.itens-do-viajour > a > i.icones-planejamento {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    transform: translate(-10%, 25%);
+    color: rgb(214, 214, 103);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+@media screen and (max-width: 320px) {
+    section#container-moeda-e-idioma.ativado {
+        justify-content: center;
+    }
+
+    section#container-moeda-e-idioma.ativado > article {
+        width: 50%;
+    }
+
+  header.header-aberto > i#fechar-icone, header.header-aberto > h1, header.header-fechado > i#user-icone, header.header-fechado > i#menu-icone {
+    font-size: 1.8em;
+  }
+
+  header.header-aberto > article#moeda-item {
+    scale: 0.74;
+  }
+
+  .stats-card {
+    padding: 30px 0px;
+}
+
+main.main-aberto.ativado > article.itens-do-viajour {
+    height: 120px;
+}
+
+}
+
+@media screen and (max-height: 568px) {
+main.main-fechado > div.desc-app > img {
+    right: 3.5%;
+    max-height: 150px;
+}
+}
+
+@media screen and (min-width: 568px) {   
+    main.main-fechado > div.desc-app > p {
+        text-align: center;
+    }
+
+    .stats-card {
+        justify-content: center;
+    }
+
+    .stat-item {
+        grid-template-columns: 30% 1fr;
+    }
+
+    .stat-item i {
+        grid-column: 1;
+    }
+
+    .stat-item .desc {
+        grid-column: 2;
+    }
+
+    body {
+        background-image: linear-gradient(to bottom, #0244f9, #57adf8 65%);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        height: 100vh;
+        background-image: linear-gradient(to bottom, #0244f9, #57adf8 20%);
+    }
+
+    .stats-card {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    header.header-aberto {
+        grid-template-columns: 15% 30% 1fr;
+    }
+
+    header.header-aberto > i#fechar-icone, header.header-aberto > h1, header.header-fechado > i#user-icone, header.header-fechado > i#menu-icone, header.header-fechado > h1 {
+        font-size: 2em;
+    }
+
+    section#container-moeda-e-idioma.ativado {
+        padding-bottom: 30px;
+    }
+
+    section#container-moeda-e-idioma.ativado > h2 {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+    }
+
+    .stats-card {
+        padding: 30px 0px;
+    }
+
+    main.main-aberto.ativado > article.itens-do-viajour {
+        height: 140px;
+    }
+
+    main.main-aberto.ativado > article.itens-do-viajour > a {
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    main.main-aberto.ativado > article.itens-do-viajour > a > p {
+        font-size: 1.6em;
+    }
+
+    main.main-aberto.ativado > article.itens-do-viajour > a > i.icones-referencia {
+        font-size: 2.2em;
+    }
+
+    main.main-aberto.ativado > article.itens-do-viajour > a > i.icones-ia, main.main-aberto.ativado > article.itens-do-viajour > a > i.icones-custo, main.main-aberto.ativado > article.itens-do-viajour > a > i.icones-planejamento {
+        font-size: 1.4em;
+        cursor: default;
+    }
+}
+
+@media screen and (min-width: 568px) and (max-width: 851px) {
+    main.main-fechado > div.desc-app > img {
+        right: 10.5%;
+        max-height: 150px;
+    }
+}
+
+@media screen and (min-width: 852px) and (max-width: 956px) {
+    main.main-fechado > div.desc-app > img {
+        right: 10.5%;
+        max-height: 150px;
+    }
+}
+
+@media screen and (min-width: 957px) and (max-width: 1024px) {
+    main.main-fechado > div.desc-app > img {
+        right: 14.5%;
+        max-height: 150px;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    body {
+        min-height: 100vh;
+        height: auto;
+        background-image: linear-gradient(to bottom, #0244f9, #57adf8 35%);
+        display: grid;
+        grid-template-columns: 4vw 1fr;
+        grid-template-rows: 10vh 20vh 1fr;    
+    }
+
+    aside {
+        position: relative;
+        z-index: 1;
+        background-color: #082556;
+        padding-top: 3vh;
+        grid-row: span 3;
+        grid-column: 1;
+        transition: all 0.1s;
+        width: 4vw;
+        display: flex;
+        justify-content: start;
+        flex-flow: column nowrap;
+        align-items: center;
+        overflow: hidden;
+        gap: 40px;
+    }
+
+    aside > article.itens-do-viajour-desktop {
+        min-height: 50px;
+        height: auto;
+        margin: 0 4%;
+        border-radius: 6px;
+        padding: auto;
+        color: white;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    }
+
+    aside > i#menu-icone-aside {
+        align-self: center;
+        color: white;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        font-size: 1.8em;
+        cursor: pointer;
+    }
+
+    aside > article.itens-do-viajour-desktop, aside > div.div-instrucoes {
+        display: none;
+    }
+
+    aside > div#div-menu-fechado {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 30px;
+        font-size: 1.4em;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    }
+
+    aside > div#div-menu-fechado > i#instrucao-1 {
+        color: lightblue;
+    }
+
+    aside > div#div-menu-fechado > i#instrucao-2 {
+        color: lightgreen;
+    }
+
+    aside > div#div-menu-fechado > i#instrucao-3 {
+        color: rgb(214, 214, 103);
+    }
+
+    aside.ativado {
+        height: auto;
+        width: 12vw;
+        transition: 0.2s linear;
+        background-color: #082556;
+        border-radius: 10px;
+        display: flex;
+        align-items: end;
+        flex-flow: column nowrap;
+        gap: 15px;
+        padding: 3vh 2vh;
+    }
+
+    aside.ativado > div#div-menu-fechado {
+        display: none;
+    }
+
+    aside.ativado > div.div-instrucoes {
+        display: flex;
+        align-self: center;
+        flex-direction: column;
+        color: rgb(245, 245, 245);
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+        align-items: center;
+        text-align: center;
+        font-size: 1.4em;
+        font-weight: 400;
+        gap: 4px;
+        margin-top: 20px;
+    }
+
+    aside.ativado > div#div-ferramentas-ia-desktop > i {
+        color: lightblue;
+    }
+
+    aside.ativado > div#div-custos-desktop > i {
+        color: lightgreen;
+    }
+
+    aside.ativado > div#div-planejamento-pessoal-desktop > i {
+        color: rgb(214, 214, 103);
+    }
+
+    aside.ativado > article.itens-do-viajour-desktop {
+        display: block;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 70px;
+        border-radius: 6px;
+        overflow: hidden;   
+    }
+
+    aside.ativado > article.itens-do-viajour-desktop > a {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: start;
+        justify-content: space-evenly;
+        gap: 4px;
+        text-decoration: none;
+        padding: 8px 0;
+        height: 100%;
+        width: 100%;
+        color: white;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+        font-weight: 400;
+        background-color: rgba(211, 211, 211, 0.062);
+        padding-left: 5px;
+        transition: all 0.3s;
+    }
+
+    aside.ativado > article.itens-do-viajour-desktop > a:hover {
+        background-color: rgb(52, 94, 219);
+    }
+
+    header.header-fechado {
+        grid-column: 2;
+        grid-row: 1;
+        width: 100%;
+        gap: 10px;
+        color: white;
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        grid-row: 1fr;
+        place-items: start normal;
+        padding: 2vh 1vw 2vh 0;
+    }
+    
+    header.header-fechado > i#menu-icone {
+        display: none;
+    }
+
+    header.header-fechado > h1 {
+        grid-column: 1;
+        grid-row: 1;
+        font-family: 'Majesty';
+        letter-spacing: 2px;
+        font-weight: 300;
+        text-align: center;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        transition: all 0.2s;
+    }
+
+    header.header-fechado > h1.menu-expandido {
+        padding-left: 9vw;
+    }
+
+    header.header-fechado > section#container-moeda-e-idioma-desktop {
+        display: flex;
+        justify-self: end;
+        grid-column: 2;
+        grid-row: 1;
+        gap: 10px;
+        transition: all 0.2s;
+        scale: 0.8;
+    }
+
+    header.header-fechado > section#container-moeda-e-idioma-desktop > article.idiomas-e-moedas-itens-desktop {
+        display: flex;
+        min-width: 140px;
+        justify-content: space-evenly;
+        padding: 10px 0;
+        align-items: center;
+        background-color: rgb(98, 195, 255);
+        box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    header.header-fechado > section#container-moeda-e-idioma-desktop > article.idiomas-e-moedas-itens-desktop:active {
+        background-color: rgb(137, 250, 112);
+    }
+
+    header.header-fechado > section#container-moeda-e-idioma-desktop > article#moeda-item {
+        display: flex;
+        background-color: #12317d75;
+        border-radius: 40px;
+        width: 175px;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        font-size: 1.2em;
+        font-weight: 300;
+        scale: 1;
+    }
+
+    header.header-fechado > i#user-icone {
+        display: none;
+    }
+
+    header i {
+        font-size: 2em;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        transition: 0.4s ease-in-out;
+    }
+
+    header.header-fechado i:active {
+        transform: scale(0.94);
+    }
+
+    .stats-card {
+        grid-row: 2;
+        grid-column: 2;
+    }
+
+    main.main-fechado {
+        grid-row: 3;
+        grid-column: 2;
+    }
+
+    main.main-fechado.menu-expandido {
+        padding-left: 8vw;
+    }
+    
+
+}
+
+@media screen and (min-width: 1528px) {
+    header.header-fechado > section#container-moeda-e-idioma-desktop {
+        scale: 0.9;
+    }
+}
+
+@media screen and (min-width: 1628px) {
+    header.header-fechado > section#container-moeda-e-idioma-desktop {
+        scale: 1;
+    }
+}

@@ -1,0 +1,187 @@
+@font-face {
+    font-family: 'Majesty';
+    src: url(/fonts/FB-Free-Majesty-Goldera/Majesty\ Goldera.otf);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Oswald', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-image: linear-gradient(to bottom, #0244f9, #57adf8 25%);
+}
+
+header.header-fechado {
+    width: 100%;
+    padding: 20px 12px 12px;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+}
+
+header.header-fechado > i#menu-icone {
+    grid-column: 1;
+    justify-self: start;
+}
+
+header.header-fechado > i#user-icone {
+    grid-column: 3;
+    justify-self: end;
+}
+
+header.header-fechado > h1 {
+    font-family: 'Majesty';
+    letter-spacing: 2px;
+    font-weight: 300;
+    text-align: center;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+header.header-fechado i {
+    font-size: 2em;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    transition: 0.4s ease-in-out;
+}
+
+header.header-fechado i:active {
+    transform: scale(0.94);
+}
+
+.stats-card {
+    width: 100%;
+    display: grid;
+    grid-row: 1fr 1fr;
+    padding: 30px 20px;
+    gap: 30px;
+}
+
+.stat-item {
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: 15% 20% 1fr;
+    align-items: center;
+}
+
+.stat-item i {
+    grid-column: 2;
+    font-size: 3em;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.stat-item .desc {
+    grid-column: 3;
+}
+
+.stat-item .value {
+    font-size: 1.6em;
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: lightyellow;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.stat-item .label {
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+main.main-fechado {
+    background-color: white;
+    padding-top: 20px;
+    padding-bottom: 100px;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr) auto auto;
+    place-content: center;
+    row-gap: 10px;
+    transition: all 0.4s;
+}
+
+main.main-fechado > div.icones {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    place-items: center;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    margin: 5px 14px 14px 15px;
+    padding-top: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+main.main-fechado > div.icones:active {
+    background-color: whitesmoke;
+}
+
+main.main-fechado > div.icones > i {
+    grid-row: 1;
+    font-size: 2.4em;
+    color: #0080ff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+main.main-fechado > div.icones > h4 {
+    grid-row: 2;
+    font-size: 1em;
+    text-align: center;
+    font-weight: 400;
+    color: rgb(1, 18, 43);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.12);
+}
+
+main.main-fechado > div.desc-app {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 1fr 1fr;
+    margin: 0 15px;
+    border-radius: 6px;
+    justify-content: start;
+    align-items: center;
+    line-height: 22px;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+    padding: 25px;
+    row-gap: 15px;
+    position: relative;
+}
+
+main.main-fechado > div.desc-app > p {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 1.4em;
+    font-weight: 400;
+    color: #222222;
+}
+
+main.main-fechado > div.desc-app > button.btn-instalar-app {
+    grid-row: 2;
+    grid-column: 1;
+    background-image: linear-gradient(to right, #5481ff, #47a7fb);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    padding: 5px 0 7px 0;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+main.main-fechado > div.desc-app > img {
+    position: absolute;
+    bottom: 0%;
+    right: 8.5%;
+    max-height: 130px;
+    max-width: 150px;
+}
