@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PaginaInicial from './pages/pagina-inicial';
 import Cadastro from './pages/cadastro';
-import PaginaMain from "./pages/pagina-main";
+import PaginaPrincipal from "./pages/pagina-principal/pagina-principal";
 
 export default function App() {
   return (
@@ -9,7 +9,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<PaginaInicial />} />
         <Route path="/cadastro" element={<Cadastro />} />
-        <Route path="/main" element={<PaginaMain />} />
+        <Route path="/principal" element={<PaginaPrincipal />} />
       </Routes>
     </BrowserRouter>
   );

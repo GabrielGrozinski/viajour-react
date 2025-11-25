@@ -10,17 +10,19 @@
     font-family: 'Oswald', sans-serif;
 }
 
-body {
+div.body-menu-fechado {
     height: 100vh;
     background-image: linear-gradient(to bottom, #0244f9, #57adf8 25%);
 }
 
 header.header-fechado {
+    background-color: transparent;
     width: 100%;
-    padding: 20px 12px 12px;
-    color: white;
+    padding: 0 12px;
     display: grid;
+    color: white;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-row: 1fr;
     place-items: center;
 }
 
@@ -34,12 +36,15 @@ header.header-fechado > i#user-icone {
     justify-self: end;
 }
 
-header.header-fechado > h1 {
+header.header-fechado > h1.logo {
+    grid-column: 2;
+    grid-row: 1;
     font-family: 'Majesty';
     letter-spacing: 2px;
     font-weight: 300;
     text-align: center;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    color: white;
 }
 
 header.header-fechado i {
@@ -99,19 +104,20 @@ header.header-fechado i:active {
 
 main.main-fechado {
     background-color: white;
+    justify-items: center;
     padding-top: 20px;
     padding-bottom: 100px;
     height: auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr) auto auto;
-    place-content: center;
     row-gap: 10px;
     transition: all 0.4s;
 }
 
 main.main-fechado > div.icones {
     display: grid;
+    min-width: 90%;
     grid-template-rows: 1fr 1fr;
     place-items: center;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
@@ -144,6 +150,7 @@ main.main-fechado > div.icones > h4 {
 
 main.main-fechado > div.desc-app {
     grid-column: span 2;
+    min-width: 95%;
     display: grid;
     grid-template-columns: 60% 40%;
     grid-template-rows: 1fr 1fr;

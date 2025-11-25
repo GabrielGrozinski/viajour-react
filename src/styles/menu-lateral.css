@@ -1,0 +1,153 @@
+@font-face {
+    font-family: 'Majesty';
+    src: url(/fonts/FB-Free-Majesty-Goldera/Majesty\ Goldera.otf);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Oswald', sans-serif;
+}
+
+aside.menu-lateral {
+    position: relative;
+    z-index: 1;
+    background-color: #082556;
+    padding-top: 3vh;
+    grid-row: span 3;
+    grid-column: 1;
+    transition: all 0.1s;
+    width: 4vw;
+    display: flex;
+    justify-content: start;
+    flex-flow: column nowrap;
+    align-items: center;
+    overflow: hidden;
+    gap: 40px;
+}
+
+aside.menu-lateral > article.itens-do-viajour-desktop {
+    min-height: 50px;
+    height: auto;
+    margin: 0 4%;
+    border-radius: 6px;
+    padding: auto;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+aside.menu-lateral > i#menu-icone-aside {
+    align-self: center;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    font-size: 1.8em;
+    cursor: pointer;
+}
+
+aside.menu-lateral > article.itens-do-viajour-desktop, aside.menu-lateral > div.div-instrucoes {
+    display: none;
+}
+
+aside.menu-lateral > div#div-menu-fechado {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 30px;
+    font-size: 0.7em;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+aside.menu-lateral > div#div-menu-fechado > i#instrucao-1 {
+    color: lightblue;
+}
+
+aside.menu-lateral > div#div-menu-fechado > i#instrucao-2 {
+    color: lightgreen;
+}
+
+aside.menu-lateral > div#div-menu-fechado > i#instrucao-3 {
+    color: rgb(214, 214, 103);
+}
+
+aside.menu-lateral.ativado {
+    height: auto;
+    width: 12vw;
+    transition: 0.2s linear;
+    background-color: #082556;
+    border-radius: 10px;
+    display: flex;
+    align-items: end;
+    flex-flow: column nowrap;
+    gap: 15px;
+    padding: 3vh 2vh;
+}
+
+aside.menu-lateral.ativado > div#div-menu-fechado {
+    display: none;
+}
+
+aside.menu-lateral.ativado > div.div-instrucoes {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    color: rgb(245, 245, 245);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    align-items: center;
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: 400;
+    gap: 4px;
+    margin-top: 20px;
+}
+
+aside.menu-lateral.ativado > div.div-instrucoes > i {
+    font-size: 1em;
+}
+
+aside.menu-lateral.ativado > div#div-ferramentas-ia-desktop > i {
+    color: lightblue;
+}
+
+aside.menu-lateral.ativado > div#div-custos-desktop > i {
+    color: lightgreen;
+}
+
+aside.menu-lateral.ativado > div#div-planejamento-pessoal-desktop > i {
+    color: rgb(214, 214, 103);
+}
+
+aside.menu-lateral.ativado > article.itens-do-viajour-desktop {
+    display: block;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 70px;
+    border-radius: 6px;
+    overflow: hidden;   
+}
+
+aside.menu-lateral.ativado > article.itens-do-viajour-desktop > a {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: start;
+    justify-content: space-evenly;
+    gap: 4px;
+    text-decoration: none;
+    padding: 8px 0;
+    height: 100%;
+    width: 100%;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    font-weight: 400;
+    background-color: rgba(211, 211, 211, 0.062);
+    padding-left: 5px;
+    transition: all 0.3s;
+}
+
+aside.menu-lateral.ativado > article.itens-do-viajour-desktop > a:hover {
+    background-color: rgb(52, 94, 219);
+}
+
+aside.menu-lateral.ativado > article.itens-do-viajour-desktop > a > i {
+    color: white;
+    font-size: 1.6em;
+}
