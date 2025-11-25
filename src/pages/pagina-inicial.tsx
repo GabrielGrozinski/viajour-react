@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import '../styles/pagina-inicial.css'
+import {useState, useRef, useEffect} from "react"
+import { useNavigate } from "react-router-dom"
+import '../styles/pagina-inicial.css';
 
-export default function PaginaInicial() {
+export default function Teste() {
   const navigate = useNavigate();
   const [menuAberto, setMenuAberto] = useState(false);
   const [produtosMobile, setProdutosMobile] = useState(false);
@@ -30,218 +30,308 @@ export default function PaginaInicial() {
     }, 0);
   }
 
-  return (
-    <>
-      {/* MENU MOBILE */}
-      <div id="menu-pressionado" className={menuAberto ? "aberto" : ""}>
-        <i
-          id="botao-fechar"
-          className="fa-solid fa-xmark"
-          onClick={() => setMenuAberto(false)}
-        ></i>
+return (
+  <>
+    {/* MENU MOBILE */}
+    <div
+      id="menu-pressionado"
+      className={
+        menuAberto
+          ? "aberto pagina-inicial-screen"
+          : "pagina-inicial-screen"
+      }
+    >
+      <i
+        id="botao-fechar"
+        className="fa-solid fa-xmark pagina-inicial-screen"
+        onClick={() => setMenuAberto(false)}
+      ></i>
 
-        <div className="cadastro">
-          <button onClick={() => navigate('/cadastro')} id="cadastrar">Cadastrar</button>
-          <button onClick={() => navigate('/cadastro')} id="login">Login</button>
-        </div>
-
-        <section id="topicos">
-          <div onClick={() => setProdutosMobile(!produtosMobile)} id="produtos-container">
-            <h3 id="produtos-tag" className={produtosMobile ? "aberto" : ""}>Produtos</h3>
-            <p id="sinal-icone" className={produtosMobile ? "aberto" : ""}>&gt;</p>
-          </div>
-
-          <article id="produtos-a-mostrar" className={produtosMobile ? "aberto" : ""}>
-            <div className="produtos-unicos">
-              <i className="fa-solid fa-wand-magic-sparkles"></i>
-              <h3>Roteiro Automático</h3>
-            </div>
-
-            <div className="produtos-unicos">
-              <i className="fa-solid fa-pen-to-square"></i>
-              <h3>Cálculo de Custos</h3>
-            </div>
-
-            <div className="produtos-unicos">
-              <i className="fa-solid fa-camera-retro"></i>
-              <h3>Monte sua Aventura</h3>
-            </div>
-          </article>
-
-          <h3>Documentação</h3>
-          <h3>Preço</h3>
-          <h3>Contato</h3>
-
-          <hr />
-
-          <article id="tema-container">
-            <h3>Tema</h3>
-            <div id="temas">
-              <i
-                className="fa-solid fa-moon"
-                onClick={() => setTemaEscuro(true)}
-              ></i>
-              <i
-                className="fa-solid fa-sun"
-                onClick={() => setTemaEscuro(false)}
-              ></i>
-            </div>
-          </article>
-        </section>
+      <div className="cadastro pagina-inicial-screen">
+        <button
+          onClick={() => navigate("/cadastro")}
+          id="cadastrar"
+          className="pagina-inicial-screen"
+        >
+          Cadastrar
+        </button>
+        <button
+          onClick={() => navigate("/cadastro")}
+          id="login"
+          className="pagina-inicial-screen"
+        >
+          Login
+        </button>
       </div>
 
-      {/* HEADER */}
-      <header
-        id="header"
-        className={menuAberto ? "fechado" : ""}
-        onMouseLeave={() => setProdutosDesktop(false)}
-      >
-        <i id="aviao-icone" className="fa-solid fa-plane"></i>
-        <h2><i id="aviao-icone-desktop" className="fa-solid fa-plane"></i> ViaJour</h2>
-
-        <section>
-          <article
-            id="produto-desktop-tag"
-            className={`topicos-desktop ${produtosDesktop ? "azul-ativado" : ""}`}
-            onMouseEnter={() => setProdutosDesktop(true)}
+      <section id="topicos" className="pagina-inicial-screen">
+        <div
+          onClick={() => setProdutosMobile(!produtosMobile)}
+          id="produtos-container"
+          className="pagina-inicial-screen"
+        >
+          <h3
+            className={
+              produtosMobile ?
+              "aberto pagina-inicial-screen" :
+              "pagina-inicial-screen"
+            }
+            id="produtos-tag"
           >
-            Produtos <span id="seta-desktop" className={produtosDesktop ? "seta-virada" : ""}>&gt;</span>
-          </article>
-
-          <h3 className="topicos-desktop" onMouseEnter={() => setProdutosDesktop(false)}>Documentação</h3>
-          <h3 className="topicos-desktop" onMouseEnter={() => setProdutosDesktop(false)}>Preço</h3>
-          <h3 className="topicos-desktop" onMouseEnter={() => setProdutosDesktop(false)}>Contato</h3>
-        </section>
-
-        <nav onMouseEnter={() => setProdutosDesktop(false)}>
-          <h3 onClick={() => navigate('/cadastro')} id="l-desktop" className="cadastro-desktop">Fazer Login</h3>
-          <h3 onClick={() => navigate('/cadastro')} id="c-desktop" className="cadastro-desktop">Cadastrar</h3>
-        </nav>
-
-        <div onMouseLeave={() => setProdutosDesktop(false)} id="produtos-desktop-container" className={produtosDesktop ? "container-ativado" : ""}>
-          <h2>Ferramentas I.A</h2>
-          <div className="produtos-pai" id="ferramentas-ia">
-            <div><i className="fa-solid fa-wand-magic-sparkles"></i><h3>Roteiro Automático</h3></div>
-            <div><i className="fa-solid fa-wand-magic-sparkles"></i><h3>Chat Auxiliar</h3></div>
-            <div><i className="fa-solid fa-wand-magic-sparkles"></i><h3>Busca Paraíso</h3></div>
-            <div><i className="fa-solid fa-wand-magic-sparkles"></i><h3>Viagem Certa</h3></div>
-          </div>
-          {/* Ferramentas-ia */}
-
-          <h2>Custos</h2>
-          <div className="produtos-pai" id="custo">
-              <div>
-                  <i className="fa-solid fa-pen-to-square"></i>
-                  <h3>Cálculo de Custos</h3>
-              </div>
-              <div>
-                  <i className="fa-solid fa-pen-to-square"></i>
-                  <h3>Viagens Baratas</h3>
-              </div>
-          </div>
-          {/* Custos */}
-
-          <h2>Planejamento</h2>
-          <div className="produtos-pai" id="planejament">
-              <div>
-                  <i className="fa-solid fa-camera-retro"></i>
-                  <h3>Monte sua Aventura</h3>
-              </div>
-              <div>
-                  <i className="fa-solid fa-camera-retro"></i>
-                  <h3>Viagens de 7 dias</h3>
-              </div>
-              <div>
-                  <i className="fa-solid fa-camera-retro"></i>
-                  <h3>Viagens Românticas</h3>
-              </div>
-              <div>
-                  <i className="fa-solid fa-camera-retro"></i>
-                  <h3>Viagens de Natal</h3>
-              </div>
-          </div>
-          {/* Planejamento */}
+            Produtos
+          </h3>
+          <p
+            className={
+              produtosMobile ?
+              "aberto pagina-inicial-screen" :
+              "pagina-inicial-screen"
+            }
+            id="sinal-icone"
+          >
+            &gt;
+          </p>
         </div>
 
-        <i id="menu-icone" className="fa-solid fa-bars" onClick={() => setMenuAberto(true)}></i>
+        <article
+          className={
+            produtosMobile ?
+            "aberto pagina-inicial-screen" :
+            "pagina-inicial-screen"
+          }
+          id="produtos-a-mostrar"
+        >
+          <div className="produtos-unicos pagina-inicial-screen">
+            <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
+            <h3 className="pagina-inicial-screen">Roteiro Automático</h3>
+          </div>
 
-        <h1>Descubra, Planeje, Viaje com <br /> ViaJour</h1>
+          <div className="produtos-unicos pagina-inicial-screen">
+            <i className="fa-solid fa-pen-to-square pagina-inicial-screen"></i>
+            <h3 className="pagina-inicial-screen">Cálculo de Custos</h3>
+          </div>
 
-        <div id="temas-desktop">
-          <i className="fa-solid fa-moon" onClick={() => setTemaEscuro(true)}></i>
-          <i className="fa-solid fa-sun" onClick={() => setTemaEscuro(false)}></i>
+          <div className="produtos-unicos pagina-inicial-screen">
+            <i className="fa-solid fa-camera-retro pagina-inicial-screen"></i>
+            <h3 className="pagina-inicial-screen">Monte sua Aventura</h3>
+          </div>
+        </article>
+
+        <h3 className="pagina-inicial-screen">Documentação</h3>
+        <h3 className="pagina-inicial-screen">Preço</h3>
+        <h3 className="pagina-inicial-screen">Contato</h3>
+
+        <hr className="pagina-inicial-screen" />
+
+        <article id="tema-container" className="pagina-inicial-screen">
+          <h3 className="pagina-inicial-screen">Tema</h3>
+          <div id="temas" className="pagina-inicial-screen">
+            <i
+              className="fa-solid fa-moon pagina-inicial-screen"
+              onClick={() => setTemaEscuro(true)}
+            ></i>
+            <i
+              className="fa-solid fa-sun pagina-inicial-screen"
+              onClick={() => setTemaEscuro(false)}
+            ></i>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    {/* HEADER */}
+    <header
+      id="header"
+      className={
+        menuAberto
+          ? "fechado pagina-inicial-screen"
+          : "pagina-inicial-screen"
+      }
+      onMouseLeave={() => setProdutosDesktop(false)}
+    >
+      <i className="fa-solid fa-plane pagina-inicial-screen" id="aviao-icone"></i>
+
+      <h2 className="pagina-inicial-screen">
+        <i className="fa-solid fa-plane pagina-inicial-screen" id="aviao-icone-desktop"></i>
+        ViaJour
+      </h2>
+
+      <section className="pagina-inicial-screen">
+        <article
+          className="topicos-desktop pagina-inicial-screen"
+          id="produto-desktop-tag"
+          onMouseEnter={() => setProdutosDesktop(true)}
+        >
+          Produtos <span id="seta-desktop" className="pagina-inicial-screen">&gt;</span>
+        </article>
+
+        <h3 className="topicos-desktop pagina-inicial-screen" onMouseEnter={() => setProdutosDesktop(false)}>Documentação</h3>
+        <h3 className="topicos-desktop pagina-inicial-screen" onMouseEnter={() => setProdutosDesktop(false)}>Preço</h3>
+        <h3 className="topicos-desktop pagina-inicial-screen" onMouseEnter={() => setProdutosDesktop(false)}>Contato</h3>
+      </section>
+
+      <nav onMouseEnter={() => setProdutosDesktop(false)} className="pagina-inicial-screen">
+        <h3 className="cadastro-desktop pagina-inicial-screen" onClick={() => navigate('/cadastro')} id="l-desktop">Fazer Login</h3>
+        <h3 className="cadastro-desktop pagina-inicial-screen" onClick={() => navigate('/cadastro')} id="c-desktop">Cadastrar</h3>
+      </nav>
+      {/* Produtos Desktop Dropdown */}
+      <div
+        onMouseLeave={() => setProdutosDesktop(false)}
+        id="produtos-desktop-container"
+        className={
+          produtosDesktop
+            ? "container-ativado pagina-inicial-screen"
+            : "pagina-inicial-screen"
+        }
+      >
+        <h2 className="pagina-inicial-screen">Ferramentas I.A</h2>
+
+        <div className="produtos-pai pagina-inicial-screen">
+          <div className="pagina-inicial-screen">
+            <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
+            <h3 className="pagina-inicial-screen">Roteiro Automático</h3>
+          </div>
+          <div className="pagina-inicial-screen">
+            <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
+            <h3 className="pagina-inicial-screen">Chat Auxiliar</h3>
+          </div>
+          <div className="pagina-inicial-screen">
+            <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
+            <h3 className="pagina-inicial-screen">Busca Paraíso</h3>
+          </div>
+          <div className="pagina-inicial-screen">
+            <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
+            <h3 className="pagina-inicial-screen">Viagem Certa</h3>
+          </div>
         </div>
-      </header>
 
-      {/* MAIN */}
-      <main id="main" className={menuAberto ? "fechado" : ""}>
-        <section className="imagem"></section>
-        <section className="imagem-desktop">
-            <article id="imagem-1"></article>
-            <article id="imagem-2"></article>
-            <article id="imagem-3"></article>
-        </section>
-        <section id="servicos-section">
-
-          <article id="servico-1" ref={servico1Ref} className="servicos-article" tabIndex={0}>
-            <div className="descricao">
-              <h2>Roteiro Automático</h2>
-              <h3>Gratuito</h3>
-              <p>Descubra novos destinos sem esforço. Nosso sistema cria roteiros personalizados com base nas suas preferências, otimizando tempo, custo e experiências únicas. Planejar uma viagem nunca foi tão simples e prazeroso.</p>
-              <button onClick={() => retomarFoco('servico-1')} className="botao-servicos">
-                Preparar
-              </button>
-            </div>
-            <article id="servico-roteiro-automatico" className="servico-imagens">
-            </article>
-          </article>
-
-          <article id="servico-2" ref={servico2Ref} className="servicos-article" tabIndex={0}>
-            <div className="descricao">
-              <h2>Cálculo de Custos</h2>
-              <h3>Gratuito</h3>
-              <p>Tenha controle total do seu orçamento de viagem. O cálculo de custos analisa transporte, hospedagem e alimentação, mostrando o valor estimado de cada etapa. Assim, você pode viajar tranquilo e sem surpresas.</p>
-              <button onClick={() => retomarFoco('servico-2')} className="botao-servicos">
-                Ver custos
-              </button>
-            </div>
-            <article id="servico-calculo-custos" className="servico-imagens"></article>
-          </article>
-
-          <article id="servico-3" ref={servico3Ref} className="servicos-article" tabIndex={0}>
-            <div className="descricao">
-              <h2>Monte sua Aventura</h2>
-              <h3>Gratuito</h3>
-              <p>Crie o seu próprio caminho! Escolha os lugares, atividades e experiências que mais combinam com você. Monte sua Aventura transforma suas ideias em um roteiro dinâmico, interativo e feito sob medida.</p>
-              <button onClick={() => retomarFoco('servico-3')} className="botao-servicos">
-                Começar
-              </button>
-            </div>
-            <article id="servico-sua-aventura" className="servico-imagens"></article>
-          </article>
-
-        </section>
-      </main>
-
-      {/* FOOTER */}
-      <footer id="footer" className={menuAberto ? "fechado" : ""}>
-        <h2>Siga-nos</h2>
-        <div className="rodape">
-            <div id="imagem-rodape-1" className="imagem-rodape"></div>
-            <div id="imagem-rodape-2" className="imagem-rodape"></div>
-            <div id="imagem-rodape-3" className="imagem-rodape"></div>
-            <div id="imagem-rodape-4" className="imagem-rodape"></div>
+        {/* Custos */}
+        <h2 className="pagina-inicial-screen">Custos</h2>
+        <div id="custo" className="produtos-pai pagina-inicial-screen">
+          <div className="pagina-inicial-screen">
+            <i className="fa-solid fa-pen-to-square pagina-inicial-screen"></i>
+            <h3 className="pagina-inicial-screen">Cálculo de Custos</h3>
+          </div>
+          <div className="pagina-inicial-screen">
+            <i className="fa-solid fa-pen-to-square pagina-inicial-screen"></i>
+            <h3 className="pagina-inicial-screen">Viagens Baratas</h3>
+          </div>
         </div>
-        <nav>
-          <h3>Descubra o mundo conosco <br></br> <strong><span id="Viajour">Viajour</span></strong> <br></br> Descubra, Planeje, Viaje</h3>
-          <ul>
-            <li><i className="fa-brands fa-instagram"></i></li>
-            <li><i className="fa-brands fa-youtube"></i></li>
-            <li><i className="fa-brands fa-facebook"></i></li>
-            <li><i className="fa-brands fa-x-twitter"></i></li>
-          </ul>
-        </nav>
-      </footer>
-    </>
-  )
+
+        {/* Planejamento */}
+        <h2 className="pagina-inicial-screen">Planejamento</h2>
+        <div id="planejamento" className="produtos-pai pagina-inicial-screen">
+          <div className="pagina-inicial-screen">
+            <i className="fa-solid fa-camera-retro pagina-inicial-screen"></i>
+            <h3 className="pagina-inicial-screen">Monte sua Aventura</h3>
+          </div>
+          <div className="pagina-inicial-screen">
+            <i className="fa-solid fa-camera-retro pagina-inicial-screen"></i>
+            <h3 className="pagina-inicial-screen">Viagens de 7 dias</h3>
+          </div>
+          <div className="pagina-inicial-screen">
+            <i className="fa-solid fa-camera-retro pagina-inicial-screen"></i>
+            <h3 className="pagina-inicial-screen">Viagens Românticas</h3>
+          </div>
+          <div className="pagina-inicial-screen">
+            <i className="fa-solid fa-camera-retro pagina-inicial-screen"></i>
+            <h3 className="pagina-inicial-screen">Viagens de Natal</h3>
+          </div>
+        </div>
+      </div>
+
+      <i
+        className="fa-solid fa-bars pagina-inicial-screen"
+        id="menu-icone"
+        onClick={() => setMenuAberto(true)}
+      ></i>
+
+      <h1 className="pagina-inicial-screen">
+        Descubra, Planeje, Viaje com <br /> ViaJour
+      </h1>
+
+      <div id="temas-desktop" className="pagina-inicial-screen">
+        <i className="fa-solid fa-moon pagina-inicial-screen" onClick={() => setTemaEscuro(true)}></i>
+        <i className="fa-solid fa-sun pagina-inicial-screen" onClick={() => setTemaEscuro(false)}></i>
+      </div>
+    </header>
+
+    {/* MAIN */}
+    <main id="main" className={menuAberto ? "fechado pagina-inicial-screen" : "pagina-inicial-screen"}>
+      <section
+        className="imagem pagina-inicial-screen"
+      ></section>
+
+      <section className="imagem-desktop pagina-inicial-screen">
+        <article id="imagem-1" className="pagina-inicial-screen"></article>
+        <article id="imagem-2" className="pagina-inicial-screen"></article>
+        <article id="imagem-3" className="pagina-inicial-screen"></article>
+      </section>
+
+      <section id="servicos-section" className="pagina-inicial-screen">
+        <article className="servicos-article pagina-inicial-screen" id="servico-1" ref={servico1Ref} tabIndex={0}>
+          <div className="descricao pagina-inicial-screen">
+            <h2 className="pagina-inicial-screen">Roteiro Automático</h2>
+            <h3 className="pagina-inicial-screen">Gratuito</h3>
+            <p className="pagina-inicial-screen">Descubra novos destinos sem esforço...</p>
+            <button className="botao-servicos pagina-inicial-screen" onClick={() => retomarFoco('servico-1')}>Preparar</button>
+          </div>
+          <article className="servico-imagens pagina-inicial-screen" id="servico-roteiro-automatico"></article>
+        </article>
+
+        <article className="servicos-article pagina-inicial-screen" id="servico-2" ref={servico2Ref} tabIndex={0}>
+          <div className="descricao pagina-inicial-screen">
+            <h2 className="pagina-inicial-screen">Cálculo de Custos</h2>
+            <h3 className="pagina-inicial-screen">Gratuito</h3>
+            <p className="pagina-inicial-screen">Tenha controle total do seu orçamento...</p>
+            <button className="botao-servicos pagina-inicial-screen" onClick={() => retomarFoco('servico-2')}>Ver custos</button>
+          </div>
+          <article className="servico-imagens pagina-inicial-screen" id="servico-calculo-custos"></article>
+        </article>
+
+        <article className="servicos-article pagina-inicial-screen" id="servico-3" ref={servico3Ref} tabIndex={0}>
+          <div className="descricao pagina-inicial-screen">
+            <h2 className="pagina-inicial-screen">Monte sua Aventura</h2>
+            <h3 className="pagina-inicial-screen">Gratuito</h3>
+            <p className="pagina-inicial-screen">Crie o seu próprio caminho!</p>
+            <button className="botao-servicos pagina-inicial-screen" onClick={() => retomarFoco('servico-3')}>Começar</button>
+          </div>
+          <article className="servico-imagens pagina-inicial-screen" id="servico-sua-aventura"></article>
+        </article>
+      </section>
+    </main>
+    {/* FOOTER */}
+    <footer id="footer" className={menuAberto ? "fechado pagina-inicial-screen" : "pagina-inicial-screen"}>
+      <h2 className="pagina-inicial-screen">Siga-nos</h2>
+
+      <div className="rodape pagina-inicial-screen">
+        <div className="imagem-rodape pagina-inicial-screen" id="imagem-rodape-1"></div>
+        <div className="imagem-rodape pagina-inicial-screen" id="imagem-rodape-2"></div>
+        <div className="imagem-rodape pagina-inicial-screen" id="imagem-rodape-3"></div>
+        <div className="imagem-rodape pagina-inicial-screen" id="imagem-rodape-4"></div>
+      </div>
+
+      <nav className="pagina-inicial-screen">
+        <h3 className="pagina-inicial-screen">
+          Descubra o mundo conosco <strong><span id="Viajour" className="pagina-inicial-screen">Viajour</span></strong><br />
+          Descubra, Planeje, Viaje
+        </h3>
+        <ul className="pagina-inicial-screen">
+          <li className="pagina-inicial-screen">
+            <i className="fa-brands fa-instagram pagina-inicial-screen"></i>
+          </li>
+          <li className="pagina-inicial-screen">
+            <i className="fa-brands fa-youtube pagina-inicial-screen"></i>
+          </li>
+          <li className="pagina-inicial-screen">
+            <i className="fa-brands fa-facebook pagina-inicial-screen"></i>
+          </li>
+          <li className="pagina-inicial-screen">
+            <i className="fa-brands fa-x-twitter pagina-inicial-screen"></i>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+  </>
+);
+
 }

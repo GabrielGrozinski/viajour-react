@@ -1,5 +1,5 @@
-import '../../styles/pagina-principal/media-query.css';
-import '../../styles/pagina-principal/menu-aberto.css';
+
+
 
 export default function MenuAberto({ fechar }: {fechar: () => void}) {
 

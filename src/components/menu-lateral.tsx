@@ -1,4 +1,4 @@
-import "../styles/menu-lateral.css"
+
 
 export default function MenuLateral() {
     function expandirMenu() {

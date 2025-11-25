@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import MenuLateral from "../../components/menu-lateral";
-import '../../styles/pagina-principal/media-query.css';
-import '../../styles/pagina-principal/menu-fechado.css';
+
 
 export default function MenuFechado({ abrir }: {abrir: () => void}) {
   const [largura, setLargura] = useState(window.innerWidth);

@@ -1,884 +1,547 @@
+@reference "tailwindcss";
+
 :root {
-    --fundo: #e1f0f8;
-    --texto: #1e2328;
-    --botao: #25262a;
-    --texto-botao: #e3e4f0;
-    --fundo-menu-pressionado: white;
-    --sombra-texto: rgba(0, 0, 0, 0.1);
-    --texto-tag-pressionada: black;
-    --fundo-tag-pressionada: rgba(132, 214, 247, 0.229);
-    --fundo-tag-aberta: rgba(211, 211, 211, 0.300);
-    --texto-produtos: rgb(108, 107, 107);
-    --lua-modo-escuro: rgba(0, 0, 139, 0.322);
-    --sol-modo-claro: black;
+  --fundo: #e1f0f8;
+  --texto: #1e2328;
+  --botao: #25262a;
+  --texto-botao: #e3e4f0;
+  --fundo-menu-pressionado: white;
+  --sombra-texto: rgba(0, 0, 0, 0.1);
+  --texto-tag-pressionada: black;
+  --fundo-tag-pressionada: rgba(132, 214, 247, 0.229);
+  --fundo-tag-aberta: rgba(211, 211, 211, 0.3);
+  --texto-produtos: rgb(108, 107, 107);
+  --lua-modo-escuro: rgba(0, 0, 139, 0.322);
+  --sol-modo-claro: black;
 }
 
 body.escuro {
-    --fundo: #051e2c;
-    --texto: #f6f8fb;
-    --botao: #f5f6f8;
-    --texto-botao: #0c0c0c;
-    --fundo-menu-pressionado: #222222;
-    --sombra-texto: rgba(0, 0, 0, 0.8);
-    --texto-tag-pressionada: white;
-    --fundo-tag-pressionada: rgba(132, 214, 247, 0.645);
-    --fundo-tag-aberta: rgba(211, 211, 211, 0.300);
-    --texto-produtos: rgb(186, 185, 185);
-    --lua-modo-escuro: rgb(26, 26, 255);
-    --sol-modo-claro: gray;
+  --fundo: #051e2c;
+  --texto: #f6f8fb;
+  --botao: #f5f6f8;
+  --texto-botao: #0c0c0c;
+  --fundo-menu-pressionado: #222222;
+  --sombra-texto: rgba(0, 0, 0, 0.8);
+  --texto-tag-pressionada: white;
+  --fundo-tag-pressionada: rgba(132, 214, 247, 0.645);
+  --fundo-tag-aberta: rgba(211, 211, 211, 0.3);
+  --texto-produtos: rgb(186, 185, 185);
+  --lua-modo-escuro: rgb(26, 26, 255);
+  --sol-modo-claro: gray;
 }
-
-
-body, html {
-    height: 100vh;
+body,
+html {
+  @apply h-screen;
 }
 
 @font-face {
-    font-family: 'Majesty';
-    src: url(/fonts/FB-Free-Majesty-Goldera/Majesty\ Goldera.otf);
+  font-family: "Majesty";
+  src: url(../fonts/FB-Free-Majesty-Goldera/Majesty\Goldera.otf);
 }
-
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Oswald', sans-serif;
+  @apply box-border m-0 p-0;
+  font-family: "Oswald", sans-serif;
 }
-
 
 /* Menu-Pressionado. Só é ativado em mobiles */
 /* 1/2 Menu-Pressionado */
 div#menu-pressionado {
-    display: none;
-    min-height: 100vh;
-    height: auto;
-    grid-template-columns: 1fr 4fr 1fr;
-    grid-template-rows: 75px 100px 500px;
-    background-color: var(--fundo-menu-pressionado);
-    row-gap: 10px;
+  @apply hidden min-h-screen h-auto grid-cols-[1fr_4fr_1fr] grid-rows-[75px_100px_500px] bg-(--fundo-menu-pressionado) gap-y-2.5;
 }
-
 div#menu-pressionado.aberto {
-    display: grid;
+  @apply grid;
 }
-
 #menu-pressionado > #botao-fechar {
-    grid-column: 3;
-    place-self: center;
+  @apply col-3 place-self-center;
 }
-
 div.cadastro {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    grid-column: span 3;
-    grid-row: 2;
+  @apply flex flex-col justify-evenly items-center col-[span_3] row-2;
 }
-
 div.cadastro > button {
-    width: 90%;
-    border-radius: 6px;
-    padding: 4px;
-    text-align: center;
-    letter-spacing: 0.5px;
-    font-size: 1em;
-    transition: 0.3s;
-    margin: 0.5vh;
+  @apply w-[90%] text-center tracking-[0.5px] text-[1em] transition-[0.3s] m-[0.5vh] p-1 rounded-md active:scale-[0.94];
 }
-
-div.cadastro > button:active {
-    transform: scale(0.94);
-}
-
 button#cadastrar {
-    background-color: var(--botao);
-    color: var(--texto-botao);
+  @apply bg-(--botao) text-(--texto-botao);
 }
-
 button#login {
-    background-color: var(--fundo-menu-pressionado);
-    color: var(--texto);
-    border: 2px solid var(--texto-produtos);
+  @apply bg-(--fundo-menu-pressionado) text-(--texto) border-(--texto-produtos) border-2 border-solid;
 }
-
 section#topicos {
-    grid-column: span 3;
-    grid-row: 3;
+  @apply col-[span_3] row-3;
 }
-
 section#topicos h3 {
-    width: 90%;
-    font-size: 1.2em;
-    padding: 10px 0 10px 10px;
-    margin: 10px auto;
-    border-radius: 6px;
-    font-weight: 100;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: var(--texto);
+  @apply w-[90%] text-[1.2em] font-thin text-(--texto) mx-auto my-2.5 pl-2.5 pr-0 py-2.5 rounded-md active:bg-(--fundo-tag-pressionada) active:text-(--texto-tag-pressionada) active:rounded-none;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
-
-section#topicos h3:active {
-    background-color: var(--fundo-tag-pressionada);
-    border-radius: 0;
-    color: var(--texto-tag-pressionada);
-}
-
 div#produtos-container {
-    position: relative;
+  @apply relative;
 }
-
 div#produtos-container > p {
-    position: absolute;
-    top: 50%;
-    right: 7.5%;
-    transform: translate(-50%, -50%);
-    font-size: 1.8em;
-    color: var(--texto-produtos);
+  @apply absolute -translate-x-2/4 -translate-y-2/4 text-[1.8em] text-(--texto-produtos) right-[7.5%] top-2/4;
 }
-
 div#produtos-container > p.aberto {
-    transform: translate(-50%, -50%) rotate(90deg);
+  @apply -translate-x-2/4 -translate-y-2/4 rotate-90;
 }
-
 h3#produtos-tag.aberto {
-    background-color: var(--fundo-tag-aberta);
+  @apply bg-(--fundo-tag-aberta);
 }
-
 article#produtos-a-mostrar {
-    display: none;
+  @apply hidden;
 }
-
 article#produtos-a-mostrar.aberto {
-    display: block;
-    margin: 20px 0;
+  @apply block mx-0 my-5;
 }
-
 article#produtos-a-mostrar h3 {
-    color: var(--texto-produtos);
-    font-size: 1em;
-    padding-left: 9vw;
-    font-weight: 400;
+  @apply text-(--texto-produtos) text-[1em] font-normal pl-[9vw];
 }
-
 article#produtos-a-mostrar .produtos-unicos:active i {
-    color: var(--texto-tag-pressionada);
+  @apply text-(--texto-tag-pressionada);
 }
-
 article#produtos-a-mostrar > .produtos-unicos {
-    position: relative;
+  @apply relative;
 }
-
 article#produtos-a-mostrar > .produtos-unicos > i {
-    position: absolute;
-    color: var(--texto-produtos);
-    font-size: 1em;
-    top: 50%;
-    left: 9vw;
-    transform: translate(-50%, -50%);
+  @apply absolute text-(--texto-produtos) text-[1em] -translate-x-2/4 -translate-y-2/4 left-[9vw] top-2/4;
 }
-
 hr {
-    border-color: rgba(211, 211, 211, 0.608);
-    margin: 0 4%;
+  @apply mx-[4%] my-0 border-[rgba(211,211,211,0.608)];
 }
-
 article#tema-container {
-    position: relative;
+  @apply relative;
 }
-
 div#temas {
-    position: absolute;
-    top: 50%;
-    right: 0%;
-    transform: translate(-30%, -50%);
+  @apply absolute translate-x-[-30%] -translate-y-2/4 right-[0%] top-2/4;
 }
-
-div#temas i#modo-escuro, div#temas-desktop i#modo-escuro {
-    color: var(--lua-modo-escuro);
+div#temas i#modo-escuro,
+div#temas-desktop i#modo-escuro {
+  @apply text-(--lua-modo-escuro);
 }
-
-div#temas i#modo-claro, div#temas-desktop i#modo-claro {
-    color: var(--sol-modo-claro)
+div#temas i#modo-claro,
+div#temas-desktop i#modo-claro {
+  @apply text-(--sol-modo-claro);
 }
 /* 2/2 Menu-Pressionado */
-
-
-header, main, footer {
-    display: grid;
+header,
+main,
+footer {
+  @apply grid;
 }
 /* Grid por padrão */
 
-
 /* Conteúdos que só mostram no Desktop */
-header > nav, header > section, header > div#temas-desktop, header > h2 > i#aviao-icone-desktop {
-    display: none;
+header > nav,
+header > section,
+header > div#temas-desktop,
+header > h2 > i#aviao-icone-desktop {
+  @apply hidden;
 }
-
 header > #produtos-desktop-container {
-  display: grid;
-  opacity: 0;
-  transform: translateY(-20px); 
-  pointer-events: none;
-  
-  height: 0;
-  overflow: hidden;
-  border: 2px outset var(--texto-tag-pressionada) ;
-  border-radius: 15px;
-  overflow: hidden;
+  @apply grid opacity-0 -translate-y-5 pointer-events-none transition-all duration-100 h-0 overflow-hidden;
 }
-
 
 /* Conteúdos que somem ao clicar no ícone de Menu */
-header.fechado, main.fechado, footer.fechado {
-    display: none;
+header.fechado,
+main.fechado,
+footer.fechado {
+  @apply hidden;
 }
-
 
 /* Valor padrão dos ícones */
 i {
-    font-size: 2em;
-    color: var(--botao);
-    transition: 0.5s;
+  @apply text-[2em] text-(--botao) transition-[0.5s];
 }
-
 
 /* Header */
 /* 1/2 Header */
 header {
-    background-color: var(--fundo-menu-pressionado);
-    grid-template-columns: 1fr 4fr 1fr;
-    grid-template-rows: 75px 1fr;
-    padding-bottom: 20px;
-    place-items: center;
+  @apply bg-(--fundo-menu-pressionado) grid-cols-[1fr_4fr_1fr] grid-rows-[75px_1fr] place-items-center pb-5;
 }
-
 header > #aviao-icone {
-    grid-row: 1;
-    grid-column: 1;
+  @apply row-1 col-1;
 }
-
 header > #menu-icone {
-    grid-row: 1;
-    grid-column: 3;
+  @apply row-1 col-3;
 }
-
 header > h2 {
-    grid-row: 1;
-    grid-column: 2;
-    letter-spacing: 1px;
-    font-size: 2.6em;
-    transition: 0.4s;
-    font-weight: 900;
-    font-family: 'Majesty';
+  @apply row-1 col-2 tracking-[1px] text-[2.6em] transition-[0.4s] font-black;
+  font-family: "Majesty";
 }
-
 header > h2 > i {
-    font-size: 1em;
+  @apply text-[1em];
 }
-
-header > h2:active, header > h2:hover {
-    letter-spacing: 4px;
+header > h2:active,
+header > h2:hover {
+  @apply tracking-[4px];
 }
-
 header > h1 {
-    grid-column: span 3;
-    grid-row: 2;
-    text-align: center;
-    padding: 0 30px;
+  @apply col-[span_3] row-2 text-center px-[30px] py-0 text-3xl;
 }
-
-h1, h2, h3 {
-    color: var(--texto);
+h1,
+h2,
+h3 {
+  @apply text-(--texto);
 }
 /* 2/2 Header */
-
 main {
-    background-color: var(--fundo);
-    grid-template-columns: auto 80% auto;
-    grid-template-rows: 500px 1000px;
-    row-gap: 5vh;
+  @apply bg-(--fundo) grid-cols-[auto_80%_auto] grid-rows-[500px_1000px] gap-y-[5vh];
 }
-
 .imagem {
-    grid-column: span 3;
-    grid-row: 1;
-    width: 100%;
-    height: 400px;
-    background: var(--texto) url(https://cdn.pixabay.com/photo/2021/12/13/07/06/airplane-6867678_1280.jpg) center center no-repeat fixed;
-    background-size: cover; 
+  @apply col-[span_3] row-1 w-full h-full bg-cover;
+  background: var(--texto)
+    url(https://cdn.pixabay.com/photo/2021/12/13/07/06/airplane-6867678_1280.jpg)
+    center center no-repeat fixed;
 }
-
-main > section article#imagem-1, main > section > article#imagem-2, main > section > article#imagem-3 {
-    display: none;
+main > section article#imagem-1,
+main > section > article#imagem-2,
+main > section > article#imagem-3 {
+  @apply hidden;
 }
-
 section#servicos-section {
-    display: grid;
-    grid-column: 2;
-    grid-row: 2;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+  @apply grid col-2 row-2 grid-cols-[1fr] grid-rows-[1fr_1fr_1fr];
 }
-
 .servicos-article {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    border: 1px solid rgba(0, 0, 0, 0.505);
-    align-items: center;
-    margin: 2.5vh 0;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    transition: 0.5s;
-    background-color: var(--fundo-menu-pressionado);
+  @apply grid grid-cols-[1fr_1fr] grid-rows-[1fr] border items-center shadow-[0_6px_18px_rgba(0,0,0,0.08)] transition-all duration-500 bg-(--fundo-menu-pressionado) mx-0 my-[2.5vh] border-solid border-[rgba(0,0,0,0.505)] focus:-translate-y-2.5 focus:shadow-[0_20px_40px_rgba(0,0,0,0.18)] focus:scale-[1.08];
 }
-
 .servicos-article > .descricao > p {
-    display: none;
+  @apply hidden;
 }
-
-.servicos-article:focus {
-    transform: translateY(-10px) scale(1.08);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.18);
-}
-
 .descricao {
-    grid-column: 2;
-    grid-row: 1;
-    text-align: center;
-    margin: 0 3%;
-    transition: 0.1s ease;
+  @apply col-2 row-1 text-center transition-[0.1s] duration-[ease] mx-[3%] my-0;
 }
-
 .servicos-article h3 {
-    margin: 15px 0;
-    font-weight: 100;
+  @apply font-thin mx-0 my-[15px];
 }
-
 .botao-servicos {
-    background-color: var(--botao);
-    padding: 10px;
-    font-size: 1em;
-    color: var(--texto-botao);
-    border-radius: 4px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.193);
-    cursor: pointer;
-    transition: 0.5s;
+  @apply bg-(--botao) text-[1em] text-(--texto-botao) rounded shadow-[1px_1px_5px_rgba(0,0,0,0.193)] cursor-pointer transition-[0.5s] p-2.5 active:scale-100;
 }
-
-.botao-servicos:active {
-    transform: scale(1);
-}
-
 .servico-imagens {
-    grid-column: 1;
-    grid-row: 1;
-    width: 100%;
-    height: 100%;
-    transition: 0.5s;
-    background: var(--fundo-menu-pressionado) center center no-repeat;
-    background-size: cover;
-}
+  @apply col-1 row-1 w-full h-full transition-all duration-500 bg-cover bg-position-[50%_40%];
 
+}
 #servico-roteiro-automatico {
-    background-image: url(https://cdn.pixabay.com/photo/2023/05/28/12/08/suitcase-8023523_1280.png);
+  @apply bg-[url(https://cdn.pixabay.com/photo/2023/05/28/12/08/suitcase-8023523\_1280.png)];
 }
-
 #servico-calculo-custos {
-    background-image: url(https://cdn.pixabay.com/photo/2017/08/01/15/03/global-2566114_1280.jpg);   
+  @apply bg-[url(https://cdn.pixabay.com/photo/2017/08/01/15/03/global-2566114\_1280.jpg)];
 }
-
 #servico-sua-aventura {
-    background-image: url(https://cdn.pixabay.com/photo/2022/05/28/14/09/landscape-7227383_1280.jpg);   
+  @apply bg-[url(https://cdn.pixabay.com/photo/2022/05/28/14/09/landscape-7227383\_1280.jpg)];
 }
-
-
 footer {
-    grid-template-columns: 1fr 5fr 1fr;
-    grid-template-rows: 1fr 2fr 3fr;
-    row-gap: 3vh;
-    padding: 20px 0;
-    background-color: var(--fundo-menu-pressionado);
+  @apply grid-cols-[1fr_5fr_1fr] grid-rows-[1fr_2fr_3fr] gap-y-[3vh] bg-(--fundo-menu-pressionado) px-0 py-5;
 }
-
 footer > h2 {
-    grid-column: 2;
-    grid-row: 1;
-    display: grid;
-    place-self: center;
-    text-align: center;
-    font-size: 2em;
-    
+  @apply col-2 row-1 grid place-self-center text-center text-[2em];
 }
-
 footer > .rodape {
-    grid-row: 2;
-    grid-column: 1 / 4;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-row: 1fr 1fr;
-    grid-auto-rows: auto;
-    grid-auto-columns: auto;
-    gap: 4px;
+  @apply row-2 col-[1/4] grid grid-cols-[1fr_1fr] grid-rows-[1fr_1fr] auto-rows-auto auto-cols-auto gap-1;
 }
-
 footer > .rodape > .imagem-rodape {
-    background: center center no-repeat;
-    background-size: cover;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.300);
+  @apply bg-cover shadow-[1px_1px_1px_rgba(0,0,0,0.300)] bg-position-[50%_80%];
 }
-
 #imagem-rodape-1 {
-    background-image: url(https://cdn.pixabay.com/photo/2023/04/20/12/22/globe-7939725_1280.jpg);
+  @apply bg-[url(https://cdn.pixabay.com/photo/2023/04/20/12/22/globe-7939725\_1280.jpg)];
 }
-
 #imagem-rodape-2 {
-    background-image: url(https://cdn.pixabay.com/photo/2022/01/10/18/06/girls-6928968_1280.jpg);
+  @apply bg-[url(https://cdn.pixabay.com/photo/2022/01/10/18/06/girls-6928968\_1280.jpg)];
 }
-
 #imagem-rodape-3 {
-    background-image: url(https://cdn.pixabay.com/photo/2023/02/24/21/11/pancake-7811889_1280.jpg);
-    background-position: bottom;
+  @apply bg-[url(https://cdn.pixabay.com/photo/2023/02/24/21/11/pancake-7811889\_1280.jpg)] bg-bottom;
 }
-
 #imagem-rodape-4 {
-    background-image: url(https://cdn.pixabay.com/photo/2020/03/18/05/15/horse-4942698_1280.jpg);
+  @apply bg-[url(https://cdn.pixabay.com/photo/2020/03/18/05/15/horse-4942698\_1280.jpg)];
 }
-
 footer > nav {
-    display: grid;
-    grid-column: span 3;
-    grid-row: 3;
-    grid-template-rows: 1fr 100px;
-    row-gap: 15px;  
+  @apply grid col-[span_3] row-3 grid-rows-[1fr_100px] gap-y-[15px];
 }
-
 nav > h3 {
-    text-align: center;
-    grid-row: 1;
-    font-size: 1.8em;
-    margin: 0 10px;
+  @apply text-center row-1 text-[1.8em] mx-2.5 my-0;
 }
-
 footer > nav > ul {
-    display: flex;
-    align-self: flex-start;
-    list-style: none;
-    gap: 20px;
-    grid-row: 2;
-    justify-content: center;
-    align-items: center;
+  @apply flex self-start gap-5 row-2 justify-center items-center;
+  list-style: none;
 }
-
 footer i {
-    color: var(--texto);
-    transition: 0.25s;
+  @apply text-(--texto) transition-[0.25s];
 }
-
-i:active, i:hover {
-    transform: scale(1.08) translateZ(-10px);
+i:active,
+i:hover {
+  transform: scale(1.08) translateZ(-10px);
+  cursor: pointer;
 }
 
 #Viajour {
-    font-size: 1.2em;
-    font-family: 'Majesty';
-    font-weight: 900;
+  @apply text-[1.2em] font-black;
+  font-family: "Majesty";
 }
 
-@media screen and (min-height: 768px) {
-footer > nav {
-    grid-template-rows: 1fr 200px;
-}
-}
-/* Rodapé para celulares/tablets com altura maior */
-
-@media screen and (min-width: 568px) and (max-width: 1024px) {
-main {
-grid-template-rows: 350px 1000px;
-}
-
-.servicos-article {
-    font-size: 1.4em;
-}
-
-#servico-roteiro-automatico {
-    background-position: 50% 85%;
-}
-
-#servico-calculo-custos {
-    background-position: 50% 20%;
+        /* Celulares grandes ou em modo paisagem */
+@media screen and (min-width: 568px) and (max-width: 768px) {
+  main {
+    @apply grid-rows-[350px_1000px];
+  }
+  .servicos-article {
+    @apply text-[1.4em];
+  }
+  #servico-roteiro-automatico {
+    @apply bg-position-[50%_85%];
+  }
+  #servico-calculo-custos {
+    @apply bg-position-[50%_20%];
+  }
+  #servico-sua-aventura {
+    @apply bg-position-[50%_15%];
+  }
+  footer {
+    @apply grid-rows-[1fr_5fr_3fr];
+  }
 }
 
-#servico-sua-aventura {
-    background-position: 50% 15%;
+        /* Tablets */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  main {
+    @apply grid-rows-[350px_850px];
+  }
+  .servicos-article {
+    @apply text-[1.4em];
+  }
+
+  header > i,
+  header > h2 {
+    @apply text-[3em];
+  }
+  #menu-pressionado > #botao-fechar {
+    @apply text-[3em];
+  }
+  #servico-roteiro-automatico {
+    @apply bg-position-[50%_85%];
+  }
+  #servico-calculo-custos {
+    @apply bg-position-[50%_20%];
+  }
+  #servico-sua-aventura {
+    @apply bg-position-[50%_10%];
+  }
+  footer {
+    @apply grid-rows-[1fr_5fr_3fr];
+  }
+  footer > nav {
+    @apply grid-rows-[1fr_200px];
+  }
 }
 
-footer {
-    grid-template-rows: 1fr 5fr 3fr;
-}
-}
-/* Tablets ou celulares no modo paisagem */
-
-@media screen and (min-width: 1024px) and (max-width: 1366px) {
-
-main {
-grid-template-rows: 350px 850px;
-}
-
-.servicos-article {
-    font-size: 1.4em;
-}
-
-header > i, header > h2 {
-    font-size: 3em;
-}
-
-#menu-pressionado > #botao-fechar {
-    font-size: 3em;
-}
-
-#servico-roteiro-automatico {
-    background-position: 50% 85%;
-}
-
-#servico-calculo-custos {
-    background-position: 50% 20%;
-}
-
-#servico-sua-aventura {
-    background-position: 50% 10%;
-}
-
-footer {
-    grid-template-rows: 1fr 5fr 3fr;
-}
-}
-/* Tablets Grandes */
-
-@media screen and (min-width: 1366px) {
-    
-header #menu-icone {display: none;}
-header #aviao-icone {display: none;}
-header > h2 > i#aviao-icone-desktop {display: inline;}
-
-header {
-    padding-top: 10px;
-    grid-template-columns: 1fr 4fr 1fr 2fr;
-    grid-template-rows: 1fr auto 2fr;
-    place-items: center normal;
-    place-content: center;
-}
-
-header > div#temas-desktop {
-    display: flex;
-    grid-column: 3;
-    grid-row: 1;
-}
-
-header > h1 {
-    grid-column: span 4;
-    grid-row: 3;
-}
-
-header > h2 {
-    justify-self: end;
-    grid-column: 1;
-    grid-row: 1;
-    display: flex;
-    font-size: 1.4em;
-    align-items: center;
-    gap: 2.5px;
-}
-
-header > h2 > i {
-    font-size: 1.2em;
-}
-
-header > section {
-    display: flex;
-    justify-content: space-around;
-    grid-row: 1;
-    grid-column: 2;
-}
-
-.topicos-desktop {
-    color: var(--texto-produtos);
-    font-weight: 300;
-    font-size: 1.4em;
-    transition: 0.5s;
-    cursor: pointer;
-    padding: 0.4em;
-    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.400);
-    border-radius: 10px;
-}
-
-#produto-desktop-tag.azul-ativado {
-    background-color: lightskyblue;
-    color: black;
-}
-
-.topicos-desktop:hover {
-    background-color: lightskyblue;
-    color: black;
-}
-
-span#seta-desktop {
-    display: inline-block;
-    transform: rotate(90deg) translate(25%, -5%);
-    transition: 0.1s ease;
-}
-
-.topicos-desktop:hover span#seta-desktop {
-    transform: rotate(-90deg) translate(-25%, 5%);
-}
-
-span#seta-desktop.seta-virada {
-    transform: rotate(-90deg) translate(-25%, 5%);
-}
-
-header > #produtos-desktop-container.container-ativado {
-    opacity: 1;
-    margin-top: 2%;
-    transform: translateY(0);
-    pointer-events: auto;
-    height: auto;
-    grid-column: 2 / 4;
-    grid-row: 2;
-    min-height: 20%;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-row: 10% 90%;
-    background-color: var(--fundo-menu-pressionado);
-    padding-bottom: 1vh;
-    transition: all 0.4s linear;
-}
-
-header > #produtos-desktop-container > h2 {
-    grid-row: 1;
-    justify-self: center;
+        /* Desktop */
+@media screen and (min-width: 1024px) {
+  header #menu-icone {
+    @apply hidden;
+  }
+  header #aviao-icone {
+    @apply hidden;
+  }
+  header > h2 > i#aviao-icone-desktop {
+    @apply inline;
+  }
+  header {
+    @apply grid-cols-[1fr_4fr_1fr_2fr] grid-rows-[1fr_auto_2fr] place-content-center pt-2.5 px-4 items-center justify-items-normal;
+  }
+  header > div#temas-desktop {
+    @apply flex col-3 row-1 scale-80;
+  }
+  header > h1 {
+    @apply col-[span_4] row-3;
+  }
+  header > h2 {
+    @apply justify-self-end col-1 row-1 flex text-[1.4em] items-center gap-[2.5px];
+  }
+  header > h2 > i {
+    @apply text-[1.2em];
+  }
+  header > section {
+    @apply flex justify-around row-1 col-2;
+  }
+  .topicos-desktop {
+    @apply text-(--texto-produtos) font-light text-[1.4em] transition-[0.5s] cursor-pointer p-[0.4em] rounded-[10px] hover:bg-[lightskyblue] hover:text-[black];
+    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.4);
+  }
+  #produto-desktop-tag.azul-ativado {
+    @apply bg-[lightskyblue] text-[black];
+  }
+  span#seta-desktop {
+    @apply inline-block rotate-90 translate-x-1/4 translate-y-[5%] transition-[0.1s] duration-[ease];
+  }
+  .topicos-desktop:hover span#seta-desktop {
+    @apply -rotate-90 translate-x-1/4 translate-y-[5%];
+  }
+  span#seta-desktop.seta-virada {
+    @apply -rotate-90 translate-x-1/4 translate-y-[5%];
+  }
+  header > #produtos-desktop-container.container-ativado {
+    @apply overflow-hidden min-h-[20%] transition-all duration-400 opacity-100 translate-y-0 mt-6 pointer-events-auto h-auto col-[2/4] row-2 grid-cols-[1fr_1fr_1fr] grid-rows-[20%_85%] bg-(--fundo-menu-pressionado) border-(--texto-tag-pressionada) pt-[1%] pb-[2%] rounded-[15px] border-2;
+  }
+  header > #produtos-desktop-container > h2 {
+    @apply row-1 justify-self-center text-2xl;
     text-shadow: 1px 1px 1px var(--fundo-menu-pressionado);
-}
-
-header > #produtos-desktop-container > div.produtos-pai {
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    justify-content: center;
-}
-
-header > #produtos-desktop-container > div.produtos-pai > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px outset rgba(0, 0, 0, 0.699);
-    border-radius: 4px;
-    padding: 0 0.5vh;
-    margin: 0.5vh 0;
-    transition: 0.2s ease-in-out;
-    cursor: pointer;
-}
-
-header > #produtos-desktop-container > div.produtos-pai > div:hover {
-    background-color: lightskyblue;
-    transform: scale(1.05);
-}
-
-header > #produtos-desktop-container > div.produtos-pai > div > i {
-    font-size: 1em;
+  }
+  header > #produtos-desktop-container > div.produtos-pai {
+    @apply grid grid-rows-[1fr_1fr_1fr_1fr] justify-center;
+  }
+  header > #produtos-desktop-container > div.produtos-pai > div {
+    @apply flex items-center justify-start rounded transition-all duration-200 cursor-pointer mx-0 my-[0.5vh] px-[0.5vh] py-0 border-2 border-(--fundo-menu-pressionado) hover:bg-[lightskyblue] hover:scale-105;
+  }
+  header > #produtos-desktop-container > div.produtos-pai > div > i {
+    @apply text-[1em];
     text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.326);
-}
-
-header > #produtos-desktop-container > div.produtos-pai > div > h3 {
-    font-size: 1em;
-    font-weight: 400;
-    margin-left: 5px;
+  }
+  header > #produtos-desktop-container > div.produtos-pai > div > h3 {
+    @apply text-[1em] font-normal ml-[5px];
     text-shadow: 1px 1px 1px var(--sombra-texto);
+  }
+  header > nav {
+    @apply justify-self-end flex col-4 row-1;
+  }
+  .cadastro-desktop {
+    @apply scale-94 text-(--texto-botao) font-light text-[1.2em] transition-[0.5s] cursor-pointer bg-(--botao) border-(--texto-tag-pressionada) px-[0.5em] py-[0.3em] rounded-[15px] border-2 border-solid active:scale-[0.9];
+    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.4);
+  }
+  .cadastro-desktop:hover,
+  #c-desktop:hover {
+    @apply bg-[lightskyblue] border-(--fundo-menu-pressionado) text-[white];
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  }
+  #c-desktop {
+    @apply text-(--texto) bg-(--fundo-menu-pressionado);
+  }
+  main {
+    @apply grid-cols-[1fr_5fr_1fr] grid-rows-[800px_minmax(100vh,150vh)] overflow-hidden;
+  }
+  .imagem {
+    @apply hidden;
+  }
+  main > section.imagem-desktop {
+    @apply grid col-[span_3] row-1 grid-cols-[1fr_1fr_1fr] grid-rows-[1fr];
+  }
+  main > section.imagem-desktop > article#imagem-1 {
+    @apply grid col-1 row-1 bg-cover;
+    background: var(--texto)
+      url(https://cdn.pixabay.com/photo/2023/12/04/05/54/ferris-wheel-8428738_1280.jpg)
+      center center no-repeat;
+  }
+  main > section.imagem-desktop > article#imagem-2 {
+    @apply grid col-2 row-1 bg-cover;
+    background: var(--texto)
+      url(https://cdn.pixabay.com/photo/2023/09/29/14/58/road-8284023_1280.jpg)
+      center center no-repeat;
+  }
+  main > section.imagem-desktop > article#imagem-3 {
+    @apply grid col-3 row-1 bg-cover;
+    background: var(--texto)
+      url(https://cdn.pixabay.com/photo/2019/07/21/21/29/path-4353699_1280.jpg)
+      center center no-repeat;
+  }
+  section#servicos-section {
+    @apply grid-rows-[1fr_1fr_1fr];
+  }
+  .servicos-article {
+    @apply transition-all duration-500 h-[30vh] max-h-[auto] grid-cols-[1fr_1fr] grid-rows-[30vh] focus:grid-cols-[1fr] focus:grid-rows-[30vh_30vh] focus:mb-[40vh];
+  }
+  main
+    > section#servicos-section
+    > article.servicos-article
+    > article.servico-imagens {
+    @apply col-2 bg-cover;
+  }
+
+  main
+    > section#servicos-section
+    > article.servicos-article
+    > article#servico-roteiro-automatico {
+    @apply bg-[url(https://cdn.pixabay.com/photo/2023/03/16/08/42/camping-7856198\_1280.jpg)] bg-position-[center_50%];
+  }
+
+  main
+    > section#servicos-section
+    > article.servicos-article
+    > article#servico-calculo-custos {
+    @apply bg-[url(https://cdn.pixabay.com/photo/2018/03/10/18/03/laptop-3214756\_1280.png)] bg-position-[center_center];
+  }
+
+  main
+    > section#servicos-section
+    > article.servicos-article
+    > article#servico-sua-aventura {
+    @apply bg-[url(https://cdn.pixabay.com/photo/2019/03/19/14/50/fantasy-4065898\_1280.jpg)] bg-position-[50%_20%];
+  }
+
+  .descricao {
+    @apply col-1;
+  }
+
+  section#servicos-section:has(.servicos-article:focus)
+    .servicos-article:not(:focus) {
+    @apply m-0 p-0;
+  }
+
+  .servicos-article:focus .descricao {
+    @apply h-full flex justify-evenly items-center flex-col gap-0 m-0 p-0;
+  }
+
+ .servicos-article .descricao > h2 {
+    @apply text-2xl font-semibold;
+ }
+
+  .servicos-article:focus > .descricao > p {
+    @apply block font-medium text-(--texto) mx-[5%] my-0;
+  }
+
+  main
+    > section#servicos-section
+    > article.servicos-article:focus
+    > article.servico-imagens {
+    @apply col-1 row-2;
+  }
+  main
+    > section#servicos-section
+    > article.servicos-article:focus
+    > article#servico-roteiro-automatico {
+    @apply bg-position-[center_90%];
+  }
+  main
+    > section#servicos-section
+    > article.servicos-article:focus
+    > article#servico-sua-aventura {
+    @apply bg-position-[center_31.5%];
+  }
+  .servicos-article:focus h3 {
+    @apply m-0 p-0;
+  }
+  .servicos-article:focus h2 {
+    @apply m-0 p-0;
+  }
+  .servicos-article:focus .botao-servicos {
+    @apply hidden;
+  }
+  .servicos-article h3 {
+    @apply text-[1.8em];
+  }
+  .botao-servicos {
+    @apply min-w-full p-[5px];
+  }
+  footer {
+    @apply grid-rows-[1fr_7fr_3fr];
+  }
+  footer > .rodape {
+    @apply col-[2/3];
+  }
 }
 
-header > nav {
-    justify-self: end;
-    display: flex;
-    grid-column: 4;
-    grid-row: 1;
+        /* Desktop grande */
+@media screen and (min-width: 1280px) {
+    header > div#temas-desktop {
+        @apply scale-90;
+    }
+
+     .cadastro-desktop {
+        @apply scale-100 active:scale-[0.94];
+    }
 }
 
-.cadastro-desktop {
-    color: var(--texto-botao);
-    font-weight: 300;
-    font-size: 1.2em;
-    transition: 0.5s;
-    cursor: pointer;
-    padding: 0.3em 0.5em;
-    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.400);
-    border-radius: 15px;
-    background-color: var(--botao);
-    border: 2px solid var(--texto-tag-pressionada);
-}
-
-.cadastro-desktop:hover, #c-desktop:hover {
-    background-color: lightskyblue;
-    border-color: var(--fundo-menu-pressionado);
-    color: white;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.200);
-}
-
-.cadastro-desktop:active {
-    transform: scale(0.94);
-}
-
-#c-desktop {
-    color: var(--texto);
-    background-color: var(--fundo-menu-pressionado);
-}
-
-main {
-    grid-template-columns: 1fr 5fr 1fr;
-    grid-template-rows: 800px minmax(100vh, 150vh);
-    overflow: hidden;
-}
-
-.imagem {
-    display: none;
-}
-
-main > section.imagem-desktop {
-    display: grid;
-    grid-column: span 3;
-    grid-row: 1;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-}
-
-main > section.imagem-desktop > article#imagem-1 {
-    display: grid;
-    grid-column: 1;
-    grid-row: 1;
-    background: var(--texto) url(https://cdn.pixabay.com/photo/2023/12/04/05/54/ferris-wheel-8428738_1280.jpg) center center no-repeat;
-    background-size: cover;
-}
-
-main > section.imagem-desktop > article#imagem-2 {
-    display: grid;
-    grid-column: 2;
-    grid-row: 1;
-    background: var(--texto) url(https://cdn.pixabay.com/photo/2023/09/29/14/58/road-8284023_1280.jpg) center center no-repeat;
-    background-size: cover;
-}
-
-main > section.imagem-desktop > article#imagem-3 {
-    display: grid;
-    grid-column: 3;
-    grid-row: 1;
-    background: var(--texto) url(https://cdn.pixabay.com/photo/2019/07/21/21/29/path-4353699_1280.jpg) center center no-repeat;
-    background-size: cover;
-}
-
-section#servicos-section {
-    grid-template-rows: 1fr 1fr 1fr; 
-}
-
-.servicos-article {
-    height: 30vh;
-    max-height: auto;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 30vh;
-}
-
-main > section#servicos-section > article.servicos-article > article.servico-imagens {
-    grid-column: 2;
-}
-
-main > section#servicos-section > article.servicos-article > article#servico-roteiro-automatico {
-    background-image: url(https://cdn.pixabay.com/photo/2023/03/16/08/42/camping-7856198_1280.jpg);
-    background-position: center 40%;
-}
-
-main > section#servicos-section > article.servicos-article > article#servico-calculo-custos {
-    background-image: url(https://cdn.pixabay.com/photo/2018/03/10/18/03/laptop-3214756_1280.png); 
-    background-position: center center;  
-}
-
-main > section#servicos-section > article.servicos-article > article#servico-sua-aventura {
-    background-image: url(https://cdn.pixabay.com/photo/2019/03/19/14/50/fantasy-4065898_1280.jpg);
-    background-position: 50% 20%;
-}
-
-.descricao {
-    grid-column: 1;
-}
-
-section#servicos-section:has(.servicos-article:focus) .servicos-article:not(:focus) {
-  padding: 0;
-  margin: 0;
-}
-
-.servicos-article:focus {
-    grid-template-columns: 1fr;
-    grid-template-rows: 30vh 30vh;
-    margin-bottom: 40vh;
-}
-
-.servicos-article:focus .descricao {
-    height: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: column;
-    margin: 0;
-    gap: 0;
-    padding: 0;
-    font-size: 0.9em;
-}
-
-.servicos-article:focus > .descricao > p {
-    display: block;
-    font-weight: 500;
-    margin: 0 5%;
-    color: var(--texto);
-}
-
-main > section#servicos-section > article.servicos-article:focus > article.servico-imagens {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-main > section#servicos-section > article.servicos-article:focus > article#servico-roteiro-automatico {
-    background-position: center 90%;
-}
-
-main > section#servicos-section > article.servicos-article:focus > article#servico-sua-aventura {
-    background-position: center 31.5%;
-}
-
-.servicos-article:focus h3 {
-    margin: 0px;
-    padding: 0;
-}
-
-.servicos-article:focus h2 {
-    margin: 0;
-    padding: 0;
-}
-
-.servicos-article:focus .botao-servicos {
-    display: none;
-}
-
-.servicos-article h3 {
-    font-size: 1.8em;
-}
-
-.botao-servicos {
-    min-width: 100%;
-    padding: 5px;
-}
-
-footer {
-    grid-template-rows: 1fr 7fr 3fr;
-}
-
-footer > .rodape {
-    grid-column: 2 / 3;
-}
-
-
-}
-/* Desktop */
