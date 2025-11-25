@@ -1,5 +1,14 @@
 @reference "tailwindcss";
 
+@font-face {
+  font-family: "Majesty";
+  src: url(/fonts/FB-Free-Majesty-Goldera/Majesty\Goldera.otf);
+}
+* {
+  @apply box-border m-0 p-0;
+  font-family: "Oswald", sans-serif;
+}
+
 :root {
   --fundo: #e1f0f8;
   --texto: #1e2328;
@@ -15,7 +24,7 @@
   --sol-modo-claro: black;
 }
 
-body.escuro {
+div#body.escuro.pagina-inicial-screen {
   --fundo: #051e2c;
   --texto: #f6f8fb;
   --botao: #f5f6f8;
@@ -29,519 +38,482 @@ body.escuro {
   --lua-modo-escuro: rgb(26, 26, 255);
   --sol-modo-claro: gray;
 }
-body,
-html {
+div#body.pagina-inicial-screen,
+html.pagina-inicial-screen {
   @apply h-screen;
-}
-
-@font-face {
-  font-family: "Majesty";
-  src: url(../fonts/FB-Free-Majesty-Goldera/Majesty\Goldera.otf);
-}
-* {
-  @apply box-border m-0 p-0;
-  font-family: "Oswald", sans-serif;
 }
 
 /* Menu-Pressionado. Só é ativado em mobiles */
 /* 1/2 Menu-Pressionado */
-div#menu-pressionado {
+div#menu-pressionado.pagina-inicial-screen {
   @apply hidden min-h-screen h-auto grid-cols-[1fr_4fr_1fr] grid-rows-[75px_100px_500px] bg-(--fundo-menu-pressionado) gap-y-2.5;
 }
-div#menu-pressionado.aberto {
+div#menu-pressionado.aberto.pagina-inicial-screen {
   @apply grid;
 }
-#menu-pressionado > #botao-fechar {
+#menu-pressionado > #botao-fechar.pagina-inicial-screen {
   @apply col-3 place-self-center;
 }
-div.cadastro {
+div.cadastro.pagina-inicial-screen {
   @apply flex flex-col justify-evenly items-center col-[span_3] row-2;
 }
-div.cadastro > button {
-  @apply w-[90%] text-center tracking-[0.5px] text-[1em] transition-[0.3s] m-[0.5vh] p-1 rounded-md active:scale-[0.94];
+div.cadastro > button.pagina-inicial-screen {
+  @apply w-[90%] cursor-pointer text-center tracking-[0.5px] text-[1em] transition-[0.3s] m-[0.5vh] p-1 rounded-md active:scale-[0.94];
 }
-button#cadastrar {
+button#cadastrar.pagina-inicial-screen {
   @apply bg-(--botao) text-(--texto-botao);
 }
-button#login {
+button#login.pagina-inicial-screen {
   @apply bg-(--fundo-menu-pressionado) text-(--texto) border-(--texto-produtos) border-2 border-solid;
 }
-section#topicos {
+section#topicos.pagina-inicial-screen {
   @apply col-[span_3] row-3;
 }
-section#topicos h3 {
+section#topicos h3.pagina-inicial-screen {
   @apply w-[90%] text-[1.2em] font-thin text-(--texto) mx-auto my-2.5 pl-2.5 pr-0 py-2.5 rounded-md active:bg-(--fundo-tag-pressionada) active:text-(--texto-tag-pressionada) active:rounded-none;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
-div#produtos-container {
+div#produtos-container.pagina-inicial-screen {
   @apply relative;
 }
-div#produtos-container > p {
+div#produtos-container > p.pagina-inicial-screen {
   @apply absolute -translate-x-2/4 -translate-y-2/4 text-[1.8em] text-(--texto-produtos) right-[7.5%] top-2/4;
 }
-div#produtos-container > p.aberto {
+div#produtos-container > p.aberto.pagina-inicial-screen {
   @apply -translate-x-2/4 -translate-y-2/4 rotate-90;
 }
-h3#produtos-tag.aberto {
+h3#produtos-tag.aberto.pagina-inicial-screen {
   @apply bg-(--fundo-tag-aberta);
 }
-article#produtos-a-mostrar {
+article#produtos-a-mostrar.pagina-inicial-screen {
   @apply hidden;
 }
-article#produtos-a-mostrar.aberto {
+article#produtos-a-mostrar.aberto.pagina-inicial-screen {
   @apply block mx-0 my-5;
 }
-article#produtos-a-mostrar h3 {
+article#produtos-a-mostrar h3.pagina-inicial-screen {
   @apply text-(--texto-produtos) text-[1em] font-normal pl-[9vw];
 }
-article#produtos-a-mostrar .produtos-unicos:active i {
+article#produtos-a-mostrar .produtos-unicos:active i.pagina-inicial-screen {
   @apply text-(--texto-tag-pressionada);
 }
-article#produtos-a-mostrar > .produtos-unicos {
+article#produtos-a-mostrar > .produtos-unicos.pagina-inicial-screen {
   @apply relative;
 }
-article#produtos-a-mostrar > .produtos-unicos > i {
+article#produtos-a-mostrar > .produtos-unicos > i.pagina-inicial-screen {
   @apply absolute text-(--texto-produtos) text-[1em] -translate-x-2/4 -translate-y-2/4 left-[9vw] top-2/4;
 }
-hr {
+hr.pagina-inicial-screen {
   @apply mx-[4%] my-0 border-[rgba(211,211,211,0.608)];
 }
-article#tema-container {
+article#tema-container.pagina-inicial-screen {
   @apply relative;
 }
-div#temas {
+div#temas.pagina-inicial-screen {
   @apply absolute translate-x-[-30%] -translate-y-2/4 right-[0%] top-2/4;
 }
-div#temas i#modo-escuro,
-div#temas-desktop i#modo-escuro {
+div#temas i#modo-escuro.pagina-inicial-screen,
+div#temas-desktop i#modo-escuro.pagina-inicial-screen {
   @apply text-(--lua-modo-escuro);
 }
-div#temas i#modo-claro,
-div#temas-desktop i#modo-claro {
+div#temas i#modo-claro.pagina-inicial-screen,
+div#temas-desktop i#modo-claro.pagina-inicial-screen {
   @apply text-(--sol-modo-claro);
 }
 /* 2/2 Menu-Pressionado */
-header,
-main,
-footer {
+header.pagina-inicial-screen,
+main.pagina-inicial-screen,
+footer.pagina-inicial-screen {
   @apply grid;
 }
 /* Grid por padrão */
 
 /* Conteúdos que só mostram no Desktop */
-header > nav,
-header > section,
-header > div#temas-desktop,
-header > h2 > i#aviao-icone-desktop {
+header.pagina-inicial-screen > nav,
+header.pagina-inicial-screen > section,
+header.pagina-inicial-screen > div#temas-desktop,
+header.pagina-inicial-screen > h2 > i#aviao-icone-desktop {
   @apply hidden;
 }
-header > #produtos-desktop-container {
+header.pagina-inicial-screen > #produtos-desktop-container {
   @apply grid opacity-0 -translate-y-5 pointer-events-none transition-all duration-100 h-0 overflow-hidden;
 }
 
 /* Conteúdos que somem ao clicar no ícone de Menu */
-header.fechado,
-main.fechado,
-footer.fechado {
+header.pagina-inicial-screen.fechado,
+main.pagina-inicial-screen.fechado,
+footer.pagina-inicial-screen.fechado {
   @apply hidden;
 }
 
 /* Valor padrão dos ícones */
-i {
+i.pagina-inicial-screen {
   @apply text-[2em] text-(--botao) transition-[0.5s];
 }
 
 /* Header */
 /* 1/2 Header */
-header {
+header.pagina-inicial-screen {
   @apply bg-(--fundo-menu-pressionado) grid-cols-[1fr_4fr_1fr] grid-rows-[75px_1fr] place-items-center pb-5;
 }
-header > #aviao-icone {
+header.pagina-inicial-screen > #aviao-icone {
   @apply row-1 col-1;
 }
-header > #menu-icone {
+header.pagina-inicial-screen > #menu-icone {
   @apply row-1 col-3;
 }
-header > h2 {
+header.pagina-inicial-screen > h2 {
   @apply row-1 col-2 tracking-[1px] text-[2.6em] transition-[0.4s] font-black;
   font-family: "Majesty";
 }
-header > h2 > i {
+header.pagina-inicial-screen > h2 > i {
   @apply text-[1em];
 }
-header > h2:active,
-header > h2:hover {
+header.pagina-inicial-screen > h2:active,
+header.pagina-inicial-screen > h2:hover {
   @apply tracking-[4px];
 }
-header > h1 {
+header.pagina-inicial-screen > h1 {
   @apply col-[span_3] row-2 text-center px-[30px] py-0 text-3xl;
 }
-h1,
-h2,
-h3 {
+h1.pagina-inicial-screen,
+h2.pagina-inicial-screen,
+h3.pagina-inicial-screen {
   @apply text-(--texto);
 }
+
 /* 2/2 Header */
-main {
+main.pagina-inicial-screen {
   @apply bg-(--fundo) grid-cols-[auto_80%_auto] grid-rows-[500px_1000px] gap-y-[5vh];
 }
-.imagem {
+main > section.imagem.pagina-inicial-screen {
   @apply col-[span_3] row-1 w-full h-full bg-cover;
   background: var(--texto)
     url(https://cdn.pixabay.com/photo/2021/12/13/07/06/airplane-6867678_1280.jpg)
     center center no-repeat fixed;
 }
-main > section article#imagem-1,
-main > section > article#imagem-2,
-main > section > article#imagem-3 {
+main.pagina-inicial-screen > section article#imagem-1,
+main.pagina-inicial-screen > section > article#imagem-2,
+main.pagina-inicial-screen > section > article#imagem-3 {
   @apply hidden;
 }
-section#servicos-section {
+section#servicos-section.pagina-inicial-screen {
   @apply grid col-2 row-2 grid-cols-[1fr] grid-rows-[1fr_1fr_1fr];
 }
-.servicos-article {
+.servicos-article.pagina-inicial-screen {
   @apply grid grid-cols-[1fr_1fr] grid-rows-[1fr] border items-center shadow-[0_6px_18px_rgba(0,0,0,0.08)] transition-all duration-500 bg-(--fundo-menu-pressionado) mx-0 my-[2.5vh] border-solid border-[rgba(0,0,0,0.505)] focus:-translate-y-2.5 focus:shadow-[0_20px_40px_rgba(0,0,0,0.18)] focus:scale-[1.08];
 }
-.servicos-article > .descricao > p {
+.servicos-article.pagina-inicial-screen > .descricao > p {
   @apply hidden;
 }
-.descricao {
+.descricao.pagina-inicial-screen {
   @apply col-2 row-1 text-center transition-[0.1s] duration-[ease] mx-[3%] my-0;
 }
-.servicos-article h3 {
+.servicos-article.pagina-inicial-screen h3 {
   @apply font-thin mx-0 my-[15px];
 }
-.botao-servicos {
+.botao-servicos.pagina-inicial-screen {
   @apply bg-(--botao) text-[1em] text-(--texto-botao) rounded shadow-[1px_1px_5px_rgba(0,0,0,0.193)] cursor-pointer transition-[0.5s] p-2.5 active:scale-100;
 }
-.servico-imagens {
+.servico-imagens.pagina-inicial-screen {
   @apply col-1 row-1 w-full h-full transition-all duration-500 bg-cover bg-position-[50%_40%];
 
 }
-#servico-roteiro-automatico {
-  @apply bg-[url(https://cdn.pixabay.com/photo/2023/05/28/12/08/suitcase-8023523\_1280.png)];
+#servico-roteiro-automatico.pagina-inicial-screen {
+  @apply bg-[url(https://cdn.pixabay.com/photo/2023/05/28/12/08/suitcase-8023523_1280.png)];
 }
-#servico-calculo-custos {
-  @apply bg-[url(https://cdn.pixabay.com/photo/2017/08/01/15/03/global-2566114\_1280.jpg)];
+#servico-calculo-custos.pagina-inicial-screen {
+  @apply bg-[url(https://cdn.pixabay.com/photo/2017/08/01/15/03/global-2566114_1280.jpg)];
 }
-#servico-sua-aventura {
-  @apply bg-[url(https://cdn.pixabay.com/photo/2022/05/28/14/09/landscape-7227383\_1280.jpg)];
+#servico-sua-aventura.pagina-inicial-screen {
+  @apply bg-[url(https://cdn.pixabay.com/photo/2022/05/28/14/09/landscape-7227383_1280.jpg)];
 }
-footer {
+
+/* Footer */
+
+footer.pagina-inicial-screen {
   @apply grid-cols-[1fr_5fr_1fr] grid-rows-[1fr_2fr_3fr] gap-y-[3vh] bg-(--fundo-menu-pressionado) px-0 py-5;
 }
-footer > h2 {
+footer > h2.pagina-inicial-screen {
   @apply col-2 row-1 grid place-self-center text-center text-[2em];
 }
-footer > .rodape {
+footer > .rodape.pagina-inicial-screen {
   @apply row-2 col-[1/4] grid grid-cols-[1fr_1fr] grid-rows-[1fr_1fr] auto-rows-auto auto-cols-auto gap-1;
 }
-footer > .rodape > .imagem-rodape {
+footer > .rodape > .imagem-rodape.pagina-inicial-screen {
   @apply bg-cover shadow-[1px_1px_1px_rgba(0,0,0,0.300)] bg-position-[50%_80%];
 }
-#imagem-rodape-1 {
-  @apply bg-[url(https://cdn.pixabay.com/photo/2023/04/20/12/22/globe-7939725\_1280.jpg)];
+#imagem-rodape-1.pagina-inicial-screen {
+  @apply bg-[url(https://cdn.pixabay.com/photo/2023/04/20/12/22/globe-7939725_1280.jpg)];
 }
-#imagem-rodape-2 {
-  @apply bg-[url(https://cdn.pixabay.com/photo/2022/01/10/18/06/girls-6928968\_1280.jpg)];
+#imagem-rodape-2.pagina-inicial-screen {
+  @apply bg-[url(https://cdn.pixabay.com/photo/2022/01/10/18/06/girls-6928968_1280.jpg)];
 }
-#imagem-rodape-3 {
-  @apply bg-[url(https://cdn.pixabay.com/photo/2023/02/24/21/11/pancake-7811889\_1280.jpg)] bg-bottom;
+#imagem-rodape-3.pagina-inicial-screen {
+  @apply bg-[url(https://cdn.pixabay.com/photo/2023/02/24/21/11/pancake-7811889_1280.jpg)] bg-bottom;
 }
-#imagem-rodape-4 {
-  @apply bg-[url(https://cdn.pixabay.com/photo/2020/03/18/05/15/horse-4942698\_1280.jpg)];
+#imagem-rodape-4.pagina-inicial-screen {
+  @apply bg-[url(https://cdn.pixabay.com/photo/2020/03/18/05/15/horse-4942698_1280.jpg)];
 }
-footer > nav {
+footer > nav.pagina-inicial-screen {
   @apply grid col-[span_3] row-3 grid-rows-[1fr_100px] gap-y-[15px];
 }
-nav > h3 {
+nav > h3.pagina-inicial-screen {
   @apply text-center row-1 text-[1.8em] mx-2.5 my-0;
 }
-footer > nav > ul {
+footer > nav > ul.pagina-inicial-screen {
   @apply flex self-start gap-5 row-2 justify-center items-center;
   list-style: none;
 }
-footer i {
+footer i.pagina-inicial-screen {
   @apply text-(--texto) transition-[0.25s];
 }
-i:active,
-i:hover {
+i.pagina-inicial-screen:active,
+i.pagina-inicial-screen:hover {
   transform: scale(1.08) translateZ(-10px);
   cursor: pointer;
 }
 
-#Viajour {
+#Viajour.pagina-inicial-screen {
   @apply text-[1.2em] font-black;
   font-family: "Majesty";
 }
 
         /* Celulares grandes ou em modo paisagem */
 @media screen and (min-width: 568px) and (max-width: 768px) {
-  main {
+  main.pagina-inicial-screen {
     @apply grid-rows-[350px_1000px];
   }
-  .servicos-article {
+  .servicos-article.pagina-inicial-screen {
     @apply text-[1.4em];
   }
-  #servico-roteiro-automatico {
+  #servico-roteiro-automatico.pagina-inicial-screen {
     @apply bg-position-[50%_85%];
   }
-  #servico-calculo-custos {
+  #servico-calculo-custos.pagina-inicial-screen {
     @apply bg-position-[50%_20%];
   }
-  #servico-sua-aventura {
+  #servico-sua-aventura.pagina-inicial-screen {
     @apply bg-position-[50%_15%];
   }
-  footer {
+  footer.pagina-inicial-screen {
     @apply grid-rows-[1fr_5fr_3fr];
   }
 }
 
         /* Tablets */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-  main {
+  main.pagina-inicial-screen {
     @apply grid-rows-[350px_850px];
   }
-  .servicos-article {
+  .servicos-article.pagina-inicial-screen {
     @apply text-[1.4em];
   }
 
-  header > i,
-  header > h2 {
+  header > i.pagina-inicial-screen,
+  header > h2.pagina-inicial-screen {
     @apply text-[3em];
   }
-  #menu-pressionado > #botao-fechar {
+  #menu-pressionado > #botao-fechar.pagina-inicial-screen {
     @apply text-[3em];
   }
-  #servico-roteiro-automatico {
+  #servico-roteiro-automatico.pagina-inicial-screen {
     @apply bg-position-[50%_85%];
   }
-  #servico-calculo-custos {
+  #servico-calculo-custos.pagina-inicial-screen {
     @apply bg-position-[50%_20%];
   }
-  #servico-sua-aventura {
+  #servico-sua-aventura.pagina-inicial-screen {
     @apply bg-position-[50%_10%];
   }
-  footer {
+  footer.pagina-inicial-screen {
     @apply grid-rows-[1fr_5fr_3fr];
   }
-  footer > nav {
+  footer > nav.pagina-inicial-screen {
     @apply grid-rows-[1fr_200px];
   }
 }
 
-        /* Desktop */
+/* Desktop */
 @media screen and (min-width: 1024px) {
-  header #menu-icone {
+  header.pagina-inicial-screen #menu-icone {
     @apply hidden;
   }
-  header #aviao-icone {
+  header.pagina-inicial-screen #aviao-icone {
     @apply hidden;
   }
-  header > h2 > i#aviao-icone-desktop {
+  header.pagina-inicial-screen > h2 > i#aviao-icone-desktop {
     @apply inline;
   }
-  header {
+  header.pagina-inicial-screen {
     @apply grid-cols-[1fr_4fr_1fr_2fr] grid-rows-[1fr_auto_2fr] place-content-center pt-2.5 px-4 items-center justify-items-normal;
   }
-  header > div#temas-desktop {
+  header.pagina-inicial-screen > div#temas-desktop {
     @apply flex col-3 row-1 scale-80;
   }
-  header > h1 {
+  header.pagina-inicial-screen > h1 {
     @apply col-[span_4] row-3;
   }
-  header > h2 {
+  header.pagina-inicial-screen > h2 {
     @apply justify-self-end col-1 row-1 flex text-[1.4em] items-center gap-[2.5px];
   }
-  header > h2 > i {
+  header.pagina-inicial-screen > h2 > i {
     @apply text-[1.2em];
   }
-  header > section {
+  header.pagina-inicial-screen > section {
     @apply flex justify-around row-1 col-2;
   }
-  .topicos-desktop {
+  .topicos-desktop.pagina-inicial-screen {
     @apply text-(--texto-produtos) font-light text-[1.4em] transition-[0.5s] cursor-pointer p-[0.4em] rounded-[10px] hover:bg-[lightskyblue] hover:text-[black];
     text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.4);
   }
-  #produto-desktop-tag.azul-ativado {
+  #produto-desktop-tag.azul-ativado.pagina-inicial-screen {
     @apply bg-[lightskyblue] text-[black];
   }
-  span#seta-desktop {
+  span#seta-desktop.pagina-inicial-screen {
     @apply inline-block rotate-90 translate-x-1/4 translate-y-[5%] transition-[0.1s] duration-[ease];
   }
-  .topicos-desktop:hover span#seta-desktop {
+  .topicos-desktop.pagina-inicial-screen:hover span#seta-desktop.pagina-inicial-screen {
     @apply -rotate-90 translate-x-1/4 translate-y-[5%];
   }
-  span#seta-desktop.seta-virada {
+  span#seta-desktop.seta-virada.pagina-inicial-screen {
     @apply -rotate-90 translate-x-1/4 translate-y-[5%];
   }
-  header > #produtos-desktop-container.container-ativado {
+  header.pagina-inicial-screen > #produtos-desktop-container.container-ativado.pagina-inicial-screen {
     @apply overflow-hidden min-h-[20%] transition-all duration-400 opacity-100 translate-y-0 mt-6 pointer-events-auto h-auto col-[2/4] row-2 grid-cols-[1fr_1fr_1fr] grid-rows-[20%_85%] bg-(--fundo-menu-pressionado) border-(--texto-tag-pressionada) pt-[1%] pb-[2%] rounded-[15px] border-2;
   }
-  header > #produtos-desktop-container > h2 {
+  header.pagina-inicial-screen > #produtos-desktop-container > h2.pagina-inicial-screen {
     @apply row-1 justify-self-center text-2xl;
     text-shadow: 1px 1px 1px var(--fundo-menu-pressionado);
   }
-  header > #produtos-desktop-container > div.produtos-pai {
+  header.pagina-inicial-screen > #produtos-desktop-container > div.produtos-pai.pagina-inicial-screen {
     @apply grid grid-rows-[1fr_1fr_1fr_1fr] justify-center;
   }
-  header > #produtos-desktop-container > div.produtos-pai > div {
-    @apply flex items-center justify-start rounded transition-all duration-200 cursor-pointer mx-0 my-[0.5vh] px-[0.5vh] py-0 border-2 border-(--fundo-menu-pressionado) hover:bg-[lightskyblue] hover:scale-105;
+  header.pagina-inicial-screen > #produtos-desktop-container > div.produtos-pai > div.pagina-inicial-screen {
+    @apply flex items-center justify-start rounded transition-all duration-200 cursor-pointer mx-0 my-[0.5vh] px-[1vh] py-[0.5vh] border-(--fundo-menu-pressionado) hover:bg-[lightskyblue] hover:scale-105;
   }
-  header > #produtos-desktop-container > div.produtos-pai > div > i {
+  header.pagina-inicial-screen > #produtos-desktop-container > div.produtos-pai > div > i.pagina-inicial-screen {
     @apply text-[1em];
     text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.326);
   }
-  header > #produtos-desktop-container > div.produtos-pai > div > h3 {
-    @apply text-[1em] font-normal ml-[5px];
+  header.pagina-inicial-screen > #produtos-desktop-container > div.produtos-pai > div > h3.pagina-inicial-screen {
+    @apply text-[1.2em] font-normal ml-[5px];
     text-shadow: 1px 1px 1px var(--sombra-texto);
   }
-  header > nav {
+  header.pagina-inicial-screen > nav.pagina-inicial-screen {
     @apply justify-self-end flex col-4 row-1;
   }
-  .cadastro-desktop {
+  .cadastro-desktop.pagina-inicial-screen {
     @apply scale-94 text-(--texto-botao) font-light text-[1.2em] transition-[0.5s] cursor-pointer bg-(--botao) border-(--texto-tag-pressionada) px-[0.5em] py-[0.3em] rounded-[15px] border-2 border-solid active:scale-[0.9];
     text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.4);
   }
-  .cadastro-desktop:hover,
-  #c-desktop:hover {
+  .cadastro-desktop.pagina-inicial-screen:hover,
+  #c-desktop.pagina-inicial-screen:hover {
     @apply bg-[lightskyblue] border-(--fundo-menu-pressionado) text-[white];
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   }
-  #c-desktop {
+  #c-desktop.pagina-inicial-screen {
     @apply text-(--texto) bg-(--fundo-menu-pressionado);
   }
-  main {
+  main.pagina-inicial-screen {
     @apply grid-cols-[1fr_5fr_1fr] grid-rows-[800px_minmax(100vh,150vh)] overflow-hidden;
   }
-  .imagem {
+  .imagem.pagina-inicial-screen {
     @apply hidden;
   }
-  main > section.imagem-desktop {
+  main.pagina-inicial-screen > section.imagem-desktop.pagina-inicial-screen {
     @apply grid col-[span_3] row-1 grid-cols-[1fr_1fr_1fr] grid-rows-[1fr];
   }
-  main > section.imagem-desktop > article#imagem-1 {
+  main.pagina-inicial-screen > section.imagem-desktop > article#imagem-1.pagina-inicial-screen {
     @apply grid col-1 row-1 bg-cover;
     background: var(--texto)
       url(https://cdn.pixabay.com/photo/2023/12/04/05/54/ferris-wheel-8428738_1280.jpg)
       center center no-repeat;
   }
-  main > section.imagem-desktop > article#imagem-2 {
+  main.pagina-inicial-screen > section.imagem-desktop > article#imagem-2.pagina-inicial-screen {
     @apply grid col-2 row-1 bg-cover;
     background: var(--texto)
       url(https://cdn.pixabay.com/photo/2023/09/29/14/58/road-8284023_1280.jpg)
       center center no-repeat;
   }
-  main > section.imagem-desktop > article#imagem-3 {
+  main.pagina-inicial-screen > section.imagem-desktop > article#imagem-3.pagina-inicial-screen {
     @apply grid col-3 row-1 bg-cover;
     background: var(--texto)
       url(https://cdn.pixabay.com/photo/2019/07/21/21/29/path-4353699_1280.jpg)
       center center no-repeat;
   }
-  section#servicos-section {
-    @apply grid-rows-[1fr_1fr_1fr];
+
+  .pagina-inicial-screen section#servicos-section {
+      @apply grid-rows-[1fr_1fr_1fr];
   }
-  .servicos-article {
-    @apply transition-all duration-500 h-[30vh] max-h-[auto] grid-cols-[1fr_1fr] grid-rows-[30vh] focus:grid-cols-[1fr] focus:grid-rows-[30vh_30vh] focus:mb-[40vh];
+  .pagina-inicial-screen .servicos-article {
+      @apply transition-all duration-500 h-[30vh] max-h-[auto] grid-cols-[1fr_1fr] grid-rows-[30vh] focus:grid-cols-[1fr] focus:grid-rows-[30vh_30vh] focus:mb-[40vh];
   }
-  main
-    > section#servicos-section
-    > article.servicos-article
-    > article.servico-imagens {
-    @apply col-2 bg-cover;
+  .pagina-inicial-screen main > section#servicos-section > article.servicos-article > article.servico-imagens {
+      @apply col-2 bg-cover;
+  }
+  .pagina-inicial-screen main > section#servicos-section > article.servicos-article > article#servico-roteiro-automatico {
+      @apply bg-[url(https://cdn.pixabay.com/photo/2023/03/16/08/42/camping-7856198_1280.jpg)] bg-position-[center_50%];
+  }
+  .pagina-inicial-screen main > section#servicos-section > article.servicos-article > article#servico-calculo-custos {
+      @apply bg-[url(https://cdn.pixabay.com/photo/2018/03/10/18/03/laptop-3214756_1280.png)] bg-position-[center_center];
+  }
+  .pagina-inicial-screen main > section#servicos-section > article.servicos-article > article#servico-sua-aventura {
+      @apply bg-[url(https://cdn.pixabay.com/photo/2019/03/19/14/50/fantasy-4065898_1280.jpg)] bg-position-[50%_20%];
+  }
+  .pagina-inicial-screen .descricao {
+      @apply col-1;
+  }
+  .pagina-inicial-screen section#servicos-section:has(.servicos-article:focus) .servicos-article:not(:focus) {
+      @apply m-0 p-0;
+  }
+  .pagina-inicial-screen .servicos-article:focus .descricao {
+      @apply h-full flex justify-evenly items-center flex-col gap-0 m-0 p-0;
+  }
+  .pagina-inicial-screen .servicos-article .descricao > h2 {
+      @apply text-2xl font-semibold;
+  }
+  .pagina-inicial-screen .servicos-article:focus > .descricao > p {
+      @apply block font-medium text-(--texto) mx-[5%] my-0;
+  }
+  .pagina-inicial-screen main > section#servicos-section > article.servicos-article:focus > article.servico-imagens {
+      @apply col-1 row-2;
+  }
+  .pagina-inicial-screen main > section#servicos-section > article.servicos-article:focus > article#servico-roteiro-automatico {
+      @apply bg-position-[center_90%];
+  }
+  .pagina-inicial-screen main > section#servicos-section > article.servicos-article:focus > article#servico-sua-aventura {
+      @apply bg-position-[center_31.5%];
+  }
+  .pagina-inicial-screen .servicos-article:focus h3 {
+      @apply m-0 p-0;
+  }
+  .pagina-inicial-screen .servicos-article:focus h2 {
+      @apply m-0 p-0;
+  }
+  .pagina-inicial-screen .servicos-article:focus .botao-servicos {
+      @apply hidden;
+  }
+  .pagina-inicial-screen .servicos-article h3 {
+      @apply text-[1.8em];
+  }
+  .pagina-inicial-screen .botao-servicos {
+      @apply min-w-full p-[5px];
+  }
+  .pagina-inicial-screen footer {
+      @apply grid-rows-[1fr_7fr_3fr];
+  }
+  .pagina-inicial-screen footer > .rodape {
+      @apply col-[2/3];
   }
 
-  main
-    > section#servicos-section
-    > article.servicos-article
-    > article#servico-roteiro-automatico {
-    @apply bg-[url(https://cdn.pixabay.com/photo/2023/03/16/08/42/camping-7856198\_1280.jpg)] bg-position-[center_50%];
-  }
-
-  main
-    > section#servicos-section
-    > article.servicos-article
-    > article#servico-calculo-custos {
-    @apply bg-[url(https://cdn.pixabay.com/photo/2018/03/10/18/03/laptop-3214756\_1280.png)] bg-position-[center_center];
-  }
-
-  main
-    > section#servicos-section
-    > article.servicos-article
-    > article#servico-sua-aventura {
-    @apply bg-[url(https://cdn.pixabay.com/photo/2019/03/19/14/50/fantasy-4065898\_1280.jpg)] bg-position-[50%_20%];
-  }
-
-  .descricao {
-    @apply col-1;
-  }
-
-  section#servicos-section:has(.servicos-article:focus)
-    .servicos-article:not(:focus) {
-    @apply m-0 p-0;
-  }
-
-  .servicos-article:focus .descricao {
-    @apply h-full flex justify-evenly items-center flex-col gap-0 m-0 p-0;
-  }
-
- .servicos-article .descricao > h2 {
-    @apply text-2xl font-semibold;
- }
-
-  .servicos-article:focus > .descricao > p {
-    @apply block font-medium text-(--texto) mx-[5%] my-0;
-  }
-
-  main
-    > section#servicos-section
-    > article.servicos-article:focus
-    > article.servico-imagens {
-    @apply col-1 row-2;
-  }
-  main
-    > section#servicos-section
-    > article.servicos-article:focus
-    > article#servico-roteiro-automatico {
-    @apply bg-position-[center_90%];
-  }
-  main
-    > section#servicos-section
-    > article.servicos-article:focus
-    > article#servico-sua-aventura {
-    @apply bg-position-[center_31.5%];
-  }
-  .servicos-article:focus h3 {
-    @apply m-0 p-0;
-  }
-  .servicos-article:focus h2 {
-    @apply m-0 p-0;
-  }
-  .servicos-article:focus .botao-servicos {
-    @apply hidden;
-  }
-  .servicos-article h3 {
-    @apply text-[1.8em];
-  }
-  .botao-servicos {
-    @apply min-w-full p-[5px];
-  }
-  footer {
-    @apply grid-rows-[1fr_7fr_3fr];
-  }
-  footer > .rodape {
-    @apply col-[2/3];
-  }
-}
-
-        /* Desktop grande */
+/* Desktop grande */
 @media screen and (min-width: 1280px) {
-    header > div#temas-desktop {
+    .pagina-inicial-screen header > div#temas-desktop {
         @apply scale-90;
     }
-
-     .cadastro-desktop {
+    .pagina-inicial-screen .cadastro-desktop {
         @apply scale-100 active:scale-[0.94];
     }
+  }
 }
-

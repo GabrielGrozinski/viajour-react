@@ -4,7 +4,7 @@
 }
 @font-face {
   font-family: "Majesty";
-  src: url(../fonts/FB-Free-Majesty-Goldera/Majesty\Goldera.otf);
+  src: url(/fonts/FB-Free-Majesty-Goldera/Majesty\Goldera.otf);
 }
 main.cadastro-screen {
   @apply h-screen bg-[url(https://cdn.pixabay.com/photo/2017/08/17/20/05/disney-2652684_1280.jpg)] grid grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto] bg-cover transition-[0.5s] place-items-center;
@@ -73,11 +73,12 @@ main.cadastro-screen {
     @apply text-shadow-black block text-[1em] text-[rgb(0,94,255)] cursor-pointer font-extrabold m-auto;
   }
 }
-@media screen and (min-height: 569px) and (min-width: 320px) and (max-width: 1024px) {
+
+@media screen and (max-height: 656px) {
   main.cadastro-screen {
-    @apply items-center justify-items-center grid-cols-[auto_1fr_auto] grid-rows-[5vh_1fr_5vh];
-  }
-  div.form-container.cadastro-screen {
-    @apply max-w-[80%] px-[5%] py-[4%] scale-110;
-  }
+  @apply h-screen relative;
+}
+div.form-container.cadastro-screen {
+  @apply pb-[6%] absolute top-[50%] translate-x-[-50%] translate-y-[-50%] scale-[0.9];
+}
 }

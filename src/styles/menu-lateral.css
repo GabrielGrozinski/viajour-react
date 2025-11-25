@@ -1,0 +1,82 @@
+@reference "tailwindcss";
+
+@font-face {
+    font-family: 'Majesty';
+    src: url(/fonts/FB-Free-Majesty-Goldera/Majesty\ Goldera.otf);
+}
+* {
+  @apply box-border m-0 p-0;
+  font-family: "Oswald", sans-serif;
+}
+aside.menu-lateral.menu-lateral-component {
+  @apply relative z-1 bg-[#082556] row-[span_3] col-1 transition-all duration-300 w-[4vw] flex items-center overflow-hidden gap-10 pt-[3vh];
+  justify-content: start;
+  flex-flow: column nowrap;
+}
+aside.menu-lateral.menu-lateral-component > article.itens-do-viajour-desktop.menu-lateral-component {
+  @apply min-h-[50px] h-auto text-[white] mx-[4%] my-0 p-[auto] rounded-md;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+aside.menu-lateral.menu-lateral-component > i#menu-icone-aside.menu-lateral-component {
+  @apply self-center text-[white] text-[1.8em] cursor-pointer;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+aside.menu-lateral.menu-lateral-component > article.itens-do-viajour-desktop.menu-lateral-component,
+aside.menu-lateral.menu-lateral-component > div.div-instrucoes.menu-lateral-component {
+  @apply hidden;
+}
+aside.menu-lateral.menu-lateral-component > div#div-menu-fechado.menu-lateral-component {
+  @apply flex gap-[30px] text-[1.6em];
+  flex-flow: column nowrap;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+aside.menu-lateral.menu-lateral-component > div#div-menu-fechado.menu-lateral-component > i {
+  @apply cursor-pointer;
+}
+
+aside.menu-lateral.menu-lateral-component > div#div-menu-fechado.menu-lateral-component > i#instrucao-1.menu-lateral-component {
+  @apply text-[lightblue];
+}
+aside.menu-lateral.menu-lateral-component > div#div-menu-fechado.menu-lateral-component > i#instrucao-2.menu-lateral-component {
+  @apply text-[lightgreen];
+}
+aside.menu-lateral.menu-lateral-component > div#div-menu-fechado.menu-lateral-component > i#instrucao-3.menu-lateral-component {
+  @apply text-[rgb(214,214,103)];
+}
+aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component {
+  @apply h-auto w-[12vw] transition-all duration-200 bg-[#082556] flex gap-[15px] px-[2vh] py-[3vh] rounded-[10px];
+  align-items: end;
+  flex-flow: column nowrap;
+}
+aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > div#div-menu-fechado.menu-lateral-component {
+  @apply hidden;
+}
+aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > div.div-instrucoes.menu-lateral-component {
+  @apply flex self-center flex-col text-neutral-100 items-center text-center text-[1.4em] font-normal gap-1 mt-5;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > div.div-instrucoes.menu-lateral-component > i.menu-lateral-component {
+  @apply text-[1em];
+}
+aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > div#div-ferramentas-ia-desktop.menu-lateral-component > i.menu-lateral-component {
+  @apply text-[lightblue];
+}
+aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > div#div-custos-desktop.menu-lateral-component > i.menu-lateral-component {
+  @apply text-[lightgreen];
+}
+aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > div#div-planejamento-pessoal-desktop.menu-lateral-component > i.menu-lateral-component {
+  @apply text-[rgb(214,214,103)];
+}
+aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > article.itens-do-viajour-desktop.menu-lateral-component {
+  @apply block min-w-full max-w-full min-h-[70px] overflow-hidden rounded-md;
+}
+aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > article.itens-do-viajour-desktop.menu-lateral-component > a.menu-lateral-component {
+  @apply flex justify-evenly gap-1 no-underline h-full w-full text-[white] font-normal bg-[rgba(211,211,211,0.062)] transition-all duration-300 pl-[5px] px-0 py-2 hover:bg-[rgb(52,94,219)];
+  flex-flow: column nowrap;
+  align-items: start;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > article.itens-do-viajour-desktop.menu-lateral-component > a.menu-lateral-component > i.menu-lateral-component {
+  @apply text-[white] text-[1.6em];
+}

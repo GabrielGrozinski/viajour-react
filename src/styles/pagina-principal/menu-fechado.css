@@ -1,0 +1,228 @@
+@reference "tailwindcss";
+
+@font-face {
+  font-family: "Majesty";
+  src: url(/fonts/FB-Free-Majesty-Goldera/Majesty\Goldera.otf);
+}
+
+* {
+  @apply box-border m-0 p-0;
+  font-family: "Oswald", sans-serif;
+}
+
+div.body-menu-fechado.menu-fechado-screen {
+  @apply h-screen bg-[linear-gradient(to_bottom,#0244f9,#57adf8_25%)];
+}
+
+header.header-fechado.menu-fechado-screen {
+  @apply bg-transparent w-full grid text-[white] grid-cols-[1fr_1fr_1fr] row-[1fr] place-items-center px-3 py-0;
+}
+
+header.header-fechado.menu-fechado-screen > i#menu-icone.menu-fechado-screen {
+  @apply col-1 justify-self-start;
+}
+
+header.header-fechado.menu-fechado-screen > i#user-icone.menu-fechado-screen {
+  @apply col-3 justify-self-end;
+}
+
+header.header-fechado.menu-fechado-screen > h1.logo.menu-fechado-screen {
+  @apply col-2 font-['Majesty'] row-1 tracking-[2px] font-light text-center text-[white];
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+header.header-fechado.menu-fechado-screen i.menu-fechado-screen {
+  @apply text-[2em] text-[white] cursor-pointer transition-[0.4s] duration-[ease-in-out] border-[none] active:scale-[0.94];
+  background: none;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.stats-card.menu-fechado-screen {
+  @apply w-full grid row-[1fr_1fr] gap-[30px] px-5 py-[30px];
+}
+
+.stat-item.menu-fechado-screen {
+  @apply grid grid-cols-[15%_20%_1fr] items-center rounded-[15px];
+}
+
+.stat-item.menu-fechado-screen i.menu-fechado-screen {
+  @apply col-2 text-[3em] text-[white] mb-[5px];
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.stat-item.menu-fechado-screen .desc.menu-fechado-screen {
+  @apply col-3;
+}
+
+.stat-item.menu-fechado-screen .value.menu-fechado-screen {
+  @apply text-[1.6em] font-semibold text-[lightyellow] mb-[3px];
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.stat-item.menu-fechado-screen .label.menu-fechado-screen {
+  @apply text-[1em] text-[rgba(255,255,255,0.9)];
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+main.main-fechado.menu-fechado-screen {
+  @apply bg-[white] justify-items-center h-auto grid grid-cols-[repeat(2,1fr)] grid-rows-[repeat(3,1fr)_auto_auto] gap-y-2.5 transition-all duration-[0.4s] pt-5 pb-[100px];
+}
+
+main.main-fechado.menu-fechado-screen > div.icones.menu-fechado-screen {
+  @apply grid min-w-[90%] grid-rows-[1fr_1fr] place-items-center shadow-[0px_0px_2px_rgba(0,0,0,0.5)] cursor-pointer transition-[0.3s] duration-[ease] ml-[15px] mr-3.5 mt-[5px] mb-3.5 pt-2.5 rounded-[15px] active:bg-[whitesmoke];
+}
+
+main.main-fechado.menu-fechado-screen > div.icones.menu-fechado-screen > i.menu-fechado-screen {
+  @apply row-1 text-[2.4em] text-[#0080ff];
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+main.main-fechado.menu-fechado-screen > div.icones.menu-fechado-screen > h4.menu-fechado-screen {
+  @apply row-2 text-[1em] text-center font-normal text-[rgb(1,18,43)];
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.12);
+}
+
+main.main-fechado.menu-fechado-screen > div.desc-app.menu-fechado-screen {
+  @apply col-[span_2] min-w-[95%] grid grid-cols-[60%_40%] grid-rows-[1fr_1fr] items-center leading-[22px] shadow-[0px_0px_2px_rgba(0,0,0,0.5)] gap-y-[15px] relative mx-[15px] my-0 p-[25px] rounded-md;
+  justify-content: start;
+}
+
+main.main-fechado.menu-fechado-screen > div.desc-app.menu-fechado-screen > p.menu-fechado-screen {
+  @apply col-1 row-1 text-[1.4em] font-normal text-[#222222];
+}
+
+main.main-fechado.menu-fechado-screen > div.desc-app.menu-fechado-screen > button.btn-instalar-app.menu-fechado-screen {
+  @apply row-2 col-1 bg-[linear-gradient(to_right,#5481ff,#47a7fb)] text-[white] text-[1.2em] cursor-pointer pt-[5px] pb-[7px] px-0 rounded-md border-[none];
+}
+
+main.main-fechado.menu-fechado-screen > div.desc-app.menu-fechado-screen > img.menu-fechado-screen {
+  @apply absolute max-h-[130px] max-w-[150px] right-[8.5%] bottom-[0%];
+}
+
+@media screen and (max-width: 320px) {
+  header.header-fechado.menu-fechado-screen > i#user-icone,
+  header.header-fechado.menu-fechado-screen > i#menu-icone {
+    @apply text-[1.8em];
+  }
+
+  section.stats-card.menu-fechado-screen {
+    @apply px-0 py-[30px];
+  }
+}
+
+@media screen and (max-height: 568px) {
+  main.main-fechado.menu-fechado-screen > div.desc-app > img.baixar-app {
+    @apply max-h-[150px] right-[3.5%];
+  }
+}
+
+@media screen and (min-width: 568px) {
+  main.main-fechado.menu-fechado-screen > div.desc-app > p {
+    @apply text-center;
+  }
+  section.stats-card.menu-fechado-screen {
+    @apply justify-center;
+  }
+  .stats-card.menu-fechado-screen > .stat-item {
+    @apply grid-cols-[30%_1fr];
+  }
+  .stats-card.menu-fechado-screen > .stat-item i {
+    @apply col-1;
+  }
+  .stats-card.menu-fechado-screen > .stat-item .desc {
+    @apply col-2;
+  }
+  div#body.body-menu-fechado.menu-fechado-screen {
+    @apply bg-[linear-gradient(to_bottom,#0244f9,#57adf8_65%)];
+  }
+}
+
+@media screen and (min-width: 768px) {
+  section.stats-card.menu-fechado-screen {
+    @apply flex justify-evenly px-0 py-[30px];
+  }
+
+  header.header-fechado.menu-fechado-screen > i#user-icone,
+  header.header-fechado.menu-fechado-screen > i#menu-icone,
+  header.header-fechado.menu-fechado-screen > h1 {
+    @apply text-[2em];
+  }
+}
+
+@media screen and (min-width: 568px) and (max-width: 851px) {
+  main.main-fechado.menu-fechado-screen > div.desc-app > img.baixar-app {
+    @apply max-h-[150px] right-[10.5%];
+  }
+}
+
+@media screen and (min-width: 852px) and (max-width: 956px) {
+  main.main-fechado.menu-fechado-screen > div.desc-app > img.baixar-app {
+    @apply max-h-[150px] right-[12.5%];
+  }
+}
+
+@media screen and (min-width: 957px) and (max-width: 1024px) {
+  main.main-fechado.menu-fechado-screen > div.desc-app > img.baixar-app {
+    @apply max-h-[150px] right-[14.5%];
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  div#body.body-menu-fechado.menu-fechado-screen {
+    @apply min-h-screen h-auto bg-[linear-gradient(to_bottom,#0244f9,#57adf8_35%)] grid grid-cols-[4vw_1fr] grid-rows-[10vh_20vh_1fr];
+  }
+  header#header.header-fechado.menu-fechado-screen {
+    @apply bg-transparent col-2 row-1 w-full gap-2.5 grid grid-cols-[150px_1fr] grid-rows-[1fr] pl-0 pr-[1vw] py-[2vh];
+    place-items: start normal;
+  }
+  header#header.header-fechado.menu-fechado-screen > i#menu-icone {
+    @apply hidden;
+  }
+  header#header.header-fechado.menu-fechado-screen > h1 {
+    @apply col-1 row-1 tracking-[2px] font-light text-center transition-all duration-200;
+    font-family: "Majesty";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  }
+  header#header.header-fechado.menu-fechado-screen > section#container-moeda-e-idioma-desktop {
+    @apply flex justify-self-end col-2 row-1 gap-2.5 transition-all duration-200;
+    scale: 0.8;
+  }
+  header#header.header-fechado.menu-fechado-screen
+    > section#container-moeda-e-idioma-desktop
+    > article.idiomas-e-moedas-itens-desktop {
+    @apply flex min-w-[140px] justify-evenly items-center bg-[rgb(98,195,255)] shadow-[0px_3px_3px_rgba(0,0,0,0.3)] cursor-pointer transition-all duration-200 px-0 py-2.5 rounded-xl active:bg-[rgb(137,250,112)];
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+  }
+  header#header.header-fechado.menu-fechado-screen
+    > section#container-moeda-e-idioma-desktop
+    > article#moeda-item {
+    @apply flex bg-[#12317d75] w-[175px] h-10 justify-center items-center gap-[5px] text-[1.2em] font-light rounded-[40px];
+    scale: 1;
+  }
+  header#header.header-fechado.menu-fechado-screen > i#user-icone {
+    @apply hidden;
+  }
+  header#header.header-fechado.menu-fechado-screen i {
+    @apply text-[2em] text-[white] cursor-pointer transition-[0.4s] duration-[ease-in-out] border-[none] active:scale-[0.94];
+    background: none;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  }
+  section.stats-card.menu-fechado-screen {
+    @apply row-2 col-2;
+  }
+  main#main-fechado.main-fechado.menu-fechado-screen {
+    @apply row-3 col-2;
+  }
+}
+
+@media screen and (min-width: 1528px) {
+  header#header.header-fechado.menu-fechado-screen > section#container-moeda-e-idioma-desktop {
+    scale: 0.9;
+  }
+}
+
+@media screen and (min-width: 1628px) {
+  header#header.header-fechado.menu-fechado-screen > section#container-moeda-e-idioma-desktop {
+    scale: 1;
+  }
+}

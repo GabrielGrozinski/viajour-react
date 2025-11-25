@@ -17,7 +17,9 @@ export default function Teste() {
   const servico3Ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    document.body.classList.toggle('escuro', temaEscuro);
+    const bodyArtificial = document.getElementById('body');
+    if (!bodyArtificial) return;
+    bodyArtificial.classList.toggle('escuro', temaEscuro);
     localStorage.setItem('tema', temaEscuro ? 'escuro' : 'claro');
   }, [temaEscuro]);
 
@@ -31,7 +33,7 @@ export default function Teste() {
   }
 
 return (
-  <>
+  <div id="body" className="pagina-inicial-screen">
     {/* MENU MOBILE */}
     <div
       id="menu-pressionado"
@@ -331,7 +333,7 @@ return (
         </ul>
       </nav>
     </footer>
-  </>
+  </div>
 );
 
 }

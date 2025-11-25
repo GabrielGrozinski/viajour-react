@@ -1,4 +1,4 @@
-
+import '../styles/menu-lateral.css';
 
 export default function MenuLateral() {
     function expandirMenu() {
@@ -9,84 +9,84 @@ export default function MenuLateral() {
     }
     
     return (
-        <aside className="menu-lateral">
+        <aside className="menu-lateral menu-lateral-component">
             <i
             onClick={() => expandirMenu()}
             id="menu-icone-aside"
-            className="fa-solid fa-bars"
+            className="fa-solid fa-bars menu-lateral-component"
             />
-            <div id="div-menu-fechado">
-            <i id="instrucao-1" className="fa-solid fa-robot" />
-            <i id="instrucao-2" className="fa-solid fa-dollar-sign" />
-            <i id="instrucao-3" className="fa-solid fa-pen-to-square" />
+            <div id="div-menu-fechado" className="menu-lateral-component">
+            <i id="instrucao-1" className="fa-solid fa-robot menu-lateral-component" />
+            <i id="instrucao-2" className="fa-solid fa-dollar-sign menu-lateral-component" />
+            <i id="instrucao-3" className="fa-solid fa-pen-to-square menu-lateral-component" />
             </div>
-            <div className="div-instrucoes" id="div-ferramentas-ia-desktop">
-            <i className="fa-solid fa-robot" /> Ferramentas de I.A
+            <div className="div-instrucoes menu-lateral-component" id="div-ferramentas-ia-desktop">
+            <i className="fa-solid fa-robot menu-lateral-component" /> Ferramentas de I.A
             </div>
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop">
-            <a href="">
-                <i className="fa-solid fa-chess" />
-                <p>Roteiro Automático</p>
+            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-lateral-component">
+            <a href="" className="menu-lateral-component">
+                <i className="fa-solid fa-chess menu-lateral-component" />
+                <p className="menu-lateral-component">Roteiro Automático</p>
             </a>
             </article>
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop">
-            <a href="">
-                <i className="fa-solid fa-brain" />
-                <p>Chat Auxiliar</p>
+            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-lateral-component">
+            <a href="" className="menu-lateral-component">
+                <i className="fa-solid fa-brain menu-lateral-component" />
+                <p className="menu-lateral-component">Chat Auxiliar</p>
             </a>
             </article>
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop">
-            <a href="">
-                <i className="fa-solid fa-cart-flatbed-suitcase" />
-                <p>Busca Paraíso</p>
+            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-lateral-component">
+            <a href="" className="menu-lateral-component">
+                <i className="fa-solid fa-cart-flatbed-suitcase menu-lateral-component" />
+                <p className="menu-lateral-component">Busca Paraíso</p>
             </a>
             </article>
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop">
-            <a href="">
-                <i className="fa-solid fa-plane" />
-                <p>Viagem Certa</p>
+            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-lateral-component">
+            <a href="" className="menu-lateral-component">
+                <i className="fa-solid fa-plane menu-lateral-component" />
+                <p className="menu-lateral-component">Viagem Certa</p>
             </a>
             </article>
-            <div className="div-instrucoes" id="div-custos-desktop">
-            <i className="fa-solid fa-dollar-sign" /> Custos
+            <div className="div-instrucoes menu-lateral-component" id="div-custos-desktop">
+            <i className="fa-solid fa-dollar-sign menu-lateral-component" /> Custos
             </div>
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop">
-            <a href="">
-                <i className="fa-solid fa-hand-holding-dollar" />
-                <p>Cálculo de Custos</p>
+            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-lateral-component">
+            <a href="" className="menu-lateral-component">
+                <i className="fa-solid fa-hand-holding-dollar menu-lateral-component" />
+                <p className="menu-lateral-component">Cálculo de Custos</p>
             </a>
             </article>
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop">
-            <a href="">
-                <i className="fa-regular fa-lightbulb" />
-                <p>Viagens Baratas</p>
+            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-lateral-component">
+            <a href="" className="menu-lateral-component">
+                <i className="fa-regular fa-lightbulb menu-lateral-component" />
+                <p className="menu-lateral-component">Viagens Baratas</p>
             </a>
             </article>
-            <div className="div-instrucoes" id="div-planejamento-pessoal-desktop">
-            <i className="fa-solid fa-pen-to-square" /> Planejamento Pessoal
+            <div className="div-instrucoes menu-lateral-component" id="div-planejamento-pessoal-desktop">
+            <i className="fa-solid fa-pen-to-square menu-lateral-component" /> Planejamento Pessoal
             </div>
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop">
-            <a href="">
-                <i className="fa-solid fa-icons" />
-                <p>Monte sua Aventura</p>
+            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-lateral-component">
+            <a href="" className="menu-lateral-component">
+                <i className="fa-solid fa-icons menu-lateral-component" />
+                <p className="menu-lateral-component">Monte sua Aventura</p>
             </a>
             </article>
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop">
-            <a href="">
-                <i className="fa-regular fa-hourglass" />
-                <p>Viagens de 7 dias</p>
+            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-lateral-component">
+            <a href="" className="menu-lateral-component">
+                <i className="fa-regular fa-hourglass menu-lateral-component" />
+                <p className="menu-lateral-component">Viagens de 7 dias</p>
             </a>
             </article>
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop">
-            <a href="">
-                <i className="fa-solid fa-heart" />
-                <p>Viagens Românticas</p>
+            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-lateral-component">
+            <a href="" className="menu-lateral-component">
+                <i className="fa-solid fa-heart menu-lateral-component" />
+                <p className="menu-lateral-component">Viagens Românticas</p>
             </a>
             </article>
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop">
-            <a href="">
-                <i className="fa-solid fa-gift" />
-                <p>Viagens de Natal</p>
+            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-lateral-component">
+            <a href="" className="menu-lateral-component">
+                <i className="fa-solid fa-gift menu-lateral-component" />
+                <p className="menu-lateral-component">Viagens de Natal</p>
             </a>
             </article>
         </aside>
