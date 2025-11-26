@@ -98,7 +98,7 @@ main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-scree
   @apply w-[45%] h-[100px] bg-[#4851d745] shadow-[1px_1px_3px_rgba(0,0,0,0.2)] rounded-[10px];
 }
 main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen {
-  @apply flex-nowrap flex-col no-underline h-full w-full flex justify-evenly relative pl-2.5 pr-[5px];
+  @apply flex-nowrap cursor-pointer flex-col no-underline h-full w-full flex justify-evenly relative pl-2.5 pr-[5px];
 }
 main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > p.menu-aberto-screen {
   @apply text-[1.2em] text-[white];

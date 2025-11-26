@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
 import MenuVertical from "../../components/menu-vertical";
 import "../../styles/produtos/calculo-de-custos.css";
+import anuncio1 from '../../assets/imagens/anuncio1.png';
 
 type Dia = {
   transporte: string;
@@ -181,7 +182,6 @@ return (
   <div id="body" className="calculo-de-custos-screen">
     <MenuVertical expandirMargem={expandirMargem} />
     <main className="calculo-de-custos-screen">
-      <img id="imagem-1" className="imagem calculo-de-custos-screen" src="/imagens/anuncio1.png" alt="anúncio" />
       <div id="container" className="container calculo-de-custos-screen">
           <h2 onClick={mudarTema} style={{ cursor: "pointer" }} className="calculo-de-custos-screen">
           Calculadora de Custos da Viagem
@@ -258,24 +258,27 @@ return (
           </span>
           </div>
           <div className="graficos calculo-de-custos-screen">
-          <div className="calculo-de-custos-screen">
-              <h3 className="calculo-de-custos-screen">Gastos por dia</h3>
-              <canvas ref={canvas1} className="calculo-de-custos-screen"></canvas>
-          </div>
-          {dias.length > LIMITE_GRAFICO && (
-              <div className="calculo-de-custos-screen">
-              <h3 className="calculo-de-custos-screen">Gastos por dia (continuação)</h3>
-              <canvas ref={canvas2} className="calculo-de-custos-screen"></canvas>
-              </div>
-          )}
-          <div className="calculo-de-custos-screen">
-              <h3 className="calculo-de-custos-screen">Gastos por categoria</h3>
-              <canvas ref={canvasCategorias} className="calculo-de-custos-screen"></canvas>
-          </div>
+            <div className="calculo-de-custos-screen">
+                <h3 className="calculo-de-custos-screen">Gastos por dia</h3>
+                <canvas ref={canvas1} className="calculo-de-custos-screen"></canvas>
+            </div>
+            {dias.length > LIMITE_GRAFICO && (
+                <div className="calculo-de-custos-screen">
+                <h3 className="calculo-de-custos-screen">Gastos por dia (continuação)</h3>
+                <canvas ref={canvas2} className="calculo-de-custos-screen"></canvas>
+                </div>
+            )}
+            <div id="grafico-final" className="calculo-de-custos-screen">
+                <h3 className="calculo-de-custos-screen">Gastos por categoria</h3>
+                <canvas ref={canvasCategorias} className="calculo-de-custos-screen"></canvas>
+            </div>
           </div>
       </div>
-      <img id="imagem-2" className="imagem calculo-de-custos-screen" src="/imagens/anuncio2.png" alt="anúncio" />
     </main>
+    <footer className="calculo-de-custos-screen">
+      <div style={{backgroundImage: `url(${anuncio1})`}} className="imagem calculo-de-custos-screen">
+      </div>
+    </footer>
   </div>
 );
 

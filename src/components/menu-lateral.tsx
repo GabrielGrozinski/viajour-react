@@ -1,6 +1,10 @@
 import '../styles/menu-lateral.css';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function MenuLateral({ expandirMargem }: {expandirMargem: () => void}) {
+    const navigate = useNavigate();
+
     function expandirMenu() {
         const asideAberto = window.document.querySelector('aside');
         if (asideAberto) {
@@ -50,8 +54,8 @@ export default function MenuLateral({ expandirMargem }: {expandirMargem: () => v
             <div className="div-instrucoes menu-lateral-component" id="div-custos-desktop">
             <i className="fa-solid fa-dollar-sign menu-lateral-component" /> Custos
             </div>
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-lateral-component">
-            <a href="" className="menu-lateral-component">
+            <article onClick={() => navigate('/calculo-de-custos')} id="roteiro-automatico" className="itens-do-viajour-desktop menu-lateral-component">
+            <a className="menu-lateral-component">
                 <i className="fa-solid fa-hand-holding-dollar menu-lateral-component" />
                 <p className="menu-lateral-component">Cálculo de Custos</p>
             </a>
@@ -73,7 +77,7 @@ export default function MenuLateral({ expandirMargem }: {expandirMargem: () => v
             </article>
             <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-lateral-component">
             <a href="" className="menu-lateral-component">
-                <i className="fa-regular fa-hourglass menu-lateral-component" />
+                <i className="fa-solid fa-mountain-city menu-lateral-component" />
                 <p className="menu-lateral-component">Viagens de 7 dias</p>
             </a>
             </article>

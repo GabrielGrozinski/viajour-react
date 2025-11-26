@@ -11,28 +11,15 @@
 }
 
 div#body.calculo-de-custos-screen {
-  @apply transition-all duration-300 h-screen flex flex-col gap-10 items-center bg-[linear-gradient(to_bottom,#142346,#0f172a)];
-
+  @apply transition-all duration-300 h-screen flex flex-col overflow-hidden bg-[linear-gradient(to_bottom,#142346,#0f172a)];
 }
 
 main.calculo-de-custos-screen {
-  @apply flex bg-red-500 max-h-[400px];
-}
-
-main.calculo-de-custos-screen > img.imagem.calculo-de-custos-screen {
-  @apply max-w-[100px] max-h-max row-2;
-}
-
-main.calculo-de-custos-screen > img#imagem-1.calculo-de-custos-screen {
-  @apply col-1;
-}
-
-main.calculo-de-custos-screen > img#imagem-2.calculo-de-custos-screen {
-  @apply col-3;
+  @apply max-h-full grid grid-cols-[1fr];
 }
 
 main.calculo-de-custos-screen > .container.calculo-de-custos-screen {
-  @apply max-h-max overflow-y-auto max-w-[440px] row-2 col-2 transition-all duration-300 bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] p-[25px];
+  @apply overflow-y-auto transition-all duration-300 bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] p-[25px];
 }
 
 main.calculo-de-custos-screen .dias-container.calculo-de-custos-screen {
@@ -97,14 +84,28 @@ main.calculo-de-custos-screen .graficos.calculo-de-custos-screen {
   @apply grid grid-cols-[1fr_1fr] gap-[30px] mt-10;
 }
 
+main.calculo-de-custos-screen .graficos.calculo-de-custos-screen > div#grafico-final {
+  @apply pb-[200px];
+}
+
+footer.calculo-de-custos-screen {
+  @apply min-w-full min-h-[80px] sticky bottom-0;
+}
+
+footer.calculo-de-custos-screen > div.imagem.calculo-de-custos-screen {
+  @apply h-full w-full bg-cover bg-center;
+}
+
 div#body.calculo-de-custos-screen.dark {
   @apply text-slate-100;
   background: #0f172a;
 }
+
 div#body.calculo-de-custos-screen.dark div#container.container.calculo-de-custos-screen {
   @apply shadow-[0_5px_20px_rgba(0,0,0,0.8)];
   background: #1e293b;
 }
+
 div#body.calculo-de-custos-screen.dark .dia.calculo-de-custos-screen {
   @apply border border-slate-700 border-solid;
   background: #0f172a;
@@ -122,58 +123,48 @@ div#body.calculo-de-custos-screen.dark .dia.calculo-de-custos-screen input {
   @apply text-[white] border border-slate-600 border-solid;
   background: #1e293b;
 }
+
 div#body.calculo-de-custos-screen.dark .dia.calculo-de-custos-screen input::placeholder {
   @apply text-slate-400;
 }
+
 div#body.calculo-de-custos-screen.dark button.calculo-de-custos-screen {
   background: #6366f1;
 }
+
 div#body.calculo-de-custos-screen.dark button.calculo-de-custos-screen:hover {
   background: #4f46e5;
 }
+
 div#body.calculo-de-custos-screen.dark .subtotal.calculo-de-custos-screen {
   @apply text-green-500;
 }
 
-/* ===== MOBILE FIRST (até 600px) ===== */
-@media (max-width: 600px) {
-  body.calculo-de-custos-screen {
-    @apply items-start px-0 py-2.5;
-  }
-  .container.calculo-de-custos-screen {
-    @apply w-full p-4 rounded-none;
-  }
-  h2.calculo-de-custos-screen {
-    @apply text-xl;
-  }
-  .dia.calculo-de-custos-screen {
-    @apply p-2.5;
-  }
-  .dia-header.calculo-de-custos-screen {
-    @apply text-[15px];
-  }
-  .dia.calculo-de-custos-screen input {
-    @apply text-sm p-2.5;
-  }
-  button.calculo-de-custos-screen {
-    @apply text-[15px] p-3;
-  }
-  #total.calculo-de-custos-screen {
-    @apply text-base;
-  }
-  .subtotal.calculo-de-custos-screen {
-    @apply text-sm;
-  }
 
-  .graficos.calculo-de-custos-screen {
+@media screen and (max-width:1024px) {
+  main.calculo-de-custos-screen .graficos.calculo-de-custos-screen {
     @apply grid-cols-[1fr] gap-[25px];
   }
-  .graficos.calculo-de-custos-screen canvas {
+  main.calculo-de-custos-screen .graficos.calculo-de-custos-screen canvas {
     @apply w-full h-auto;
   }
-  h3.calculo-de-custos-screen {
-    @apply text-base text-center;
+}
+
+/* ===== MOBILE FIRST (até 600px) ===== */
+@media (max-width: 600px) {
+
+  main.calculo-de-custos-screen .container.calculo-de-custos-screen {
+    @apply w-full p-4 rounded-none;
   }
+
+  main.calculo-de-custos-screen .dia.calculo-de-custos-screen {
+    @apply p-2.5;
+  }
+  
+  main.calculo-de-custos-screen .dia.calculo-de-custos-screen input {
+    @apply text-sm p-2.5;
+  }
+
 }
 
 /* ===== TELAS MUITO PEQUENAS (até 380px) ===== */
@@ -186,5 +177,15 @@ div#body.calculo-de-custos-screen.dark .subtotal.calculo-de-custos-screen {
   }
   .dia.calculo-de-custos-screen input {
     @apply text-[13px];
+  }
+}
+
+@media screen and (min-height: 624px) and (max-height:852px) {
+  main.calculo-de-custos-screen .graficos.calculo-de-custos-screen > div#grafico-final {
+    @apply pb-[280px];
+  }
+  
+  footer.calculo-de-custos-screen {
+    @apply min-w-full min-h-[130px] max-h-[130px] sticky bottom-0;
   }
 }

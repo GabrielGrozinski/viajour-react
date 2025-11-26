@@ -8,10 +8,10 @@ export default function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/calc" element={<PaginaInicial />} />
+        <Route path="/" element={<PaginaInicial />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/principal" element={<PaginaPrincipal />} />
-        <Route path="/" element={<CalculoDeCustos />} />
+        <Route path="/calculo-de-custos" element={<CalculoDeCustos />} />
       </Routes>
     </HashRouter>
   );

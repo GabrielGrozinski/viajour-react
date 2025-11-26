@@ -1,6 +1,9 @@
 import '../../styles/pagina-principal/menu-aberto.css';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function MenuAberto({ fechar }: {fechar: () => void}) {
+    const navigate = useNavigate();
 
     function mostrarMoedas() {
         const moedasContainer = window.document.getElementById('container-moeda-e-idioma');
@@ -154,8 +157,8 @@ return (
             </a>
             </article>
             {/*Itens I.A*/}
-            <article className="itens-do-viajour itens-custo menu-aberto-screen">
-            <a href="produtos/calculo-de-custos.html" className="menu-aberto-screen">
+            <article onClick={() => navigate('/calculo-de-custos')} className="itens-do-viajour itens-custo menu-aberto-screen">
+            <a className="menu-aberto-screen">
                 <i className="fa-solid fa-hand-holding-dollar icones-referencia menu-aberto-screen" />
                 <p className="menu-aberto-screen">Cálculo de Custos</p>
                 <i className="fa-solid fa-dollar-sign icones-custo menu-aberto-screen" />
@@ -178,7 +181,7 @@ return (
             </article>
             <article className="itens-do-viajour itens-planejamento menu-aberto-screen">
             <a href="" className="menu-aberto-screen">
-                <i className="fa-regular fa-hourglass icones-referencia menu-aberto-screen" />
+                <i className="fa-solid fa-mountain-city icones-referencia menu-aberto-screen" />
                 <p className="menu-aberto-screen">Viagens de 7 dias</p>
                 <i className="fa-regular fa-pen-to-square icones-planejamento menu-aberto-screen" />
             </a>
