@@ -15,11 +15,15 @@ div.body-menu-fechado.menu-fechado-screen {
 }
 
 header.header-fechado.menu-fechado-screen {
-  @apply bg-transparent w-full grid text-[white] grid-cols-[1fr_1fr_1fr] row-[1fr] place-items-center px-3 py-0;
+  @apply bg-transparent w-full grid text-[white] grid-cols-[1fr_1fr_1fr] row-[1fr] place-items-center p-4;
 }
 
 header.header-fechado.menu-fechado-screen > i#menu-icone.menu-fechado-screen {
   @apply col-1 justify-self-start;
+}
+
+header#header.header-fechado.menu-fechado-screen > section#container-moeda-e-idioma-desktop {
+  @apply hidden;
 }
 
 header.header-fechado.menu-fechado-screen > i#user-icone.menu-fechado-screen {
@@ -27,7 +31,7 @@ header.header-fechado.menu-fechado-screen > i#user-icone.menu-fechado-screen {
 }
 
 header.header-fechado.menu-fechado-screen > h1.logo.menu-fechado-screen {
-  @apply col-2 font-['Majesty'] row-1 tracking-[2px] font-light text-center text-[white];
+  @apply col-2 font-['Majesty'] text-3xl row-1 tracking-[2px] font-light text-center text-[white];
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
@@ -96,7 +100,7 @@ main.main-fechado.menu-fechado-screen > div.desc-app.menu-fechado-screen > butto
 }
 
 main.main-fechado.menu-fechado-screen > div.desc-app.menu-fechado-screen > img.menu-fechado-screen {
-  @apply absolute max-h-[130px] max-w-[150px] right-[8.5%] bottom-[0%];
+  @apply absolute max-h-full max-w-[150px] right-[6.5%] bottom-[0%];
 }
 
 @media screen and (max-width: 320px) {
@@ -108,11 +112,27 @@ main.main-fechado.menu-fechado-screen > div.desc-app.menu-fechado-screen > img.m
   section.stats-card.menu-fechado-screen {
     @apply px-0 py-[30px];
   }
+
+  main.main-fechado.menu-fechado-screen > div.desc-app > img.baixar-app.menu-fechado-screen {
+    @apply right-[3.5%];
+  }
 }
 
-@media screen and (max-height: 568px) {
-  main.main-fechado.menu-fechado-screen > div.desc-app > img.baixar-app {
-    @apply max-h-[150px] right-[3.5%];
+@media screen and (min-width: 568px) and (max-width: 851px) {
+  main.main-fechado.menu-fechado-screen > div.desc-app > img.baixar-app.menu-fechado-screen {
+    @apply right-[10.5%];
+  }
+}
+
+@media screen and (min-width: 852px) and (max-width: 956px) {
+  main.main-fechado.menu-fechado-screen > div.desc-app > img.baixar-app.menu-fechado-screen {
+    @apply right-[12.5%];
+  }
+}
+
+@media screen and (min-width: 957px) and (max-width: 1023px) {
+  main.main-fechado.menu-fechado-screen > div.desc-app > img.baixar-app.menu-fechado-screen {
+    @apply right-[14.5%];
   }
 }
 
@@ -149,25 +169,7 @@ main.main-fechado.menu-fechado-screen > div.desc-app.menu-fechado-screen > img.m
   }
 }
 
-@media screen and (min-width: 568px) and (max-width: 851px) {
-  main.main-fechado.menu-fechado-screen > div.desc-app > img.baixar-app {
-    @apply max-h-[150px] right-[10.5%];
-  }
-}
-
-@media screen and (min-width: 852px) and (max-width: 956px) {
-  main.main-fechado.menu-fechado-screen > div.desc-app > img.baixar-app {
-    @apply max-h-[150px] right-[12.5%];
-  }
-}
-
-@media screen and (min-width: 957px) and (max-width: 1024px) {
-  main.main-fechado.menu-fechado-screen > div.desc-app > img.baixar-app {
-    @apply max-h-[150px] right-[14.5%];
-  }
-}
-
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1024px) {
   div#body.body-menu-fechado.menu-fechado-screen {
     @apply min-h-screen h-auto bg-[linear-gradient(to_bottom,#0244f9,#57adf8_35%)] grid grid-cols-[4vw_1fr] grid-rows-[10vh_20vh_1fr];
   }
@@ -212,6 +214,10 @@ main.main-fechado.menu-fechado-screen > div.desc-app.menu-fechado-screen > img.m
   }
   main#main-fechado.main-fechado.menu-fechado-screen {
     @apply row-3 col-2;
+  }
+
+  main#main-fechado.main-fechado.menu-fechado-screen.menu-lateral-expandido, header#header.menu-fechado-screen.menu-lateral-expandido {
+    padding-left: 9vw;
   }
 }
 

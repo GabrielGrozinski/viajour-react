@@ -1,6 +1,6 @@
 import '../styles/menu-lateral.css';
 
-export default function MenuLateral() {
+export default function MenuLateral({ expandirMargem }: {expandirMargem: () => void}) {
     function expandirMenu() {
         const asideAberto = window.document.querySelector('aside');
         if (asideAberto) {
@@ -11,7 +11,7 @@ export default function MenuLateral() {
     return (
         <aside className="menu-lateral menu-lateral-component">
             <i
-            onClick={() => expandirMenu()}
+            onClick={() => {expandirMenu(); expandirMargem()}}
             id="menu-icone-aside"
             className="fa-solid fa-bars menu-lateral-component"
             />

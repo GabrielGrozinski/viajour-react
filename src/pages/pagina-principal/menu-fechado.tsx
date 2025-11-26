@@ -15,6 +15,13 @@ export default function MenuFechado({ abrir }: {abrir: () => void}) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  function expandirMargem() {
+    const header = window.document.getElementById('header');
+    const main = window.document.getElementById('main-fechado');
+    header?.classList.toggle('menu-lateral-expandido');
+    main?.classList.toggle('menu-lateral-expandido');
+  }
+
 return (
     <div id="body" className="body-menu-fechado menu-fechado-screen">
         <header id="header" className="header-fechado menu-fechado-screen">
@@ -105,7 +112,7 @@ return (
             <i id="user-icone" className="fa-solid fa-user user-btn menu-fechado-screen" />
         </header>
         {largura > 1024 && (
-            <MenuLateral />
+            <MenuLateral expandirMargem={expandirMargem} />
         )}
         <section className="stats-card menu-fechado-screen">
             <div id="item-money" className="stat-item menu-fechado-screen">

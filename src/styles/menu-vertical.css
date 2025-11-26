@@ -1,0 +1,31 @@
+@reference "tailwindcss";
+
+@font-face {
+    font-family: 'Majesty';
+    src: url(/fonts/FB-Free-Majesty-Goldera/Majesty\ Goldera.otf);
+}
+* {
+  @apply box-border m-0 p-0;
+  font-family: "Oswald", sans-serif;
+}
+aside.menu-lateral.menu-vertical-component {
+  @apply z-1 bg-[#082556] row-1 col-[span_3] transition-all duration-300 gap-x-10 gap-y-4 max-h-[100px] py-4 px-6 w-full flex overflow-hidden flex-wrap justify-start;
+}
+
+aside.menu-lateral.menu-vertical-component.menu-expandido {
+    @apply max-h-[200px];
+}
+
+aside.menu-lateral.menu-vertical-component.menu-vertical-component > article.itens-do-viajour-desktop.menu-vertical-component {
+  @apply block w-[10%] min-h-[70px] overflow-hidden rounded-md;
+}
+
+aside.menu-lateral.menu-vertical-component.menu-vertical-component > article.itens-do-viajour-desktop.menu-vertical-component > a.menu-vertical-component {
+  @apply flex justify-evenly items-center gap-1 no-underline h-full w-full text-[white] font-normal bg-[rgba(211,211,211,0.062)] transition-all duration-300 pl-[5px] px-0 py-2 hover:bg-[rgb(52,94,219)];
+  flex-flow: column nowrap;
+  align-items: start;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+aside.menu-lateral.menu-vertical-component.menu-vertical-component > article.itens-do-viajour-desktop.menu-vertical-component > a.menu-vertical-component > i.menu-vertical-component {
+  @apply text-[white] text-[1.6em];
+}
