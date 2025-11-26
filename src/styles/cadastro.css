@@ -1,16 +1,17 @@
 @reference "tailwindcss";
-* .cadastro-screen {
+* {
   @apply box-border m-0 p-0 font-['Oswald',sans-serif];
 }
 @font-face {
   font-family: "Majesty";
   src: url(/fonts/FB-Free-Majesty-Goldera/Majesty\Goldera.otf);
 }
+
 main.cadastro-screen {
-  @apply h-screen bg-[url(https://cdn.pixabay.com/photo/2017/08/17/20/05/disney-2652684_1280.jpg)] grid grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto] bg-cover transition-[0.5s] place-items-center;
+  @apply h-screen bg-[url(https://cdn.pixabay.com/photo/2017/08/17/20/05/disney-2652684_1280.jpg)] relative bg-cover transition-[0.5s];
 }
-.form-container.cadastro-screen {
-  @apply justify-self-center col-2 row-2 w-auto h-auto bg-white border shadow-[rgba(0,0,0,0.25)_1px_1px_1px] px-[4%] py-[2%] rounded-[15px] border-[rgba(0,0,0,0.701)] scale-[1.2];
+main.cadastro-screen > .form-container.cadastro-screen {
+  @apply w-4/5 absolute -translate-x-2/4 left-2/4 top-[50%] px-[4%] py-[2%] -translate-y-2/4 pb-[6%] bg-white border shadow-[rgba(0,0,0,0.25)_1px_1px_1px] rounded-[15px] border-[rgba(0,0,0,0.701)] scale-[1];
 }
 .title.cadastro-screen {
   @apply text-center text-[2.8em] font-['Majesty'] font-normal text-[#222222] mb-[4%];
@@ -29,7 +30,7 @@ main.cadastro-screen {
   @apply text-[rgb(61,129,247)];
 }
 .form-btn.cadastro-screen {
-  @apply text-[1.5em] text-[white] cursor-pointer shadow-[rgba(0,0,0,0.24)_0px_3px_8px] transition-[0.2s] duration-[ease] text-shadow-black bg-[#62a9d5] outline-0 pt-0.5 pb-1 px-0 rounded-[20px] border-0 active:shadow-none active:scale-[0.96];
+  @apply text-[1.5em] text-[white] cursor-pointer shadow-[rgba(0,0,0,0.24)_0px_3px_8px] transition-[0.2s] duration-[ease] text-shadow-black bg-blue-600 outline-0 pt-0.5 pb-1 px-0 rounded-[20px] border-0 active:shadow-none active:scale-[0.96];
 }
 .sign-up-label.cadastro-screen {
   @apply text-[1em] text-[#504f4f] mt-2.5 m-0;
@@ -62,23 +63,19 @@ main.cadastro-screen {
 .google-icon.cadastro-screen {
   @apply text-lg mb-px;
 }
-@media screen and (max-height: 568px) {
-  main.cadastro-screen {
-    @apply h-screen bg-[url(https://cdn.pixabay.com/photo/2017/08/17/20/05/disney-2652684_1280.jpg)] flex relative bg-cover transition-[0.5s];
-  }
-  div.form-container.cadastro-screen {
-    @apply w-4/5 absolute -translate-x-2/4 -translate-y-2/4 border shadow-[rgba(0,0,0,0.25)_1px_1px_1px] px-[4%] py-[2%] rounded-[15px] border-[rgba(0,0,0,0.701)] left-2/4 top-[42.5%];
-  }
-  .sign-up-link.cadastro-screen {
-    @apply text-shadow-black block text-[1em] text-[rgb(0,94,255)] cursor-pointer font-extrabold m-auto;
-  }
-}
 
 @media screen and (max-height: 656px) {
-  main.cadastro-screen {
-  @apply h-screen relative;
-}
+
 div.form-container.cadastro-screen {
-  @apply pb-[6%] absolute top-[50%] translate-x-[-50%] translate-y-[-50%] scale-[0.9];
+  @apply px-[6%] scale-[0.9];
 }
+}
+
+@media screen and (min-width: 524px) {
+  main#imagem.cadastro-screen {
+    @apply h-screen flex flex-col items-start justify-start;
+  }
+  main#imagem > div.form-container.cadastro-screen {
+    @apply relative w-[400px] px-[20px] py-[10px] pb-[30px];
+  }
 }

@@ -13,6 +13,8 @@ export default function MenuVertical({ expandirMargem }: {expandirMargem: () => 
     }
     
     return (
+        <>
+        <h1 id='titulo' className='menu-vertical-component'>ViaJour</h1>
         <aside onMouseEnter={expandirMenu} onMouseLeave={expandirMenu} className="menu-lateral menu-vertical-component">
 
             <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-vertical-component">
@@ -86,5 +88,6 @@ export default function MenuVertical({ expandirMargem }: {expandirMargem: () => 
             </article>
             
         </aside>
+        </>
     );
 }

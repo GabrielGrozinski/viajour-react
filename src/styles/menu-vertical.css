@@ -8,8 +8,13 @@
   @apply box-border m-0 p-0;
   font-family: "Oswald", sans-serif;
 }
+
+h1#titulo.menu-vertical-component {
+  @apply text-white font-['Majesty'] text-2xl text-center bg-[#082556];
+}
+
 aside.menu-lateral.menu-vertical-component {
-  @apply bg-[#082556] transition-all duration-300 py-4 px-6
+  @apply bg-[#082556] transition-all duration-300 pb-4 pt-1 px-6
   w-max max-w-full min-h-[100px]
   flex flex-row flex-nowrap justify-start gap-x-6 overflow-x-auto overflow-y-hidden whitespace-nowrap;
   scrollbar-width: none;
