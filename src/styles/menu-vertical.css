@@ -9,15 +9,18 @@
   font-family: "Oswald", sans-serif;
 }
 aside.menu-lateral.menu-vertical-component {
-  @apply z-1 bg-[#082556] row-1 col-[span_3] transition-all duration-300 gap-x-10 gap-y-4 max-h-[100px] py-4 px-6 w-full flex overflow-hidden flex-wrap justify-start;
+  @apply bg-[#082556] transition-all duration-300 py-4 px-6
+  w-max max-w-full min-h-[100px]
+  flex flex-row flex-nowrap justify-start gap-x-6 overflow-x-auto overflow-y-hidden whitespace-nowrap;
+  scrollbar-width: none;
 }
 
-aside.menu-lateral.menu-vertical-component.menu-expandido {
-    @apply max-h-[200px];
+aside.menu-lateral.menu-vertical-component::-webkit-scrollbar {
+  display: none;
 }
 
-aside.menu-lateral.menu-vertical-component.menu-vertical-component > article.itens-do-viajour-desktop.menu-vertical-component {
-  @apply block w-[10%] min-h-[70px] overflow-hidden rounded-md;
+aside.menu-lateral.menu-vertical-component > article.itens-do-viajour-desktop.menu-vertical-component {
+  @apply inline-block w-[90px] min-w-[140px] min-h-[70px] rounded-xl shrink-0 overflow-hidden;
 }
 
 aside.menu-lateral.menu-vertical-component.menu-vertical-component > article.itens-do-viajour-desktop.menu-vertical-component > a.menu-vertical-component {

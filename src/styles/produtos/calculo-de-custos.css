@@ -11,74 +11,92 @@
 }
 
 div#body.calculo-de-custos-screen {
-  @apply transition-all duration-300 grid grid-cols-[20vw_5fr_20vw] grid-rows-[100px_1fr] items-start bg-[linear-gradient(to_bottom,#142346,#0f172a)] min-w-full min-h-screen;
-  background-color: #142346
+  @apply transition-all duration-300 h-screen flex flex-col gap-10 items-center bg-[linear-gradient(to_bottom,#142346,#0f172a)];
+
 }
 
-div#body.calculo-de-custos-screen.menu-expandido {
-  @apply grid-rows-[auto_1fr];
+main.calculo-de-custos-screen {
+  @apply flex;
 }
 
-.container.calculo-de-custos-screen {
-  @apply w-[850px] row-2 col-2 transition-all duration-300 bg-white max-w-[95%] shadow-[0_5px_15px_rgba(0,0,0,0.1)] p-[25px] rounded-xl;
+main.calculo-de-custos-screen > img.imagem.calculo-de-custos-screen {
+  @apply max-w-[100px] row-2;
 }
 
-.dias-container.calculo-de-custos-screen {
+main.calculo-de-custos-screen > img#imagem-1.calculo-de-custos-screen {
+  @apply col-1;
+}
+
+main.calculo-de-custos-screen > img#imagem-2.calculo-de-custos-screen {
+  @apply col-3;
+}
+
+main.calculo-de-custos-screen > .container.calculo-de-custos-screen {
+  @apply max-h-full overflow-y-auto max-w-[440px] row-2 col-2 transition-all duration-300 bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] p-[25px];
+}
+
+main.calculo-de-custos-screen .dias-container.calculo-de-custos-screen {
   @apply w-full;
 }
 
-h2.calculo-de-custos-screen {
+main.calculo-de-custos-screen h2.calculo-de-custos-screen {
   @apply text-3xl text-center mb-5;
 }
 
-.dia.calculo-de-custos-screen {
+main.calculo-de-custos-screen .dia.calculo-de-custos-screen {
   @apply border mb-[15px] p-3 rounded-lg border-solid;
   background: #fafafa;
 }
 
-.dia-header.calculo-de-custos-screen {
+main.calculo-de-custos-screen .dia-header.calculo-de-custos-screen {
   @apply text-xl mb-2.5;
 }
 
-.btn-remover-dia.calculo-de-custos-screen {
+main.calculo-de-custos-screen .btn-remover-dia.calculo-de-custos-screen {
   @apply float-right translate-x-[20%] text-2xl cursor-pointer select-none;
   line-height: 20px;
   color: #444;
 }
 
-.btn-remover-dia.calculo-de-custos-screen:hover {
+main.calculo-de-custos-screen .btn-remover-dia.calculo-de-custos-screen:hover {
   color: #e11d48; 
 }
 
-.dia.calculo-de-custos-screen input {
+div#body.calculo-de-custos-screen .dia.calculo-de-custos-screen input::placeholder {
+  @apply text-slate-600;
+}
+
+main.calculo-de-custos-screen .dia.calculo-de-custos-screen input {
   @apply w-full border mx-0 my-1.5 p-2 rounded-md border-solid border-[#ccc];
 }
-button#btn-adicionar-dias.calculo-de-custos-screen {
+
+main.calculo-de-custos-screen button#btn-adicionar-dias.calculo-de-custos-screen {
   @apply w-full text-white text-xl cursor-pointer transition-[0.2s] duration-[ease] mt-2 p-2.5 rounded-md border-[none];
   background: #4f46e5;
 }
 
-button#btn-adicionar-dias.desativado.calculo-de-custos-screen {
+main.calculo-de-custos-screen button#btn-adicionar-dias.desativado.calculo-de-custos-screen {
   @apply pointer-events-none opacity-50;
 }
 
-button.calculo-de-custos-screen:hover {
+main.calculo-de-custos-screen button.calculo-de-custos-screen:hover {
   background: #3730a3;
 }
-#total.calculo-de-custos-screen {
+main.calculo-de-custos-screen #total.calculo-de-custos-screen {
   @apply text-center font-[bold] text-lg mt-[15px];
 }
-.subtotal.calculo-de-custos-screen {
+main.calculo-de-custos-screen .subtotal.calculo-de-custos-screen {
   @apply font-semibold text-green-700 mt-[5px];
 }
 
-span.total.calculo-de-custos-screen {
+main.calculo-de-custos-screen span.total.calculo-de-custos-screen {
     @apply text-3xl text-green-600;
 }
 
-.graficos.calculo-de-custos-screen {
+main.calculo-de-custos-screen .graficos.calculo-de-custos-screen {
   @apply grid grid-cols-[1fr_1fr] gap-[30px] mt-10;
 }
+
 div#body.calculo-de-custos-screen.dark {
   @apply text-slate-100;
   background: #0f172a;
