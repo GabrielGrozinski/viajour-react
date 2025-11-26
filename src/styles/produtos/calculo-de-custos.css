@@ -16,11 +16,11 @@ div#body.calculo-de-custos-screen {
 }
 
 main.calculo-de-custos-screen {
-  @apply flex;
+  @apply flex bg-red-500 max-h-[400px];
 }
 
 main.calculo-de-custos-screen > img.imagem.calculo-de-custos-screen {
-  @apply max-w-[100px] row-2;
+  @apply max-w-[100px] max-h-max row-2;
 }
 
 main.calculo-de-custos-screen > img#imagem-1.calculo-de-custos-screen {
@@ -32,7 +32,7 @@ main.calculo-de-custos-screen > img#imagem-2.calculo-de-custos-screen {
 }
 
 main.calculo-de-custos-screen > .container.calculo-de-custos-screen {
-  @apply max-h-full overflow-y-auto max-w-[440px] row-2 col-2 transition-all duration-300 bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] p-[25px];
+  @apply max-h-max overflow-y-auto max-w-[440px] row-2 col-2 transition-all duration-300 bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] p-[25px];
 }
 
 main.calculo-de-custos-screen .dias-container.calculo-de-custos-screen {
