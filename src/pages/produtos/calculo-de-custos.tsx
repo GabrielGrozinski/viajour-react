@@ -4,6 +4,8 @@ import MenuVertical from "../../components/menu-vertical";
 import MenuLateral from "../../components/menu-lateral";
 import "../../styles/produtos/calculo-de-custos.css";
 import anuncio1 from '../../assets/imagens/anuncio1.png';
+import fundo from '../../assets/imagens/fundo.png';
+import fundoDark from '../../assets/imagens/fundo-dark.png';
 
 type Dia = {
   transporte: string;
@@ -21,9 +23,13 @@ export default function CalculoDeCustos() {
     (localStorage.getItem("tema") as "dark" | "normal") || "normal"
   );
 
-const corLabel = useMemo(() => {
-  return tema === "dark" ? "lightgray" : "gray";
-}, [tema]);
+  const corLabel = useMemo(() => {
+    return tema === "dark" ? "lightgray" : "gray";
+  }, [tema]);
+
+  const fundoAtual = useMemo(() => {
+    return tema === 'dark' ? fundoDark : fundo;
+  }, [tema])
 
   const LIMITE_GRAFICO = 7;
   const LIMITE_MAX_DIAS = 14;
@@ -56,6 +62,10 @@ const corLabel = useMemo(() => {
       return;
     }
 
+    if (dias.length === 7) {
+      window.document.getElementById('grafico-dia-1')?.classList.add('grafico-extra');
+    }
+
     setDias(prev => [
       ...prev,
       { transporte: '', hospedagem: '', alimentacao: '' }
@@ -64,6 +74,10 @@ const corLabel = useMemo(() => {
 
   function removerDia(index: number) {
     if (dias.length === 1) return; // impede remover tudo
+
+    if (dias.length <= 8) {
+      window.document.getElementById('grafico-dia-1')?.classList.remove('grafico-extra');
+    }
 
     setDias(prev => prev.filter((_, i) => i !== index));
   }
@@ -234,7 +248,8 @@ const corLabel = useMemo(() => {
 
 
 return (
-  <div id="body" className="calculo-de-custos-screen">
+  <div id="body" style={{backgroundImage: `url(${fundoAtual})`}} className="calculo-de-custos-screen">
+    <div className="menu-em-cima"></div>
     {largura < 1024 ? 
     (<MenuVertical />)
     :
@@ -256,6 +271,14 @@ return (
                   <h3 className="calculo-de-custos-screen">Gastos por categoria</h3>
                   <canvas ref={canvasCategorias} className="calculo-de-custos-screen"></canvas>
               </div>
+
+              <section className="container-gerar-rotina calculo-de-custos-screen">
+                <h1>Gerador Automático de Rotina de Gastos</h1>
+                <p>Crie automaticamente uma rotina de gastos completa com base no seu orçamento e perfil de viagem.</p>
+                <button>
+                  Gerar rotina automaticamente
+                </button>
+              </section>
       </div>
     )}
 

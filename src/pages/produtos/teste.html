@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Gerador Automático de Rotina de Gastos — Mockup (corrigido)</title>
+<style>
+  :root{
+    --bg:#f7f7f8;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --accent:#146cff;
+    --accent-strong:#0b61e6;
+    --success:#0aa94f;
+    --border:#e6e6e9;
+    --radius:12px;
+    font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  }
+
+  body{
+    margin:0;
+    background: linear-gradient(180deg,#fff 0%, #fbfbfd 100%);
+    color:#111827;
+    padding:24px;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  .right-column {
+    max-width:720px;
+    margin:0 auto;
+  }
+
+  h1.page-title{
+    font-size:28px;
+    margin:0 0 18px 0;
+    letter-spacing:0.2px;
+    font-weight:700;
+  }
+
+  .card {
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:20px;
+    box-shadow: 0 6px 18px rgba(12,18,36,0.06);
+    border: 1px solid var(--border);
+  }
+
+  .lead {
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    margin-bottom:18px;
+  }
+  .lead .title {
+    font-weight:700;
+    font-size:18px;
+    margin-bottom:6px;
+  }
+  .lead .desc {
+    color:var(--muted);
+    line-height:1.45;
+    font-size:14px;
+  }
+
+  form.field-grid {
+    margin-top:8px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+
+  label.field-label{
+    display:block;
+    font-weight:600;
+    margin-bottom:8px;
+    color:#111827;
+    font-size:14px;
+  }
+
+  input[type="number"],
+  input[type="text"]{
+    width:100%;
+    padding:12px 14px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:#fff;
+    font-size:15px;
+    box-sizing:border-box;
+  }
+
+  .row {
+    display:flex;
+    gap:18px;
+    align-items:center;
+  }
+
+  .radio-group{
+    display:flex;
+    gap:14px;
+    align-items:center;
+    margin-top:6px;
+  }
+
+  /* radio layout changed so we can style label text consistently */
+  .radio {
+    display:flex;
+    gap:8px;
+    align-items:center;
+    font-size:14px;
+    color:var(--muted);
+    cursor:pointer;
+  }
+  .radio input[type="radio"]{
+    accent-color: var(--accent);
+    width:16px;
+    height:16px;
+    margin:0;
+  }
+  .radio .label-text {
+    color:var(--muted);
+    font-weight:600; /* uniform weight for all options */
+  }
+  /* when radio is checked, only change color (not weight) */
+  .radio input[type="radio"]:checked + .label-text {
+    color:#111827;
+  }
+
+  .dist {
+    margin-top:6px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .dist .item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+
+  .dist .meta {
+    min-width:130px;
+    font-size:14px;
+    color:#111827;
+    font-weight:600;
+  }
+
+  .progress-wrapper {
+    flex:1;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+
+  .progress {
+    height:8px;
+    width:100%;
+    background:#eef2ff;
+    border-radius:999px;
+    overflow:hidden;
+    position:relative;
+  }
+
+  .progress > span {
+    display:block;
+    height:100%;
+    width:0%;
+    background: linear-gradient(90deg,var(--accent),var(--accent-strong));
+    border-radius:999px;
+    transition:width 260ms ease;
+  }
+
+  .percent {
+    min-width:46px;
+    text-align:right;
+    font-weight:700;
+    color:#111827;
+    font-size:14px;
+  }
+
+  .generate {
+    margin-top:12px;
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    padding:12px 18px;
+    border-radius:10px;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    box-shadow: 0 8px 18px rgba(20,108,255,0.12);
+  }
+  .generate:active{ transform:translateY(1px); }
+
+  .spacer { height:8px; }
+
+  .hint { color:var(--muted); font-size:13px; line-height:1.4; }
+
+  @media (max-width:720px){
+    body { padding:12px; }
+    .right-column { max-width:100%; }
+    .lead { flex-direction:column; gap:8px; }
+  }
+</style>
+</head>
+<body>
+  <div class="right-column">
+    <section class="card" aria-labelledby="gen-title">
+      <div class="lead">
+        <div style="flex:1">
+          <div id="gen-title" class="title">Gerador Automático de Rotina de Gastos</div>
+          <div class="desc">Crie automaticamente uma rotina de gastos completa com base no seu orçamento e perfil de viagem.</div>
+        </div>
+      </div>
+
+      <form class="field-grid" id="generatorForm" onsubmit="return false;">
+        <div>
+          <label class="field-label" for="duration">Duração da viagem (dias)</label>
+          <input id="duration" name="duration" type="number" min="1" value="7" />
+        </div>
+
+        <div>
+          <label class="field-label" for="budget">Orçamento total da viagem (R$)</label>
+          <input id="budget" name="budget" type="text" inputmode="numeric" value="3.000,00" />
+        </div>
+
+        <div>
+          <label class="field-label">Tipo de viagem</label>
+          <div class="radio-group" role="radiogroup" aria-label="Tipo de viagem">
+
+            <label class="radio"><input type="radio" name="tipo" value="economica" aria-checked="false"><span class="label-text">Econômica</span></label>
+
+            <label class="radio"><input type="radio" name="tipo" value="intermediaria" checked aria-checked="true"><span class="label-text">Intermediária</span></label>
+
+            <label class="radio"><input type="radio" name="tipo" value="conforto" aria-checked="false"><span class="label-text">Conforto</span></label>
+          </div>
+        </div>
+
+        <div>
+          <label class="field-label">Distribuição por categoria</label>
+
+          <div class="dist" aria-hidden="false">
+            <div class="item">
+              <div class="meta">Transporte</div>
+              <div class="progress-wrapper">
+                <div class="progress" data-key="transporte"><span></span></div>
+              </div>
+              <div class="percent" id="p-transporte">0%</div>
+            </div>
+
+            <div class="item">
+              <div class="meta">Alimentação</div>
+              <div class="progress-wrapper">
+                <div class="progress" data-key="alimentacao"><span></span></div>
+              </div>
+              <div class="percent" id="p-alimentacao">0%</div>
+            </div>
+
+            <div class="item">
+              <div class="meta">Hospedagem</div>
+              <div class="progress-wrapper">
+                <div class="progress" data-key="hospedagem"><span></span></div>
+              </div>
+              <div class="percent" id="p-hospedagem">0%</div>
+            </div>
+
+            <div class="item">
+              <div class="meta">Diversão</div>
+              <div class="progress-wrapper">
+                <div class="progress" data-key="diversao"><span></span></div>
+              </div>
+              <div class="percent" id="p-diversao">0%</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div>
+          <button class="generate" id="generateBtn">Gerar rotina automaticamente</button>
+          <div class="spacer"></div>
+          <div class="hint">Ao gerar, os dias serão criados automaticamente e preenchidos com valores proporcionais.</div>
+        </div>
+      </form>
+    </section>
+  </div>
+
+<script>
+  (function(){
+
+    // elementos das barras e textos de percentuais
+    const elTranspBar = document.querySelector('[data-key="transporte"] > span');
+    const elAlimBar  = document.querySelector('[data-key="alimentacao"] > span');
+    const elHospBar  = document.querySelector('[data-key="hospedagem"] > span');
+    const elDiveBar = document.querySelector('[data-key="diversao"] > span');
+
+    const txtTransp = document.getElementById('p-transporte');
+    const txtAlim  = document.getElementById('p-alimentacao');
+    const txtHosp  = document.getElementById('p-hospedagem');
+    const txtDive = document.getElementById('p-diversao');
+
+    // função para atualizar barras + texto
+    function updateBars(dist){
+      // dist: object com valores em 0..1 (ex: {transporte:0.2, alimentacao:0.4, hospedagem:0.4})
+      const t = Math.round((dist.transporte * 100));
+      const a = Math.round((dist.alimentacao * 100));
+      const h = Math.round((dist.hospedagem * 100));
+      const d = Math.round((dist.diversao) * 100);
+
+      elTranspBar.style.width = t + '%';
+      elAlimBar.style.width  = a + '%';
+      elHospBar.style.width  = h + '%';
+      elDiveBar.style.width = d + '%';
+
+      txtTransp.innerText = t + '%';
+      txtAlim.innerText  = a + '%';
+      txtHosp.innerText  = h + '%';
+      txtDive.innerText = d + '%';
+    }
+
+    // distribuições padrão
+    const distributions = {
+      intermediaria: { transporte:0.25, alimentacao:0.25, hospedagem:0.25, diversao:0.25 },
+      economica:     { transporte:0.3, alimentacao:0.3, hospedagem:0.30, diversao:0.10 },
+      conforto:      { transporte:0.2, alimentacao:0.20, hospedagem:0.2, diversao:0.4 }
+    };
+
+    // set inicial (Intermediária)
+    updateBars(distributions.intermediaria);
+
+    // atualiza visual quando o usuário troca o tipo (opcional, dá feedback instantâneo)
+    const radios = document.querySelectorAll('input[name="tipo"]');
+    radios.forEach(r => r.addEventListener('change', function(){
+      const tipo = document.querySelector('input[name="tipo"]:checked').value;
+      const dist = distributions[tipo] || distributions.intermediaria;
+      updateBars(dist);
+    }));
+
+    // botão gerar rotina
+    document.getElementById('generateBtn').addEventListener('click', function(ev){
+      ev.preventDefault();
+      const dias = Number(document.getElementById('duration').value) || 1;
+      const budgetRaw = document.getElementById('budget').value || "0";
+      const budget = Number( (budgetRaw.replace(/\./g,'').replace(',','.')).replace(/[^\d.-]/g,'') ) || 0;
+      const tipo = document.querySelector('input[name="tipo"]:checked').value;
+
+      let dist = distributions[tipo] || distributions.intermediaria;
+
+      // atualizar visual das barras (agora com a dist escolhida)
+      updateBars(dist);
+
+      // cálculo simples de rotina (valor por dia por categoria)
+      const totalPorDia = budget / Math.max(1, dias);
+      const rotina = [];
+      for(let i=1;i<=dias;i++){
+        rotina.push({
+          dia: i,
+          transporte: Math.round((totalPorDia * dist.transporte) * 100) / 100,
+          alimentacao: Math.round((totalPorDia * dist.alimentacao) * 100) / 100,
+          hospedagem: Math.round((totalPorDia * dist.hospedagem) * 100) / 100,
+          total: Math.round(totalPorDia * 100) / 100
+        });
+      }
+
+      // Nesta versão demo mostramos no console; na sua app React você injeta no state
+      console.log('Rotina gerada:', {dias, budget, tipo, dist, rotina});
+      alert('Rotina gerada (veja console). As barras foram atualizadas visualmente.');
+    });
+
+  })();
+</script>
+</body>
+</html>
