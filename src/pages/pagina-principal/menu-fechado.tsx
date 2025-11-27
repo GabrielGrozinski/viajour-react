@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MenuLateral from "../../components/menu-lateral";
 import '../../styles/pagina-principal/menu-fechado.css';
+import imagemCelular from '../../assets/imagens/celular-icone.png';
 
 
 export default function MenuFechado({ abrir }: {abrir: () => void}) {
@@ -164,7 +165,7 @@ return (
                     Tenha a melhor <br className="menu-fechado-screen" /> experiencia no app
                 </p>
                 <button className="btn-instalar-app menu-fechado-screen">Baixar agora</button>
-                <img className="baixar-app menu-fechado-screen" src="/imagens/celular-icone.png" alt="" />
+                <img className="baixar-app menu-fechado-screen" src={imagemCelular} alt="" />
             </div>
         </main>
     </div>

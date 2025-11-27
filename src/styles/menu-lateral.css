@@ -44,39 +44,71 @@ aside.menu-lateral.menu-lateral-component > div#div-menu-fechado.menu-lateral-co
 aside.menu-lateral.menu-lateral-component > div#div-menu-fechado.menu-lateral-component > i#instrucao-3.menu-lateral-component {
   @apply text-[rgb(214,214,103)];
 }
-aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component {
-  @apply h-auto w-[12vw] transition-all duration-200 bg-[#082556] flex gap-[15px] px-[2vh] py-[3vh] rounded-[10px];
+aside.menu-lateral.menu-lateral-component.ativado {
+  @apply h-auto w-[12vw] overflow-y-auto transition-all duration-200 bg-[#082556] flex gap-[15px] px-[2vh] py-[3vh];
   align-items: end;
   flex-flow: column nowrap;
 }
-aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > div#div-menu-fechado.menu-lateral-component {
+
+aside.menu-lateral.menu-lateral-component.ativado > div#div-menu-fechado.menu-lateral-component {
   @apply hidden;
 }
-aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > div.div-instrucoes.menu-lateral-component {
+
+aside.menu-lateral.menu-lateral-component.ativado > div.div-instrucoes.menu-lateral-component {
   @apply flex self-center flex-col text-neutral-100 items-center text-center text-[1.4em] font-normal gap-1 mt-5;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
-aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > div.div-instrucoes.menu-lateral-component > i.menu-lateral-component {
+
+aside.menu-lateral.menu-lateral-component.ativado > div.div-instrucoes.menu-lateral-component > i.menu-lateral-component {
   @apply text-[1em];
 }
-aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > div#div-ferramentas-ia-desktop.menu-lateral-component > i.menu-lateral-component {
+
+aside.menu-lateral.menu-lateral-component.ativado > div#div-ferramentas-ia-desktop.menu-lateral-component > i.menu-lateral-component {
   @apply text-[lightblue];
 }
-aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > div#div-custos-desktop.menu-lateral-component > i.menu-lateral-component {
+
+aside.menu-lateral.menu-lateral-component.ativado > div#div-custos-desktop.menu-lateral-component > i.menu-lateral-component {
   @apply text-[lightgreen];
 }
-aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > div#div-planejamento-pessoal-desktop.menu-lateral-component > i.menu-lateral-component {
+
+aside.menu-lateral.menu-lateral-component.ativado > div#div-planejamento-pessoal-desktop.menu-lateral-component > i.menu-lateral-component {
   @apply text-[rgb(214,214,103)];
 }
-aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > article.itens-do-viajour-desktop.menu-lateral-component {
+
+aside.menu-lateral.menu-lateral-component.ativado > article.itens-do-viajour-desktop.menu-lateral-component {
   @apply block min-w-full max-w-full min-h-[70px] overflow-hidden rounded-md;
 }
-aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > article.itens-do-viajour-desktop.menu-lateral-component > a.menu-lateral-component {
+
+aside.menu-lateral.menu-lateral-component.ativado > article.itens-do-viajour-desktop.menu-lateral-component > a.menu-lateral-component {
   @apply flex justify-evenly gap-1 cursor-pointer no-underline h-full w-full text-[white] font-normal bg-[rgba(211,211,211,0.062)] transition-all duration-300 pl-[5px] px-0 py-2 hover:bg-[rgb(52,94,219)];
   flex-flow: column nowrap;
   align-items: start;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
-aside.menu-lateral.menu-lateral-component.ativado.menu-lateral-component > article.itens-do-viajour-desktop.menu-lateral-component > a.menu-lateral-component > i.menu-lateral-component {
+
+aside.menu-lateral.menu-lateral-component.ativado > article.itens-do-viajour-desktop.menu-lateral-component > a.menu-lateral-component > i.menu-lateral-component {
   @apply text-[white] text-[1.6em];
+}
+
+aside.menu-lateral.menu-lateral-component.ativado::-webkit-scrollbar {
+  width: 10px;
+}
+
+aside.menu-lateral.menu-lateral-component.ativado::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  box-sizing: content-box;
+  background-color: #3c3f4774;
+  border-radius: 2px;
+}
+
+aside.menu-lateral.menu-lateral-component.ativado::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(60, 63, 71, 0.655);
+}
+
+aside.menu-lateral.menu-lateral-component.ativado::-webkit-scrollbar-thumb:active {
+  background-color: rgba(60, 63, 71, 0.85);
+}
+
+aside.menu-lateral.menu-lateral-component.ativado::-webkit-scrollbar-track {
+  background-color: #082556;
 }

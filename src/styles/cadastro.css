@@ -30,7 +30,7 @@ main.cadastro-screen > .form-container.cadastro-screen {
   @apply text-[rgb(61,129,247)];
 }
 .form-btn.cadastro-screen {
-  @apply text-[1.5em] text-[white] cursor-pointer shadow-[rgba(0,0,0,0.24)_0px_3px_8px] transition-[0.2s] duration-[ease] text-shadow-black bg-blue-600 outline-0 pt-0.5 pb-1 px-0 rounded-[20px] border-0 active:shadow-none active:scale-[0.96];
+  @apply text-[1.5em] text-[white] cursor-pointer shadow-[rgba(0,0,0,0.24)_0px_3px_8px] transition-all duration-200 text-shadow-black bg-blue-600 outline-0 pt-0.5 pb-1 px-0 rounded-[20px] border-0 active:shadow-none active:scale-[0.96];
 }
 .sign-up-label.cadastro-screen {
   @apply text-[1em] text-[#504f4f] mt-2.5 m-0;
@@ -47,7 +47,7 @@ main.cadastro-screen > .form-container.cadastro-screen {
 }
 .apple-login-button.cadastro-screen,
 .google-login-button.cadastro-screen {
-  @apply shadow-[rgba(0,0,0,0.16)_0px_10px_36px_0px,rgba(0,0,0,0.06)_0px_0px_0px_1px] cursor-pointer flex justify-center items-center gap-[5px] text-[1.2em] transition-[0.2s] duration-[ease] pt-[1.5%] pb-[2.5%] px-[3.5%] rounded-[20px];
+  @apply shadow-[rgba(0,0,0,0.16)_0px_10px_36px_0px,rgba(0,0,0,0.06)_0px_0px_0px_1px] cursor-pointer flex justify-center items-center gap-[5px] text-[1.2em] transition-all duration-200 pt-[1.5%] pb-[2.5%] px-[3.5%] rounded-[20px];
 }
 .apple-login-button.cadastro-screen:active,
 .google-login-button.cadastro-screen:active {

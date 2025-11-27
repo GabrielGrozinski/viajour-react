@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
 import MenuVertical from "../../components/menu-vertical";
+import MenuLateral from "../../components/menu-lateral";
 import "../../styles/produtos/calculo-de-custos.css";
 import anuncio1 from '../../assets/imagens/anuncio1.png';
+import anuncio2 from '../../assets/imagens/anuncio2.png';
 
 type Dia = {
   transporte: string;
@@ -14,6 +16,7 @@ export default function CalculoDeCustos() {
   const [dias, setDias] = useState<Dia[]>([
     { transporte: '', hospedagem: '', alimentacao: '' }
   ]);
+  const [largura, setLargura] = useState(window.innerWidth);
 
   const [tema, setTema] = useState<"dark" | "normal">(
     (localStorage.getItem("tema") as "dark" | "normal") || "normal"
@@ -173,14 +176,28 @@ export default function CalculoDeCustos() {
     0
   );
 
+  useEffect(() => {
+    const handleResize = () => setLargura(window.innerWidth);
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  });
+
   function expandirMargem() {
-    
+    const container = window.document.getElementById('container');
+    container?.classList.toggle('menu-lateral-expandido')
   }
 
 
 return (
   <div id="body" className="calculo-de-custos-screen">
-    <MenuVertical expandirMargem={expandirMargem} />
+    {largura < 1024 ? 
+    (<MenuVertical />)
+    :
+    (<MenuLateral expandirMargem={expandirMargem} />)
+    }
+
     <main className="calculo-de-custos-screen">
       <div id="container" className="container calculo-de-custos-screen">
           <h2 onClick={mudarTema} style={{ cursor: "pointer" }} className="calculo-de-custos-screen">
@@ -274,11 +291,17 @@ return (
             </div>
           </div>
       </div>
+      {largura >= 1024 && (
+        <div style={{backgroundImage: `url(${anuncio1})`}} className="imagem-desktop calculo-de-custos-screen">
+        </div>
+      )}
     </main>
-    <footer className="calculo-de-custos-screen">
-      <div style={{backgroundImage: `url(${anuncio1})`}} className="imagem calculo-de-custos-screen">
-      </div>
-    </footer>
+    {largura < 1024 && (
+      <footer className="calculo-de-custos-screen">
+        <div style={{backgroundImage: `url(${anuncio1})`}} className="imagem calculo-de-custos-screen">
+        </div>
+      </footer>
+    )}
   </div>
 );
 

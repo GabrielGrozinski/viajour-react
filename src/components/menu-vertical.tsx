@@ -2,20 +2,13 @@ import '../styles/menu-vertical.css';
 import { useNavigate } from 'react-router-dom';
 
 
-export default function MenuVertical({ expandirMargem }: {expandirMargem: () => void}) {
+export default function MenuVertical() {
     const navigate = useNavigate();
-
-    function expandirMenu() {
-        const asideAberto = window.document.querySelector('aside');
-        asideAberto?.classList.toggle('menu-expandido');
-        expandirMargem();
-        
-    }
     
     return (
         <>
         <h1 id='titulo' className='menu-vertical-component'>ViaJour</h1>
-        <aside onMouseEnter={expandirMenu} onMouseLeave={expandirMenu} className="menu-lateral menu-vertical-component">
+        <aside className="menu-lateral menu-vertical-component">
 
             <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-vertical-component">
             <a href="" className="menu-vertical-component">
