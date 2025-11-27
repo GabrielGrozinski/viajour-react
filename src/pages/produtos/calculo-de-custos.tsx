@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Chart from "chart.js/auto";
 import MenuVertical from "../../components/menu-vertical";
 import MenuLateral from "../../components/menu-lateral";
 import "../../styles/produtos/calculo-de-custos.css";
 import anuncio1 from '../../assets/imagens/anuncio1.png';
-import anuncio2 from '../../assets/imagens/anuncio2.png';
 
 type Dia = {
   transporte: string;
@@ -21,6 +20,10 @@ export default function CalculoDeCustos() {
   const [tema, setTema] = useState<"dark" | "normal">(
     (localStorage.getItem("tema") as "dark" | "normal") || "normal"
   );
+
+const corLabel = useMemo(() => {
+  return tema === "dark" ? "lightgray" : "gray";
+}, [tema]);
 
   const LIMITE_GRAFICO = 7;
   const LIMITE_MAX_DIAS = 14;
@@ -78,6 +81,7 @@ export default function CalculoDeCustos() {
 
   // Atualiza gráficos
   useEffect(() => {
+    if (!corLabel) return;
     const labels1: string[] = [];
     const valores1: number[] = [];
 
@@ -122,7 +126,22 @@ export default function CalculoDeCustos() {
               backgroundColor: "#4f46e5"
             }
           ]
-        }
+        },
+        options: {
+          plugins: {
+            legend: {
+              labels: {
+                color: corLabel
+              }
+            }
+        },
+        scales: {
+            x: {
+              ticks: {
+                color: corLabel
+              }
+            },
+        }}
       });
     }
 
@@ -141,7 +160,22 @@ export default function CalculoDeCustos() {
               backgroundColor: "#4f46e5"
             }
           ]
-        }
+        },
+        options: {
+          plugins: {
+            legend: {
+              labels: {
+                color: corLabel
+              }
+            }
+        },
+        scales: {
+            x: {
+              ticks: {
+                color: corLabel
+              }
+            },
+        }}
       });
     }
 
@@ -160,13 +194,22 @@ export default function CalculoDeCustos() {
                 totalHospedagem,
                 totalAlimentacao
               ],
-              backgroundColor: ["#2563eb", "#16a34a", "#ea580c"]
+              backgroundColor: ["#2563eb", "#16a34a", "#ea580c"],
             }
           ]
+        },
+        options: {
+          plugins: {
+            legend: {
+              labels: {
+                color: corLabel
+              }
+            }
+          }
         }
       });
     }
-  }, [dias]);
+  }, [dias, tema]);
 
   const totalGeral = dias.reduce(
     (acc, d) => acc + 
@@ -185,8 +228,8 @@ export default function CalculoDeCustos() {
   });
 
   function expandirMargem() {
-    const container = window.document.getElementById('container');
-    container?.classList.toggle('menu-lateral-expandido')
+    const graficosDesktop = window.document.getElementById('graficos-desktop');
+    graficosDesktop?.classList.toggle('menu-lateral-expandido');
   }
 
 
@@ -197,6 +240,24 @@ return (
     :
     (<MenuLateral expandirMargem={expandirMargem} />)
     }
+    {largura >= 1024 && (
+      <div id="graficos-desktop" className="graficos calculo-de-custos-screen">
+              <div id="grafico-dia-1" className="grafico-dia calculo-de-custos-screen">
+                  <h3 className="calculo-de-custos-screen">Gastos por dia</h3>
+                  <canvas ref={canvas1} className="calculo-de-custos-screen"></canvas>
+              </div>
+              {dias.length > LIMITE_GRAFICO && (
+                  <div id="grafico-dia-2" className="grafico-dia calculo-de-custos-screen">
+                  <h3 className="calculo-de-custos-screen">Gastos por dia (continuação)</h3>
+                  <canvas ref={canvas2} className="calculo-de-custos-screen"></canvas>
+                  </div>
+              )}
+              <div id="grafico-final" className="calculo-de-custos-screen">
+                  <h3 className="calculo-de-custos-screen">Gastos por categoria</h3>
+                  <canvas ref={canvasCategorias} className="calculo-de-custos-screen"></canvas>
+              </div>
+      </div>
+    )}
 
     <main className="calculo-de-custos-screen">
       <div id="container" className="container calculo-de-custos-screen">
@@ -274,28 +335,31 @@ return (
               R$ {totalGeral.toFixed(2)}
           </span>
           </div>
-          <div className="graficos calculo-de-custos-screen">
-            <div className="calculo-de-custos-screen">
-                <h3 className="calculo-de-custos-screen">Gastos por dia</h3>
-                <canvas ref={canvas1} className="calculo-de-custos-screen"></canvas>
+          {largura < 1024 && (
+            <div className="graficos calculo-de-custos-screen">
+                    <div className="grafico-dia calculo-de-custos-screen">
+                        <h3 className="calculo-de-custos-screen">Gastos por dia</h3>
+                        <canvas ref={canvas1} className="calculo-de-custos-screen"></canvas>
+                    </div>
+                    {dias.length > LIMITE_GRAFICO && (
+                        <div className="grafico-dia calculo-de-custos-screen">
+                        <h3 className="calculo-de-custos-screen">Gastos por dia (continuação)</h3>
+                        <canvas ref={canvas2} className="calculo-de-custos-screen"></canvas>
+                        </div>
+                    )}
+                    <div id="grafico-final" className="calculo-de-custos-screen">
+                        <h3 className="calculo-de-custos-screen">Gastos por categoria</h3>
+                        <canvas ref={canvasCategorias} className="calculo-de-custos-screen"></canvas>
+                    </div>
             </div>
-            {dias.length > LIMITE_GRAFICO && (
-                <div className="calculo-de-custos-screen">
-                <h3 className="calculo-de-custos-screen">Gastos por dia (continuação)</h3>
-                <canvas ref={canvas2} className="calculo-de-custos-screen"></canvas>
-                </div>
-            )}
-            <div id="grafico-final" className="calculo-de-custos-screen">
-                <h3 className="calculo-de-custos-screen">Gastos por categoria</h3>
-                <canvas ref={canvasCategorias} className="calculo-de-custos-screen"></canvas>
-            </div>
-          </div>
+          )}
       </div>
       {largura >= 1024 && (
         <div style={{backgroundImage: `url(${anuncio1})`}} className="imagem-desktop calculo-de-custos-screen">
         </div>
       )}
     </main>
+
     {largura < 1024 && (
       <footer className="calculo-de-custos-screen">
         <div style={{backgroundImage: `url(${anuncio1})`}} className="imagem calculo-de-custos-screen">
