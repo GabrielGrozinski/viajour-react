@@ -10,14 +10,35 @@
 }
 
 h1#titulo.menu-vertical-component {
-  @apply text-white font-['Majesty'] text-2xl text-center bg-[#082556];
+  @apply text-white transition-all cursor-pointer duration-300 font-['Majesty'] text-2xl text-center bg-[#082556];
+}
+
+h1#titulo.menu-vertical-component > span {
+  @apply hidden;
+}
+
+h1#titulo.menu-vertical-component.menu-ativado {
+  @apply cursor-default;
+}
+
+h1#titulo.menu-vertical-component.menu-ativado > i {
+  @apply hidden;
+}
+
+h1#titulo.menu-vertical-component.menu-ativado > span {
+  @apply block;
 }
 
 aside.menu-lateral.menu-vertical-component {
   @apply bg-[#082556] transition-all duration-300 pb-4 pt-1 px-6
   w-max max-w-full min-h-[100px]
-  flex flex-row flex-nowrap justify-start gap-x-6 overflow-x-auto overflow-y-hidden whitespace-nowrap;
+  hidden flex-row flex-nowrap justify-start gap-x-6 overflow-x-auto overflow-y-hidden whitespace-nowrap;
   scrollbar-width: none;
+  pointer-events: none;
+}
+
+aside.menu-lateral.menu-vertical-component.menu-ativado {
+  @apply flex;
 }
 
 aside.menu-lateral.menu-vertical-component::-webkit-scrollbar {

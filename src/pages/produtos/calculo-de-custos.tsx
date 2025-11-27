@@ -249,11 +249,15 @@ export default function CalculoDeCustos() {
 
 return (
   <div id="body" style={{backgroundImage: `url(${fundoAtual})`}} className="calculo-de-custos-screen">
-    <div className="menu-em-cima"></div>
-    {largura < 1024 ? 
+    {largura < 1024 ?
     (<MenuVertical />)
     :
-    (<MenuLateral expandirMargem={expandirMargem} />)
+    (
+    <>
+      <div className="menu-em-cima"></div>
+      <MenuLateral expandirMargem={expandirMargem} />
+    </>
+    )
     }
     {largura >= 1024 && (
       <div id="graficos-desktop" className="graficos calculo-de-custos-screen">

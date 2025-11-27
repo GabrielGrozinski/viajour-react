@@ -1,14 +1,42 @@
 import '../styles/menu-vertical.css';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 
 
 export default function MenuVertical() {
     const navigate = useNavigate();
+    const ref_barra = useRef<any>(null);
+
+    useEffect(() => {
+        function handleClickFora(e: any) {
+            if (ref_barra.current && !ref_barra.current.contains(e.target)) {
+                ['titulo', 'barra-vertical'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el?.classList.contains('menu-ativado')) {
+                    el.classList.remove('menu-ativado');
+                }
+                });
+            }
+        }
+
+        document.addEventListener("click", handleClickFora);
+
+        return () => document.removeEventListener("click", handleClickFora);
+    }, [])
+
+    function ativarMenu() {
+        window.document.getElementById('titulo')?.classList.add('menu-ativado');
+        window.document.getElementById('barra-vertical')?.classList.add('menu-ativado');
+    }
     
     return (
         <>
-        <h1 id='titulo' className='menu-vertical-component'>ViaJour</h1>
-        <aside className="menu-lateral menu-vertical-component">
+        <h1 onClick={(e) => {e.stopPropagation(); ativarMenu();}} id='titulo' className='menu-vertical-component'>
+            <span>ViaJour</span>
+            <i className="fa-solid fa-bars"></i>
+            </h1>
+        
+        <aside ref={ref_barra} id='barra-vertical' className="menu-lateral menu-vertical-component">
 
             <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-vertical-component">
             <a href="" className="menu-vertical-component">
