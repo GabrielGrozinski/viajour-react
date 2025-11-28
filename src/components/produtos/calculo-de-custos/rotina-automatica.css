@@ -16,7 +16,7 @@
 }
 
 div.container.rotina-automatica-component {
-  @apply max-w-full overflow-y-auto rounded-xl mx-auto mb-[100px];
+  @apply max-w-full overflow-y-auto bg-blue-400 rounded-xl mx-auto;
 }
 
 h2#gen-title.title.rotina-automatica-component {
@@ -105,7 +105,7 @@ input[type="text"].rotina-automatica-component {
 
 @media screen and (max-width:1024px) {
 div.container.rotina-automatica-component .card.rotina-automatica-component {
-  @apply bg-white max-h-full min-h-full p-5;
+  @apply max-h-full min-h-full p-5;
 }
 
 div#btn-rotinas.rotina-automatica-component {
