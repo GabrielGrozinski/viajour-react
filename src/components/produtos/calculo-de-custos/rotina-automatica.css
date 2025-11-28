@@ -1,0 +1,138 @@
+@reference "tailwindcss";
+
+* {
+    @apply box-border m-0 p-0;
+    font-family: "Oswald", sans-serif;
+}
+
+:root {
+  --bg: #f7f7f8;
+  --card: #1e293b;
+  --muted: #6b7280;
+  --accent: #146cff;
+  --accent-strong: #0b61e6;
+  --success: #0aa94f;
+  --radius: 12px;
+}
+
+div.container.rotina-automatica-component {
+  @apply max-w-full overflow-y-auto rounded-xl mx-auto mb-[100px];
+}
+
+h2#gen-title.title.rotina-automatica-component {
+  @apply text-3xl text-center tracking-[0.2px] font-normal mt-0 mb-[18px] mx-0;
+}
+
+.card.rotina-automatica-component {
+  @apply rounded-(--radius) bg-white max-h-[88%] p-5;
+}
+.lead.rotina-automatica-component {
+  @apply flex gap-[18px] items-start mb-[18px];
+}
+.lead .title.rotina-automatica-component {
+  @apply font-bold text-lg mb-1.5;
+}
+.lead .desc.rotina-automatica-component {
+  @apply text-(--muted) leading-[1.45] text-sm;
+}
+form.field-grid.rotina-automatica-component {
+  @apply flex flex-col gap-[18px] mt-2;
+}
+label.field-label.rotina-automatica-component {
+  @apply block font-semibold text-gray-900 text-sm mb-2;
+}
+input[type="number"].rotina-automatica-component,
+input[type="text"].rotina-automatica-component {
+  @apply w-full border border-(--border) text-[15px] box-border px-3.5 py-3 rounded-[10px] border-solid;
+  background: #fff;
+}
+.row.rotina-automatica-component {
+  @apply flex gap-[18px] items-center;
+}
+.radio-group.rotina-automatica-component {
+  @apply flex gap-3.5 items-center mt-1.5;
+}
+
+/* radio layout changed so we can style label text consistently */
+.radio.rotina-automatica-component {
+  @apply flex gap-2 items-center text-sm text-(--muted) cursor-pointer;
+}
+.radio input[type="radio"].rotina-automatica-component {
+  @apply accent-(--accent) w-4 h-4 m-0;
+}
+.radio .label-text.rotina-automatica-component {
+  @apply text-(--muted) font-semibold;
+
+  /* uniform weight for all options */
+}
+/* when radio is checked, only change color (not weight) */
+.radio input[type="radio"]:checked + .label-text.rotina-automatica-component {
+  @apply text-sky-600;
+}
+.dist.rotina-automatica-component {
+  @apply flex flex-col gap-3 mt-1.5;
+}
+.dist .item.rotina-automatica-component {
+  @apply flex items-center gap-3;
+}
+.dist .meta.rotina-automatica-component {
+  @apply min-w-[130px] text-sm text-gray-900 font-semibold;
+}
+.progress-wrapper.rotina-automatica-component {
+  @apply flex-1 flex items-center gap-3;
+}
+.progress.rotina-automatica-component {
+  @apply h-2 w-full overflow-hidden relative rounded-[999px];
+  background: #eef2ff;
+}
+.progress > span.rotina-automatica-component {
+  @apply block h-full w-[0%] transition-[width] duration-260 ease-[ease] rounded-[999px];
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+}
+.percent.rotina-automatica-component {
+  @apply min-w-[46px] text-right font-bold text-gray-900 text-sm;
+}
+.generate.rotina-automatica-component {
+  @apply text-white text-shadow-[1px_1px_1px_#0000003a] font-bold text-[15px] cursor-pointer shadow-[0_8px_18px_rgba(20,108,255,0.12)] mt-3 px-[18px] py-3 rounded-[10px] border-[none] active:translate-y-px;
+  background: var(--accent);
+}
+.spacer.rotina-automatica-component {
+  @apply h-2;
+}
+.hint.rotina-automatica-component {
+  @apply text-(--muted) text-[13px] leading-[1.4];
+}
+
+@media screen and (max-width:1024px) {
+div.container.rotina-automatica-component .card.rotina-automatica-component {
+  @apply bg-white max-h-full min-h-full p-5;
+}
+
+div#btn-rotinas.rotina-automatica-component {
+  @apply flex justify-around mt-4;
+}
+
+button#btn-rotina-manual.rotina-automatica-component {
+  @apply bg-[#4447fd] cursor-pointer opacity-20 p-1 rounded-md text-white text-shadow-[1px_1px_1px_#0000003a];
+}
+
+button#btn-rotina-automatica.rotina-automatica-component {
+  @apply bg-[#4447fd] cursor-pointer opacity-100 p-1 rounded-md text-white text-shadow-[1px_1px_1px_#0000003a];
+}
+
+}
+
+
+
+@media (max-width: 720px) {
+  div#body.rotina-automatica-component {
+    @apply p-3;
+  }
+  .right-column.rotina-automatica-component {
+    @apply max-w-full;
+  }
+  .lead.rotina-automatica-component {
+    @apply flex-col gap-2;
+  }
+}
+
