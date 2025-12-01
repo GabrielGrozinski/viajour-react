@@ -10,7 +10,7 @@
 }
 
 div#body.viagens-natalinas-screen {
-  @apply relative min-h-screen grid grid-rows-[auto_1fr_1fr] grid-cols-[4vw_80%_1fr] gap-4;
+  @apply relative min-h-screen grid grid-rows-[auto_1fr_auto] grid-cols-[4vw_1fr_200px] gap-4;
   background: url(../../assets/imagens/fundo1.png) fixed no-repeat;
   background-size: cover;
   row-gap: 5vh;
@@ -20,12 +20,8 @@ hr.hr-vertical.viagens-natalinas-screen {
   @apply border-none h-[90%] w-[2px] bg-neutral-400;
 }
 
-hr.hr-lateral.viagens-natalinas-screen {
-  @apply border-neutral-300 row-2 col-[2/-1];
-}
-
 header.viagens-natalinas-screen {
-  @apply row-1 col-[2/-1] flex justify-between pt-2 items-center pr-4 transition-all duration-300;
+  @apply row-1 sticky top-[0%] left-[0%] bg-white border-b pb-6 border-neutral-300 col-[2/-1] flex justify-between pt-2 items-center pr-4 transition-all duration-300;
 }
 
 header.viagens-natalinas-screen.menu-lateral-expandido {
@@ -37,11 +33,23 @@ header.viagens-natalinas-screen > h1 {
 }
 
 div.filtros.viagens-natalinas-screen {
-  @apply flex gap-2;
+  @apply flex gap-4;
 }
 
 div.filtro-busca.viagens-natalinas-screen {
-  @apply shadow-[0px_0px_2px_#0000008a] p-1.5 flex items-center justify-between min-w-[340px] rounded-4xl transition-all duration-300;
+    @apply shadow-[0px_0px_2px_#0000008a] p-1.5 px-4 flex items-center justify-between min-w-[340px] rounded-4xl overflow-hidden transition-all duration-300;
+}
+
+input#searchViagem.viagens-natalinas-screen {
+  @apply max-h-0 max-w-0 opacity-0;
+}
+
+input#searchViagem.viagens-natalinas-screen.ativado {
+  @apply max-w-[80%] pl-4 bg-white opacity-100 min-w-[80%] mr-1 min-h-[70%] max-h-[70%] rounded-xl shadow-[1px_1px_2px_#2222223a] border border-[#2222227a] border-solid;
+}
+
+input#searchViagem.viagens-natalinas-screen.ativado:focus {
+  @apply outline-none;
 }
 
 div.filtro-busca.viagens-natalinas-screen:hover {
@@ -67,6 +75,8 @@ div.filtro-busca.viagens-natalinas-screen > div.icone {
   @apply bg-[#1d4ed8] cursor-pointer p-1.5 px-2 rounded-full;
 }
 
+
+
 div.filtro-busca.viagens-natalinas-screen > div.icone > i {
   @apply translate-y-[-10%] text-white text-shadow-[1px_1px_1px_#2222222a];
 }
@@ -80,7 +90,7 @@ div.custo-estimado.viagens-natalinas-screen {
 }
 
 .pagina-natal.viagens-natalinas-screen { 
-  @apply w-full mt-6 transition-all duration-300 col-2  pt-0 row-[2/-1] grid grid-cols-[10%_1fr_10%] gap-6;
+  @apply w-full transition-all duration-300 col-2  pt-0 row-2 grid grid-cols-[5%_1fr_5%] gap-6;
 }
 
 .pagina-natal.viagens-natalinas-screen.menu-lateral-expandido {
@@ -111,7 +121,7 @@ div.custo-estimado.viagens-natalinas-screen {
   flex-wrap: wrap;
 }
 .card-viagem.viagens-natalinas-screen {
-  @apply cursor-pointer overflow-hidden max-w-[31%] min-w-[31%] justify-items-center grid grid-rows-[2fr_1fr] transition-[0.2s] rounded-2xl hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] sm:flex-row;
+  @apply cursor-pointer overflow-hidden max-w-[31%] min-w-[25%] justify-items-center grid grid-rows-[2fr_1fr] transition-[0.2s] rounded-2xl hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] sm:flex-row;
   background: white;
 }
 .card-img.viagens-natalinas-screen {
@@ -138,5 +148,38 @@ div.custo-estimado.viagens-natalinas-screen {
 }
 
 div.imagem-desktop.viagens-natalinas-screen {
-  @apply col-3 sticky bg-cover bg-no-repeat row-[2/-1] right-[0%] top-[50%] translate-y-[-35%] mt-6 min-w-[200px] min-h-[550px] max-w-[200px] max-h-[550px];
+  @apply fixed cursor-pointer bg-cover col-3 row-span-full bg-no-repeat right-[1%] top-[50%] translate-y-[-40%] min-w-[200px] min-h-[550px] max-w-[200px] max-h-[550px];
 }
+
+/* CONTÊINER PRINCIPAL FIXO NO FUNDO */
+.ad-container {
+  @apply fixed bottom-0 left-1/2 -translate-x-1/2 z-1
+         w-full max-w-[900px] bg-white overflow-hidden
+         transition-all duration-300 ease-in-out
+         h-[50px] rounded-t-xl shadow-[0_-8px_25px_rgba(0,0,0,0.18)];
+}
+
+/* Quando abre */
+.ad-container.open {
+  @apply h-[230px] shadow-[0_-12px_40px_rgba(0,0,0,0.25)];
+}
+
+/* TOPO COM A SETA */
+.ad-header {
+  @apply w-full h-[60px] cursor-pointer flex justify-center items-start 
+         bg-white relative;
+}
+
+.ad-arrow {
+  @apply text-[28px] text-[#444] transition duration-300 ease-in-out;
+}
+
+/* ÁREA DO ANÚNCIO */
+.ad-content {
+  @apply w-full h-[200px] p-3 flex justify-center items-center;
+}
+
+.ad-content img {
+  @apply max-w-[90%] max-h-[90px] rounded-xl;
+}
+

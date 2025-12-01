@@ -9,17 +9,15 @@
   font-family: "Oswald", sans-serif;
 }
 aside.menu-lateral.menu-lateral-component {
-  @apply relative z-1 bg-[#082556] row-[span_3] col-1 transition-all duration-300 w-[4vw] flex items-center overflow-hidden gap-10 pt-[3vh];
-  justify-content: start;
-  flex-flow: column nowrap;
+  /* make the lateral menu fixed on the side so it doesn't scroll with the page */
+  @apply fixed top-0 left-0 z-50 bg-[#082556] transition-all duration-300 w-[4vw] flex flex-col flex-nowrap justify-start items-center overflow-hidden gap-10 pt-[3vh] h-screen;
 }
 aside.menu-lateral.menu-lateral-component > article.itens-do-viajour-desktop.menu-lateral-component {
   @apply min-h-[50px] h-auto text-[white] mx-[4%] my-0 p-[auto] rounded-md;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 aside.menu-lateral.menu-lateral-component > i#menu-icone-aside.menu-lateral-component {
-  @apply self-center text-[white] text-[1.8em] cursor-pointer;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  @apply self-center text-white text-[1.8em] cursor-pointer text-shadow-[1px_1px_1px_#0000004d];
 }
 aside.menu-lateral.menu-lateral-component > article.itens-do-viajour-desktop.menu-lateral-component,
 aside.menu-lateral.menu-lateral-component > div.div-instrucoes.menu-lateral-component {
@@ -45,7 +43,8 @@ aside.menu-lateral.menu-lateral-component > div#div-menu-fechado.menu-lateral-co
   @apply text-[rgb(214,214,103)];
 }
 aside.menu-lateral.menu-lateral-component.ativado {
-  @apply h-auto w-[12vw] overflow-y-auto transition-all duration-200 bg-[#082556] flex gap-[15px] px-[2vh] py-[3vh];
+  /* keep fixed positioning, allow independent scrolling inside the expanded menu */
+  @apply h-screen w-[12vw] overflow-y-auto transition-all duration-200 bg-[#082556] flex gap-[15px] px-[2vh] py-[3vh];
   align-items: end;
   flex-flow: column nowrap;
 }
