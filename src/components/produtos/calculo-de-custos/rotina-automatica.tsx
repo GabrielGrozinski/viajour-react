@@ -112,169 +112,167 @@ export default function RotinaAutomatica({ setRotina }: any) {
   }, []);
 
   return (
-    <div className="container rotina-automatica-component">
-        {largura < 1024 && (
+    <>
+      
+      {largura < 1024 && (
           <div id="btn-rotinas" className="rotina-automatica-component">
             <button onClick={() => setRotina('rotina-manual')} id="btn-rotina-manual" className="rotina-automatica-component">Rotina Manual</button>
             <button onClick={() => setRotina('rotina-automatica')} id="btn-rotina-automatica" className="rotina-automatica-component">Rotina Automática</button>
           </div>
-        )}
-        <section className="card rotina-automatica-component" aria-labelledby="gen-title">
-            <div className="lead rotina-automatica-component">
-            <div className="rotina-automatica-component" style={{ flex: 1 }}>
-                <h2 id="gen-title" className="title rotina-automatica-component">
-                Gerador Automático de Rotina de Gastos
-                </h2>
-                <p className="desc rotina-automatica-component">
-                Crie automaticamente uma rotina de gastos completa com base no seu orçamento e perfil de viagem.
-                </p>
-            </div>
-            </div>
+        
+      )}
+      <h2 id="gen-title" className="title rotina-automatica-component">
+          Gerador Automático de Rotina de Gastos
+      </h2>
+      <p className="desc rotina-automatica-component">
+        Crie automaticamente uma rotina de gastos completa com base no seu orçamento e perfil de viagem.
+      </p>
 
-            <form
-            className="field-grid rotina-automatica-component"
-            onSubmit={(e) => e.preventDefault()}
+      <form
+      className="field-grid rotina-automatica-component"
+      onSubmit={(e) => e.preventDefault()}
+      >
+        <div className="rotina-automatica-component">
+            <label className="field-label rotina-automatica-component" htmlFor="duration">
+            Duração da viagem (dias)
+            </label>
+            <input
+            id="duration"
+            type="number"
+            min={1}
+            className="rotina-automatica-component"
+            value={duration}
+            onChange={(e) => setDuration(Number(e.target.value))}
+            />
+        </div>
+
+        <div className="rotina-automatica-component">
+            <label className="field-label rotina-automatica-component" htmlFor="budget">
+            Orçamento total da viagem (R$)
+            </label>
+            <input
+            id="budget"
+            type="text"
+            inputMode="numeric"
+            className="rotina-automatica-component"
+            value={budget}
+            onChange={(e) => setBudget(e.target.value)}
+            />
+        </div>
+
+        <div className="rotina-automatica-component">
+            <label className="field-label rotina-automatica-component">
+            Tipo de viagem
+            </label>
+
+            <div
+            className="radio-group rotina-automatica-component"
+            role="radiogroup"
+            aria-label="Tipo de viagem"
             >
-            <div className="rotina-automatica-component">
-                <label className="field-label rotina-automatica-component" htmlFor="duration">
-                Duração da viagem (dias)
-                </label>
+            <label className="radio rotina-automatica-component">
                 <input
-                id="duration"
-                type="number"
-                min={1}
+                type="radio"
+                name="tipo"
+                value="economica"
                 className="rotina-automatica-component"
-                value={duration}
-                onChange={(e) => setDuration(Number(e.target.value))}
+                checked={tipo === "economica"}
+                onChange={() => setTipo("economica")}
                 />
-            </div>
+                <span className="label-text rotina-automatica-component">Econômica</span>
+            </label>
 
-            <div className="rotina-automatica-component">
-                <label className="field-label rotina-automatica-component" htmlFor="budget">
-                Orçamento total da viagem (R$)
-                </label>
+            <label className="radio rotina-automatica-component">
                 <input
-                id="budget"
-                type="text"
-                inputMode="numeric"
+                type="radio"
+                name="tipo"
+                value="intermediaria"
                 className="rotina-automatica-component"
-                value={budget}
-                onChange={(e) => setBudget(e.target.value)}
+                checked={tipo === "intermediaria"}
+                onChange={() => setTipo("intermediaria")}
                 />
+                <span className="label-text rotina-automatica-component">Intermediária</span>
+            </label>
+
+            <label className="radio rotina-automatica-component">
+                <input
+                type="radio"
+                name="tipo"
+                value="conforto"
+                className="rotina-automatica-component"
+                checked={tipo === "conforto"}
+                onChange={() => setTipo("conforto")}
+                />
+                <span className="label-text rotina-automatica-component">Conforto</span>
+            </label>
+            </div>
+        </div>
+
+        {/* DISTRIBUIÇÃO */}
+        <div className="rotina-automatica-component">
+            <label className="field-label rotina-automatica-component">
+            Distribuição por categoria
+            </label>
+
+            <div className="dist rotina-automatica-component">
+            <div className="item rotina-automatica-component">
+                <div className="meta rotina-automatica-component">Transporte</div>
+                <div className="progress-wrapper rotina-automatica-component">
+                <div className="progress rotina-automatica-component" data-key="transporte">
+                    <span className="rotina-automatica-component" ref={transpRef}></span>
+                </div>
+                </div>
+                <div className="percent rotina-automatica-component" ref={pTranspRef}>0%</div>
             </div>
 
-            <div className="rotina-automatica-component">
-                <label className="field-label rotina-automatica-component">
-                Tipo de viagem
-                </label>
-
-                <div
-                className="radio-group rotina-automatica-component"
-                role="radiogroup"
-                aria-label="Tipo de viagem"
-                >
-                <label className="radio rotina-automatica-component">
-                    <input
-                    type="radio"
-                    name="tipo"
-                    value="economica"
-                    className="rotina-automatica-component"
-                    checked={tipo === "economica"}
-                    onChange={() => setTipo("economica")}
-                    />
-                    <span className="label-text rotina-automatica-component">Econômica</span>
-                </label>
-
-                <label className="radio rotina-automatica-component">
-                    <input
-                    type="radio"
-                    name="tipo"
-                    value="intermediaria"
-                    className="rotina-automatica-component"
-                    checked={tipo === "intermediaria"}
-                    onChange={() => setTipo("intermediaria")}
-                    />
-                    <span className="label-text rotina-automatica-component">Intermediária</span>
-                </label>
-
-                <label className="radio rotina-automatica-component">
-                    <input
-                    type="radio"
-                    name="tipo"
-                    value="conforto"
-                    className="rotina-automatica-component"
-                    checked={tipo === "conforto"}
-                    onChange={() => setTipo("conforto")}
-                    />
-                    <span className="label-text rotina-automatica-component">Conforto</span>
-                </label>
+            <div className="item rotina-automatica-component">
+                <div className="meta rotina-automatica-component">Alimentação</div>
+                <div className="progress-wrapper rotina-automatica-component">
+                <div className="progress rotina-automatica-component" data-key="alimentacao">
+                    <span className="rotina-automatica-component" ref={alimRef}></span>
                 </div>
+                </div>
+                <div className="percent rotina-automatica-component" ref={pAlimRef}>0%</div>
             </div>
 
-            {/* DISTRIBUIÇÃO */}
-            <div className="rotina-automatica-component">
-                <label className="field-label rotina-automatica-component">
-                Distribuição por categoria
-                </label>
-
-                <div className="dist rotina-automatica-component">
-                <div className="item rotina-automatica-component">
-                    <div className="meta rotina-automatica-component">Transporte</div>
-                    <div className="progress-wrapper rotina-automatica-component">
-                    <div className="progress rotina-automatica-component" data-key="transporte">
-                        <span className="rotina-automatica-component" ref={transpRef}></span>
-                    </div>
-                    </div>
-                    <div className="percent rotina-automatica-component" ref={pTranspRef}>0%</div>
-                </div>
-
-                <div className="item rotina-automatica-component">
-                    <div className="meta rotina-automatica-component">Alimentação</div>
-                    <div className="progress-wrapper rotina-automatica-component">
-                    <div className="progress rotina-automatica-component" data-key="alimentacao">
-                        <span className="rotina-automatica-component" ref={alimRef}></span>
-                    </div>
-                    </div>
-                    <div className="percent rotina-automatica-component" ref={pAlimRef}>0%</div>
-                </div>
-
-                <div className="item rotina-automatica-component">
-                    <div className="meta rotina-automatica-component">Hospedagem</div>
-                    <div className="progress-wrapper rotina-automatica-component">
-                    <div className="progress rotina-automatica-component" data-key="hospedagem">
-                        <span className="rotina-automatica-component" ref={hospRef}></span>
-                    </div>
-                    </div>
-                    <div className="percent rotina-automatica-component" ref={pHospRef}>0%</div>
-                </div>
-
-                <div className="item rotina-automatica-component">
-                    <div className="meta rotina-automatica-component">Diversão</div>
-                    <div className="progress-wrapper rotina-automatica-component">
-                    <div className="progress rotina-automatica-component" data-key="diversao">
-                        <span className="rotina-automatica-component" ref={diveRef}></span>
-                    </div>
-                    </div>
-                    <div className="percent rotina-automatica-component" ref={pDiveRef}>0%</div>
+            <div className="item rotina-automatica-component">
+                <div className="meta rotina-automatica-component">Hospedagem</div>
+                <div className="progress-wrapper rotina-automatica-component">
+                <div className="progress rotina-automatica-component" data-key="hospedagem">
+                    <span className="rotina-automatica-component" ref={hospRef}></span>
                 </div>
                 </div>
+                <div className="percent rotina-automatica-component" ref={pHospRef}>0%</div>
             </div>
 
-            <div className="rotina-automatica-component">
-                <button
-                type="button"
-                className="generate rotina-automatica-component"
-                onClick={gerarRotina}
-                >
-                Gerar rotina automaticamente
-                </button>
-                <div className="spacer rotina-automatica-component"></div>
-                <p className="hint rotina-automatica-component">
-                Ao gerar, os dias serão criados automaticamente e preenchidos com valores proporcionais.
-                </p>
+            <div className="item rotina-automatica-component">
+                <div className="meta rotina-automatica-component">Diversão</div>
+                <div className="progress-wrapper rotina-automatica-component">
+                <div className="progress rotina-automatica-component" data-key="diversao">
+                    <span className="rotina-automatica-component" ref={diveRef}></span>
+                </div>
+                </div>
+                <div className="percent rotina-automatica-component" ref={pDiveRef}>0%</div>
             </div>
-            </form>
-        </section>
-    </div>
+            </div>
+        </div>
+
+        <div id="container-gerar" className="rotina-automatica-component">
+            <button
+            type="button"
+            className="generate rotina-automatica-component"
+            onClick={gerarRotina}
+            >
+            Gerar rotina automaticamente
+            </button>
+            <p className="hint rotina-automatica-component">
+            Ao gerar, os dias serão criados automaticamente e preenchidos com valores proporcionais.
+            </p>
+        </div>
+
+      </form>
+
+    </>
+
   );
 }

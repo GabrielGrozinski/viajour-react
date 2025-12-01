@@ -15,11 +15,11 @@ div.menu-em-cima {
 }
 
 div#body.calculo-de-custos-screen {
-  @apply transition-all bg-sky-600 relative bg-fixed bg-cover bg-no-repeat duration-300 h-screen flex flex-col overflow-hidden;
+  @apply transition-all relative bg-fixed bg-cover bg-no-repeat duration-300 h-screen flex flex-col overflow-hidden;
 }
 
 main.calculo-de-custos-screen {
-  @apply max-h-full bg-green-400 grid grid-cols-[1fr];
+  @apply max-h-full grid grid-cols-[1fr];
 }
 
 div#btn-rotinas.calculo-de-custos-screen {
@@ -104,15 +104,16 @@ main.calculo-de-custos-screen .graficos.calculo-de-custos-screen canvas {
 }
 
 main.calculo-de-custos-screen .graficos.calculo-de-custos-screen > div#grafico-final {
-  @apply pb-[200px];
+  @apply pb-[140px];
 }
 
 footer.calculo-de-custos-screen {
-  @apply min-w-full min-h-[10%] sticky bottom-[5%];
+  @apply min-w-full min-h-[12vh] sticky bottom-[0%];
+  transform: translateY(-10%);
 }
 
 footer.calculo-de-custos-screen > div.imagem.calculo-de-custos-screen {
-  @apply h-full w-full bg-cover bg-center;
+  @apply min-h-full w-full bg-cover bg-center;
 }
 
 div#body.calculo-de-custos-screen.dark {
@@ -188,21 +189,22 @@ div#body.calculo-de-custos-screen.dark .subtotal.calculo-de-custos-screen {
   }
 }
 
+@media screen and (min-height: 852px) and (max-height:1024px) {
+  footer.calculo-de-custos-screen {
+  transform: translateY(-50%);
+}
+}
+
 @media screen and (min-height: 624px) and (max-height:852px) {
+  
   main.calculo-de-custos-screen .graficos.calculo-de-custos-screen > div#grafico-final {
-    @apply pb-[280px];
+    @apply pb-[200px];
   }
 }
 
 @media screen and (min-height:853px) and (max-height: 1024px) and (max-width: 1024px)  {
   main.calculo-de-custos-screen .graficos.calculo-de-custos-screen > div#grafico-final {
     @apply pb-[300px];
-  }
-}
-
-@media screen and (max-width:1024px) {
-  div#body.calculo-de-custos-screen {
-    @apply bg-yellow-500;
   }
 }
 
@@ -296,7 +298,7 @@ div#body.calculo-de-custos-screen.dark .subtotal.calculo-de-custos-screen {
   }
 
   main.calculo-de-custos-screen > .container.calculo-de-custos-screen {
-    @apply overflow-y-auto rounded-xl max-h-[88%] max-w-full transition-all duration-300 bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] p-[25px];
+    @apply overflow-y-auto rounded-xl max-h-[92%] max-w-full transition-all duration-300 bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] p-[25px];
   }
 
   div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen.menu-lateral-expandido {
