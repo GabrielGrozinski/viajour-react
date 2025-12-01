@@ -49,7 +49,7 @@ div.filtro-busca.viagens-natalinas-screen:hover {
 }
 
 .btn-filtro.viagens-natalinas-screen {
-  @apply text-sm cursor-pointer transition-[0.2s] px-3 py-1.5 rounded-xl;
+  @apply text-sm font-[400] cursor-pointer transition-[0.2s] px-3 py-1.5 rounded-xl;
   background: white;
 }
 .btn-filtro:hover.viagens-natalinas-screen {
@@ -122,6 +122,9 @@ div.custo-estimado.viagens-natalinas-screen {
 }
 .card-titulo.viagens-natalinas-screen {
   @apply text-lg font-semibold md:text-xl;
+}
+.card-descricao.viagens-natalinas-screen {
+  @apply text-slate-900 text-sm mt-1.5;
 }
 .card-custo.viagens-natalinas-screen {
   @apply text-slate-600 text-sm mt-1.5;
