@@ -315,7 +315,7 @@ div.filtro-preco.viagens-natalinas-screen {
 /* -----------------------------------------------------------
    CONTEÚDO PRINCIPAL
 ----------------------------------------------------------- */
-.pagina-natal.viagens-natalinas-screen { 
+main.pagina-natal.viagens-natalinas-screen { 
   @apply w-full flex gap-6;
 }
 
@@ -347,7 +347,6 @@ div.filtro-preco.viagens-natalinas-screen {
 ----------------------------------------------------------- */
 .loader-carregando.viagens-natalinas-screen,
 .loader-fim.viagens-natalinas-screen {
-  @apply min-w-full col-span-full mb-[100px];
+  @apply min-w-full max-w-full col-3 translate-x-[-50%] mb-[100px];
 }
-
 }

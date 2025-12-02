@@ -1153,6 +1153,7 @@ export default function ViagensNatal() {
           }}
           style={{backgroundColor: pesquisaAtiva ? '#1d4ed8' : ''}} className="filtro-busca viagens-natalinas-screen">
           <input onChange={(event) => {
+            scrollToHeader();
             const textoDigitado = event.target.value;
             const textoFormatado = formatarString(textoDigitado);
             setPesquisaAtual(textoFormatado)}} placeholder="Feliz Natal!" type="text" className="viagens-natalinas-screen" name="searchViagem" id="searchViagem" />
@@ -1197,7 +1198,13 @@ export default function ViagensNatal() {
             <h2>Custo estimado</h2>
             <h3>R$ {value[0]} - {value[1]} </h3>
           </div>
-          <SliderCustomizado step={100} value={value} onChange={(_, newValue) => { if (Array.isArray(newValue)) setValue(newValue)}} valueLabelDisplay="auto" min={0} max={25000} />
+          <SliderCustomizado step={100} value={value} onChange={(_, newValue) => {
+             if (Array.isArray(newValue)) {
+              setValue(newValue);
+              scrollToHeader();
+             } else return;
+             }} 
+            valueLabelDisplay="auto" min={0} max={25000} />
         </div>
       </div>
     </header>
