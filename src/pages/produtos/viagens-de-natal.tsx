@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import '../../styles/produtos/viagens-de-natal.css';
 import MenuLateral from "../../components/menu-lateral";
+import MenuVertical from "../../components/menu-vertical";
 import anuncio from '../../assets/imagens/anuncio1.png';
 import Slider from '@mui/material/Slider';
 import {styled} from '@mui/material/styles';
@@ -1061,14 +1062,29 @@ export default function ViagensNatal() {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, "");
   }
+
+  function scrollToHeader() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
   
 
   return (
   <div id="body" className="viagens-natalinas-screen">
-    <MenuLateral expandirMargem={expandirMargem}/>
+    {largura >= 1024 ? (
+      <MenuLateral expandirMargem={expandirMargem}/>
+    ) : 
+    (
+      <MenuVertical />
+    )
+    }
     <header id="header" className="viagens-natalinas-screen">
       {/* Filtros */}
-      <h1 className="viagens-natalinas-screen">ViaJour</h1>
+      {largura >= 1024 && (
+        <h1 className="viagens-natalinas-screen">ViaJour</h1>
+      )}
       <h1 className="titulo viagens-natalinas-screen">
         🎄 Viagens de Natal
         <p className="subtitulo viagens-natalinas-screen">
@@ -1087,7 +1103,7 @@ export default function ViagensNatal() {
           <>
             <button
               id="btn-viagem-internacional"
-              onClick={() => setFiltro("internacional")}
+              onClick={() => {setFiltro("internacional"); scrollToHeader()}}
               className={`btn-filtro ${filtro === "internacional" ? "btn-ativo" : ""} viagens-natalinas-screen`}
             >
               Viagens internacionais
@@ -1095,7 +1111,7 @@ export default function ViagensNatal() {
             <hr id="hr-btn-viagem" className="hr-vertical viagens-natalinas-screen" />
             <button
               id="btn-viagem-nacional"
-              onClick={() => setFiltro("nacional")}
+              onClick={() => {setFiltro("nacional"); scrollToHeader()}}
               className={`btn-filtro ${filtro === "nacional" ? "btn-ativo" : ""} viagens-natalinas-screen`}
             >
               Viagens nacionais
@@ -1162,25 +1178,27 @@ export default function ViagensNatal() {
 
     
     {largura >= 1024 && (
-      <div style={{backgroundImage: `url(${anuncio})`}} className="imagem-desktop viagens-natalinas-screen">
-      </div>
+      <>
+        <div style={{backgroundImage: `url(${anuncio})`}} className="imagem-desktop viagens-natalinas-screen">
+        </div>
+        {/* Anuncio-Desktop-Lateral */}
+
+        <div className={`ad-container ${!adOpen ? "open" : ""}`}>
+          <div className="ad-header" onClick={() => setAdOpen(!adOpen)}>
+            <span className="ad-arrow">{!adOpen ? "▼" : "▲"}</span>
+          </div>
+
+          <div className="ad-content">
+            <img
+              src="https://static.stands4.com/images/symbol/2848_bing-search-logo.png"
+              alt="Ad"
+            />
+          </div>
+        </div>
+        {/* Anuncio-Desktop-Rodapé */}
+      </>
+
     )}
-
-    {/* ----------------------------- */}
-    {/* 🔽 ANÚNCIO EXPANSÍVEL CLONADO */}
-    {/* ----------------------------- */}
-    <div className={`ad-container ${!adOpen ? "open" : ""}`}>
-      <div className="ad-header" onClick={() => setAdOpen(!adOpen)}>
-        <span className="ad-arrow">{!adOpen ? "▼" : "▲"}</span>
-      </div>
-
-      <div className="ad-content">
-        <img
-          src="https://static.stands4.com/images/symbol/2848_bing-search-logo.png"
-          alt="Ad"
-        />
-      </div>
-    </div>
 
   </div>
 );

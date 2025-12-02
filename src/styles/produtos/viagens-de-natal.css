@@ -1,14 +1,23 @@
 @reference "tailwindcss";
 
+/* -----------------------------------------------------------
+   FONTES
+----------------------------------------------------------- */
 @font-face {
-    font-family: 'Majesty';
-    src: url(../../assets/fonts/majesty.otf);
+  font-family: 'Majesty';
+  src: url(../../assets/fonts/majesty.otf);
 }
 
+/* -----------------------------------------------------------
+   RESET GLOBAL
+----------------------------------------------------------- */
 * {
   @apply box-border m-0 p-0;
 }
 
+/* -----------------------------------------------------------
+   LAYOUT GERAL DA PAGE
+----------------------------------------------------------- */
 div#body.viagens-natalinas-screen {
   @apply relative min-h-screen grid grid-rows-[auto_1fr_auto] grid-cols-[4vw_1fr_200px] gap-4;
   background: url(../../assets/imagens/fundo1.png) fixed no-repeat;
@@ -16,147 +25,184 @@ div#body.viagens-natalinas-screen {
   row-gap: 5vh;
 }
 
-hr.hr-vertical.viagens-natalinas-screen {
-  @apply border-none h-[90%] w-[2px] bg-neutral-400;
-}
-
+/* -----------------------------------------------------------
+   HEADER (TOPO)
+----------------------------------------------------------- */
 header.viagens-natalinas-screen {
-  @apply row-1 sticky top-[0%] left-[0%] bg-white border-b pb-6 border-neutral-300 col-[2/-1] flex justify-between pt-2 items-center pr-4 transition-all duration-300;
+  @apply row-1 sticky top-0 left-0 bg-white border-b border-neutral-300
+         pb-6 pt-2 col-[2/-1] flex justify-between items-center pr-4
+         transition-all duration-300;
 }
 
+/* Header quando menu lateral abre */
 header.viagens-natalinas-screen.menu-lateral-expandido {
   @apply pl-[8vw];
 }
 
-header.viagens-natalinas-screen > h1 {
-  @apply font-['Majesty'] text-3xl;
+/* -----------------------------------------------------------
+   TÍTULOS
+----------------------------------------------------------- */
+header.viagens-natalinas-screen > h1.titulo.viagens-natalinas-screen {
+  @apply font-['Majesty'] text-4xl text-[#222222] text-center;
 }
 
+header.viagens-natalinas-screen > h1.titulo.viagens-natalinas-screen > .subtitulo.viagens-natalinas-screen {
+  @apply text-gray-500 text-center text-sm md:text-base mt-1;
+}
+
+/* -----------------------------------------------------------
+   ÁREA DE FILTROS
+----------------------------------------------------------- */
 div.filtros.viagens-natalinas-screen {
   @apply flex gap-4;
 }
 
+/* ------------------ BUSCA ------------------ */
 div.filtro-busca.viagens-natalinas-screen {
-    @apply shadow-[0px_0px_2px_#0000008a] p-1.5 px-4 flex items-center justify-between min-w-[340px] rounded-4xl overflow-hidden transition-all duration-300;
+  @apply shadow-[0px_0px_2px_#0000008a] p-1.5 px-4 flex items-center justify-between
+         min-w-[340px] rounded-4xl overflow-hidden transition-all duration-300;
 }
 
+/* Input escondido */
 input#searchViagem.viagens-natalinas-screen {
   @apply max-h-0 max-w-0 opacity-0;
 }
 
+/* Input expandido */
 input#searchViagem.viagens-natalinas-screen.ativado {
-  @apply max-w-[80%] pl-4 bg-white opacity-100 min-w-[80%] mr-1 min-h-[70%] max-h-[70%] rounded-xl shadow-[1px_1px_2px_#2222223a] border border-[#2222227a] border-solid;
+  @apply max-w-[80%] min-w-[80%] bg-white opacity-100 pl-4
+         mr-1 min-h-[70%] max-h-[70%] rounded-xl
+         border border-[#2222227a] shadow-[1px_1px_2px_#2222223a];
 }
 
+/* Focus */
 input#searchViagem.viagens-natalinas-screen.ativado:focus {
   @apply outline-none;
 }
 
+/* Hover caixa busca */
 div.filtro-busca.viagens-natalinas-screen:hover {
   @apply shadow-[0px_0px_3px_#0000008a];
 }
 
-.btn-filtro.viagens-natalinas-screen {
-  @apply text-sm font-[400] cursor-pointer transition-[0.2s] px-3 py-1.5 rounded-xl;
-  background: white;
-}
-.btn-filtro:hover.viagens-natalinas-screen {
-  background: #f1f5f9;
-}
-.btn-ativo.viagens-natalinas-screen {
-  @apply text-[white];
-  background: #1d4ed8;
-}
-.btn-ativo:hover.viagens-natalinas-screen {
-  background: #1d4ed8;
-}
-
+/* Ícone de busca */
 div.filtro-busca.viagens-natalinas-screen > div.icone {
   @apply bg-[#1d4ed8] cursor-pointer p-1.5 px-2 rounded-full;
 }
-
-
 
 div.filtro-busca.viagens-natalinas-screen > div.icone > i {
   @apply translate-y-[-10%] text-white text-shadow-[1px_1px_1px_#2222222a];
 }
 
+/* ------------------ BOTÕES DE FILTRO ------------------ */
+
+.btn-filtro.viagens-natalinas-screen {
+  @apply text-sm font-[400] cursor-pointer transition-[0.2s]
+         px-3 py-1.5 rounded-xl bg-white;
+}
+
+.btn-filtro:hover.viagens-natalinas-screen {
+  background: #f1f5f9;
+}
+
+hr.hr-vertical.viagens-natalinas-screen {
+  @apply border-none h-[90%] w-[2px] bg-neutral-400;
+}
+
+/* Ativo */
+div.filtro-busca.viagens-natalinas-screen > .btn-ativo.viagens-natalinas-screen {
+  @apply text-white;
+  background: #1d4ed8;
+}
+
+.btn-ativo:hover.viagens-natalinas-screen {
+  background: #1d4ed8;
+}
+
+/* ------------------ FILTRO DE PREÇO ------------------ */
+
 div.filtro-preco.viagens-natalinas-screen {
-  @apply flex flex-col justify-between p-1.5  items-center min-w-[340px] rounded-4xl transition-all duration-300;
+  @apply flex flex-col justify-between items-center
+         p-1.5 min-w-[340px] rounded-4xl transition-all duration-300;
 }
 
 div.custo-estimado.viagens-natalinas-screen {
-  @apply flex w-full justify-between;
+  @apply flex justify-between w-full;
 }
 
+/* -----------------------------------------------------------
+   CONTEÚDO PRINCIPAL
+----------------------------------------------------------- */
 .pagina-natal.viagens-natalinas-screen { 
-  @apply w-full transition-all duration-300 col-2  pt-0 row-2 grid grid-cols-[5%_1fr_5%] gap-6;
+  @apply w-full row-2 col-2 grid grid-cols-[5%_1fr_5%] gap-6
+         pt-0 transition-all duration-300;
 }
 
 .pagina-natal.viagens-natalinas-screen.menu-lateral-expandido {
   @apply pl-[8vw];
 }
 
-
-
-/* ===============================
-   TÍTULOS
-================================= */
-.titulo.viagens-natalinas-screen {
-  @apply text-4xl text-[#222222] text-center;
-}
-.subtitulo.viagens-natalinas-screen {
-  @apply text-gray-500 text-center text-sm mt-1 md:text-base;
-}
-
-/* ===============================
-   BOTÕES DE FILTRO
-================================= */
-
-/* ===============================
-   CARDS DE VIAGENS
-================================= */
+/* -----------------------------------------------------------
+   LISTA + CARDS DE VIAGENS
+----------------------------------------------------------- */
 .lista-viagens.viagens-natalinas-screen {
-  @apply flex col-2 min-w-auto gap-8;
-  flex-wrap: wrap;
+  @apply flex gap-8 col-2 flex-wrap min-w-auto;
 }
+
 .card-viagem.viagens-natalinas-screen {
-  @apply cursor-pointer overflow-hidden max-w-[31%] min-w-[25%] justify-items-center grid grid-rows-[2fr_1fr] transition-[0.2s] rounded-2xl hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] sm:flex-row;
-  background: white;
+  @apply cursor-pointer overflow-hidden bg-white
+         max-w-[31%] min-w-[25%] grid grid-rows-[2fr_1fr] justify-items-center
+         rounded-2xl transition-[0.2s]
+         hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)];
 }
+
 .card-img.viagens-natalinas-screen {
-  @apply min-w-full min-h-full object-cover sm:w-40 sm:h-40;
+  @apply object-cover min-w-full min-h-full;
 }
+
 .card-info.viagens-natalinas-screen {
   @apply flex flex-col justify-between p-4;
 }
+
 .card-titulo.viagens-natalinas-screen {
   @apply text-lg font-semibold md:text-xl;
 }
+
 .card-descricao.viagens-natalinas-screen {
-  @apply text-slate-900 text-sm mt-1.5;
+  @apply text-sm text-slate-900 mt-1.5;
 }
+
 .card-custo.viagens-natalinas-screen {
-  @apply text-slate-600 text-sm mt-1.5;
+  @apply text-sm text-slate-600 mt-1.5;
 }
+
 .card-custo span.viagens-natalinas-screen {
   @apply font-semibold;
 }
+
 .tag-natalina.viagens-natalinas-screen {
-  @apply text-[11px] w-fit text-red-700 mt-3 px-3 py-1.5 rounded-[999px];
+  @apply text-[11px] text-red-700 w-fit mt-3 px-3 py-1.5 rounded-[999px];
   background: #fee2e2;
 }
 
+/* Imagem lateral fixa (desktop) */
 div.imagem-desktop.viagens-natalinas-screen {
-  @apply fixed cursor-pointer bg-cover col-3 row-span-full bg-no-repeat right-[1%] top-[50%] translate-y-[-40%] min-w-[200px] min-h-[550px] max-w-[200px] max-h-[550px];
+  @apply fixed right-[1%] top-[50%] translate-y-[-40%]
+         bg-cover bg-no-repeat cursor-pointer
+         col-3 row-span-full
+         min-w-[200px] min-h-[550px]
+         max-w-[200px] max-h-[550px];
 }
 
-/* CONTÊINER PRINCIPAL FIXO NO FUNDO */
+/* -----------------------------------------------------------
+   ANÚNCIO FIXO NO RODAPÉ
+----------------------------------------------------------- */
 .ad-container {
   @apply fixed bottom-0 left-1/2 -translate-x-1/2 z-1
          w-full max-w-[900px] bg-white overflow-hidden
-         transition-all duration-300 ease-in-out
-         h-[50px] rounded-t-xl shadow-[0_-8px_25px_rgba(0,0,0,0.18)];
+         h-[50px] rounded-t-xl
+         shadow-[0_-8px_25px_rgba(0,0,0,0.18)]
+         transition-all duration-300 ease-in-out;
 }
 
 /* Quando abre */
@@ -164,17 +210,18 @@ div.imagem-desktop.viagens-natalinas-screen {
   @apply h-[230px] shadow-[0_-12px_40px_rgba(0,0,0,0.25)];
 }
 
-/* TOPO COM A SETA */
+/* Header do anúncio */
 .ad-header {
-  @apply w-full h-[60px] cursor-pointer flex justify-center items-start 
+  @apply w-full h-[60px] cursor-pointer flex justify-center items-start
          bg-white relative;
 }
 
+/* Seta */
 .ad-arrow {
   @apply text-[28px] text-[#444] transition duration-300 ease-in-out;
 }
 
-/* ÁREA DO ANÚNCIO */
+/* Conteúdo */
 .ad-content {
   @apply w-full h-[200px] p-3 flex justify-center items-center;
 }
@@ -183,7 +230,9 @@ div.imagem-desktop.viagens-natalinas-screen {
   @apply max-w-[90%] max-h-[90px] rounded-xl;
 }
 
-/* Loader / status shown during infinite-scroll */
+/* -----------------------------------------------------------
+   LOADERS DO INFINITE SCROLL
+----------------------------------------------------------- */
 .loader-carregando.viagens-natalinas-screen,
 .loader-fim.viagens-natalinas-screen {
   @apply w-full text-center text-sm text-gray-500 mb-10;
@@ -193,3 +242,93 @@ div.imagem-desktop.viagens-natalinas-screen {
   @apply animate-pulse;
 }
 
+@media screen and (max-width: 1024px) {
+  
+/* -----------------------------------------------------------
+   LAYOUT GERAL DA PAGE
+----------------------------------------------------------- */
+div#body.viagens-natalinas-screen {
+  @apply flex flex-col gap-4;
+  row-gap: 0;
+}
+
+/* -----------------------------------------------------------
+   HEADER (TOPO)
+----------------------------------------------------------- */
+header.viagens-natalinas-screen {
+  @apply pb-2 pt-2 grid grid-cols-1 grid-rows-[auto_auto] justify-center gap-2 items-start pr-2 pl-2;
+}
+
+/* Título principal do header */
+header.viagens-natalinas-screen > h1.titulo.viagens-natalinas-screen {
+  @apply text-2xl;
+}
+
+header.viagens-natalinas-screen > h1.titulo > p {
+  @apply text-lg;
+}
+
+/* -----------------------------------------------------------
+   ÁREA DE FILTROS
+----------------------------------------------------------- */
+div.filtros.viagens-natalinas-screen {
+  @apply grid grid-rows-2 gap-2;
+}
+
+/* ------------------ BUSCA ------------------ */
+div.filtro-busca.viagens-natalinas-screen {
+  @apply min-w-[80%] max-w-full scale-90 gap-3;
+}
+
+/* Ícone de busca */
+div.filtro-busca.viagens-natalinas-screen > div.icone {
+  @apply p-1 px-1.5;
+}
+
+div.filtro-busca.viagens-natalinas-screen > div.icone > i {
+  @apply text-sm;
+}
+
+/* ------------------ BOTÕES DE FILTRO ------------------ */
+.btn-filtro.viagens-natalinas-screen {
+  @apply text-sm px-[4%] py-[2%];
+}
+
+/* ------------------ FILTRO DE PREÇO ------------------ */
+div.filtro-preco.viagens-natalinas-screen {
+  @apply min-w-[80%] max-w-full scale-90;
+}
+
+/* -----------------------------------------------------------
+   CONTEÚDO PRINCIPAL
+----------------------------------------------------------- */
+.pagina-natal.viagens-natalinas-screen { 
+  @apply w-full flex gap-6;
+}
+
+/* -----------------------------------------------------------
+   LISTA + CARDS DE VIAGENS
+----------------------------------------------------------- */
+.lista-viagens.viagens-natalinas-screen {
+  @apply grid grid-cols-[1%_1fr_1fr_1%] gap-6 mt-4 ;
+}
+
+.card-viagem.viagens-natalinas-screen {
+  @apply max-w-full min-w-full max-h-[500px] grid-rows-[auto_1fr];
+}
+
+.card-viagem.viagens-natalinas-screen:nth-child(odd) {
+  @apply col-2
+}
+
+.card-viagem.viagens-natalinas-screen:nth-child(even) {
+  @apply col-3
+}
+
+.card-img.viagens-natalinas-screen {
+  @apply min-w-full min-h-[200px] max-h-[200px];
+}
+
+
+
+}
