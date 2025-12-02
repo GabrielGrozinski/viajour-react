@@ -92,7 +92,7 @@ div.filtro-busca.viagens-romanticas-screen:hover {
 
 /* Ícone de busca */
 div.filtro-busca.viagens-romanticas-screen > div.icone {
-  @apply bg-[#1d4ed8] cursor-pointer p-1.5 px-2 rounded-full;
+  @apply bg-[#EF4444] cursor-pointer p-1.5 px-2 rounded-full;
 }
 
 div.filtro-busca.viagens-romanticas-screen > div.icone > i {
@@ -117,11 +117,11 @@ hr.hr-vertical.viagens-romanticas-screen {
 /* Ativo */
 div.filtro-busca.viagens-romanticas-screen > .btn-ativo.viagens-romanticas-screen {
   @apply text-white;
-  background: #1d4ed8;
+  background: #EF4444;
 }
 
 .btn-ativo:hover.viagens-romanticas-screen {
-  background: #1d4ed8;
+  background: #EF4444;
 }
 
 /* ------------------ FILTRO DE PREÇO ------------------ */
@@ -187,7 +187,7 @@ div.custo-estimado.viagens-romanticas-screen {
 }
 
 .tag-natalina.viagens-romanticas-screen {
-  @apply text-[12px] text-purple-100 text-shadow-[1px_1px_1px_#2222223a] bg-purple-600 w-fit mt-3 px-3 py-1.5 rounded-full;
+  @apply text-[12px] text-red-100 text-shadow-[1px_1px_1px_#2222223a] bg-red-500 w-fit mt-3 px-3 py-1.5 rounded-full;
 }
 
 /* Imagem lateral fixa (desktop) */

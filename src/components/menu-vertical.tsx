@@ -38,70 +38,70 @@ export default function MenuVertical() {
         
         <aside ref={ref_barra} id='barra-vertical' className="menu-lateral menu-vertical-component">
 
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-vertical-component">
+            <article  className="itens-do-viajour-desktop menu-vertical-component">
             <a href="" className="menu-vertical-component">
                 <i className="fa-solid fa-chess menu-vertical-component" />
                 <p className="menu-vertical-component">Roteiro Automático</p>
             </a>
             </article>
 
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-vertical-component">
+            <article  className="itens-do-viajour-desktop menu-vertical-component">
             <a href="" className="menu-vertical-component">
                 <i className="fa-solid fa-brain menu-vertical-component" />
                 <p className="menu-vertical-component">Chat Auxiliar</p>
             </a>
             </article>
 
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-vertical-component">
+            <article  className="itens-do-viajour-desktop menu-vertical-component">
             <a href="" className="menu-vertical-component">
                 <i className="fa-solid fa-cart-flatbed-suitcase menu-vertical-component" />
                 <p className="menu-vertical-component">Busca Paraíso</p>
             </a>
             </article>
 
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-vertical-component">
+            <article  className="itens-do-viajour-desktop menu-vertical-component">
             <a href="" className="menu-vertical-component">
                 <i className="fa-solid fa-plane menu-vertical-component" />
                 <p className="menu-vertical-component">Viagem Certa</p>
             </a>
             </article>
 
-            <article onClick={() => navigate('/calculo-de-custos')} id="roteiro-automatico" className="itens-do-viajour-desktop menu-vertical-component">
+            <article onClick={() => navigate('/calculo-de-custos')}  className="itens-do-viajour-desktop menu-vertical-component">
             <a className="menu-vertical-component">
                 <i className="fa-solid fa-hand-holding-dollar menu-vertical-component" />
                 <p className="menu-vertical-component">Cálculo de Custos</p>
             </a>
             </article>
 
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-vertical-component">
+            <article  className="itens-do-viajour-desktop menu-vertical-component">
             <a href="" className="menu-vertical-component">
                 <i className="fa-regular fa-lightbulb menu-vertical-component" />
                 <p className="menu-vertical-component">Viagens Baratas</p>
             </a>
             </article>
 
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-vertical-component">
+            <article  className="itens-do-viajour-desktop menu-vertical-component">
             <a href="" className="menu-vertical-component">
                 <i className="fa-solid fa-icons menu-vertical-component" />
                 <p className="menu-vertical-component">Monte sua Aventura</p>
             </a>
             </article>
 
-            <article id="roteiro-automatico" className="itens-do-viajour-desktop menu-vertical-component">
+            <article  className="itens-do-viajour-desktop menu-vertical-component">
             <a href="" className="menu-vertical-component">
                 <i className="fa-solid fa-mountain-city menu-vertical-component" />
                 <p className="menu-vertical-component">Viagens de 7 dias</p>
             </a>
             </article>
 
-            <article onClick={() => navigate('/viagens-romanticas')}  id="roteiro-automatico" className="itens-do-viajour-desktop menu-vertical-component">
+            <article onClick={() => navigate('/viagens-romanticas')}   className="itens-do-viajour-desktop menu-vertical-component">
             <a className="menu-vertical-component">
                 <i className="fa-solid fa-heart menu-vertical-component" />
                 <p className="menu-vertical-component">Viagens Românticas</p>
             </a>
             </article>
 
-            <article onClick={() => navigate('/viagens-de-natal')} id="roteiro-automatico" className="itens-do-viajour-desktop menu-vertical-component">
+            <article onClick={() => navigate('/viagens-de-natal')}  className="itens-do-viajour-desktop menu-vertical-component">
             <a className="menu-vertical-component">
                 <i className="fa-solid fa-gift menu-vertical-component" />
                 <p className="menu-vertical-component">Viagens de Natal</p>
