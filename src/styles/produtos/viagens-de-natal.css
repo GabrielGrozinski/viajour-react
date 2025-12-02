@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: 'Majesty';
-    src: url(/fonts/FB-Free-Majesty-Goldera/Majesty\ Goldera.otf);
+    src: url(../../assets/fonts/majesty.otf);
 }
 
 * {
@@ -186,7 +186,7 @@ div.imagem-desktop.viagens-natalinas-screen {
 /* Loader / status shown during infinite-scroll */
 .loader-carregando.viagens-natalinas-screen,
 .loader-fim.viagens-natalinas-screen {
-  @apply w-full text-center text-sm text-gray-500 py-4;
+  @apply w-full text-center text-sm text-gray-500 mb-10;
 }
 
 .loader-carregando.viagens-natalinas-screen {

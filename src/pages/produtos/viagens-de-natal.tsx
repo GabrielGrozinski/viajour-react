@@ -982,9 +982,6 @@ const SliderCustomizado = styled(Slider)({
   }
 });
 
-// Reset pagination when filters change (new filtered list)
-// These hooks belong inside the component below (kept here as a helper comment)
-
 
 export default function ViagensNatal() {
   const [filtro, setFiltro] = useState<"nacional" | "internacional">("nacional");
@@ -1004,13 +1001,12 @@ export default function ViagensNatal() {
     ),
   [pesquisaAtual, viagensFiltradasCusto]);
 
-  // Memoize the final filtered array so its identity only changes when inputs change
   const viagensFiltradas = useMemo(
     () => viagensFiltradasTextoDigitado.filter((v) => v.categoria === filtro),
     [viagensFiltradasTextoDigitado, filtro]
   );
 
-  // Pagination / infinite scroll
+  // Paginação / infinite scroll
   const PAGE_SIZE = 12;
   const [itemsToShow, setItemsToShow] = useState<Viagem[]>(() => viagensFiltradas.slice(0, PAGE_SIZE));
   const sentinelRef = useRef<HTMLDivElement | null>(null);
@@ -1065,7 +1061,6 @@ export default function ViagensNatal() {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, "");
   }
-
   
 
   return (
@@ -1189,7 +1184,4 @@ export default function ViagensNatal() {
 
   </div>
 );
-
 }
-
-  

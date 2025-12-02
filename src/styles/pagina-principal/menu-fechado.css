@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "Majesty";
-  src: url(/fonts/FB-Free-Majesty-Goldera/Majesty\Goldera.otf);
+  src: url(../../assets/fonts/majesty.otf);
 }
 
 * {
