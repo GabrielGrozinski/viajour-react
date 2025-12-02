@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import '../../styles/produtos/viagens-de-natal.css';
 import MenuLateral from "../../components/menu-lateral";
 import anuncio from '../../assets/imagens/anuncio1.png';
@@ -982,6 +982,9 @@ const SliderCustomizado = styled(Slider)({
   }
 });
 
+// Reset pagination when filters change (new filtered list)
+// These hooks belong inside the component below (kept here as a helper comment)
+
 
 export default function ViagensNatal() {
   const [filtro, setFiltro] = useState<"nacional" | "internacional">("nacional");
@@ -991,6 +994,7 @@ export default function ViagensNatal() {
   const [largura, setLargura] = useState(window.innerWidth);
   const [value, setValue] = useState([1000, 10000]);
   const viagensFiltradasCusto = useMemo(() =>
+
     viagens.filter((v) => v.custoBruto >= value[0] && v.custoBruto <= value[1])
   , [value]);
 
@@ -1000,7 +1004,16 @@ export default function ViagensNatal() {
     ),
   [pesquisaAtual, viagensFiltradasCusto]);
 
-  const viagensFiltradas = viagensFiltradasTextoDigitado.filter((v) => v.categoria === filtro);
+  // Memoize the final filtered array so its identity only changes when inputs change
+  const viagensFiltradas = useMemo(
+    () => viagensFiltradasTextoDigitado.filter((v) => v.categoria === filtro),
+    [viagensFiltradasTextoDigitado, filtro]
+  );
+
+  // Pagination / infinite scroll
+  const PAGE_SIZE = 12;
+  const [itemsToShow, setItemsToShow] = useState<Viagem[]>(() => viagensFiltradas.slice(0, PAGE_SIZE));
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleResize = () => setLargura(window.innerWidth);
@@ -1008,7 +1021,32 @@ export default function ViagensNatal() {
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  });
+  }, []);
+
+  // Reset pagination when the filtered results change
+  useEffect(() => {
+    setItemsToShow(viagensFiltradas.slice(0, PAGE_SIZE));
+  }, [viagensFiltradas]);
+
+  // Infinite-scroll: observe sentinel and append next PAGE_SIZE
+  useEffect(() => {
+    const node = sentinelRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (entry.isIntersecting) {
+        setItemsToShow((prev: Viagem[]) => {
+          if (prev.length >= viagensFiltradas.length) return prev;
+          const nextCount = Math.min(prev.length + PAGE_SIZE, viagensFiltradas.length);
+          return viagensFiltradas.slice(0, nextCount);
+        });
+      }
+    }, { root: null, rootMargin: '300px', threshold: 0.1 });
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [sentinelRef, viagensFiltradas.length]);
 
   function ativarPesquisa() {
     window.document.getElementById('searchViagem')?.classList.toggle('ativado');
@@ -1028,7 +1066,9 @@ export default function ViagensNatal() {
     .replace(/[\u0300-\u036f]/g, "");
   }
 
-return (
+  
+
+  return (
   <div id="body" className="viagens-natalinas-screen">
     <MenuLateral expandirMargem={expandirMargem}/>
     <header id="header" className="viagens-natalinas-screen">
@@ -1086,7 +1126,7 @@ return (
     <main id="container" className="pagina-natal viagens-natalinas-screen">
       {/* Cards */}
       <div className="lista-viagens viagens-natalinas-screen">
-        {viagensFiltradas.map((v) => (
+        {itemsToShow.map((v) => (
           <div
             key={v.id}
             className="card-viagem viagens-natalinas-screen"
@@ -1113,9 +1153,19 @@ return (
             </div>
           </div>
         ))}
+        {/* sentinel for infinite scroll */}
+        <div ref={sentinelRef} style={{height: 1}} aria-hidden />
+
+        {/* loader / status */}
+        {itemsToShow.length < viagensFiltradas.length ? (
+          <div className="loader-carregando viagens-natalinas-screen">Carregando mais viagens...</div>
+        ) : (
+          <div className="loader-fim viagens-natalinas-screen">{itemsToShow.length === 0 ? 'Nenhuma viagem encontrada' : 'Você chegou ao fim'}</div>
+        )}
       </div>
     </main>
 
+    
     {largura >= 1024 && (
       <div style={{backgroundImage: `url(${anuncio})`}} className="imagem-desktop viagens-natalinas-screen">
       </div>
@@ -1141,3 +1191,5 @@ return (
 );
 
 }
+
+  
