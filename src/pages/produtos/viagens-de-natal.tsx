@@ -1156,7 +1156,12 @@ export default function ViagensNatal() {
             scrollToHeader();
             const textoDigitado = event.target.value;
             const textoFormatado = formatarString(textoDigitado);
-            setPesquisaAtual(textoFormatado)}} placeholder="Feliz Natal!" type="text" className="viagens-natalinas-screen" name="searchViagem" id="searchViagem" />
+            setPesquisaAtual(textoFormatado)}} placeholder="Feliz Natal!" type="text" className="viagens-natalinas-screen" name="searchViagem" id="searchViagem"
+            onKeyUp={(e) => {
+              if (e.key === 'Enter') {
+                ativarPesquisa();
+              }
+            }} />
           
           {!pesquisaAtiva && (
           <>
