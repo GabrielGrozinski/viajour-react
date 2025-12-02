@@ -42,7 +42,7 @@ header.viagens-natalinas-screen.menu-lateral-expandido {
 /* -----------------------------------------------------------
    TÍTULOS
 ----------------------------------------------------------- */
-header.viagens-natalinas-screen > h1.titulo.viagens-natalinas-screen {
+header.viagens-natalinas-screen > h1 {
   @apply font-['Majesty'] text-4xl text-[#222222] text-center;
 }
 

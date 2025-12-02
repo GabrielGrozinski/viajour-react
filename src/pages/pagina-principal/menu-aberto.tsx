@@ -193,8 +193,8 @@ return (
                 <i className="fa-regular fa-pen-to-square icones-planejamento menu-aberto-screen" />
             </a>
             </article>
-            <article className="itens-do-viajour itens-planejamento menu-aberto-screen">
-            <a href="" className="menu-aberto-screen">
+            <article onClick={() => navigate('/viagens-de-natal')} className="itens-do-viajour itens-planejamento menu-aberto-screen">
+            <a className="menu-aberto-screen">
                 <i className="fa-solid fa-gift icones-referencia menu-aberto-screen" />
                 <p className="menu-aberto-screen">Viagens de Natal</p>
                 <i className="fa-regular fa-pen-to-square icones-planejamento menu-aberto-screen" />

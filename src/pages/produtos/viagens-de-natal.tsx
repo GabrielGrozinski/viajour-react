@@ -72,7 +72,7 @@ const viagens: Viagem[] = [
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2017/08/29/09/26/disney-2692578_1280.jpg",
     descricao: "Magia total: espetáculos temáticos, desfiles e momentos com personagens para todas as idades.",
-    keywords: ["Disneylândia - EUA", "viagem de natal", "Disneylândia", "Disney", "Mickey", "Magic Kingdom", "personagens", "desfiles", "parque temático", "viagem em família"]
+    keywords: ["Disneylândia - EUA", 'universal', "viagem de natal", "Disneylândia", "Disney", "Mickey", "Magic Kingdom", "personagens", "desfiles", "parque temático", "viagem em família"]
   },
   {
     id: 6,
@@ -967,6 +967,39 @@ const viagens: Viagem[] = [
   },
 ];
 
+// Add continent keywords dynamically so we don't need to edit each entry by hand.
+// We check destination + existing keywords for country names and append Portuguese
+// continent keywords when a match is found.
+const normalizeText = (s: string) => s.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/['"`]/g, '');
+
+const continentRules: { matches: string[]; add: string[] }[] = [
+  { matches: ['portugal', 'frança', 'franca', 'france', 'espanha', 'italia', 'italy', 'alemanha', 'germany', 'reino unido', 'londres', 'holanda', 'amsterdam', 'belgica', 'bruxelas', 'república tcheca', 'praga', 'suécia', 'suecia', 'suica', 'suíça', 'noruega', 'finlândia', 'finlandia', 'grecia', 'grécia', 'viena', 'austria', 'roma', 'berlim', 'nuremberg', 'edimburgo'] , add: ['europa','europeu','viagem europa','viagem europeia'] },
+  { matches: ['áfrica','africa','áfrica do sul','africa do sul','egito','cairo','marrocos','tanzânia','tanzania','zanzibar','cidade do cabo','cape town'], add: ['áfrica','africano','africana'] },
+  { matches: ['eua','estados unidos','canadá','canada','argentina','chile','peru','equador','brasil','brazil','méxico','mexico','colombia','uruguai','bolívia','bolivia','venezuela','usa','nova york','new york'], add: ['américa','america','americano','americana','américa do sul','america do sul','américa do norte','america do norte'] },
+  { matches: ['japão','japao','tóquio','tokyo','indonésia','indonesia','china','china','tailândia','tailandia','coreia','korea','malásia','malasia','singapura','singapore','hong kong','dubai','india','tailandia','bangkok'], add: ['ásia','asia','asiático','asiatica'] },
+  { matches: ['austrália','australia','nova zelândia','new zealand','auckland','sydney'], add: ['oceania','oceânico','oceania'] },
+];
+
+const viagensAugmented: Viagem[] = viagens.map((v) => {
+  const text = normalizeText([v.destino, ...(v.keywords || [])].join(' '));
+  const extras = new Set<string>();
+
+  for (const rule of continentRules) {
+    for (const token of rule.matches) {
+      if (text.includes(normalizeText(token))) {
+        rule.add.forEach(k => extras.add(k));
+        break; // matched this rule
+      }
+    }
+  }
+
+  // keep original keywords and append continent keywords (avoid duplicates)
+  const existing = new Set(v.keywords.map(k => k.toLocaleLowerCase()));
+  for (const e of Array.from(extras)) existing.add(e);
+
+  return { ...v, keywords: Array.from(existing) } as Viagem;
+});
+
 const SliderCustomizado = styled(Slider)({
   color: "#1d4ed8",
   height: 2.5,
@@ -993,7 +1026,7 @@ export default function ViagensNatal() {
   const [value, setValue] = useState([1000, 10000]);
   const viagensFiltradasCusto = useMemo(() =>
 
-    viagens.filter((v) => v.custoBruto >= value[0] && v.custoBruto <= value[1])
+    viagensAugmented.filter((v) => v.custoBruto >= value[0] && v.custoBruto <= value[1])
   , [value]);
 
   const viagensFiltradasTextoDigitado = useMemo(() => 
