@@ -1078,6 +1078,27 @@ export default function ViagensNatal() {
     return () => observer.disconnect();
   }, [sentinelRef, viagensFiltradas.length]);
 
+  // Header adaptado para mobile
+  const [scroll_do_user, setScroll_do_user] = useState<boolean>(false);
+  useEffect(() => {
+    let ticking = false;
+
+    function handleScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scroll = window.scrollY;
+          setScroll_do_user(scroll > 105);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+
   function ativarPesquisa() {
     window.document.getElementById('searchViagem')?.classList.toggle('ativado');
     setPesquisaAtiva((valorAtual) => !valorAtual);
@@ -1118,7 +1139,7 @@ export default function ViagensNatal() {
       {largura >= 1024 && (
         <h1 className="viagens-natalinas-screen">ViaJour</h1>
       )}
-      <h1 className="titulo viagens-natalinas-screen">
+      <h1 className={`titulo viagens-natalinas-screen ${largura < 1024 && scroll_do_user ? 'sumir' : 'aparecer'}`}>
         🎄 Viagens de Natal
         <p className="subtitulo viagens-natalinas-screen">
           Explore destinos perfeitos para passar o Natal. Previsão de custo para 7 dias.
@@ -1126,12 +1147,16 @@ export default function ViagensNatal() {
       </h1>
       <div className="filtros viagens-natalinas-screen">
         <div onMouseLeave={() => {
-          if (pesquisaAtiva) {ativarPesquisa()}}}
-           style={{backgroundColor: pesquisaAtiva ? '#1d4ed8' : ''}} className="filtro-busca viagens-natalinas-screen">
+          if (largura >= 1024) {
+            if (pesquisaAtiva) {ativarPesquisa()}
+          } else return;
+          }}
+          style={{backgroundColor: pesquisaAtiva ? '#1d4ed8' : ''}} className="filtro-busca viagens-natalinas-screen">
           <input onChange={(event) => {
             const textoDigitado = event.target.value;
             const textoFormatado = formatarString(textoDigitado);
             setPesquisaAtual(textoFormatado)}} placeholder="Feliz Natal!" type="text" className="viagens-natalinas-screen" name="searchViagem" id="searchViagem" />
+          
           {!pesquisaAtiva && (
           <>
             <button
@@ -1151,8 +1176,18 @@ export default function ViagensNatal() {
             </button>
           </>
           )}
+
           <div onMouseEnter={() => {
-            if (!pesquisaAtiva) {ativarPesquisa()}}} className="icone viagens-natalinas-screen">
+            if (largura >= 1024) {
+              if (!pesquisaAtiva) {ativarPesquisa()} 
+            } else return;
+            }}
+            onClick={() => {
+              if (largura < 1024) {
+                ativarPesquisa(); 
+              } else return;
+            }}
+            className="icone viagens-natalinas-screen">
             <i className="fa-solid fa-magnifying-glass viagens-natalinas-screen"></i>
             </div>
         </div>
