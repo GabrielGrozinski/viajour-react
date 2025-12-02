@@ -329,6 +329,12 @@ div.filtro-preco.viagens-natalinas-screen {
   @apply min-w-full min-h-[200px] max-h-[200px];
 }
 
-
+/* -----------------------------------------------------------
+   LOADERS DO INFINITE SCROLL
+----------------------------------------------------------- */
+.loader-carregando.viagens-natalinas-screen,
+.loader-fim.viagens-natalinas-screen {
+  @apply min-w-full col-span-full mb-[100px];
+}
 
 }
