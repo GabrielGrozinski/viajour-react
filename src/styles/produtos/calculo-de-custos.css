@@ -10,10 +10,6 @@
   font-family: "Oswald", sans-serif;
 }
 
-div.menu-em-cima {
-  @apply absolute min-w-full min-h-2 bg-[#082556];
-}
-
 div#body.calculo-de-custos-screen {
   @apply transition-all relative bg-fixed bg-cover bg-no-repeat duration-300 h-screen flex flex-col overflow-hidden;
 }

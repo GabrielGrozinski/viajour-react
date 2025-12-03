@@ -5,6 +5,7 @@ import PaginaPrincipal from "./pages/pagina-principal/pagina-principal";
 import CalculoDeCustos from "./pages/produtos/calculo-de-custos";
 import ViagensNatal from "./pages/produtos/viagens-de-natal";
 import ViagensRomanticas from "./pages/produtos/viagens-romanticas";
+import ViagensSeteDias from "./pages/produtos/viagens-de-sete-dias";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/calculo-de-custos" element={<CalculoDeCustos />} />
         <Route path="/viagens-de-natal" element={<ViagensNatal />} />
         <Route path="/viagens-romanticas" element={<ViagensRomanticas />} />
+        <Route path="/viagens-de-sete-dias" element={<ViagensSeteDias />} />
       </Routes>
     </HashRouter>
   );

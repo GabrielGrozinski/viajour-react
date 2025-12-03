@@ -255,11 +255,7 @@ return (
     (<MenuVertical />)
     :
     (
-    <>
-      <div className="menu-em-cima">
-      </div>
       <MenuLateral expandirMargem={expandirMargem} />
-    </>
     )
     }
     {largura >= 1024 && (

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import '../../styles/produtos/viagens-de-natal.css';
+import '../../styles/produtos/viagens-de-sete-dias.css';
 import MenuLateral from "../../components/menu-lateral";
 import MenuVertical from "../../components/menu-vertical";
 import anuncio from '../../assets/imagens/anuncio1.png';
@@ -27,8 +27,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2022/05/03/20/12/prague-7172597_1280.jpg",
-    descricao: "Praças iluminadas, feiras natalinas e muito chocolate quente nas montanhas gaúchas.",
-    keywords: ["Gramado - RS", "viagem de natal", "Gramado", "Rio Grande do Sul", "serra gaúcha", "praças iluminadas", "feiras natalinas", "chocolate quente"],
+    descricao: "Pacote de 7 dias para explorar as atrações da serra gaúcha, restaurantes e passeios locais.",
+    keywords: ["Gramado - RS", "viagem de 7 dias", "7 dias", "Gramado", "Rio Grande do Sul", "serra gaúcha"],
   },
   {
     id: 2,
@@ -38,8 +38,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2020/12/20/10/01/christmas-tree-5846564_1280.jpg",
-    descricao: "Clima europeu no Brasil: muita decoração, pousadas aconchegantes e comidas típicas.",
-    keywords: ["Penedo - RJ", "viagem de natal", "Penedo", "Rio de Janeiro", "clima europeu", "pousadas aconchegantes", "comidas típicas", "destino romântico"],
+    descricao: "Roteiro de 7 dias aproveitando pousadas, gastronomia local e passeios tranquilos.",
+    keywords: ["Penedo - RJ", "viagem de 7 dias", "7 dias", "Penedo", "Rio de Janeiro"],
   },
   {
     id: 3,
@@ -49,8 +49,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2018/11/24/02/05/christmas-lights-3834926_1280.jpg",
-    descricao: "Iluminações, mercados e restaurantes especiais para celebrar o Natal em família.",
-    keywords: ["Curitiba - PR", "viagem de natal", "Curitiba", "Paraná", "iluminações natalinas", "mercados de natal", "restaurantes especiais", "cidade verde"],
+    descricao: "Semana de 7 dias com visitas a parques, mercados e experiências gastronômicas locais.",
+    keywords: ["Curitiba - PR", "viagem de 7 dias", "7 dias", "Curitiba", "Paraná"],
   },
   {
     id: 4,
@@ -60,8 +60,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2019/12/29/19/19/marketplace-4727905_1280.jpg",
-    descricao: "Natal nas ruas de Manhattan: shows, patinação no gelo e vitrines icônicas.",
-    keywords: ["Nova York - EUA", "viagem de natal", "Nova York", "Manhattan", "patinação no gelo", "vitrines icônicas", "shows de natal", "Rockefeller"],
+    descricao: "Itinerário de 7 dias para conhecer pontos emblemáticos, museus e bairros icônicos de Manhattan.",
+    keywords: ["Nova York - EUA", "viagem de 7 dias", "7 dias", "Nova York", "Manhattan"],
   },
   {
     id: 5,
@@ -70,9 +70,9 @@ const viagens: Viagem[] = [
     custoBruto: 3400*5.3,
     tipo: "Viagem de Natal",
     categoria: "internacional",
-    img: 'https://cdn.pixabay.com/photo/2014/10/24/18/27/magic-kingdom-501634_1280.jpg',
-    descricao: "Magia total: espetáculos temáticos, desfiles e momentos com personagens para todas as idades.",
-    keywords: ["Disneylândia - EUA", 'universal', "viagem de natal", "Disneylândia", "Disney", "Mickey", "Magic Kingdom", "personagens", "desfiles", "parque temático", "viagem em família"]
+    img: "https://cdn.pixabay.com/photo/2017/08/29/09/26/disney-2692578_1280.jpg",
+    descricao: "Pacote de 7 dias com parques temáticos, shows e tempo para aproveitar atrações em família.",
+    keywords: ["Disneylândia - EUA", "viagem de 7 dias", "7 dias", "Disney", "parque temático", "viagem em família" ]
   },
   {
     id: 6,
@@ -82,8 +82,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2022/01/24/16/29/horses-6963914_1280.jpg",
-    descricao: "Mercados tradicionais, concertos natalinos e atmosfera clássica europeia.",
-    keywords: ["Viena - Áustria", "viagem de natal", "Viena", "Áustria", "mercados natalinos", "concertos natalinos", "atmosfera clássica", "Natal europeu"],
+    descricao: "Roteiro de 7 dias explorando mercados, museus e concertos — ideal para uma semana cultural.",
+    keywords: ["Viena - Áustria", "viagem de 7 dias", "7 dias", "Viena", "Áustria"],
   },
   {
     id: 7,
@@ -93,8 +93,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2022/05/03/10/29/prague-7171444_1280.jpg",
-    descricao: "Clima de serra, chocolates, fondue e ruas enfeitadas — perfeito para um Natal romântico.",
-    keywords: ["Campos do Jordão - SP", "viagem de natal", "Campos do Jordão", "São Paulo", "serra", "chocolates", "fondue", "clima de serra", "Natal romântico"],
+    descricao: "Semana de 7 dias para aproveitar a serra, gastronomia e passeios por pontos turísticos locais.",
+    keywords: ["Campos do Jordão - SP", "viagem de 7 dias", "7 dias", "Campos do Jordão", "São Paulo"],
   },
   {
     id: 8,
@@ -104,8 +104,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2018/11/18/18/35/hamburg-3823819_1280.jpg",
-    descricao: "Natureza exuberante, rios cristalinos e passeios outdoor para relaxar no Natal.",
-    keywords: ["Bonito - MS", "viagem de natal", "Bonito", "Mato Grosso do Sul", "rios cristalinos", "natureza exuberante", "passeios outdoor", "ecoturismo"],
+    descricao: "Roteiro de 7 dias voltado a atividades ao ar livre, rios cristalinos e ecoturismo.",
+    keywords: ["Bonito - MS", "viagem de 7 dias", "7 dias", "Bonito", "Mato Grosso do Sul", "ecoturismo"],
   },
   {
     id: 9,
@@ -115,8 +115,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2019/09/07/02/25/city-4457801_1280.jpg",
-    descricao: "Cataratas imponentes e vistas espetaculares, ideal para quem busca aventura e natureza.",
-    keywords: ["Foz do Iguaçu - PR", "viagem de natal", "Foz do Iguaçu", "Paraná", "Cataratas do Iguaçu", "aventura", "natureza", "Parque Nacional"],
+    descricao: "Pacote de 7 dias com visitas às cataratas e atividades de aventura na região.",
+    keywords: ["Foz do Iguaçu - PR", "viagem de 7 dias", "7 dias", "Foz do Iguaçu", "Paraná", "Cataratas do Iguaçu"],
   },
   {
     id: 10,
@@ -126,8 +126,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2019/12/15/14/55/czech-republic-4697278_1280.jpg",
-    descricao: "Praias e clima tropical, perfeito para um Natal com mar e tranquilidade.",
-    keywords: ["Natal - RN", "viagem de natal", "Natal", "Rio Grande do Norte", "praias", "clima tropical", "mar", "tranquilidade"],
+    descricao: "Semana de 7 dias para curtir praias, passeios costeiros e descanso à beira-mar.",
+    keywords: ["Natal - RN", "viagem de 7 dias", "7 dias", "Natal", "Rio Grande do Norte", "praias"],
   },
   {
     id: 11,
@@ -137,8 +137,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2019/11/21/20/34/philadelphia-4643451_1280.jpg",
-    descricao: "Cultura e festas com alto astral, saboreie a culinária baiana durante as festas.",
-    keywords: ["Salvador - BA", "viagem de natal", "Salvador", "Bahia", "cultura", "festas", "culinária baiana", "alta energia"],
+    descricao: "Roteiro de 7 dias para conhecer a cultura, pontos históricos e experimentar a culinária local.",
+    keywords: ["Salvador - BA", "viagem de 7 dias", "7 dias", "Salvador", "Bahia", "culinária baiana"],
   },
   {
     id: 12,
@@ -148,8 +148,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2014/02/10/00/37/santiago-263235_1280.jpg",
-    descricao: "Explore a floresta amazônica, cruzeiros e experiências culturais únicas no Natal.",
-    keywords: ["Manaus - AM", "viagem de natal", "Manaus", "Amazonas", "floresta amazônica", "cruzeiros", "experiências culturais", "Amazônia"],
+    descricao: "Pacote de 7 dias com passeios de ecoturismo, cruzeiros e imersão cultural na região amazônica.",
+    keywords: ["Manaus - AM", "viagem de 7 dias", "7 dias", "Manaus", "Amazonas", "ecoturismo"],
   },
   {
     id: 13,
@@ -159,8 +159,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2018/05/31/04/59/cities-3443208_1280.jpg",
-    descricao: "Ilhas paradisíacas com praias de água cristalina – o Natal ideal para quem ama mar e tranquilidade.",
-    keywords: ["Fernando de Noronha - PE", "viagem de natal", "Fernando de Noronha", "Pernambuco", "ilhas paradisíacas", "praias de água cristalina", "mergulho", "natureza marinha"],
+    descricao: "Semana de 7 dias para aproveitar praias, mergulho e conservação marinha em um arquipélago preservado.",
+    keywords: ["Fernando de Noronha - PE", "viagem de 7 dias", "7 dias", "Fernando de Noronha", "Pernambuco", "mergulho"],
   },
   {
     id: 14,
@@ -170,8 +170,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2019/10/25/09/09/city-4576421_1280.jpg",
-    descricao: "Praias calmas e festas locais, ótimo destino para descansar e curtir com amigos.",
-    keywords: ["Morro de São Paulo - BA", "viagem de natal", "Morro de São Paulo", "Bahia", "praias calmas", "festas locais", "descansar", "ilhas"]
+    descricao: "Roteiro de 7 dias para relaxar em praias calmas, explorar ilhas e curtir a vida local.",
+    keywords: ["Morro de São Paulo - BA", "viagem de 7 dias", "7 dias", "Morro de São Paulo", "Bahia", "praias"]
   },
   {
     id: 15,
@@ -181,8 +181,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2014/11/21/17/23/new-york-540807_1280.jpg",
-    descricao: "Ruas históricas e iluminação mágica: descubra tradições natalinas em bairros pitorescos.",
-    keywords: ["Lisboa - Portugal", "viagem de natal", "Lisboa", "Portugal", "ruas históricas", "iluminação mágica", "tradições natalinas", "bairro pitoresco"],
+    descricao: "Pacote de 7 dias explorando ruas históricas, gastronomia e bairros pitorescos de Lisboa.",
+    keywords: ["Lisboa - Portugal", "viagem de 7 dias", "7 dias", "Lisboa", "Portugal", "ruas históricas"],
   },
   {
     id: 16,
@@ -192,8 +192,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2017/10/30/15/21/travel-2902737_1280.jpg",
-    descricao: "Mercados encantadores, cafés e vitrines decoradas — um Natal cheio de charme europeu.",
-    keywords: ["Paris - França", "viagem de natal", "Paris", "França", "mercados encantadores", "cafés", "vitrines decoradas", "charme europeu"],
+    descricao: "Itinerário de 7 dias para conhecer museus, cafés e bairros cheios de charme em Paris.",
+    keywords: ["Paris - França", "viagem de 7 dias", "7 dias", "Paris", "França", "cafés"],
   },
   {
     id: 17,
@@ -203,8 +203,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2020/10/15/12/50/prague-5656740_1280.jpg",
-    descricao: "Tradição, teatros e rotas históricas — perfeito para celebrar o Natal com cultura e estilo.",
-    keywords: ["Londres - Reino Unido", "viagem de natal", "Londres", "Reino Unido", "teatros", "tradição", "rotas históricas", "Natal cultural"],
+    descricao: "Roteiro de 7 dias com museus, teatros e passeios históricos pela cidade.",
+    keywords: ["Londres - Reino Unido", "viagem de 7 dias", "7 dias", "Londres", "Reino Unido", "teatros"],
   },
   {
     id: 18,
@@ -214,8 +214,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2019/04/04/17/58/road-4103334_1280.jpg",
-    descricao: "Iluminações moderníssimas, delícias culinárias e experiências urbanas únicas no Natal.",
-    keywords: ["Tóquio - Japão", "viagem de natal", "Tóquio", "Japão", "iluminações moderníssimas", "culinária japonesa", "experiências urbanas"],
+    descricao: "Pacote de 7 dias para explorar bairros urbanos, gastronomia e experiências culturais em Tóquio.",
+    keywords: ["Tóquio - Japão", "viagem de 7 dias", "7 dias", "Tóquio", "Japão", "culinária japonesa"],
   },
   {
     id: 19,
@@ -225,8 +225,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2013/12/28/13/14/sidney-234714_1280.jpg",
-    descricao: "Natal de verão: praias, eventos ao ar livre e fogos de artifício à beira-mar.",
-    keywords: ["Sydney - Austrália", "viagem de natal", "Sydney", "Austrália", "Natal de verão", "praias", "fogos de artifício", "events ao ar livre"],
+    descricao: "Roteiro de 7 dias combinando praias, pontos urbanos e atividades ao ar livre." ,
+    keywords: ["Sydney - Austrália", "viagem de 7 dias", "7 dias", "Sydney", "Austrália", "praias"],
   },
   {
     id: 20,
@@ -236,8 +236,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2017/08/29/21/39/snow-2694971_1280.jpg",
-    descricao: "Relaxamento em praias tropicais, templos e resorts perfeitos para celebrar com calma.",
-    keywords: ["Bali - Indonésia", "viagem de natal", "Bali", "Indonésia", "praias tropicais", "templos", "resorts", "relaxamento"],
+    descricao: "Pacote de 7 dias para relaxamento em praias tropicais, templos e experiências locais.",
+    keywords: ["Bali - Indonésia", "viagem de 7 dias", "7 dias", "Bali", "Indonésia", "praias tropicais"],
   },
   {
     id: 21,
@@ -247,8 +247,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2016/05/31/20/02/city-view-1427730_1280.jpg",
-    descricao: "Paisagens costeiras deslumbrantes, vinhos regionais e uma combinação de cultura e natureza.",
-    keywords: ["Cidade do Cabo - África do Sul", "viagem de natal", "Cidade do Cabo", "África do Sul", "paisagens costeiras", "vinhos regionais", "natureza"],
+    descricao: "Roteiro de 7 dias com paisagens costeiras, vinhos locais e atividades na natureza.",
+    keywords: ["Cidade do Cabo - África do Sul", "viagem de 7 dias", "7 dias", "Cidade do Cabo", "África do Sul"],
   },
   {
     id: 22,
@@ -258,8 +258,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2013/10/04/21/13/san-diego-190898_1280.jpg",
-    descricao: "Auroras boreais, paisagens geladas e vilarejos pitorescos para um Natal mágico.",
-    keywords: ["Reykjavik - Islândia", "viagem de natal", "Reykjavik", "Islândia", "auroras boreais", "paisagens geladas", "vilarejos pitorescos", "turismo de inverno"],
+    descricao: "Semana de 7 dias para explorar paisagens vulcânicas, geotermais e, quando possível, auroras boreais.",
+    keywords: ["Reykjavik - Islândia", "viagem de 7 dias", "7 dias", "Reykjavik", "Islândia"],
   },
   {
     id: 23,
@@ -269,8 +269,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2016/08/10/19/11/los-angeles-1584089_1280.jpg",
-    descricao: "Montanhas nevadas próximas e uma cidade vibrante — perfeito para combinar esqui e urbanismo.",
-    keywords: ["Vancouver - Canadá", "viagem de natal", "Vancouver", "Canadá", "montanhas nevadas", "esqui", "cidade vibrante", "urbanismo + natureza"],
+    descricao: "Pacote de 7 dias combinando atividades urbanas e passeios para montanhas próximas ou parques naturais.",
+    keywords: ["Vancouver - Canadá", "viagem de 7 dias", "7 dias", "Vancouver", "Canadá"],
   },
   {
     id: 24,
@@ -280,8 +280,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2025/03/31/21/30/italy-9505450_1280.jpg",
-    descricao: "História, gastronomia e presépios nas praças — um Natal cercado por arte e tradição.",
-    keywords: ["Roma - Itália", "viagem de natal", "Roma", "Itália", "história", "gastronomia", "presépios", "tradição"],
+    descricao: "Roteiro de 7 dias para descobrir sítios históricos, praças e a rica gastronomia romana.",
+    keywords: ["Roma - Itália", "viagem de 7 dias", "7 dias", "Roma", "Itália", "história"],
   },
   {
     id: 25,
@@ -291,8 +291,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2020/01/25/19/14/paris-4793200_1280.jpg",
-    descricao: "Mercados medievais, praças iluminadas e charme arquitetônico para um Natal inesquecível.",
-    keywords: ["Praga - República Tcheca", "viagem de natal", "Praga", "República Tcheca", "mercados medievais", "praças iluminadas", "charme arquitetônico"],
+    descricao: "Semana de 7 dias para explorar arquitetura histórica, praças e roteiros culturais em Praga.",
+    keywords: ["Praga - República Tcheca", "viagem de 7 dias", "7 dias", "Praga", "República Tcheca"],
   },
   {
     id: 26,
@@ -302,8 +302,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2020/03/11/14/32/burj-khalifa-4922317_1280.jpg",
-    descricao: "Luxo, grandes shoppings e eventos modernos — um Natal com experiências exclusivas.",
-    keywords: ["Dubai - Emirados Árabes", "viagem de natal", "Dubai", "Emirados Árabes", "luxo", "grandes shoppings", "experiências exclusivas", "Natal moderno"],
+    descricao: "Pacote de 7 dias para aproveitar atrações modernas, compras e experiências urbanas exclusivas.",
+    keywords: ["Dubai - Emirados Árabes", "viagem de 7 dias", "7 dias", "Dubai", "Emirados Árabes"],
   },
   {
     id: 27,
@@ -313,8 +313,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2025/07/16/10/33/rice-9717641_1280.jpg",
-    descricao: "Gastronomia e arquitetura colonial — uma mistura cultural perfeita para o Natal.",
-    keywords: ["Belo Horizonte - MG", "viagem de natal", "Belo Horizonte", "Minas Gerais", "gastronomia", "arquitetura colonial"],
+    descricao: "Roteiro de 7 dias focado em gastronomia, cultura e cidades históricas na região.",
+    keywords: ["Belo Horizonte - MG", "viagem de 7 dias", "7 dias", "Belo Horizonte", "Minas Gerais", "gastronomia"],
   },
   {
     id: 28,
@@ -324,8 +324,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2023/12/06/17/17/street-8434099_1280.jpg",
-    descricao: "Praias e história literária — um Natal praiano com charme e tranquilidade.",
-    keywords: ["Ilhéus - BA", "viagem de natal", "Ilhéus", "Bahia", "praias", "história literária"],
+    descricao: "Pacote de 7 dias combinando praias, história local e cultura regional.",
+    keywords: ["Ilhéus - BA", "viagem de 7 dias", "7 dias", "Ilhéus", "Bahia"],
   },
   {
     id: 29,
@@ -335,8 +335,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2023/07/12/18/21/croatia-8123037_1280.jpg",
-    descricao: "Vinhedos e paisagens andinas — perfeito para um Natal tranquilo entre vinhos e montanhas.",
-    keywords: ["Mendoza - Argentina", "viagem de natal", "Mendoza", "Argentina", "vinhedos", "Andes"],
+    descricao: "Roteiro de 7 dias para visitar vinhedos, degustações e passeios na região andina.",
+    keywords: ["Mendoza - Argentina", "viagem de 7 dias", "7 dias", "Mendoza", "Argentina", "vinhedos"],
   },
   {
     id: 30,
@@ -346,8 +346,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2021/05/08/11/24/city-6238228_1280.jpg",
-    descricao: "Mercados de Natal famosos, iluminação e muita história — uma cidade viva no Natal.",
-    keywords: ["Berlim - Alemanha", "viagem de natal", "Berlim", "Alemanha", "mercados de natal", "história"],
+    descricao: "Pacote de 7 dias combinando história, museus e vida cultural em Berlim.",
+    keywords: ["Berlim - Alemanha", "viagem de 7 dias", "7 dias", "Berlim", "Alemanha"],
   },
   {
     id: 31,
@@ -357,8 +357,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2022/06/18/21/40/strasbourg-7270721_1280.jpg",
-    descricao: "Um dos mercados de Natal mais tradicionais do mundo — atmosfera medieval e quitutes típicos.",
-    keywords: ["Nuremberg - Alemanha", "viagem de natal", "Nuremberg", "Alemanha", "mercado de natal", "tradição"],
+    descricao: "Roteiro de 7 dias para conhecer a cidade histórica e saborear comidas típicas locais.",
+    keywords: ["Nuremberg - Alemanha", "viagem de 7 dias", "7 dias", "Nuremberg", "Alemanha"],
   },
   {
     id: 32,
@@ -368,8 +368,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2022/04/22/20/54/assisi-city-7150611_1280.jpg",
-    descricao: "Ruas históricas, festivais e um clima acolhedor — Natal com tradição celta e mercados artesanais.",
-    keywords: ["Edimburgo - Escócia", "viagem de natal", "Edimburgo", "Escócia", "festivais", "mercados artesanais"],
+    descricao: "Pacote de 7 dias explorando ruas históricas, festivais locais e atrações culturais.",
+    keywords: ["Edimburgo - Escócia", "viagem de 7 dias", "7 dias", "Edimburgo", "Escócia"],
   },
   {
     id: 33,
@@ -379,8 +379,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2020/11/24/10/00/city-5772040_1280.jpg",
-    descricao: "Clima ameno, feiras de artesanato e celebrações locais — Natal com charme andaluz.",
-    keywords: ["Sevilha - Espanha", "viagem de natal", "Sevilha", "Espanha", "andaluz", "feiras de artesanato"],
+    descricao: "Roteiro de 7 dias para aproveitar clima ameno, arquitetura e cultura andaluza.",
+    keywords: ["Sevilha - Espanha", "viagem de 7 dias", "7 dias", "Sevilha", "Espanha"],
   },
   {
     id: 34,
@@ -390,8 +390,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2021/12/14/16/15/city-6870803_1280.jpg",
-    descricao: "Ilhas brancas e pores do sol inesquecíveis — um Natal romântico em paisagens deslumbrantes.",
-    keywords: ["Santorini - Grécia", "viagem de natal", "Santorini", "Grécia", "ilhas", "pôr do sol", "romântico"],
+    descricao: "Semana de 7 dias para curtir ilhas, paisagens e pôr do sol em cenários pitorescos.",
+    keywords: ["Santorini - Grécia", "viagem de 7 dias", "7 dias", "Santorini", "Grécia"],
   },
   {
     id: 35,
@@ -401,8 +401,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2020/02/27/20/57/building-4885833_1280.jpg",
-    descricao: "Mercados aconchegantes, decoração e gastronomia nórdica — um Natal escandinavo autêntico.",
-    keywords: ["Göteborg - Suécia", "viagem de natal", "Göteborg", "Suécia", "mercados", "nórdico"],
+    descricao: "Roteiro de 7 dias para experimentar gastronomia nórdica, mercados e cultura local.",
+    keywords: ["Göteborg - Suécia", "viagem de 7 dias", "7 dias", "Göteborg", "Suécia"],
   },
   {
     id: 36,
@@ -412,8 +412,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2018/11/29/21/19/hamburg-3846525_1280.jpg",
-    descricao: "Montanhas nevadas, chalés e esqui — Natal alpino perfeito para quem busca neve.",
-    keywords: ["Zermatt - Suíça", "viagem de natal", "Zermatt", "Suíça", "neve", "esqui", "chalés"],
+    descricao: "Semana de 7 dias para atividades de montanha, trilhas e esportes de neve (quando disponíveis).",
+    keywords: ["Zermatt - Suíça", "viagem de 7 dias", "7 dias", "Zermatt", "Suíça", "montanha"],
   },
   {
     id: 37,
@@ -423,8 +423,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2021/01/30/18/07/salzburg-5964812_1280.jpg",
-    descricao: "Praias urbanas, centros históricos e culinária pernambucana para um Natal animado.",
-    keywords: ["Recife - PE", "viagem de natal", "Recife", "Pernambuco", "praias", "centro histórico", "culinária"],
+    descricao: "Pacote de 7 dias para conhecer praias urbanas, centros históricos e gastronomia local.",
+    keywords: ["Recife - PE", "viagem de 7 dias", "7 dias", "Recife", "Pernambuco"],
   },
   {
     id: 38,
@@ -434,8 +434,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2016/11/23/15/32/pedestrians-1853552_1280.jpg",
-    descricao: "Praias variadas e vida noturna — ótima combinação para um Natal descontraído.",
-    keywords: ["Florianópolis - SC", "viagem de natal", "Floripa", "Santa Catarina", "praias", "ilha"],
+    descricao: "Roteiro de 7 dias para aproveitar praias variadas, trilhas e vida noturna local.",
+    keywords: ["Florianópolis - SC", "viagem de 7 dias", "7 dias", "Florianópolis", "Santa Catarina"],
   },
   {
     id: 39,
@@ -445,8 +445,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2021/07/23/11/38/switzerland-6487204_1280.jpg",
-    descricao: "Ruas históricas e decoração colonial — Natal com tradição e espírito cultural.",
-    keywords: ["Ouro Preto - MG", "viagem de natal", "Ouro Preto", "Minas Gerais", "história", "arquitetura"],
+    descricao: "Pacote de 7 dias para explorar o centro histórico, museus e a culinária mineira.",
+    keywords: ["Ouro Preto - MG", "viagem de 7 dias", "7 dias", "Ouro Preto", "Minas Gerais"],
   },
   {
     id: 40,
@@ -456,8 +456,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2021/06/17/05/14/city-6342765_1280.jpg",
-    descricao: "Praias e festas de fim de ano — um Natal praiano com clima de celebração.",
-    keywords: ["Porto Seguro - BA", "viagem de natal", "Porto Seguro", "Bahia", "praias", "festa"],
+    descricao: "Semana de 7 dias com praias, passeios culturais e opções de lazer para todas as idades.",
+    keywords: ["Porto Seguro - BA", "viagem de 7 dias", "7 dias", "Porto Seguro", "Bahia"],
   },
   {
     id: 41,
@@ -467,8 +467,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2022/05/03/20/09/prague-7172594_1280.jpg",
-    descricao: "Cachoeiras, trilhas e natureza exuberante — Natal para quem busca aventura e contato com a natureza.",
-    keywords: ["Chapada Diamantina - BA", "viagem de natal", "Chapada Diamantina", "Bahia", "cachoeiras", "trilhas"],
+    descricao: "Roteiro de 7 dias com trilhas, cachoeiras e experiências de ecoturismo na Chapada.",
+    keywords: ["Chapada Diamantina - BA", "viagem de 7 dias", "7 dias", "Chapada Diamantina", "Bahia"],
   },
   {
     id: 42,
@@ -478,8 +478,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2016/11/29/12/16/buildings-1869425_1280.jpg",
-    descricao: "Cultura, tango e gastronomia — um Natal com charme porteño e noites animadas.",
-    keywords: ["Buenos Aires - Argentina", "viagem de natal", "Buenos Aires", "Argentina", "tango", "gastronomia"],
+    descricao: "Pacote de 7 dias para aproveitar tango, gastronomia e roteiros culturais pela cidade.",
+    keywords: ["Buenos Aires - Argentina", "viagem de 7 dias", "7 dias", "Buenos Aires", "Argentina"],
   },
   {
     id: 43,
@@ -489,8 +489,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2020/07/03/16/42/amsterdam-5367020_1280.jpg",
-    descricao: "Canais iluminados, mercados e design — um Natal europeu com charme informal.",
-    keywords: ["Amsterdam - Holanda", "viagem de natal", "Amsterdam", "Holanda", "canais", "mercados"],
+    descricao: "Roteiro de 7 dias passando por canais, museus e design urbano em Amsterdam.",
+    keywords: ["Amsterdam - Holanda", "viagem de 7 dias", "7 dias", "Amsterdam", "Holanda"],
   },
   {
     id: 44,
@@ -500,8 +500,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2019/03/09/13/45/dubai-4044183_1280.jpg",
-    descricao: "Arquitetura de Gaudí, clima ameno e mercados locais — um Natal vibrante à beira-mar.",
-    keywords: ["Barcelona - Espanha", "viagem de natal", "Barcelona", "Espanha", "Gaudí", "mercados"],
+    descricao: "Pacote de 7 dias para conhecer a arquitetura de Gaudí, praias e vida cultural local.",
+    keywords: ["Barcelona - Espanha", "viagem de 7 dias", "7 dias", "Barcelona", "Espanha"],
   },
   {
     id: 45,
@@ -511,8 +511,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2020/02/20/13/25/city-4864747_1280.jpg",
-    descricao: "Arranha-céus iluminados, mercados noturnos e sabores variados — Natal cosmopolita e moderno.",
-    keywords: ["Hong Kong - China", "viagem de natal", "Hong Kong", "China", "mercados noturnos", "arranha-céus"],
+    descricao: "Roteiro de 7 dias combinando arranha-céus, mercados noturnos e gastronomia local.",
+    keywords: ["Hong Kong - China", "viagem de 7 dias", "7 dias", "Hong Kong", "China"],
   },
   {
     id: 46,
@@ -522,8 +522,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2014/08/26/14/11/cathedral-427997_1280.jpg",
-    descricao: "Mercados de inverno, arquitetura e clima frio — um Natal aconchegante com toque francês.",
-    keywords: ["Montreal - Canadá", "viagem de natal", "Montreal", "Canadá", "mercados de inverno", "clima frio"],
+    descricao: "Pacote de 7 dias com arquitetura marcante, mercados e experiências culturais em Montreal.",
+    keywords: ["Montreal - Canadá", "viagem de 7 dias", "7 dias", "Montreal", "Canadá"],
   },
   {
     id: 47,
@@ -533,8 +533,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2020/04/11/14/42/street-5030692_1280.jpg",
-    descricao: "Praias tranquilas e clima aconchegante para curtir o Natal em família.",
-    keywords: ["João Pessoa - PB", "viagem de natal", "João Pessoa", "Paraíba", "praias", "litoral norte"],
+    descricao: "Semana de 7 dias para relaxar em praias tranquilas e aproveitar passeios costeiros.",
+    keywords: ["João Pessoa - PB", "viagem de 7 dias", "7 dias", "João Pessoa", "Paraíba"],
   },
   {
     id: 48,
@@ -544,8 +544,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2021/12/03/20/59/town-6843799_1280.jpg",
-    descricao: "Águas cristalinas e passeios de barco — Natal perfeito para mergulho e praias.",
-    keywords: ["Arraial do Cabo - RJ", "viagem de natal", "Arraial do Cabo", "Rio de Janeiro", "praias", "mergulho"],
+    descricao: "Roteiro de 7 dias com mergulho, passeios de barco e praias de águas cristalinas.",
+    keywords: ["Arraial do Cabo - RJ", "viagem de 7 dias", "7 dias", "Arraial do Cabo", "Rio de Janeiro"],
   },
   {
     id: 49,
@@ -555,8 +555,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2022/08/27/14/29/stone-building-7414577_1280.jpg",
-    descricao: "Praias charmosas e vida noturna animada — Natal sofisticado à beira-mar.",
-    keywords: ["Búzios - RJ", "viagem de natal", "Búzios", "Rio de Janeiro", "praias", "vida noturna"],
+    descricao: "Pacote de 7 dias para curtir praias charmosas, passeios e opções de vida noturna.",
+    keywords: ["Búzios - RJ", "viagem de 7 dias", "7 dias", "Búzios", "Rio de Janeiro"],
   },
   {
     id: 50,
@@ -566,8 +566,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2022/01/18/18/10/mountain-6947848_1280.jpg",
-    descricao: "Centro histórico, ruas de pedra e paisagens costeiras — Natal cultural e tranquilo.",
-    keywords: ["Paraty - RJ", "viagem de natal", "Paraty", "Rio de Janeiro", "histórico", "centro colonial"],
+    descricao: "Roteiro de 7 dias entre centro histórico, passeios de barco e gastronomia local.",
+    keywords: ["Paraty - RJ", "viagem de 7 dias", "7 dias", "Paraty", "Rio de Janeiro"],
   },
   {
     id: 51,
@@ -577,8 +577,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2014/10/02/01/40/town-469252_1280.jpg",
-    descricao: "Piscinas naturais e praias famosas — ótima pedida para um Natal de mar e sol.",
-    keywords: ["Porto de Galinhas - PE", "viagem de natal", "Porto de Galinhas", "Pernambuco", "piscinas naturais", "praias"],
+    descricao: "Pacote de 7 dias para aproveitar piscinas naturais, praias e atividades aquáticas.",
+    keywords: ["Porto de Galinhas - PE", "viagem de 7 dias", "7 dias", "Porto de Galinhas", "Pernambuco"],
   },
   {
     id: 52,
@@ -588,8 +588,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2021/11/02/11/34/lavaux-6763006_1280.jpg",
-    descricao: "Cultura pop, tecnologia e luzes — um Natal urbano e vibrante na Ásia.",
-    keywords: ["Seul - Coreia do Sul", "viagem de natal", "Seul", "Coreia do Sul", "cultura pop", "tecnologia"],
+    descricao: "Roteiro de 7 dias misturando cultura pop, tecnologia e gastronomia urbana em Seul.",
+    keywords: ["Seul - Coreia do Sul", "viagem de 7 dias", "7 dias", "Seul", "Coreia do Sul"],
   },
   {
     id: 53,
@@ -599,8 +599,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2021/11/13/12/33/vineyards-6791178_1280.jpg",
-    descricao: "Paisagens naturais e praias únicas — Natal no Hemisfério Sul com sol e mar.",
-    keywords: ["Auckland - Nova Zelândia", "viagem de natal", "Auckland", "Nova Zelândia", "paisagens naturais", "ilhas"],
+    descricao: "Pacote de 7 dias explorando paisagens naturais, ilhas e atividades ao ar livre.",
+    keywords: ["Auckland - Nova Zelândia", "viagem de 7 dias", "7 dias", "Auckland", "Nova Zelândia"],
   },
   {
     id: 54,
@@ -610,8 +610,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2018/01/20/10/14/architecture-3094199_1280.jpg",
-    descricao: "Mercados, cores e palácios — um Natal exótico entre medinas e arquitetura histórica.",
-    keywords: ["Marrakech - Marrocos", "viagem de natal", "Marrakech", "Marrocos", "medina", "mercados"],
+    descricao: "Roteiro de 7 dias por medinas, mercados e palácios com forte influência cultural.",
+    keywords: ["Marrakech - Marrocos", "viagem de 7 dias", "7 dias", "Marrakech", "Marrocos"],
   },
   {
     id: 55,
@@ -621,8 +621,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2016/11/14/04/24/buffalo-1822581_1280.jpg",
-    descricao: "Cultura multicultural, arranha-céus e sabores asiáticos — Natal cosmopolita na Malásia.",
-    keywords: ["Kuala Lumpur - Malásia", "viagem de natal", "Kuala Lumpur", "Malásia", "multicultural", "culinária"],
+    descricao: "Pacote de 7 dias com experiências multiculturais, gastronomia e pontos urbanos em Kuala Lumpur.",
+    keywords: ["Kuala Lumpur - Malásia", "viagem de 7 dias", "7 dias", "Kuala Lumpur", "Malásia"],
   },
   {
     id: 56,
@@ -632,8 +632,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2021/12/11/11/08/mountain-6862538_1280.jpg",
-    descricao: "Cenário andino e bons vinhos — Natal com gastronomia e paisagens próximas às montanhas.",
-    keywords: ["Santiago - Chile", "viagem de natal", "Santiago", "Chile", "Andes", "vinhos"],
+    descricao: "Roteiro de 7 dias para conhecer a cidade, vinícolas e roteiros próximos às montanhas.",
+    keywords: ["Santiago - Chile", "viagem de 7 dias", "7 dias", "Santiago", "Chile"],
   },
   {
     id: 57,
@@ -643,8 +643,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2021/10/25/16/33/town-6741493_1280.jpg",
-    descricao: "Praias de águas cristalinas e piscinas naturais — Natal relaxante com sol e mar.",
-    keywords: ["Maceió - AL", "viagem de natal", "Maceió", "Alagoas", "praias", "piscinas naturais"],
+    descricao: "Pacote de 7 dias para aproveitar praias de águas cristalinas e passeios de snorkel.",
+    keywords: ["Maceió - AL", "viagem de 7 dias", "7 dias", "Maceió", "Alagoas"],
   },
   {
     id: 58,
@@ -654,8 +654,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2014/05/18/19/19/botanical-347384_1280.jpg",
-    descricao: "Centro histórico, cultura riquíssima e praias na costa maranhense — Natal cultural.",
-    keywords: ["São Luís - MA", "viagem de natal", "São Luís", "Maranhão", "centro histórico", "cultura"],
+    descricao: "Roteiro de 7 dias com centro histórico, manifestações culturais e passeios costeiros.",
+    keywords: ["São Luís - MA", "viagem de 7 dias", "7 dias", "São Luís", "Maranhão"],
   },
   {
     id: 59,
@@ -665,8 +665,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2015/12/06/15/17/portugal-1079586_1280.jpg",
-    descricao: "Sabores amazônicos, mercados e natureza próxima — Natal com sabores e tradições locais.",
-    keywords: ["Belém - PA", "viagem de natal", "Belém", "Pará", "mercados", "culinária amazônica"],
+    descricao: "Pacote de 7 dias para explorar sabores amazônicos, mercados e roteiros culturais.",
+    keywords: ["Belém - PA", "viagem de 7 dias", "7 dias", "Belém", "Pará"],
   },
   {
     id: 60,
@@ -676,8 +676,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2018/05/30/11/57/vitoria-3441335_1280.jpg",
-    descricao: "Praias urbanas e ilhas próximas — um Natal tranquilo com boa gastronomia litorânea.",
-    keywords: ["Vitória - ES", "viagem de natal", "Vitória", "Espírito Santo", "praias", "ilhas"],
+    descricao: "Roteiro de 7 dias entre praias urbanas, ilhas próximas e boa gastronomia litorânea.",
+    keywords: ["Vitória - ES", "viagem de 7 dias", "7 dias", "Vitória", "Espírito Santo"],
   },
   {
     id: 61,
@@ -687,8 +687,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2021/10/12/05/50/lighthouse-6702434_1280.jpg",
-    descricao: "Porta de entrada para o Pantanal — Natal de natureza, observação de fauna e passeios únicos.",
-    keywords: ["Campo Grande - MS", "viagem de natal", "Campo Grande", "Mato Grosso do Sul", "Pantanal", "natureza"],
+    descricao: "Pacote de 7 dias com roteiros para o Pantanal: observação de fauna, passeios e natureza.",
+    keywords: ["Campo Grande - MS", "viagem de 7 dias", "7 dias", "Campo Grande", "Mato Grosso do Sul", "Pantanal"],
   },
   {
     id: 62,
@@ -698,8 +698,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2021/11/22/18/11/town-6817089_1280.jpg",
-    descricao: "Tradições, música ao vivo e pubs acolhedores — um Natal com clima informal e cultural.",
-    keywords: ["Dublin - Irlanda", "viagem de natal", "Dublin", "Irlanda", "pubs", "música"],
+    descricao: "Roteiro de 7 dias entre pubs tradicionais, música ao vivo e passeios históricos em Dublin.",
+    keywords: ["Dublin - Irlanda", "viagem de 7 dias", "7 dias", "Dublin", "Irlanda"],
   },
   {
     id: 63,
@@ -709,8 +709,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2021/04/29/07/48/village-6215845_1280.jpg",
-    descricao: "Mercados de inverno e paisagens nórdicas — Natal com inspiração escandinava e neve possível.",
-    keywords: ["Oslo - Noruega", "viagem de natal", "Oslo", "Noruega", "mercados de inverno", "nórdico"],
+    descricao: "Pacote de 7 dias para explorar mercados, museus e natureza nórdica em Oslo.",
+    keywords: ["Oslo - Noruega", "viagem de 7 dias", "7 dias", "Oslo", "Noruega"],
   },
   {
     id: 64,
@@ -720,8 +720,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2023/05/05/06/19/street-7971714_1280.jpg",
-    descricao: "Arquitetura moderna, mercados e proximidade com paisagens geladas — Natal elegante e frio.",
-    keywords: ["Helsinque - Finlândia", "viagem de natal", "Helsinque", "Finlândia", "mercados", "neve"],
+    descricao: "Roteiro de 7 dias com arquitetura moderna, mercados locais e experiências ao ar livre.",
+    keywords: ["Helsinque - Finlândia", "viagem de 7 dias", "7 dias", "Helsinque", "Finlândia"],
   },
   {
     id: 65,
@@ -731,8 +731,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2022/03/27/14/32/rotterdam-7095262_1280.jpg",
-    descricao: "Templos iluminados, mercados e gastronomia vibrante — Natal exótico e cheio de sabores.",
-    keywords: ["Bangkok - Tailândia", "viagem de natal", "Bangkok", "Tailândia", "templos", "mercados"],
+    descricao: "Pacote de 7 dias para vivenciar templos, mercados e a culinária vibrante de Bangkok.",
+    keywords: ["Bangkok - Tailândia", "viagem de 7 dias", "7 dias", "Bangkok", "Tailândia"],
   },
   {
     id: 66,
@@ -742,8 +742,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2021/11/16/06/50/town-6800271_1280.jpg",
-    descricao: "Cruzar continentes entre Europa e Ásia, bazares e muita história — Natal cultural e vibrante.",
-    keywords: ["Istambul - Turquia", "viagem de natal", "Istambul", "Turquia", "bazar", "história"],
+    descricao: "Roteiro de 7 dias para explorar bazares, mesquitas e a diversidade cultural entre Europa e Ásia.",
+    keywords: ["Istambul - Turquia", "viagem de 7 dias", "7 dias", "Istambul", "Turquia"],
   },
   {
     id: 67,
@@ -753,8 +753,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2017/04/26/19/28/the-national-library-2263515_1280.jpg",
-    descricao: "Dunas, lagoas e um pôr do sol famoso — Natal perfeito para quem busca praia e vento para praticar esportes náuticos.",
-    keywords: ["Jericoacoara - CE", "viagem de natal", "Jericoacoara", "Ceará", "dunas", "lagoas", "esportes náuticos"],
+    descricao: "Semana de 7 dias com dunes, lagoas e atividades aquáticas ideais para esportes náuticos.",
+    keywords: ["Jericoacoara - CE", "viagem de 7 dias", "7 dias", "Jericoacoara", "Ceará"],
   },
   {
     id: 68,
@@ -764,8 +764,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2018/07/03/22/11/arapongas-3514905_1280.jpg",
-    descricao: "Piscinas naturais e águas cristalinas — Natal com mergulho e descanso em praias paradisíacas.",
-    keywords: ["Maragogi - AL", "viagem de natal", "Maragogi", "Alagoas", "piscinas naturais", "mergulho"],
+    descricao: "Pacote de 7 dias para aproveitar piscinas naturais, mergulho e praias paradisíacas.",
+    keywords: ["Maragogi - AL", "viagem de 7 dias", "7 dias", "Maragogi", "Alagoas"],
   },
   {
     id: 69,
@@ -775,8 +775,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2021/02/09/03/57/brazil-5997313_1280.jpg",
-    descricao: "Praias com falésias e vida noturna charmosa — Natal descontraído e com ótimas opções de lazer.",
-    keywords: ["Pipa - RN", "viagem de natal", "Pipa", "Rio Grande do Norte", "falésias", "praias"],
+    descricao: "Roteiro de 7 dias entre falésias, praias e opções de lazer com atmosfera descontraída.",
+    keywords: ["Pipa - RN", "viagem de 7 dias", "7 dias", "Pipa", "Rio Grande do Norte"],
   },
   {
     id: 70,
@@ -786,8 +786,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2024/08/26/23/38/maranhao-sheets-9000410_1280.jpg",
-    descricao: "Paisagens únicas de dunas e lagoas — Natal para quem busca experiências naturais e fotografia memorável.",
-    keywords: ["Lençóis Maranhenses - MA", "viagem de natal", "Lençóis Maranhenses", "Maranhão", "dunas", "lagoas"],
+    descricao: "Pacote de 7 dias para explorar dunas, lagoas e roteiros fotográficos únicos.",
+    keywords: ["Lençóis Maranhenses - MA", "viagem de 7 dias", "7 dias", "Lençóis Maranhenses", "Maranhão"],
   },
   {
     id: 71,
@@ -797,8 +797,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2013/08/09/05/58/kuala-lumpur-170985_1280.jpg",
-    descricao: "Atmosfera serrana, atrações natalinas e natureza — Natal romântico e próximo de Gramado.",
-    keywords: ["Canela - RS", "viagem de natal", "Canela", "Rio Grande do Sul", "serra", "Natal"],
+    descricao: "Roteiro de 7 dias entre atrações serranas, natureza e passeios próximos à região." ,
+    keywords: ["Canela - RS", "viagem de 7 dias", "7 dias", "Canela", "Rio Grande do Sul"],
   },
   {
     id: 72,
@@ -808,8 +808,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2016/08/21/17/52/bridge-1610395_1280.jpg",
-    descricao: "Canais, gondolas e arquitetura histórica — Natal romântico entre praças e luzes mágicas.",
-    keywords: ["Veneza - Itália", "viagem de natal", "Veneza", "Itália", "canais", "gondolas"],
+    descricao: "Pacote de 7 dias para passeios de gôndola, praças históricas e roteiros culturais.",
+    keywords: ["Veneza - Itália", "viagem de 7 dias", "7 dias", "Veneza", "Itália"],
   },
   {
     id: 73,
@@ -819,8 +819,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2021/11/20/05/15/car-6810885_1280.jpg",
-    descricao: "Praias, entretenimento e cultura pop — Natal com clima ameno e atividades para toda a família.",
-    keywords: ["Los Angeles - EUA", "viagem de natal", "Los Angeles", "EUA", "entretenimento", "praias"],
+    descricao: "Roteiro de 7 dias entre atrações culturais, entretenimento e praias próximas a Los Angeles.",
+    keywords: ["Los Angeles - EUA", "viagem de 7 dias", "7 dias", "Los Angeles", "EUA"],
   },
   {
     id: 74,
@@ -830,8 +830,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2020/01/31/14/27/taj-mahal-sunset-4808233_1280.jpg",
-    descricao: "Mercados vibrantes, monumentos históricos e culinária rica — Natal repleto de cultura e cores.",
-    keywords: ["Nova Délhi - Índia", "viagem de natal", "Délhi", "Índia", "mercados", "história"],
+    descricao: "Pacote de 7 dias para explorar monumentos históricos, mercados e a culinária local.",
+    keywords: ["Nova Délhi - Índia", "viagem de 7 dias", "7 dias", "Délhi", "Índia"],
   },
   {
     id: 75,
@@ -841,8 +841,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2019/04/19/15/35/tower-4139724_1280.jpg",
-    descricao: "Cidade-jardim, iluminação e gastronomia cosmopolita — Natal moderno e confortável na Ásia.",
-    keywords: ["Singapura - Singapura", "viagem de natal", "Singapura", "cidade-jardim", "gastronomia"],
+    descricao: "Roteiro de 7 dias por jardins urbanos, pontos turísticos e experiências gastronômicas.",
+    keywords: ["Singapura - Singapura", "viagem de 7 dias", "7 dias", "Singapura"],
   },
   {
     id: 76,
@@ -852,8 +852,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2021/07/27/16/52/belgium-6497401_1280.jpg",
-    descricao: "Praças iluminadas, mercados e tradição — Natal espanhol com muito sabor e cultura local.",
-    keywords: ["Madri - Espanha", "viagem de natal", "Madri", "Espanha", "mercados", "praças iluminadas"],
+    descricao: "Pacote de 7 dias para conhecer praças históricas, mercados e a cena cultural de Madri.",
+    keywords: ["Madri - Espanha", "viagem de 7 dias", "7 dias", "Madri", "Espanha"],
   },
   {
     id: 77,
@@ -863,8 +863,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2021/03/17/13/12/ilhabela-6102274_1280.jpg",
-    descricao: "Ilhas e praias preservadas — Natal com muito sol, trilhas e esportes aquáticos.",
-    keywords: ["Ilhabela - SP", "viagem de natal", "Ilhabela", "São Paulo", "praias", "trilhas"],
+    descricao: "Roteiro de 7 dias com praias preservadas, trilhas e esportes aquáticos em Ilhabela.",
+    keywords: ["Ilhabela - SP", "viagem de 7 dias", "7 dias", "Ilhabela", "São Paulo"],
   },
   {
     id: 78,
@@ -874,8 +874,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2014/10/12/17/19/minas-485767_1280.jpg",
-    descricao: "Centro histórico preservado e gastronomia — Natal cultural e acolhedor no interior mineiro.",
-    keywords: ["Tiradentes - MG", "viagem de natal", "Tiradentes", "Minas Gerais", "histórico", "gastronomia"],
+    descricao: "Pacote de 7 dias para explorar o centro histórico, ateliês e a gastronomia regional.",
+    keywords: ["Tiradentes - MG", "viagem de 7 dias", "7 dias", "Tiradentes", "Minas Gerais"],
   },
   {
     id: 79,
@@ -885,8 +885,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2021/11/21/11/48/nature-6813841_1280.jpg",
-    descricao: "Dunas, fervedouros e paisagens únicas — Natal de aventura em meio à natureza selvagem.",
-    keywords: ["Jalapão - TO", "viagem de natal", "Jalapão", "Tocantins", "dunas", "fervedouros"],
+    descricao: "Roteiro de 7 dias para atividades de aventura, fervedouros e paisagens naturais impressionantes.",
+    keywords: ["Jalapão - TO", "viagem de 7 dias", "7 dias", "Jalapão", "Tocantins"],
   },
   {
     id: 80,
@@ -896,8 +896,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2016/11/20/08/34/buildings-1842205_1280.jpg",
-    descricao: "Vida urbana, cultura e festas de fim de ano — Natal com opções variadas de lazer e gastronomia.",
-    keywords: ["São Paulo - SP", "viagem de natal", "São Paulo", "cidade", "cultura", "gastronomia"],
+    descricao: "Pacote de 7 dias para aproveitar vida urbana, cultura e gastronomia em São Paulo.",
+    keywords: ["São Paulo - SP", "viagem de 7 dias", "7 dias", "São Paulo", "cidade"],
   },
   {
     id: 81,
@@ -907,8 +907,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "nacional",
     img: "https://cdn.pixabay.com/photo/2014/01/28/17/11/zanzibar-253862_1280.jpg",
-    descricao: "Praias muito procuradas, piscinas naturais e ótima infraestrutura — Natal praiano para todas as idades.",
-    keywords: ["Guarapari - ES", "viagem de natal", "Guarapari", "Espírito Santo", "praias", "piscinas naturais"],
+    descricao: "Roteiro de 7 dias entre praias populares, piscinas naturais e infraestrutura turística.",
+    keywords: ["Guarapari - ES", "viagem de 7 dias", "7 dias", "Guarapari", "Espírito Santo"],
   },
   {
     id: 82,
@@ -918,8 +918,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2022/11/07/21/17/feldkirch-7577247_1280.jpg",
-    descricao: "Praças, chocolate e mercados de inverno — Natal com charme e história europeia.",
-    keywords: ["Bruxelas - Bélgica", "viagem de natal", "Bruxelas", "Bélgica", "chocolate", "mercados"],
+    descricao: "Pacote de 7 dias para visitar praças históricas, provar chocolates e conhecer a cena cultural.",
+    keywords: ["Bruxelas - Bélgica", "viagem de 7 dias", "7 dias", "Bruxelas", "Bélgica"],
   },
   {
     id: 83,
@@ -929,8 +929,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2021/11/10/14/27/lima-6784100_1280.jpg",
-    descricao: "Gastronomia renomada, centros históricos e cultura — Natal com muitos sabores e história.",
-    keywords: ["Lima - Peru", "viagem de natal", "Lima", "Peru", "gastronomia", "centro histórico"],
+    descricao: "Roteiro de 7 dias focado na gastronomia, história e centros culturais de Lima.",
+    keywords: ["Lima - Peru", "viagem de 7 dias", "7 dias", "Lima", "Peru"],
   },
   {
     id: 84,
@@ -940,8 +940,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2020/05/18/18/57/monsaraz-5188012_1280.jpg",
-    descricao: "Arquitetura colonial nas alturas dos Andes — Natal cultural com vistas panorâmicas e clima ameno.",
-    keywords: ["Quito - Equador", "viagem de natal", "Quito", "Equador", "Andes", "centro histórico"],
+    descricao: "Pacote de 7 dias para explorar arquitetura colonial, mirantes e roteiros culturais nos Andes.",
+    keywords: ["Quito - Equador", "viagem de 7 dias", "7 dias", "Quito", "Equador"],
   },
   {
     id: 85,
@@ -951,8 +951,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2020/01/11/13/22/woman-4757533_1280.jpg",
-    descricao: "Antigos monumentos, mercados e história milenar — Natal exótico entre pirâmides e cultura local.",
-    keywords: ["Cairo - Egito", "viagem de natal", "Cairo", "Egito", "pirâmides", "história"],
+    descricao: "Roteiro de 7 dias para visitar sítios arqueológicos, mercados e entender a história milenar local.",
+    keywords: ["Cairo - Egito", "viagem de 7 dias", "7 dias", "Cairo", "Egito"],
   },
   {
     id: 86,
@@ -962,8 +962,8 @@ const viagens: Viagem[] = [
     tipo: "Viagem de Natal",
     categoria: "internacional",
     img: "https://cdn.pixabay.com/photo/2022/08/28/09/30/zebra-7416165_1280.jpg",
-    descricao: "Praias exóticas e cultura costeira — Natal de sol e mar em uma ilha colorida e cheia de história.",
-    keywords: ["Zanzibar - Tanzânia", "viagem de natal", "Zanzibar", "Tanzânia", "praias", "cultura costeira"],
+    descricao: "Pacote de 7 dias para aproveitar praias exóticas, cultura local e passeios costeiros.",
+    keywords: ["Zanzibar - Tanzânia", "viagem de 7 dias", "7 dias", "Zanzibar", "Tanzânia"],
   },
 ];
 
@@ -1001,13 +1001,13 @@ const viagensAugmented: Viagem[] = viagens.map((v) => {
 });
 
 const SliderCustomizado = styled(Slider)({
-  color: "#9333EA",
+  color: "#1d4ed8",
   height: 2.5,
   '& .MuiSlider-thumb': {
     height: 20,
     width: 20,
     backgroundColor: 'white',
-    border: '2px solid #9333EA',
+    border: '2px solid #1d4ed8',
     boxShadow: '0 0 6px rgba(0,0,0,0.3)'
   },
   '& .MuiSlider-rail': {
@@ -1017,7 +1017,7 @@ const SliderCustomizado = styled(Slider)({
 });
 
 
-export default function ViagensNatal() {
+export default function ViagensSeteDias() {
   const [filtro, setFiltro] = useState<"nacional" | "internacional">("nacional");
   const [adOpen, setAdOpen] = useState(false);
   const [pesquisaAtiva, setPesquisaAtiva] = useState<boolean>(false);
@@ -1125,8 +1125,8 @@ export default function ViagensNatal() {
   }
   
 
-  return (
-  <div id="body" className="viagens-natalinas-screen">
+return (
+  <div id="body" className="viagens-de-sete-dias-screen">
     {largura >= 1024 ? (
       <MenuLateral expandirMargem={expandirMargem}/>
     ) : 
@@ -1134,29 +1134,29 @@ export default function ViagensNatal() {
       <MenuVertical />
     )
     }
-    <header id="header" className="viagens-natalinas-screen">
+    <header id="header" className="viagens-de-sete-dias-screen">
       {/* Filtros */}
       {largura >= 1024 && (
-        <h1 className="viagens-natalinas-screen">ViaJour</h1>
+        <h1 className="viagens-de-sete-dias-screen">ViaJour</h1>
       )}
-      <h1 className={`titulo viagens-natalinas-screen ${largura < 1024 && scroll_do_user ? 'sumir' : 'aparecer'}`}>
-        🎄 Viagens de Natal
-        <p className="subtitulo viagens-natalinas-screen">
+      <h1 className={`titulo viagens-de-sete-dias-screen ${largura < 1024 && scroll_do_user ? 'sumir' : 'aparecer'}`}>
+        🗺️ Viagens de 7 Dias
+        <p className="subtitulo viagens-de-sete-dias-screen">
           Explore destinos perfeitos para passar o Natal. Previsão de custo para 7 dias.
         </p>
       </h1>
-      <div className="filtros viagens-natalinas-screen">
+      <div className="filtros viagens-de-sete-dias-screen">
         <div onMouseLeave={() => {
           if (largura >= 1024) {
             if (pesquisaAtiva) {ativarPesquisa()}
           } else return;
           }}
-          style={{backgroundColor: pesquisaAtiva ? '#9333EA' : ''}} className="filtro-busca viagens-natalinas-screen">
+          style={{backgroundColor: pesquisaAtiva ? '#1d4ed8' : ''}} className="filtro-busca viagens-de-sete-dias-screen">
           <input onChange={(event) => {
             scrollToHeader();
             const textoDigitado = event.target.value;
             const textoFormatado = formatarString(textoDigitado);
-            setPesquisaAtual(textoFormatado)}} placeholder="Feliz Natal!" type="text" className="viagens-natalinas-screen" name="searchViagem" id="searchViagem"
+            setPesquisaAtual(textoFormatado)}} placeholder="Feliz Natal!" type="text" className="viagens-de-sete-dias-screen" name="searchViagem" id="searchViagem"
             onKeyUp={(e) => {
               if (e.key === 'Enter') {
                 ativarPesquisa();
@@ -1168,15 +1168,15 @@ export default function ViagensNatal() {
             <button
               id="btn-viagem-internacional"
               onClick={() => {setFiltro("internacional"); scrollToHeader()}}
-              className={`btn-filtro ${filtro === "internacional" ? "btn-ativo" : ""} viagens-natalinas-screen`}
+              className={`btn-filtro ${filtro === "internacional" ? "btn-ativo" : ""} viagens-de-sete-dias-screen`}
             >
               Viagens internacionais
             </button>
-            <hr id="hr-btn-viagem" className="hr-vertical viagens-natalinas-screen" />
+            <hr id="hr-btn-viagem" className="hr-vertical viagens-de-sete-dias-screen" />
             <button
               id="btn-viagem-nacional"
               onClick={() => {setFiltro("nacional"); scrollToHeader()}}
-              className={`btn-filtro ${filtro === "nacional" ? "btn-ativo" : ""} viagens-natalinas-screen`}
+              className={`btn-filtro ${filtro === "nacional" ? "btn-ativo" : ""} viagens-de-sete-dias-screen`}
             >
               Viagens nacionais
             </button>
@@ -1193,13 +1193,13 @@ export default function ViagensNatal() {
                 ativarPesquisa(); 
               } else return;
             }}
-            className="icone viagens-natalinas-screen">
-            <i className="fa-solid fa-magnifying-glass viagens-natalinas-screen"></i>
+            className="icone viagens-de-sete-dias-screen">
+            <i className="fa-solid fa-magnifying-glass viagens-de-sete-dias-screen"></i>
             </div>
         </div>
 
-        <div className="filtro-preco viagens-natalinas-screen">
-          <div className="custo-estimado viagens-natalinas-screen">
+        <div className="filtro-preco viagens-de-sete-dias-screen">
+          <div className="custo-estimado viagens-de-sete-dias-screen">
             <h2>Custo estimado</h2>
             <h3>R$ {value[0]} - {value[1]} </h3>
           </div>
@@ -1214,31 +1214,31 @@ export default function ViagensNatal() {
       </div>
     </header>
     
-    <main id="container" className="pagina-natal viagens-natalinas-screen">
+    <main id="container" className="pagina-natal viagens-de-sete-dias-screen">
       {/* Cards */}
-      <div className="lista-viagens viagens-natalinas-screen">
+      <div className="lista-viagens viagens-de-sete-dias-screen">
         {itemsToShow.map((v) => (
           <div
             key={v.id}
-            className="card-viagem viagens-natalinas-screen"
+            className="card-viagem viagens-de-sete-dias-screen"
           >
             {v.img && (
               <img
                 src={v.img}
                 alt={v.destino}
-                className="card-img viagens-natalinas-screen"
+                className="card-img viagens-de-sete-dias-screen"
               />
             )}
-            <div className="card-info viagens-natalinas-screen">
-              <div className="viagens-natalinas-screen">
-                <h2 className="card-titulo viagens-natalinas-screen">{v.destino}</h2>
-                <p className="card-descricao viagens-natalinas-screen">{v.descricao}</p>
-                <p className="card-custo viagens-natalinas-screen">
+            <div className="card-info viagens-de-sete-dias-screen">
+              <div className="viagens-de-sete-dias-screen">
+                <h2 className="card-titulo viagens-de-sete-dias-screen">{v.destino}</h2>
+                <p className="card-descricao viagens-de-sete-dias-screen">{v.descricao}</p>
+                <p className="card-custo viagens-de-sete-dias-screen">
                   Custo estimado (7 dias):{" "}
-                  <span className="viagens-natalinas-screen">{v.custo}</span>
+                  <span className="viagens-de-sete-dias-screen">{v.custo}</span>
                 </p>
               </div>
-              <span className="tag-natalina viagens-natalinas-screen">
+              <span className="tag-natalina viagens-de-sete-dias-screen">
                 {v.tipo}
               </span>
             </div>
@@ -1249,9 +1249,9 @@ export default function ViagensNatal() {
 
         {/* loader / status */}
         {itemsToShow.length < viagensFiltradas.length ? (
-          <div className="loader-carregando viagens-natalinas-screen">Carregando mais viagens...</div>
+          <div className="loader-carregando viagens-de-sete-dias-screen">Carregando mais viagens...</div>
         ) : (
-          <div className="loader-fim viagens-natalinas-screen">{itemsToShow.length === 0 ? 'Nenhuma viagem encontrada' : 'Você chegou ao fim'}</div>
+          <div className="loader-fim viagens-de-sete-dias-screen">{itemsToShow.length === 0 ? 'Nenhuma viagem encontrada' : 'Você chegou ao fim'}</div>
         )}
       </div>
     </main>
@@ -1259,7 +1259,7 @@ export default function ViagensNatal() {
     
     {largura >= 1024 && (
       <>
-        <div style={{backgroundImage: `url(${anuncio})`}} className="imagem-desktop viagens-natalinas-screen">
+        <div style={{backgroundImage: `url(${anuncio})`}} className="imagem-desktop viagens-de-sete-dias-screen">
         </div>
         {/* Anuncio-Desktop-Lateral */}
 
@@ -1282,4 +1282,5 @@ export default function ViagensNatal() {
 
   </div>
 );
+
 }
