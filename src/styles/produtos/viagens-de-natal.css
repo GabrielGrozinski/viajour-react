@@ -47,7 +47,7 @@ header.viagens-natalinas-screen > h1 {
 }
 
 header.viagens-natalinas-screen > h1.titulo.viagens-natalinas-screen > .subtitulo.viagens-natalinas-screen {
-  @apply text-gray-500 font-[400] text-shadow-[1px_1px_1px_#2222221a] text-center text-sm md:text-base mt-1;
+  @apply text-neutral-600 font-normal text-shadow-[1px_1px_1px_#2222221a] text-center text-sm md:text-base mt-1;
 }
 
 /* -----------------------------------------------------------

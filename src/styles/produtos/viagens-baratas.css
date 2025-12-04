@@ -47,7 +47,7 @@ header.viagens-de-sete-dias-screen > h1 {
 }
 
 header.viagens-de-sete-dias-screen > h1.titulo.viagens-de-sete-dias-screen > .subtitulo.viagens-de-sete-dias-screen {
-  @apply text-neutral-500 font-normal text-shadow-[1px_1px_1px_#2222221a] text-center text-sm mt-1;
+  @apply text-neutral-600 font-normal text-shadow-[1px_1px_1px_#2222221a] text-center text-sm mt-1;
 }
 
 /* -----------------------------------------------------------
@@ -92,7 +92,7 @@ div.filtro-busca.viagens-de-sete-dias-screen:hover {
 
 /* Ícone de busca */
 div.filtro-busca.viagens-de-sete-dias-screen > div.icone {
-  @apply bg-[#1d4ed8] cursor-pointer p-1.5 px-2 rounded-full;
+  @apply bg-amber-500 cursor-pointer p-1.5 px-2 rounded-full;
 }
 
 div.filtro-busca.viagens-de-sete-dias-screen > div.icone > i {
@@ -116,11 +116,11 @@ hr.hr-vertical.viagens-de-sete-dias-screen {
 
 /* Ativo */
 div.filtro-busca.viagens-de-sete-dias-screen > .btn-ativo.viagens-de-sete-dias-screen {
-  @apply text-white bg-[#1d4ed8];
+  @apply text-white bg-amber-500;
 }
 
 .btn-ativo:hover.viagens-de-sete-dias-screen {
-  @apply bg-[#1d4ed8];
+  @apply bg-amber-500;
 }
 
 /* ------------------ FILTRO DE PREÇO ------------------ */
@@ -186,7 +186,7 @@ div.custo-estimado.viagens-de-sete-dias-screen {
 }
 
 .tag-natalina.viagens-de-sete-dias-screen {
-  @apply text-[12px] text-white text-shadow-[1px_1px_1px_#2222223a] bg-[#1d4ed8] w-fit mt-3 px-3 py-1.5 rounded-full;
+  @apply text-[12px] text-white text-shadow-[1px_1px_1px_#2222223a] bg-amber-500 w-fit mt-3 px-3 py-1.5 rounded-full;
 }
 
 /* Imagem lateral fixa (desktop) */

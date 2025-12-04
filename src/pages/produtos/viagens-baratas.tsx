@@ -242,7 +242,7 @@ const viagens: Viagem[] = [
   {
     id: 21,
     destino: "Cidade do Cabo - África do Sul",
-    custo: `US$ 1.350 ou R$ ${(3900*5.3)}`,
+    custo: `US$ 1.350 ou R$ ${(1350*5.3)}`,
     custoBruto: 1350*5.3,
     tipo: "Viagem de Natal",
     categoria: "internacional",
@@ -1001,13 +1001,13 @@ const viagensAugmented: Viagem[] = viagens.map((v) => {
 });
 
 const SliderCustomizado = styled(Slider)({
-  color: "#1d4ed8",
+  color: "#f59e0b",
   height: 2.5,
   '& .MuiSlider-thumb': {
     height: 20,
     width: 20,
     backgroundColor: 'white',
-    border: '2px solid #1d4ed8',
+    border: '2px solid #f59e0b',
     boxShadow: '0 0 6px rgba(0,0,0,0.3)'
   },
   '& .MuiSlider-rail': {
@@ -1022,7 +1022,14 @@ export default function ViagensBaratas() {
   const [pesquisaAtiva, setPesquisaAtiva] = useState<boolean>(false);
   const [pesquisaAtual, setPesquisaAtual] = useState<string>('');
   const [largura, setLargura] = useState(window.innerWidth);
-  const [value, setValue] = useState([1000, 10000]);
+  const [value, setValue] = useState([0, 4000]);
+  useEffect(() => {
+    if (filtro === 'nacional') {
+        setValue([0, 4000]);
+    } else {
+        setValue([0, 10000])
+    }
+  }, [filtro]);
   const [menuExpandidoH1, setMenuExpandidoH1] = useState<boolean>(false);
   const viagensFiltradasCusto = useMemo(() =>
 
@@ -1141,9 +1148,9 @@ return (
         <h1 className="viagens-de-sete-dias-screen">ViaJour</h1>
       )}
       <h1 className={`titulo viagens-de-sete-dias-screen ${largura < 1024 && scroll_do_user ? 'sumir' : 'aparecer'}`}>
-        🗺️ Viagens de 7 Dias
+        🏷️ Viagens Baratas
         <p className="subtitulo viagens-de-sete-dias-screen">
-          Explore destinos perfeitos para passar o Natal. Previsão de custo para 7 dias.
+          Explore destinos incríveis e com um preço que cabe no seu bolso. Previsão de custo para 7 dias.
         </p>
       </h1>
       <div className="filtros viagens-de-sete-dias-screen">
@@ -1152,7 +1159,7 @@ return (
             if (pesquisaAtiva) {ativarPesquisa()}
           } else return;
           }}
-          style={{backgroundColor: pesquisaAtiva ? '#1d4ed8' : ''}} className="filtro-busca viagens-de-sete-dias-screen">
+          style={{backgroundColor: pesquisaAtiva ? '#f59e0b' : ''}} className="filtro-busca viagens-de-sete-dias-screen">
           <input onChange={(event) => {
             scrollToHeader();
             const textoDigitado = event.target.value;
@@ -1210,7 +1217,7 @@ return (
               scrollToHeader();
              } else return;
              }} 
-            valueLabelDisplay="auto" min={0} max={25000} />
+            valueLabelDisplay="auto" min={0} max={filtro === 'nacional' ? 4000 : 10000} />
         </div>
       </div>
     </header>
