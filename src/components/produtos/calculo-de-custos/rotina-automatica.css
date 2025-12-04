@@ -16,7 +16,7 @@
 
 /* TÍTULO */
 h2#gen-title.title.rotina-automatica-component {
-  @apply text-3xl text-center tracking-[0.2px] font-normal mt-0 mb-[18px] mx-0;
+  @apply text-3xl text-center tracking-[0.2px] font-normal mt-0 mb-[9px] mx-0;
 }
 
 /* DESCRIÇÃO */
@@ -134,4 +134,45 @@ button#btn-rotina-automatica.rotina-automatica-component {
     }
 }
 
+/* -----------------------------------------------------------
+   Modo Dark
+----------------------------------------------------------- */
 
+html.dark .desc.rotina-automatica-component {
+  @apply text-slate-300;
+}
+
+html.dark label.field-label.rotina-automatica-component {
+  @apply text-gray-100;
+}
+
+/* INPUTS */
+html.dark input[type="number"].rotina-automatica-component,
+html.dark input[type="text"].rotina-automatica-component {
+  @apply border-slate-500;
+  background: #1e293b;
+}
+
+html.dark .radio .label-text.rotina-automatica-component {
+  @apply text-slate-400;
+}
+
+html.dark .radio input[type="radio"]:checked + .label-text.rotina-automatica-component {
+  @apply text-sky-400 text-shadow-[1px_1px_1px_#0000004a];
+}
+
+html.dark .meta.rotina-automatica-component {
+  @apply text-gray-300;
+}
+
+html.dark .progress.rotina-automatica-component {
+  background: #10111143;
+}
+
+html.dark .percent.rotina-automatica-component {
+  @apply text-gray-300;
+}
+
+html.dark .hint.rotina-automatica-component {
+  @apply text-slate-300;
+}

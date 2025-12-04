@@ -71,6 +71,9 @@ main.sua-aventura-screen {
   @apply w-full max-w-[700px] flex flex-col items-center mx-auto my-0;
 }
 
+/* -----------------------------------------------------------
+   Modo Dark
+----------------------------------------------------------- */
 html.dark .sua-aventura-screen.card {
   @apply bg-[#1e293b];
 }

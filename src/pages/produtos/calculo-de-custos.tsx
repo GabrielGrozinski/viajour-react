@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useContext, useState } from "react";
+import { TemaContext } from "../../context/TemaContext";
 import Chart from "chart.js/auto";
 import MenuVertical from "../../components/menu-vertical";
 import MenuLateral from "../../components/menu-lateral";
@@ -16,23 +17,20 @@ type Dia = {
 };
 
 export default function CalculoDeCustos() {
+  const { dark } = useContext(TemaContext);
   const [dias, setDias] = useState<Dia[]>([
     { transporte: '', hospedagem: '', alimentacao: '' }
   ]);
   const [largura, setLargura] = useState(window.innerWidth);
   const [rotinaAtual, setRotina] = useState<'rotina-manual' | 'rotina-automatica'> ('rotina-manual');
 
-  const [tema, setTema] = useState<"dark" | "normal">(
-    (localStorage.getItem("tema") as "dark" | "normal") || "normal"
-  );
-
   const corLabel = useMemo(() => {
-    return tema === "dark" ? "lightgray" : "gray";
-  }, [tema]);
+    return dark ? "lightgray" : "gray";
+  }, [dark]);
 
   const fundoAtual = useMemo(() => {
-    return tema === 'dark' ? fundoDark : fundo;
-  }, [tema])
+    return dark ? fundoDark : fundo;
+  }, [dark]);
 
   const LIMITE_GRAFICO = 7;
   const LIMITE_MAX_DIAS = 14;
@@ -47,16 +45,6 @@ export default function CalculoDeCustos() {
   const canvas2 = useRef<HTMLCanvasElement | null>(null);
   const canvasCategorias = useRef<HTMLCanvasElement | null>(null);
 
-  // Tema
-  useEffect(() => {
-    const bodyCorpo = window.document.getElementById('body');
-    bodyCorpo?.classList.toggle("dark", tema === "dark");
-    localStorage.setItem("tema", tema);
-  }, [tema]);
-
-  function mudarTema() {
-    setTema(prev => (prev === "dark" ? "normal" : "dark"));
-  }
 
   // Adicionar dia
   function adicionarDia() {
@@ -226,7 +214,7 @@ export default function CalculoDeCustos() {
         }
       });
     }
-  }, [dias, tema]);
+  }, [dias, dark]);
 
   const totalGeral = dias.reduce(
     (acc, d) => acc + 
@@ -310,7 +298,7 @@ return (
               </div>
             )}
 
-            <h2 onClick={mudarTema} style={{ cursor: "pointer" }} className="calculo-de-custos-screen">
+            <h2 className="calculo-de-custos-screen">
               Calculadora de Custos da Viagem
             </h2>
 
@@ -437,7 +425,3 @@ return (
 
 
 }
-
-/* 
-
-*/

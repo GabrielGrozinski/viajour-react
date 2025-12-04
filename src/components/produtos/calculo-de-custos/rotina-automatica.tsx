@@ -98,19 +98,6 @@ export default function RotinaAutomatica({ setRotina }: any) {
     alert("Rotina gerada! Veja no console.");
   }
 
-  const tema = (localStorage.getItem("tema") as "dark" | "normal") ||"normal"
-  ;
-
-
-  useEffect(() => {
-    if (!tema) return;
-    if (tema === 'dark') {
-      window.document.getElementById('container')?.classList.add('dark');
-    } else {
-      window.document.getElementById('container')?.classList.remove('dark');
-    }
-  }, []);
-
   return (
     <>
       
