@@ -7,6 +7,7 @@ import ViagensNatal from "./pages/produtos/viagens-de-natal";
 import ViagensRomanticas from "./pages/produtos/viagens-romanticas";
 import ViagensSeteDias from "./pages/produtos/viagens-de-sete-dias";
 import MonteSuaAventura from "./pages/produtos/sua-aventura";
+import ViagensBaratas from "./pages/produtos/viagens-baratas";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/viagens-romanticas" element={<ViagensRomanticas />} />
         <Route path="/viagens-de-sete-dias" element={<ViagensSeteDias />} />
         <Route path="/monte-sua-aventura" element={<MonteSuaAventura />} />
+        <Route path="/viagens-baratas" element={<ViagensBaratas />} />
       </Routes>
     </HashRouter>
   );

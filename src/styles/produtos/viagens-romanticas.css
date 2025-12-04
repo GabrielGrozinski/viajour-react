@@ -43,11 +43,11 @@ header.viagens-romanticas-screen.menu-lateral-expandido {
    TÍTULOS
 ----------------------------------------------------------- */
 header.viagens-romanticas-screen > h1 {
-  @apply font-['Majesty'] text-4xl text-[#222222] text-center;
+  @apply font-['Majesty'] text-4xl font-[100] text-[#222222] text-center;
 }
 
 header.viagens-romanticas-screen > h1.titulo.viagens-romanticas-screen > .subtitulo.viagens-romanticas-screen {
-  @apply text-gray-500 text-center text-sm md:text-base mt-1;
+  @apply text-gray-500 font-[400] text-shadow-[1px_1px_1px_#2222221a] text-center text-sm md:text-base mt-1;
 }
 
 /* -----------------------------------------------------------
@@ -264,21 +264,12 @@ header.viagens-romanticas-screen {
   @apply pb-2 pt-2 grid grid-cols-1 grid-rows-[auto_auto] justify-center gap-2 items-start pr-2 pl-2;
 }
 
-/* Título principal do header */
-header.viagens-romanticas-screen > h1.titulo.viagens-romanticas-screen {
-  @apply text-2xl;
-}
-
 .aparecer {
   @apply opacity-100;
 }
 
 .sumir {
   @apply opacity-0 pointer-events-none absolute;
-}
-
-header.viagens-romanticas-screen > h1.titulo > p {
-  @apply text-lg;
 }
 
 /* -----------------------------------------------------------

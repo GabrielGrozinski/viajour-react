@@ -43,11 +43,11 @@ header.viagens-de-sete-dias-screen.menu-lateral-expandido {
    TÍTULOS
 ----------------------------------------------------------- */
 header.viagens-de-sete-dias-screen > h1 {
-  @apply font-['Majesty'] text-4xl text-[#222222] text-center;
+  @apply font-['Majesty'] text-4xl text-[#222222] font-[100] text-center;
 }
 
 header.viagens-de-sete-dias-screen > h1.titulo.viagens-de-sete-dias-screen > .subtitulo.viagens-de-sete-dias-screen {
-  @apply text-gray-500 text-center text-sm md:text-base mt-1;
+  @apply text-neutral-500 font-[400] text-shadow-[1px_1px_1px_#2222221a] text-center text-sm mt-1;
 }
 
 /* -----------------------------------------------------------
@@ -265,7 +265,7 @@ header.viagens-de-sete-dias-screen {
 
 /* Título principal do header */
 header.viagens-de-sete-dias-screen > h1.titulo.viagens-de-sete-dias-screen {
-  @apply text-2xl;
+  @apply font-[700];
 }
 
 .aparecer {
@@ -274,10 +274,6 @@ header.viagens-de-sete-dias-screen > h1.titulo.viagens-de-sete-dias-screen {
 
 .sumir {
   @apply opacity-0 pointer-events-none absolute;
-}
-
-header.viagens-de-sete-dias-screen > h1.titulo > p {
-  @apply text-lg;
 }
 
 /* -----------------------------------------------------------

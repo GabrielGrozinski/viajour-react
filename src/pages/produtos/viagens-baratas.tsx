@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import '../../styles/produtos/viagens-de-sete-dias.css';
+import '../../styles/produtos/viagens-baratas.css';
 import MenuLateral from "../../components/menu-lateral";
 import MenuVertical from "../../components/menu-vertical";
 import AnuncioDesktop from "../../components/anuncio-desktop";
@@ -1017,7 +1017,7 @@ const SliderCustomizado = styled(Slider)({
 });
 
 
-export default function ViagensSeteDias() {
+export default function ViagensBaratas() {
   const [filtro, setFiltro] = useState<"nacional" | "internacional">("nacional");
   const [pesquisaAtiva, setPesquisaAtiva] = useState<boolean>(false);
   const [pesquisaAtual, setPesquisaAtual] = useState<string>('');

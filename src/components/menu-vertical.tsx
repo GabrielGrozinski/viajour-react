@@ -73,8 +73,8 @@ export default function MenuVertical() {
             </a>
             </article>
 
-            <article  className="itens-do-viajour-desktop menu-vertical-component">
-            <a href="" className="menu-vertical-component">
+            <article onClick={() => navigate('/viagens-baratas')} className="itens-do-viajour-desktop menu-vertical-component">
+            <a className="menu-vertical-component">
                 <i className="fa-regular fa-lightbulb menu-vertical-component" />
                 <p className="menu-vertical-component">Viagens Baratas</p>
             </a>

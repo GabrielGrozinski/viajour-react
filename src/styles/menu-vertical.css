@@ -10,7 +10,7 @@
 }
 
 h1#titulo.menu-vertical-component {
-  @apply text-white transition-all cursor-pointer duration-300 font-['Majesty'] text-2xl py-1 text-center bg-[#082556];
+  @apply text-white min-w-full transition-all cursor-pointer duration-300 font-['Majesty'] text-2xl py-1 text-center bg-[#082556];
 }
 
 h1#titulo.menu-vertical-component > span {
@@ -30,7 +30,7 @@ h1#titulo.menu-vertical-component.menu-ativado > span {
 }
 
 aside.menu-lateral.menu-vertical-component {
-  @apply bg-[#082556] transition-all duration-300 pb-4 pt-1 px-6
+  @apply bg-[#082556] min-w-full transition-all duration-300 pb-4 pt-1 px-6
   w-max max-w-full min-h-[100px]
   hidden flex-row flex-nowrap justify-start gap-x-6 overflow-x-auto overflow-y-hidden whitespace-nowrap;
   scrollbar-width: none;

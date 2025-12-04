@@ -68,8 +68,8 @@ export default function MenuLateral({ expandirMargem }: {expandirMargem: () => v
             </a>
             </article>
 
-            <article  className="itens-do-viajour-desktop menu-lateral-component">
-            <a href="" className="menu-lateral-component">
+            <article onClick={() => navigate('/viagens-baratas')}  className="itens-do-viajour-desktop menu-lateral-component">
+            <a className="menu-lateral-component">
                 <i className="fa-regular fa-lightbulb menu-lateral-component" />
                 <p className="menu-lateral-component">Viagens Baratas</p>
             </a>

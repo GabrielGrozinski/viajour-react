@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import '../../styles/produtos/viagens-romanticas.css';
 import MenuLateral from "../../components/menu-lateral";
 import MenuVertical from "../../components/menu-vertical";
-import anuncio from '../../assets/imagens/anuncio1.png';
+import AnuncioDesktop from "../../components/anuncio-desktop";
 import Slider from '@mui/material/Slider';
 import {styled} from '@mui/material/styles';
 
@@ -1020,11 +1020,11 @@ const SliderCustomizado = styled(Slider)({
 
 export default function ViagensRomanticas() {
   const [filtro, setFiltro] = useState<"nacional" | "internacional">("nacional");
-  const [adOpen, setAdOpen] = useState(false);
   const [pesquisaAtiva, setPesquisaAtiva] = useState<boolean>(false);
   const [pesquisaAtual, setPesquisaAtual] = useState<string>('');
   const [largura, setLargura] = useState(window.innerWidth);
   const [value, setValue] = useState([1000, 10000]);
+  const [menuExpandidoH1, setMenuExpandidoH1] = useState<boolean>(false);
   const viagensFiltradasCusto = useMemo(() =>
 
     viagensAugmented.filter((v) => v.custoBruto >= value[0] && v.custoBruto <= value[1])
@@ -1108,6 +1108,7 @@ export default function ViagensRomanticas() {
   function expandirMargem() {
     window.document.getElementById('container')?.classList.toggle('menu-lateral-expandido');
     window.document.getElementById('header')?.classList.toggle('menu-lateral-expandido');
+    setMenuExpandidoH1(!menuExpandidoH1);
   }
 
   function formatarString(texto: string) {
@@ -1137,7 +1138,7 @@ return (
     }
     <header id="header" className="viagens-romanticas-screen">
       {/* Filtros */}
-      {largura >= 1024 && (
+      {largura >= 1024 && !menuExpandidoH1 && (
         <h1 className="viagens-romanticas-screen">ViaJour</h1>
       )}
       <h1 className={`titulo viagens-romanticas-screen ${largura < 1024 && scroll_do_user ? 'sumir' : 'aparecer'}`}>
@@ -1259,25 +1260,7 @@ return (
 
     
     {largura >= 1024 && (
-      <>
-        <div style={{backgroundImage: `url(${anuncio})`}} className="imagem-desktop viagens-romanticas-screen">
-        </div>
-        {/* Anuncio-Desktop-Lateral */}
-
-        <div className={`ad-container ${!adOpen ? "open" : ""}`}>
-          <div className="ad-header" onClick={() => setAdOpen(!adOpen)}>
-            <span className="ad-arrow">{!adOpen ? "▼" : "▲"}</span>
-          </div>
-
-          <div className="ad-content">
-            <img
-              src="https://static.stands4.com/images/symbol/2848_bing-search-logo.png"
-              alt="Ad"
-            />
-          </div>
-        </div>
-        {/* Anuncio-Desktop-Rodapé */}
-      </>
+      <AnuncioDesktop/>
     )}
 
   </div>

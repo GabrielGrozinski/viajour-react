@@ -7,6 +7,9 @@ import "flatpickr/dist/flatpickr.min.css";
 import { Portuguese } from "flatpickr/dist/l10n/pt.js";
 import "flatpickr/dist/themes/airbnb.css";
 import Select from "react-select";
+import MenuLateral from "../../components/menu-lateral";
+import MenuVertical from "../../components/menu-vertical";
+import AnuncioDesktop from "../../components/anuncio-desktop";
 
 
 interface DiaRoteiro {
@@ -103,12 +106,13 @@ export default function MonteSuaAventura() {
   useEffect(() => {
     if (inputRefData.current) {
         flatpickr(inputRefData.current, {
-            dateFormat: 'd/m/Y',
-            locale: Portuguese,
-            defaultDate: dataInicio,
-            onChange: (selectedDates, dateStr) => {
-                setDataInicio(dateStr);
-            }
+          allowInput: true,
+          dateFormat: 'd/m/Y',
+          locale: Portuguese,
+          defaultDate: dataInicio,
+          onChange: (selectedDates, dateStr) => {
+            setDataInicio(dateStr);
+          }
         });
     }
   }, []);
@@ -119,77 +123,115 @@ export default function MonteSuaAventura() {
     }
   }, [dataInicio]);
 
-    const autoResize = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const autoResize = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.target.style.height = "auto";     // reseta
     e.target.style.height = `${e.target.scrollHeight}px`; // ajusta
     };
 
-  return (
-    <div style={{backgroundImage: largura >= 1024 ? `url(${fundoAtual})` : 'none'}} className="aventura-container">
-      <h1 className="titulo">Monte sua Aventura</h1>
+  function expandirMargem() {
+    // Não faz nada, pois não é necessário expandir a margem.
+  }
 
-      {/* Dados iniciais */}
-      <div className="card">
-        <label>Destino da viagem:</label>
+return (
+  <div
+    id="body" 
+    style={{backgroundImage: `url(${fundoAtual})`}} 
+    className="sua-aventura-screen"
+  >
+    {largura >= 1024 ? (
+      <MenuLateral expandirMargem={expandirMargem}/>
+    ) : 
+    (
+      <MenuVertical />
+    )
+    }
+
+    <h1 className="titulo sua-aventura-screen">Monte sua Aventura</h1>
+
+    {/* Dados iniciais */}
+    <main className="sua-aventura-screen">
+      <form 
+        onSubmit={(e) => {
+          e.preventDefault();
+          gerarDias();
+          }} 
+        className="card sua-aventura-screen">
+        <label htmlFor="destino-viagem" className="sua-aventura-screen">Destino da viagem:</label>
         <input
+          id="destino-viagem"
+          required
+          className="sua-aventura-screen"
           type="text"
           value={destino}
           onChange={(e) => setDestino(e.target.value)}
         />
 
-        <label>Data de início:</label>
+        <label htmlFor="data-viagem" className="sua-aventura-screen">Data de início:</label>
         <input
+          onInvalid={(e) => {
+            if (e.currentTarget.id === 'data-viagem') {
+            e.preventDefault();
+            e.currentTarget.reportValidity();
+            }
+          }}
+          id="data-viagem"
+          required
           ref={inputRefData}
           type="text"
           placeholder="Selecione uma data"
+          className="sua-aventura-screen"
         />
 
-        <label>Quantidade de dias:</label>
+        <label htmlFor="quant-dias" className="sua-aventura-screen">Quantidade de dias:</label>
         <input
           type="number"
           min={1}
+          id="quant-dias"
           value={quantidadeDias}
+          className="sua-aventura-screen"
           onChange={(e) => setQuantidadeDias(Number(e.target.value))}
         />
 
-        <button className="btn-gerar" onClick={gerarDias}>
-          Gerar roteiro
-        </button>
-      </div>
+        <label htmlFor="btn-montar-aventura" className="sua-aventura-screen"></label>
+        <input className="btn-montar sua-aventura-screen" id="btn-montar-aventura" type="submit" value="Montar Aventura" />
+      </form>
 
       {/* Dias */}
-      <div className="dias-container">
+      <div className="dias-container sua-aventura-screen">
         {dias.map((dia) => (
-          <div key={dia.id} className="card">
-            <h2>Dia {dia.id}</h2>
+          <div key={dia.id} className="card sua-aventura-screen">
+            <h2 className="sua-aventura-screen">Dia {dia.id}</h2>
 
-            <label>Tipo do dia:</label>
+            <label className="sua-aventura-screen">Tipo do dia:</label>
             <Select
-            styles={customStyles}
-            options={opcoesTipo}
-            value={opcoesTipo.find((opt) => opt.value === dia.tipo)}
-            onChange={(opcao) => atualizarDia(dia.id, "tipo", opcao?.value)}
+              styles={customStyles}
+              options={opcoesTipo}
+              value={opcoesTipo.find((opt) => opt.value === dia.tipo)}
+              onChange={(opcao) => atualizarDia(dia.id, "tipo", opcao?.value)}
+              className="sua-aventura-screen"
             />
 
-            <label>Adicionar nota?</label>
-            <div className="radio-group">
-              <label>
+            <label className="sua-aventura-screen">Adicionar nota?</label>
+            <div className="radio-group sua-aventura-screen">
+              <label className="sua-aventura-screen">
                 <input
                   type="radio"
                   checked={!dia.adicionarNota}
                   onChange={() =>
                     atualizarDia(dia.id, "adicionarNota", false)
                   }
+                  className="sua-aventura-screen"
                 />
                 Não
               </label>
-              <label>
+              <label className="sua-aventura-screen">
                 <input
                   type="radio"
                   checked={dia.adicionarNota}
                   onChange={() =>
                     atualizarDia(dia.id, "adicionarNota", true)
                   }
+                  className="sua-aventura-screen"
                 />
                 Sim
               </label>
@@ -197,23 +239,32 @@ export default function MonteSuaAventura() {
 
             {dia.adicionarNota && (
               <>
-                <label>Nota do dia:</label>
+                <label className="sua-aventura-screen">Nota do dia:</label>
                 <textarea
                   value={dia.nota}
                   onChange={(e) => {
                     atualizarDia(dia.id, "nota", e.target.value);
                     autoResize(e);
                   }}
+                  className="sua-aventura-screen"
                 />
               </>
             )}
+
+            {dias.length > 0 && dias.length === dia.id && (
+              <button className="btn-salvar sua-aventura-screen">
+                Salvar aventura
+              </button>
+            )}
           </div>
         ))}
-
-        {dias.length > 0 && (
-          <button className="btn-salvar">Salvar roteiro</button>
-        )}
       </div>
-    </div>
-  );
+    </main>
+
+    {largura >= 1024 && (
+      <AnuncioDesktop/>
+    )}
+  </div>
+);
+
 }
