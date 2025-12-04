@@ -1134,7 +1134,7 @@ export default function ViagensBaratas() {
   
 
 return (
-  <div id="body" className="viagens-de-sete-dias-screen">
+  <div id="body" className="viagens-baratas-screen">
     {largura >= 1024 ? (
       <MenuLateral expandirMargem={expandirMargem}/>
     ) : 
@@ -1142,29 +1142,29 @@ return (
       <MenuVertical />
     )
     }
-    <header id="header" className="viagens-de-sete-dias-screen">
+    <header id="header" className="viagens-baratas-screen">
       {/* Filtros */}
       {largura >= 1024 && !menuExpandidoH1 && (
-        <h1 className="viagens-de-sete-dias-screen">ViaJour</h1>
+        <h1 className="viagens-baratas-screen">ViaJour</h1>
       )}
-      <h1 className={`titulo viagens-de-sete-dias-screen ${largura < 1024 && scroll_do_user ? 'sumir' : 'aparecer'}`}>
+      <h1 className={`titulo viagens-baratas-screen ${largura < 1024 && scroll_do_user ? 'sumir' : 'aparecer'}`}>
         🏷️ Viagens Baratas
-        <p className="subtitulo viagens-de-sete-dias-screen">
+        <p className="subtitulo viagens-baratas-screen">
           Explore destinos incríveis e com um preço que cabe no seu bolso. Previsão de custo para 7 dias.
         </p>
       </h1>
-      <div className="filtros viagens-de-sete-dias-screen">
+      <div className="filtros viagens-baratas-screen">
         <div onMouseLeave={() => {
           if (largura >= 1024) {
             if (pesquisaAtiva) {ativarPesquisa()}
           } else return;
           }}
-          style={{backgroundColor: pesquisaAtiva ? '#f59e0b' : ''}} className="filtro-busca viagens-de-sete-dias-screen">
+          style={{backgroundColor: pesquisaAtiva ? '#f59e0b' : ''}} className="filtro-busca viagens-baratas-screen">
           <input onChange={(event) => {
             scrollToHeader();
             const textoDigitado = event.target.value;
             const textoFormatado = formatarString(textoDigitado);
-            setPesquisaAtual(textoFormatado)}} placeholder="Feliz Natal!" type="text" className="viagens-de-sete-dias-screen" name="searchViagem" id="searchViagem"
+            setPesquisaAtual(textoFormatado)}} placeholder="Feliz Natal!" type="text" className="viagens-baratas-screen" name="searchViagem" id="searchViagem"
             onKeyUp={(e) => {
               if (e.key === 'Enter') {
                 ativarPesquisa();
@@ -1176,15 +1176,15 @@ return (
             <button
               id="btn-viagem-internacional"
               onClick={() => {setFiltro("internacional"); scrollToHeader()}}
-              className={`btn-filtro ${filtro === "internacional" ? "btn-ativo" : ""} viagens-de-sete-dias-screen`}
+              className={`btn-filtro ${filtro === "internacional" ? "btn-ativo" : ""} viagens-baratas-screen`}
             >
               Viagens internacionais
             </button>
-            <hr id="hr-btn-viagem" className="hr-vertical viagens-de-sete-dias-screen" />
+            <hr id="hr-btn-viagem" className="hr-vertical viagens-baratas-screen" />
             <button
               id="btn-viagem-nacional"
               onClick={() => {setFiltro("nacional"); scrollToHeader()}}
-              className={`btn-filtro ${filtro === "nacional" ? "btn-ativo" : ""} viagens-de-sete-dias-screen`}
+              className={`btn-filtro ${filtro === "nacional" ? "btn-ativo" : ""} viagens-baratas-screen`}
             >
               Viagens nacionais
             </button>
@@ -1201,13 +1201,13 @@ return (
                 ativarPesquisa(); 
               } else return;
             }}
-            className="icone viagens-de-sete-dias-screen">
-            <i className="fa-solid fa-magnifying-glass viagens-de-sete-dias-screen"></i>
+            className="icone viagens-baratas-screen">
+            <i className="fa-solid fa-magnifying-glass viagens-baratas-screen"></i>
             </div>
         </div>
 
-        <div className="filtro-preco viagens-de-sete-dias-screen">
-          <div className="custo-estimado viagens-de-sete-dias-screen">
+        <div className="filtro-preco viagens-baratas-screen">
+          <div className="custo-estimado viagens-baratas-screen">
             <h2>Custo estimado</h2>
             <h3>R$ {value[0]} - {value[1]} </h3>
           </div>
@@ -1222,31 +1222,31 @@ return (
       </div>
     </header>
     
-    <main id="container" className="pagina-natal viagens-de-sete-dias-screen">
+    <main id="container" className="pagina-natal viagens-baratas-screen">
       {/* Cards */}
-      <div className="lista-viagens viagens-de-sete-dias-screen">
+      <div className="lista-viagens viagens-baratas-screen">
         {itemsToShow.map((v) => (
           <div
             key={v.id}
-            className="card-viagem viagens-de-sete-dias-screen"
+            className="card-viagem viagens-baratas-screen"
           >
             {v.img && (
               <img
                 src={v.img}
                 alt={v.destino}
-                className="card-img viagens-de-sete-dias-screen"
+                className="card-img viagens-baratas-screen"
               />
             )}
-            <div className="card-info viagens-de-sete-dias-screen">
-              <div className="viagens-de-sete-dias-screen">
-                <h2 className="card-titulo viagens-de-sete-dias-screen">{v.destino}</h2>
-                <p className="card-descricao viagens-de-sete-dias-screen">{v.descricao}</p>
-                <p className="card-custo viagens-de-sete-dias-screen">
+            <div className="card-info viagens-baratas-screen">
+              <div className="viagens-baratas-screen">
+                <h2 className="card-titulo viagens-baratas-screen">{v.destino}</h2>
+                <p className="card-descricao viagens-baratas-screen">{v.descricao}</p>
+                <p className="card-custo viagens-baratas-screen">
                   Custo estimado (7 dias):{" "}
-                  <span className="viagens-de-sete-dias-screen">{v.custo}</span>
+                  <span className="viagens-baratas-screen">{v.custo}</span>
                 </p>
               </div>
-              <span className="tag-natalina viagens-de-sete-dias-screen">
+              <span className="tag-natalina viagens-baratas-screen">
                 {v.tipo}
               </span>
             </div>
@@ -1257,9 +1257,9 @@ return (
 
         {/* loader / status */}
         {itemsToShow.length < viagensFiltradas.length ? (
-          <div className="loader-carregando viagens-de-sete-dias-screen">Carregando mais viagens...</div>
+          <div className="loader-carregando viagens-baratas-screen">Carregando mais viagens...</div>
         ) : (
-          <div className="loader-fim viagens-de-sete-dias-screen">{itemsToShow.length === 0 ? 'Nenhuma viagem encontrada' : 'Você chegou ao fim'}</div>
+          <div className="loader-fim viagens-baratas-screen">{itemsToShow.length === 0 ? 'Nenhuma viagem encontrada' : 'Você chegou ao fim'}</div>
         )}
       </div>
     </main>

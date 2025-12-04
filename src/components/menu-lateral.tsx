@@ -1,9 +1,12 @@
 import '../styles/menu-lateral.css';
+import { useContext } from 'react';
+import { TemaContext } from '../context/TemaContext';
 import { useNavigate } from 'react-router-dom';
 
 
 export default function MenuLateral({ expandirMargem }: {expandirMargem: () => void}) {
     const navigate = useNavigate();
+    const { setDark } = useContext(TemaContext);
 
     function expandirMenu() {
         const asideAberto = window.document.querySelector('aside');
@@ -20,9 +23,12 @@ export default function MenuLateral({ expandirMargem }: {expandirMargem: () => v
             className="fa-solid fa-bars menu-lateral-component"
             />
             <div id="div-menu-fechado" className="menu-lateral-component">
-            <i id="instrucao-1" className="fa-solid fa-robot menu-lateral-component" />
-            <i id="instrucao-2" className="fa-solid fa-dollar-sign menu-lateral-component" />
-            <i id="instrucao-3" className="fa-solid fa-pen-to-square menu-lateral-component" />
+                <i className="fa-solid fa-house"></i>
+                <i className="fa-solid fa-circle-user"></i>
+                <div id='temas' className="menu-lateral-component">
+                    <i onClick={() => setDark(true)} id='icone-dark' className="fa-solid fa-moon menu-lateral-component"></i>
+                    <i onClick={() => setDark(false)} id='icone-claro' className="fa-solid fa-sun menu-lateral-component"></i>
+                </div>
             </div>
 
             <div className="div-instrucoes menu-lateral-component" id="div-ferramentas-ia-desktop">

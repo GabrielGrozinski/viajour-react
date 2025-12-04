@@ -1,4 +1,5 @@
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useContext, useMemo, useRef, useEffect } from "react";
+import { TemaContext } from "../../context/TemaContext";
 import "../../styles/produtos/sua-aventura.css";
 import fundo from '../../assets/imagens/fundo.png';
 import fundoDark from '../../assets/imagens/fundo-dark.png';
@@ -26,6 +27,7 @@ const opcoesTipo = [
 ];
 
 export default function MonteSuaAventura() {
+  const { dark, setDark } = useContext(TemaContext);
   const [destino, setDestino] = useState<string>("");
   const [dataInicio, setDataInicio] = useState<string>("");
   const [quantidadeDias, setQuantidadeDias] = useState<number>(1);
@@ -33,32 +35,25 @@ export default function MonteSuaAventura() {
   const [dias, setDias] = useState<DiaRoteiro[]>([]);
   const inputRefData = useRef<HTMLInputElement | null>(null);
   const pickerRef = useRef<any>(null);
-  const [tema, setTema] = useState<"dark" | "normal">(
-    (localStorage.getItem("tema") as "dark" | "normal") || "normal"
-  );
 
-  const fundoAtual = useMemo(() => {
-    return tema === 'dark' ? fundoDark : fundo;
-  }, [tema])
 
   const customStyles = {
     control: (base: any) => ({
         ...base,
-        backgroundColor: tema === "dark" ? "#2a2a2a" : "white",
-        borderColor: tema === "dark" ? "#555" : "#ccc",
-        color: tema === "dark" ? "#eee" : "#333",
+        backgroundColor: dark ? "#e2e8f0" : "white",
+        borderColor: dark ? "#555" : "#ccc",
     }),
     menu: (base: any) => ({
         ...base,
-        backgroundColor: tema === "dark" ? "#333" : "white",
+        backgroundColor: dark ? "#1e293b" : "white",
     }),
     option: (base: any, state: any) => ({
         ...base,
         backgroundColor: state.isSelected
-        ? (tema === "dark" ? "#6c63ff" : "#6c63ff")
+        ? (dark ? "#6c63ff" : "#6c63ff")
         : state.isFocused
-        ? (tema === "dark" ? "#444" : "#eee")
-        : (tema === "dark" ? "#333" : "white"),
+        ? (dark ? "#94a3b8" : "#eee")
+        : (dark ? "#e2e8f0" : "white"),
         
     }),
   };
@@ -76,16 +71,6 @@ export default function MonteSuaAventura() {
 
     setDias(novosDias);
   };
-
-  useEffect(() => {
-    const bodyCorpo = window.document.getElementById('body');
-    bodyCorpo?.classList.toggle("dark", tema === "dark");
-    localStorage.setItem("tema", tema);
-  }, [tema]);
-
-  function mudarTema() {
-    setTema(prev => (prev === "dark" ? "normal" : "dark"));
-  }
 
   useEffect(() => {
     const handleResize = () => setLargura(window.innerWidth);
@@ -135,7 +120,7 @@ export default function MonteSuaAventura() {
 return (
   <div
     id="body" 
-    style={{backgroundImage: `url(${fundoAtual})`}} 
+    style={{backgroundImage: dark ? `url(${fundoDark})` : `url(${fundo})`}} 
     className="sua-aventura-screen"
   >
     {largura >= 1024 ? (
@@ -146,7 +131,7 @@ return (
     )
     }
 
-    <h1 className="titulo sua-aventura-screen">Monte sua Aventura</h1>
+    <h1 onClick={() => setDark(!dark)} className="titulo sua-aventura-screen">Monte sua Aventura</h1>
 
     {/* Dados iniciais */}
     <main className="sua-aventura-screen">
@@ -158,6 +143,7 @@ return (
         className="card sua-aventura-screen">
         <label htmlFor="destino-viagem" className="sua-aventura-screen">Destino da viagem:</label>
         <input
+          placeholder="Escolha um destino"
           id="destino-viagem"
           required
           className="sua-aventura-screen"

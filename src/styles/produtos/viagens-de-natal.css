@@ -19,7 +19,7 @@
    LAYOUT GERAL DA PAGE
 ----------------------------------------------------------- */
 div#body.viagens-natalinas-screen {
-  @apply relative min-h-screen grid grid-rows-[auto_1fr_auto] grid-cols-[4vw_1fr_200px] gap-4;
+  @apply relative min-h-screen grid grid-rows-[auto_1fr_auto] grid-cols-[4vw_1fr_200px];
   background: url(../../assets/imagens/fundo1.png) fixed no-repeat;
   background-size: cover;
   row-gap: 5vh;
@@ -29,14 +29,14 @@ div#body.viagens-natalinas-screen {
    HEADER (TOPO)
 ----------------------------------------------------------- */
 header.viagens-natalinas-screen {
-  @apply row-1 sticky top-0 left-0 bg-white border-b border-neutral-300
-         pb-6 pt-2 col-[2/-1] flex justify-between items-center pr-4
+  @apply row-1 sticky top-0 left-0 pl-4 bg-white border-b border-neutral-300
+         pb-6 pt-4 col-[2/-1] flex justify-between items-center pr-4
          transition-all duration-300;
 }
 
 /* Header quando menu lateral abre */
 header.viagens-natalinas-screen.menu-lateral-expandido {
-  @apply pl-[8vw];
+  @apply pl-[9vw];
 }
 
 /* -----------------------------------------------------------
@@ -295,3 +295,65 @@ main.pagina-natal.viagens-natalinas-screen {
   @apply min-w-full max-w-full col-3 translate-x-[-50%] mb-[100px];
 }
 }
+
+
+/* -----------------------------------------------------------
+   Modo Dark
+----------------------------------------------------------- */
+
+html.dark div#body.viagens-natalinas-screen {
+  background: url(../../assets/imagens/fundo-dark.png) fixed no-repeat;
+}
+
+html.dark header.viagens-natalinas-screen {
+  @apply bg-[#171c28];
+}
+
+html.dark header.viagens-natalinas-screen > h1 {
+  @apply text-slate-200;
+}
+
+html.dark header.viagens-natalinas-screen > h1.titulo.viagens-natalinas-screen > .subtitulo.viagens-natalinas-screen {
+  @apply text-neutral-400;
+}
+
+html.dark .btn-filtro.viagens-natalinas-screen {
+  @apply bg-[#1e293b] text-slate-100;
+}
+
+html.dark .btn-filtro:hover.viagens-natalinas-screen {
+  @apply bg-[#283243];
+}
+
+html.dark .btn-ativo:hover.viagens-natalinas-screen {
+  @apply bg-[#1d4ed8];
+}
+
+html.dark div.filtro-busca.viagens-natalinas-screen {
+  @apply shadow-[0px_0px_2px_#e2e8f0];
+}
+
+html.dark input#searchViagem.viagens-natalinas-screen.ativado {
+  @apply text-slate-800 text-shadow-[1px_1px_1px_#2222221a];
+}
+
+html.dark div.filtro-busca:hover.viagens-natalinas-screen {
+  @apply shadow-[0px_0px_3px_#f8fafc];
+}
+
+html.dark .custo-estimado.viagens-natalinas-screen > h3 {
+  @apply text-slate-200;
+}
+
+html.dark .card-viagem.viagens-natalinas-screen {
+  @apply bg-[#171c28] transition-shadow duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)] active:shadow-[0_4px_16px_rgba(0,0,0,0.4)];
+}
+
+html.dark .card-descricao.viagens-natalinas-screen {
+  @apply text-slate-300;
+}
+
+html.dark .card-custo.viagens-natalinas-screen {
+  @apply text-neutral-300;
+}
+

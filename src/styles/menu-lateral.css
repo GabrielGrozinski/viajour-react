@@ -8,40 +8,69 @@
   @apply box-border m-0 p-0;
   font-family: "Oswald", sans-serif;
 }
+
 aside.menu-lateral.menu-lateral-component {
   /* make the lateral menu fixed on the side so it doesn't scroll with the page */
   @apply fixed top-0 left-0 z-50 bg-[#082556] transition-all duration-300 w-[4vw] flex flex-col flex-nowrap justify-start items-center overflow-hidden gap-10 pt-[3vh] h-screen;
 }
-aside.menu-lateral.menu-lateral-component > article.itens-do-viajour-desktop.menu-lateral-component {
+
+article.itens-do-viajour-desktop.menu-lateral-component {
   @apply min-h-[50px] h-auto text-[white] mx-[4%] my-0 p-[auto] rounded-md;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
-aside.menu-lateral.menu-lateral-component > i#menu-icone-aside.menu-lateral-component {
+
+i#menu-icone-aside.menu-lateral-component {
   @apply self-center text-white text-[1.8em] cursor-pointer text-shadow-[1px_1px_1px_#0000004d];
 }
-aside.menu-lateral.menu-lateral-component > article.itens-do-viajour-desktop.menu-lateral-component,
-aside.menu-lateral.menu-lateral-component > div.div-instrucoes.menu-lateral-component {
+
+article.itens-do-viajour-desktop.menu-lateral-component,
+div.div-instrucoes.menu-lateral-component {
   @apply hidden;
 }
-aside.menu-lateral.menu-lateral-component > div#div-menu-fechado.menu-lateral-component {
-  @apply flex gap-[30px] text-[1.6em];
+
+div#div-menu-fechado.menu-lateral-component {
+  @apply flex flex-1 items-center min-w-full gap-[30px] text-[1.6em];
   flex-flow: column nowrap;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
-aside.menu-lateral.menu-lateral-component > div#div-menu-fechado.menu-lateral-component > i {
+div#div-menu-fechado.menu-lateral-component > i {
+  @apply text-slate-100 transition-colors duration-200 text-shadow-[1px_1px_1px_#2222224a];
+}
+
+div#div-menu-fechado.menu-lateral-component > i:hover {
+  @apply text-slate-400;
+}
+
+div#temas.menu-lateral-component {
+  @apply flex absolute bottom-[2%] text-shadow-[1px_1px_1px_#2222227a] left-[50%] translate-x-[-50%];
+}
+
+div#temas.menu-lateral-component i {
+  @apply text-xl text-slate-200;
+}
+
+#icone-dark.menu-lateral-component {
+  @apply opacity-30;
+}
+
+html.dark #icone-dark.menu-lateral-component {
+  @apply opacity-100
+}
+
+#icone-claro.menu-lateral-component {
+  @apply opacity-100;
+}
+
+html.dark #icone-claro.menu-lateral-component {
+  @apply opacity-30;
+}
+
+
+div#div-menu-fechado.menu-lateral-component i {
   @apply cursor-pointer;
 }
 
-aside.menu-lateral.menu-lateral-component > div#div-menu-fechado.menu-lateral-component > i#instrucao-1.menu-lateral-component {
-  @apply text-[lightblue];
-}
-aside.menu-lateral.menu-lateral-component > div#div-menu-fechado.menu-lateral-component > i#instrucao-2.menu-lateral-component {
-  @apply text-[lightgreen];
-}
-aside.menu-lateral.menu-lateral-component > div#div-menu-fechado.menu-lateral-component > i#instrucao-3.menu-lateral-component {
-  @apply text-[rgb(214,214,103)];
-}
 aside.menu-lateral.menu-lateral-component.ativado {
   /* keep fixed positioning, allow independent scrolling inside the expanded menu */
   @apply h-screen w-[12vw] overflow-y-auto transition-all duration-200 bg-[#082556] flex gap-[15px] px-[2vh] py-[3vh];

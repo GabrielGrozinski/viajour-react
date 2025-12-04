@@ -16,12 +16,12 @@ main.sua-aventura-screen {
 @apply w-full min-h-full pb-16 flex flex-col items-center px-[30px] lg:px-0;
 }
 .sua-aventura-screen.titulo {
-  @apply text-[32px] text-center w-full text-white my-2;
+  @apply text-[32px] cursor-pointer text-center w-full text-white my-2;
 }
 .sua-aventura-screen.card {
-  @apply p-5 w-full max-w-[600px] shadow-[0_4px_10px_rgba(0,0,0,0.15)] mb-[25px] rounded-[14px];
-  background: #ffffff;
+  @apply p-5 w-full bg-white max-w-[600px] shadow-[0_4px_10px_rgba(0,0,0,0.15)] mb-[25px] rounded-[14px];
 }
+
 .sua-aventura-screen.card h2 {
   @apply text-[1.2em] mb-[15px];
 }
@@ -53,7 +53,7 @@ main.sua-aventura-screen {
 }
 .sua-aventura-screen.btn-montar,
 .sua-aventura-screen.btn-salvar {
-  @apply w-full text-lg cursor-pointer text-white transition-[0.2s] mt-[15px] p-3 rounded-lg border-[none];
+  @apply w-full text-lg cursor-pointer text-white transition-[0.2s] mt-[15px] p-3 rounded-lg;
 }
 .sua-aventura-screen.btn-montar {
   background: #4d7cff;
@@ -69,4 +69,28 @@ main.sua-aventura-screen {
 }
 .sua-aventura-screen.dias-container {
   @apply w-full max-w-[700px] flex flex-col items-center mx-auto my-0;
+}
+
+html.dark .sua-aventura-screen.card {
+  @apply bg-[#1e293b];
+}
+
+html.dark label {
+  @apply text-white text-shadow-[1px_1px_1px_#2222223a];
+}
+
+html.dark ::placeholder {
+  @apply text-slate-400 text-shadow-[1px_1px_1px_#2222223a];
+}
+
+html.dark input {
+  @apply text-slate-100;
+}
+
+html.dark .btn-montar.sua-aventura-screen {
+  @apply border border-black;
+}
+
+html.dark h2 {
+@apply text-white text-shadow-[1px_1px_1px_#2222223a];
 }
