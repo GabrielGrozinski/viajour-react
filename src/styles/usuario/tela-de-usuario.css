@@ -4,17 +4,13 @@
   font-family: "Majesty";
   src: url(../assets/fonts/majesty.otf);
 }
-* {
-  @apply box-border m-0 p-0;
-  font-family: "Oswald", sans-serif;
-}
 
 #body.tela-de-usuario-screen {
   @apply min-h-screen bg-cover bg-fixed bg-no-repeat bg-[url(../../assets/imagens/fundo1.png)] grid grid-cols-[8vw_20%_60%_1fr] pt-10 grid-rows-[60px_auto_1fr_15%];
 }
 
 hr.tela-de-usuario-screen {
-  @apply col-span-full row-2;
+  @apply col-span-full row-2 border-neutral-200;
 }
 
 .header.tela-de-usuario-screen {
@@ -42,7 +38,7 @@ hr.tela-de-usuario-screen {
 }
 
 .btn-buscar.tela-de-usuario-screen::placeholder {
-  @apply text-neutral-400;
+  @apply text-neutral-400 font-light;
 }
 
 #icone-buscar.tela-de-usuario-screen {
@@ -67,7 +63,7 @@ hr.tela-de-usuario-screen {
 }
 
 .container.tela-de-usuario-screen {
-  @apply col-3 mt-7 row-3 min-h-[1400px];
+  @apply col-3 mt-7 row-3;
 }
 
 .rodape.tela-de-usuario-screen {

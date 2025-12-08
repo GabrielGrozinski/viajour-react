@@ -1,14 +1,45 @@
 import "../../styles/usuario/tela-de-usuario.css";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { NavLink, Outlet } from "react-router-dom";
 
 interface Topicos {
-    
+    nome: string,
+    url: string,
+    telaGeral: boolean,
 }
 
 export default function TelaDeUsuario() {
-    const [topicos, setTopicos] = useState<any>([]);
+    const topicos: Topicos[] = [
+        {
+            nome: 'Geral',
+            url: '',
+            telaGeral: true,
+        },
+        {
+            nome: 'Autenticação',
+            url: 'autenticacao',
+            telaGeral: false,
+        },
+        {
+            nome: 'Métodos de Pagamento',
+            url: 'metodos-de-pagamento',
+            telaGeral: false,
+        },
+        {
+            nome: 'Assinaturas',
+            url: 'assinaturas',
+            telaGeral: false,
+        },
+    ];
     const [textoDigitado, setTextoDigitado] = useState<string>('');
+
+    const topicosFiltrados = useMemo(() => {
+        if (textoDigitado === '') {
+           return topicos; 
+        } else {
+            return topicos.filter((topico: Topicos) => formatarString(topico.nome).includes(textoDigitado));
+        } 
+    }, [textoDigitado]);
 
     useEffect(() => {
         function handleScroll() {
@@ -29,6 +60,14 @@ export default function TelaDeUsuario() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    function formatarString(texto: string) {
+    return texto
+    .toLocaleLowerCase()
+    .trim()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, "");
+    }
+
 
     return (
         <div id="body" className="tela-de-usuario-screen">
@@ -41,37 +80,20 @@ export default function TelaDeUsuario() {
                     {!textoDigitado && (
                         <i id="icone-buscar" className="fa-solid fa-magnifying-glass tela-de-usuario-screen"></i>
                     )}
-                    <input onChange={(texto) => setTextoDigitado(texto.target.value)} type="text" placeholder="Buscar" name="btn-buscar" id="btn-buscar" className="btn-buscar tela-de-usuario-screen"/>
+                    <input onChange={(event) => setTextoDigitado(formatarString(event.target.value))} type="text" placeholder="Buscar" name="btn-buscar" id="btn-buscar" className="btn-buscar tela-de-usuario-screen"/>
                 </div>
                     
                 <ul className="lista-topicos tela-de-usuario-screen">
-                    <li className="topicos tela-de-usuario-screen">
-                        <NavLink style={({isActive}) => ({
-                            fontWeight: isActive ? 500 : '',
-                            color: isActive ? '#18181b' : '#737373',
-                        })} to="" end>Geral</NavLink>
-                    </li>
-                    <li className="topicos tela-de-usuario-screen">
-                        <NavLink style={({isActive}) => ({
-                            fontWeight: isActive ? 500 : '',
-                            color: isActive ? '#18181b' : '#737373',
-                            textShadow: '1px 1px 1px #0000001a',
-                        })} to="autenticacao">Autenticação</NavLink>
-                    </li>
-                    <li className="topicos tela-de-usuario-screen">
-                        <NavLink style={({isActive}) => ({
-                            fontWeight: isActive ? 500 : '',
-                            color: isActive ? '#18181b' : '#737373',
-                            textShadow: '1px 1px 1px #0000001a',
-                        })} to="metodos-de-pagamento">Métodos de Pagamento</NavLink>
-                    </li>
-                    <li className="topicos tela-de-usuario-screen">
-                        <NavLink style={({isActive}) => ({
-                            fontWeight: isActive ? 500 : '',
-                            color: isActive ? '#18181b' : '#737373',
-                            textShadow: '1px 1px 1px #0000001a',
-                        })} to="assinaturas">Assinaturas</NavLink>
-                    </li>
+                    {topicosFiltrados.map((topico: Topicos, index: number) => (
+                        <li key={index} className="topicos tela-de-usuario-screen">
+                            <a href="#">
+                                <NavLink style={({isActive}) => ({
+                                    fontWeight: isActive ? 500 : 300,
+                                    color: isActive ? '#18181b' : '#737373',
+                                })} to={topico.url} end={topico.telaGeral}>{topico.nome}</NavLink>
+                            </a>
+                        </li>
+                    ))}
                 </ul>
             </aside>
             <main className="container tela-de-usuario-screen">
