@@ -196,7 +196,7 @@ export default function TelaDeUsuario() {
                 </ul>
             </aside>
             <main className="container tela-de-usuario-screen">
-                <Outlet context={{topicoEscolhido}} />
+                <Outlet context={{topicoEscolhido, textoDigitado}} />
             </main>
             <footer className="rodape tela-de-usuario-screen">
                 footer

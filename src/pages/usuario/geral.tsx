@@ -96,7 +96,7 @@ export default function Geral() {
     },
   ];
   
-  const { topicoEscolhido }: any = useOutletContext();
+  const { topicoEscolhido, textoDigitado }: any = useOutletContext();
   useEffect(() => {
     if (!topicoEscolhido) return;
     const elemento = document.getElementById(topicoEscolhido);
@@ -119,6 +119,16 @@ export default function Geral() {
   const [custoViagens, setCustoViagens] = useState<string>('');
   const [preferenciaViagens, setPreferenciaViagens] = useState<string[]>(['']);
 
+  function highlight(text: string, search: string) {
+    if (!search || search.trim() === "") return text;
+
+    const regex = new RegExp(`(${search})`, "gi");
+
+    return text.replace(
+      regex,
+      `<span style="color:#3b82f6; font-weight:800">$1</span>`
+    );
+  }
 
     return (
       <main className="flex flex-col gap-6 min-h-full min-w-full">
@@ -147,7 +157,12 @@ export default function Geral() {
                   Salvar
               </button>
 
-              <h1 className="text-[#222222] text-xl font-medium">{subTopico.titulo}</h1>
+              <h1
+                className="text-[#222222] text-xl font-medium"
+                dangerouslySetInnerHTML={{
+                  __html: highlight(subTopico.titulo, textoDigitado)
+                }}
+              />
 
               <p className="font-normal text-sm text-neutral-600">{subTopico.paragrafo}</p>
 
