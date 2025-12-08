@@ -113,11 +113,11 @@ div#btn-rotinas.rotina-automatica-component {
 }
 
 button#btn-rotina-manual.rotina-automatica-component {
-  @apply bg-[#4447fd] cursor-pointer opacity-20 p-1 rounded-md text-white;
+  @apply bg-[#4447fd] text-sm cursor-pointer opacity-20 p-1 rounded-md text-white;
 }
 
 button#btn-rotina-automatica.rotina-automatica-component {
-  @apply bg-[#4447fd] cursor-pointer opacity-100 p-1 rounded-md text-white;
+  @apply bg-[#4447fd] text-sm cursor-pointer opacity-100 p-1 rounded-md text-white;
 }
 
 }

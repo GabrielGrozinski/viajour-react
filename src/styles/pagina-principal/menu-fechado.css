@@ -15,7 +15,7 @@ div.body-menu-fechado.menu-fechado-screen {
 }
 
 header.header-fechado.menu-fechado-screen {
-  @apply bg-transparent w-full grid text-[white] grid-cols-[1fr_1fr_1fr] row-[1fr] place-items-center p-4;
+  @apply bg-transparent w-full grid text-white grid-cols-[1fr_1fr_1fr] row-[1fr] place-items-center p-4;
 }
 
 header.header-fechado.menu-fechado-screen > i#menu-icone.menu-fechado-screen {
@@ -36,7 +36,7 @@ header.header-fechado.menu-fechado-screen > h1.logo.menu-fechado-screen {
 }
 
 header.header-fechado.menu-fechado-screen i.menu-fechado-screen {
-  @apply text-[2em] text-[white] cursor-pointer transition-[0.4s] duration-[ease-in-out] border-[none] active:scale-[0.94];
+  @apply text-[2em] text-white cursor-pointer transition-[0.4s] duration-[ease-in-out] border-[none] active:scale-[0.94];
   background: none;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
@@ -69,7 +69,7 @@ header.header-fechado.menu-fechado-screen i.menu-fechado-screen {
 }
 
 main.main-fechado.menu-fechado-screen {
-  @apply bg-[white] justify-items-center h-auto grid grid-cols-[repeat(2,1fr)] grid-rows-[repeat(3,1fr)_auto_auto] gap-y-2.5 transition-all duration-[0.4s] pt-5 pb-[100px];
+  @apply bg-white justify-items-center h-auto grid grid-cols-[repeat(2,1fr)] grid-rows-[repeat(3,1fr)_auto_auto] gap-y-2.5 transition-all duration-[0.4s] pt-5 pb-[100px];
 }
 
 main.main-fechado.menu-fechado-screen > div.icones.menu-fechado-screen {
@@ -232,3 +232,20 @@ main.main-fechado.menu-fechado-screen > div.desc-app.menu-fechado-screen > img.m
     scale: 1;
   }
 }
+
+/* -----------------------------------------------------------
+   Modo Dark
+----------------------------------------------------------- */
+
+html.dark main.main-fechado.menu-fechado-screen {
+  @apply bg-[#1e293b];
+}
+
+html.dark main.main-fechado.menu-fechado-screen > div.desc-app.menu-fechado-screen > p.menu-fechado-screen {
+  @apply text-slate-200;
+}
+
+html.dark main.main-fechado.menu-fechado-screen > div.icones.menu-fechado-screen > h4.menu-fechado-screen {
+  @apply text-slate-200;
+}
+

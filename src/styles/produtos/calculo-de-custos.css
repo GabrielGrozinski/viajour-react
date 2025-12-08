@@ -23,11 +23,11 @@ div#btn-rotinas.calculo-de-custos-screen {
 }
 
 button#btn-rotina-manual.calculo-de-custos-screen {
-  @apply bg-[#4447fd] cursor-pointer p-1 rounded-md text-white text-shadow-[1px_1px_1px_#0000003a];
+  @apply bg-[#4447fd] text-sm cursor-pointer p-1 rounded-md text-white text-shadow-[1px_1px_1px_#0000003a];
 }
 
 button#btn-rotina-automatica.calculo-de-custos-screen {
-  @apply bg-[#4447fd] cursor-pointer opacity-20 p-1 rounded-md text-white text-shadow-[1px_1px_1px_#0000003a];
+  @apply bg-[#4447fd] text-sm cursor-pointer opacity-20 p-1 rounded-md text-white text-shadow-[1px_1px_1px_#0000003a];
 }
 
 main.calculo-de-custos-screen > .container.calculo-de-custos-screen {

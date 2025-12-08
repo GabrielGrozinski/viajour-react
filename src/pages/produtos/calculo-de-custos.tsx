@@ -6,7 +6,6 @@ import MenuLateral from "../../components/menu-lateral";
 import "../../styles/produtos/calculo-de-custos.css";
 import RotinaAutomatica from "../../components/produtos/calculo-de-custos/rotina-automatica"; 
 import anuncio1 from '../../assets/imagens/anuncio1.png';
-import AnuncioDesktop from "../../components/anuncio-desktop";
 import fundo from '../../assets/imagens/fundo.png';
 import fundoDark from '../../assets/imagens/fundo-dark.png';
 

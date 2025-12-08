@@ -1,6 +1,7 @@
 import '../styles/menu-vertical.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
+import BotaoTema from './botao-tema';
 
 
 export default function MenuVertical() {
@@ -31,10 +32,13 @@ export default function MenuVertical() {
     
     return (
         <>
-        <h1 onClick={(e) => {e.stopPropagation(); ativarMenu();}} id='titulo' className='menu-vertical-component'>
+        <nav onClick={(e) => {e.stopPropagation(); ativarMenu();}} id='titulo' className='menu-vertical-component'>
             <span>ViaJour</span>
+            <div className="tema menu-vertical-component"><BotaoTema/></div>
+            <i onClick={() => navigate('/principal')} className="fa-solid fa-house"></i>
             <i className="fa-solid fa-bars"></i>
-            </h1>
+            <i onClick={() => navigate('/usuario')} className="fa-solid fa-circle-user"></i>
+            </nav>
         
         <aside ref={ref_barra} id='barra-vertical' className="menu-lateral menu-vertical-component">
 

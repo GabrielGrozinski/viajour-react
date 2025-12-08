@@ -45,8 +45,11 @@ main.sua-aventura-screen {
 .sua-aventura-screen.card textarea {
   @apply min-h-20;
 }
+#label-anotacao.sua-aventura-screen {
+  @apply mb-0 mt-4;
+}
 .sua-aventura-screen.radio-group {
-  @apply flex gap-[25px] mx-0 my-2.5;
+  @apply flex gap-[25px] mt-0 mx-0 my-2.5;
 }
 .sua-aventura-screen.radio-group > label {
   @apply text-center;

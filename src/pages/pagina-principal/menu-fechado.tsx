@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MenuLateral from "../../components/menu-lateral";
 import '../../styles/pagina-principal/menu-fechado.css';
 import imagemCelular from '../../assets/imagens/celular-icone.png';
 
 
 export default function MenuFechado({ abrir }: {abrir: () => void}) {
+  const navigate = useNavigate();
   const [largura, setLargura] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -110,7 +112,7 @@ return (
                     <p className="menu-fechado-screen">PT | BRL</p>
                 </article>
             </section>
-            <i id="user-icone" className="fa-solid fa-user user-btn menu-fechado-screen" />
+            <i onClick={() => navigate('/usuario')} id="user-icone" className="fa-solid fa-user user-btn menu-fechado-screen" />
         </header>
         {largura > 1024 && (
             <MenuLateral expandirMargem={expandirMargem} />

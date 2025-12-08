@@ -9,23 +9,35 @@
   font-family: "Oswald", sans-serif;
 }
 
-h1#titulo.menu-vertical-component {
-  @apply text-white min-w-full transition-all cursor-pointer duration-300 font-['Majesty'] text-2xl py-1 text-center bg-[#082556];
+nav#titulo.menu-vertical-component {
+  @apply relative text-white flex justify-between min-w-full transition-all duration-300 font-['Majesty'] text-2xl py-3 px-2 text-center bg-[#082556];
 }
 
-h1#titulo.menu-vertical-component > span {
+nav#titulo.menu-vertical-component > span {
   @apply hidden;
 }
 
-h1#titulo.menu-vertical-component.menu-ativado {
-  @apply cursor-default;
+nav#titulo.menu-vertical-component > i {
+  @apply z-1 cursor-pointer;
 }
 
-h1#titulo.menu-vertical-component.menu-ativado > i {
+nav#titulo.menu-vertical-component > .tema {
+  @apply absolute hidden pointer-events-none;
+}
+
+nav#titulo.menu-vertical-component.menu-ativado {
+  @apply cursor-default justify-center py-2;
+}
+
+nav#titulo.menu-vertical-component.menu-ativado > i {
   @apply hidden;
 }
 
-h1#titulo.menu-vertical-component.menu-ativado > span {
+nav#titulo.menu-vertical-component.menu-ativado > .tema {
+  @apply pointer-events-none block right-[1.2%] top-[12%];
+}
+
+nav#titulo.menu-vertical-component.menu-ativado > span {
   @apply block;
 }
 

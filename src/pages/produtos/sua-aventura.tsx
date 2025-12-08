@@ -1,4 +1,4 @@
-import { useState, useContext, useMemo, useRef, useEffect } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import { TemaContext } from "../../context/TemaContext";
 import "../../styles/produtos/sua-aventura.css";
 import fundo from '../../assets/imagens/fundo.png';
@@ -95,7 +95,7 @@ export default function MonteSuaAventura() {
           dateFormat: 'd/m/Y',
           locale: Portuguese,
           defaultDate: dataInicio,
-          onChange: (selectedDates, dateStr) => {
+          onChange: (_, dateStr) => {
             setDataInicio(dateStr);
           }
         });
@@ -197,7 +197,8 @@ return (
               className="sua-aventura-screen"
             />
 
-            <label className="sua-aventura-screen">Adicionar nota?</label>
+            <label
+            id="label-anotacao" className="sua-aventura-screen">Adicionar nota?</label>
             <div className="radio-group sua-aventura-screen">
               <label className="sua-aventura-screen">
                 <input
