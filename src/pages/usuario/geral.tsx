@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useOutletContext } from "react-router-dom"
 
 interface sub_topicos {
   id: number,
@@ -84,8 +85,30 @@ export default function Geral() {
       inputId: 'custo-viagens-Input',
       placeHolderInput: 'O mínimo possível  Pouco  Moderadamente  Muito'
     },
+    {
+      id: 9,
+      identificador: 'preferencia-viagens',
+      titulo: 'Preferência de Viagens',
+      paragrafo: 'Escolha até três preferências de viagens (você pode mudar a qualquer momento).',
+      inputTipo: 'checkbox',
+      inputId: 'preferencia-viagens-Input',
+      placeHolderInput: 'Natureza  Museus  Vida Noturna  Shopping  Parques Temáticos  Cultura e História  Gastronomia  Praia  Neve'
+    },
   ];
   
+  const { topicoEscolhido }: any = useOutletContext();
+  useEffect(() => {
+    if (!topicoEscolhido) return;
+    const elemento = document.getElementById(topicoEscolhido);
+    if (!elemento) return;
+    const posicao = elemento?.getBoundingClientRect().top + window.pageYOffset - 100;
+    window.scrollTo({
+      top: posicao,
+      behavior: 'smooth'
+    });
+  }, [topicoEscolhido]);
+
+
   const [nomeDigitado, setNomeDigitado] = useState<string>('');
   const [avatar, setAvatar] = useState<boolean>(false);
   const [numeroTelefone, setNumeroTelefone] = useState<string>('');
@@ -94,6 +117,8 @@ export default function Geral() {
   const [quantViagens, setQuantViagens] = useState<string>('');
   const [tipoViajante, setTipoViajante] = useState<string>('');
   const [custoViagens, setCustoViagens] = useState<string>('');
+  const [preferenciaViagens, setPreferenciaViagens] = useState<string[]>(['']);
+
 
     return (
       <main className="flex flex-col gap-6 min-h-full min-w-full">
@@ -107,6 +132,7 @@ export default function Geral() {
             : subTopico.id === 6 ? quantViagens
             : subTopico.id === 7 ? tipoViajante
             : subTopico.id === 8 ? custoViagens
+            : subTopico.id === 9 ? preferenciaViagens.length !== 4 ? false : true
             : false;
 
           return(
@@ -126,7 +152,8 @@ export default function Geral() {
               <p className="font-normal text-sm text-neutral-600">{subTopico.paragrafo}</p>
 
               {subTopico.inputTipo === 'image' ? (
-                <input 
+                <input
+                  id={subTopico.inputId}
                   onClick={() => setAvatar(!avatar)} className="max-h-12 max-w-12" type="image"   src="https://cdn.pixabay.com/photo/2020/05/11/15/38/tom-5158824_1280.png" alt="avatar" 
                 />
               ) 
@@ -143,8 +170,8 @@ export default function Geral() {
                     : false;
 
                   return (
-                    <label key={index} htmlFor={item}>
-                      <span className={`flex ${isChecked ? 'text-[#222222] font-semibold' : 'text-slate-700'} flex-col gap-1`}>
+                    <label id={item} key={index} htmlFor={item}>
+                      <span className={`flex ${isChecked ? 'text-[#222222] font-medium' : 'text-slate-700'} flex-col gap-1`}>
                         {item}
                       <input checked={isChecked} 
                         onChange={() => 
@@ -155,7 +182,7 @@ export default function Geral() {
                         : subTopico.id === 8 ? setCustoViagens(item)
                         : false
                         } type={subTopico.inputTipo} name={item} id={item}
-                        style={{backgroundColor: 'red'}} />
+                      />
                       </span>
                     </label>
                   );
@@ -163,7 +190,33 @@ export default function Geral() {
                 })}
                 </div>
               ) 
-              : 
+              :
+              subTopico.inputTipo === 'checkbox' ? (
+                <>
+                <div id={subTopico.inputId} className="flex max-w-1/2 flex-wrap gap-4">
+                  {subTopico.placeHolderInput.split('  ').map((item: string, index: number) => (
+                    <button onClick={() => {
+                      if (preferenciaViagens.includes(item)) {
+                        const preferenciaViagemDesmarcada = preferenciaViagens.filter((preferencia: string) => preferencia !== item);
+                        setPreferenciaViagens(preferenciaViagemDesmarcada);
+                      } else {
+                        if (preferenciaViagens.length === 4) return;
+                        setPreferenciaViagens([...preferenciaViagens, item]);
+                      }
+                    }} 
+                    style={{padding: '4px 6px', 
+                    backgroundColor: preferenciaViagens.includes(item) ? '#3b82f6' : '', 
+                    color: preferenciaViagens.includes(item) ? '#f8fafc' : '#222222',
+                    cursor: preferenciaViagens.includes(item) ? '' : preferenciaViagens.length === 4 ? 'not-allowed' : 'pointer'
+                    }} 
+                    className={`cursor-pointer rounded-md shadow-[1px_1px_2px_#0000001a] bg-neutral-100`} key={index}>
+                      {item}
+                    </button>
+                  ))}
+                </div>
+                </>
+              )
+              :
               (
               <input onChange={(event) => {
                 switch (subTopico.id) {
