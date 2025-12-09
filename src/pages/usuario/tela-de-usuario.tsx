@@ -116,6 +116,42 @@ export default function TelaDeUsuario() {
             telaGeral: true,
             topicoEspecifico: 'preferencia-viagens-Input',
         },
+        {
+            nome: 'Email',
+            url: 'autenticacao',
+            telaGeral: false,
+            topicoEspecifico: 'emailInput',
+        },
+        {
+            nome: 'Senha',
+            url: 'autenticacao',
+            telaGeral: false,
+            topicoEspecifico: 'senhaInput',
+        },
+        {
+            nome: 'Adicionar Cartão',
+            url: 'metodos-de-pagamento',
+            telaGeral: false,
+            topicoEspecifico: 'adicionar-cartao',
+        },
+        {
+            nome: 'Plano Gratuito',
+            url: 'assinaturas',
+            telaGeral: false,
+            topicoEspecifico: 'plano-gratuito',
+        },
+        {
+            nome: 'Plano Aventureiro',
+            url: 'assinaturas',
+            telaGeral: false,
+            topicoEspecifico: 'plano-aventureiro',
+        },
+        {
+            nome: 'Plano Viajante',
+            url: 'assinaturas',
+            telaGeral: false,
+            topicoEspecifico: 'plano-viajante',
+        },
 
     ];
     const [textoDigitado, setTextoDigitado] = useState<string>('');
@@ -185,7 +221,6 @@ export default function TelaDeUsuario() {
                             <li onClick={() => setTopicoEscolhido(topico.topicoEspecifico)} key={index} className="topicos tela-de-usuario-screen">
                                 <NavLink style={({isActive}) => 
                                     ({
-                                    fontWeight: isTopicoPadrao ? isActive ? 500 : 400 : 400,
                                     color: isTopicoPadrao ? isActive ? '#18181b' : '#737373' : '#737373',
                                     })} 
                                     to={topico.url} end={topico.telaGeral}>{topico.nome}

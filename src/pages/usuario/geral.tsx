@@ -242,7 +242,7 @@ export default function Geral() {
                     setNumeroTelefone(event.target.value);
                     break;
                 }
-                }} style={{padding: 4, marginTop: '14px'}} placeholder={subTopico.placeHolderInput} className="rounded-md border text-slate-800 border-black/60 max-w-[60%]" type={subTopico.inputTipo} name={subTopico.inputId} id={subTopico.inputId}
+                }} style={{padding: 6, marginTop: '14px'}} placeholder={subTopico.placeHolderInput} className="rounded-md border text-slate-800 border-black/60 max-w-[60%]" type={subTopico.inputTipo} name={subTopico.inputId} id={subTopico.inputId}
               />
               )}
             </section>

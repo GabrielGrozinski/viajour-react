@@ -1,8 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 import CartaoDeCredito from "../../components/usuario/cartao-de-credito";
 
 export default function Assinaturas() {
   const [ativandoCartao, setAtivandoCartao] = useState<boolean>(false);
+  const { topicoEscolhido }: any = useOutletContext();
+
+  useEffect(() => {
+    if (!topicoEscolhido) return;
+    const elemento = document.getElementById(topicoEscolhido);
+    if (!elemento) return;
+    const posicao = elemento?.getBoundingClientRect().top + window.pageYOffset - 100;
+    window.scrollTo({
+      top: posicao,
+      behavior: 'smooth'
+    });
+  }, [topicoEscolhido]);
 
   // LISTA GLOBAL DE TODAS AS FEATURES (9 no total)
   const todasAsFeatures = [
@@ -20,6 +33,7 @@ export default function Assinaturas() {
   const planos = [
     {
       id: 1,
+      idInput: 'plano-gratuito',
       titulo: "Gratuito",
       preco: "0",
       desc: "A boa opção para quem está começando e quer testar nossa plataforma.",
@@ -36,6 +50,7 @@ export default function Assinaturas() {
     },
     {
       id: 2,
+      idInput: 'plano-aventureiro',
       titulo: "Aventureiro",
       preco: "5",
       desc: "Esse plano é ideal para quem viaja ativamente ou busca extrair o melhor delas.",
@@ -55,6 +70,7 @@ export default function Assinaturas() {
     },
     {
       id: 3,
+      idInput: 'plano-viajante',
       titulo: "Viajante",
       preco: "20",
       desc: "Perfeito para aqueles que têm sangue de viajante!",
@@ -78,11 +94,12 @@ export default function Assinaturas() {
   ];
 
   return (
-    <div className="flex justify-center flex-col md:flex-row gap-6">
+    <div id="escolher-plano" className="flex justify-center items-center flex-col md:flex-row md:items-stretch gap-6">
       {!ativandoCartao ? (
       planos.map((plano) => (
         <main
           key={plano.id}
+          id={plano.idInput}
           className="shadow-[0_30px_30px_-25px_rgba(0,38,255,0.205)] bg-white text-[#697e91] max-w-[300px] rounded-2xl"
         >
           <div

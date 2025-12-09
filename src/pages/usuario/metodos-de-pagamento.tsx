@@ -1,14 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";7
+import { useOutletContext } from "react-router-dom";
 import CartaoDeCredito from "../../components/usuario/cartao-de-credito";
 import CartaoSalvo from "../../components/usuario/cartao-salvo";
 
 export default function MetodosDePagamento() {
   const [ativandoCartao, setAtivandoCartao] = useState<boolean>(false);
   const [cartaoSalvo, setCartaoSalvo] = useState<boolean>(true);
+  const { topicoEscolhido }: any = useOutletContext();
 
+  useEffect(() => {
+    if (!topicoEscolhido) return;
+    const elemento = document.getElementById(topicoEscolhido);
+    if (!elemento) return;
+    const posicao = elemento?.getBoundingClientRect().top + window.pageYOffset - 100;
+    window.scrollTo({
+      top: posicao,
+      behavior: 'smooth'
+    });
+  }, [topicoEscolhido]);
 
   return (
-    <main style={{padding: '20px 10px'}} className="w-full flex justify-center gap-10 items-center">
+    <main id="adicionar-cartao" style={{padding: '20px 10px'}} className="w-full flex justify-center gap-10 items-center">
       {!ativandoCartao ? (
         cartaoSalvo ? (
           <>
