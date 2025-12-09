@@ -214,8 +214,10 @@ export default function TelaDeUsuario() {
 
     return (
         <div id="body" className="tela-de-usuario-screen">
-            {largura >= 1024 && (
+            {largura >= 1024 ? (
                 <MenuLateral expandirMargem={expandirMargem}/>
+            ) : (
+                <div className="testando"><MenuVertical/></div>
             )}
             <header className="header tela-de-usuario-screen">
                 <h1 className="titulo tela-de-usuario-screen">Configurações de Usuário</h1>

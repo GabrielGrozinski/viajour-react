@@ -5,20 +5,26 @@
   src: url(../assets/fonts/majesty.otf);
 }
 
+/* -----------------------------------------------------------
+   MOBILE FIRST — antes era o desktop
+----------------------------------------------------------- */
+
 #body.tela-de-usuario-screen {
-  @apply min-h-screen transition-all duration-300 bg-cover bg-fixed bg-no-repeat bg-[url(../../assets/imagens/fundo1.png)] grid grid-cols-[8vw_20%_60%_1fr] pt-10 grid-rows-[60px_auto_1fr_15%];
+  @apply grid grid-cols-[10%_1fr_10%] pt-0 grid-rows-[auto_auto_1fr_100px]
+         min-h-screen transition-all duration-300 bg-cover bg-fixed bg-no-repeat 
+         bg-[url(../../assets/imagens/fundo1.png)];
 }
 
 #body.tela-de-usuario-screen.menu-expandido {
-  @apply grid-cols-[14vw_20%_60%_1fr];
+  @apply grid-cols-[10%_1fr_10%];
 }
 
 hr.tela-de-usuario-screen {
-  @apply col-span-full row-2 border-neutral-200;
+  @apply col-span-full row-3 border-neutral-200;
 }
 
 .header.tela-de-usuario-screen {
-  @apply col-[2/-1] row-1;
+  @apply col-2 flex flex-col row-2 justify-center items-center;
 }
 
 .titulo.tela-de-usuario-screen {
@@ -26,11 +32,11 @@ hr.tela-de-usuario-screen {
 }
 
 #barra-topico.tela-de-usuario-screen {
-  @apply col-2 row-3 p-2 mt-5 flex flex-col gap-10;;
+  @apply col-2 row-3 p-2 mt-5 flex flex-col gap-2;
 }
 
 #barra-topico.tela-de-usuario-screen.barra-fixa {
-  @apply fixed top-0 mt-0 left-[8vw];
+  @apply fixed top-0 mt-0 left-[10%];
 }
 
 .tela-de-usuario-screen.container-buscar {
@@ -46,16 +52,11 @@ hr.tela-de-usuario-screen {
 }
 
 #icone-buscar.tela-de-usuario-screen {
-  @apply text-neutral-400 pointer-events-none absolute top-[50%] translate-x-[-50%] translate-y-[-50%];
-  left: calc(50% + 16px);
-}
-
-#icone-buscar.tela-de-usuario-screen.barra-fixa {
-  left: calc(90%);
+  @apply text-neutral-400 pointer-events-none absolute top-[50%] translate-y-[-50%] left-[85%];
 }
 
 .lista-topicos.tela-de-usuario-screen {
-  @apply flex flex-col gap-4;
+  @apply flex flex-col gap-0;
 }
 
 .topicos.tela-de-usuario-screen {
@@ -67,16 +68,30 @@ hr.tela-de-usuario-screen {
 }
 
 .container.tela-de-usuario-screen {
-  @apply col-3 mt-7 row-3;
+  @apply col-span-full scale-90 mt-0 translate-y-[-3%] row-3;
 }
 
 .rodape.tela-de-usuario-screen {
-  @apply col-[2/-1] row-[-1]
+  @apply col-[2/-1] row-[-1];
 }
 
-@media screen and (max-width: 1024px) {
+/* elementos adicionais do mobile */
+div.testando {
+  @apply col-span-full mb-4;
+}
+
+/* -----------------------------------------------------------
+   DESKTOP — antes era o mobile
+----------------------------------------------------------- */
+
+@media screen and (min-width: 1024px) {
+
   #body.tela-de-usuario-screen {
-    @apply grid grid-cols-[10%_1fr_10%] pt-10 grid-rows-[auto_1fr_100px];
+    @apply grid grid-cols-[8vw_20%_60%_1fr] pt-10 grid-rows-[60px_auto_1fr_15%];
+  }
+
+  #body.tela-de-usuario-screen.menu-expandido {
+    @apply grid-cols-[14vw_20%_60%_1fr];
   }
 
   hr.tela-de-usuario-screen {
@@ -84,36 +99,41 @@ hr.tela-de-usuario-screen {
   }
 
   .header.tela-de-usuario-screen {
-    @apply col-2 flex flex-col row-1 justify-center items-center;
+    @apply col-2 row-1;
   }
 
   #barra-topico.tela-de-usuario-screen {
-    @apply gap-2;
+    @apply gap-10;
   }
 
+  #barra-topico.tela-de-usuario-screen.barra-fixa {
+    @apply left-[8vw];
+  }
 
   #icone-buscar.tela-de-usuario-screen {
-    @apply text-neutral-400 pointer-events-none absolute top-[50%] translate-y-[-50%] left-[90%];
+    @apply text-neutral-400 pointer-events-none absolute top-[50%] translate-x-[-50%] translate-y-[-50%];
+    left: calc(50% + 16px);
   }
 
-/* items */
+  #icone-buscar.tela-de-usuario-screen.barra-fixa {
+    left: calc(90%);
+  }
 
   .lista-topicos.tela-de-usuario-screen {
-    @apply gap-0;
+    @apply gap-4;
   }
 
   .container.tela-de-usuario-screen {
-    @apply col-span-full scale-90 mt-0 translate-y-[-3%] row-2;
+    @apply col-3 mt-7 row-3 scale-100 translate-y-0;
   }
-
 }
 
 /* -----------------------------------------------------------
-   Modo Dark
+   Modo Dark (sem alterações)
 ----------------------------------------------------------- */
 
 html.dark #body.tela-de-usuario-screen {
-  @apply bg-[url(../../assets/imagens/fundo-dark.png)]
+  @apply bg-[url(../../assets/imagens/fundo-dark.png)];
 }
 
 html.dark hr.tela-de-usuario-screen {
