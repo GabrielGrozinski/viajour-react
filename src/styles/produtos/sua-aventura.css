@@ -81,15 +81,15 @@ html.dark .sua-aventura-screen.card {
   @apply bg-[#1e293b];
 }
 
-html.dark label {
+html.dark label.sua-aventura-screen {
   @apply text-white text-shadow-[1px_1px_1px_#2222223a];
 }
 
-html.dark ::placeholder {
+html.dark .sua-aventura-screen::placeholder {
   @apply text-slate-400 text-shadow-[1px_1px_1px_#2222223a];
 }
 
-html.dark input {
+html.dark input.sua-aventura-screen {
   @apply text-slate-100;
 }
 
@@ -97,6 +97,6 @@ html.dark .btn-montar.sua-aventura-screen {
   @apply border border-black;
 }
 
-html.dark h2 {
+html.dark h2.sua-aventura-screen {
 @apply text-white text-shadow-[1px_1px_1px_#2222223a];
 }
