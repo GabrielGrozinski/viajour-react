@@ -147,7 +147,7 @@ export default function Geral() {
 
           return(
             <section 
-              style={{padding: 12}} key={subTopico.id} className="flex relative flex-col gap-2 min-w-full min-h-[100px] bg-[#fefeff] border border-neutral-300 shadow-[0px_0px_3px_#2222221a] rounded-2xl" id={subTopico.identificador}>
+              style={{padding: 12}} key={subTopico.id} className="flex relative flex-col gap-2 min-w-full min-h-[100px] bg-[#fefeff] border-l-4 border-l-blue-400 border border-neutral-300 shadow-[0px_0px_3px_#2222221a] rounded-4xl rounded-l-xl" id={subTopico.identificador}>
 
               <button 
                 className={
