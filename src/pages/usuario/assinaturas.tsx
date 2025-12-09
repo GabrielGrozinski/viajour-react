@@ -1,4 +1,9 @@
+import { useState } from "react";
+import CartaoDeCredito from "../../components/usuario/cartao-de-credito";
+
 export default function Assinaturas() {
+  const [ativandoCartao, setAtivandoCartao] = useState<boolean>(false);
+
   // LISTA GLOBAL DE TODAS AS FEATURES (9 no total)
   const todasAsFeatures = [
     "Acesso limitado",
@@ -73,8 +78,9 @@ export default function Assinaturas() {
   ];
 
   return (
-    <div className="flex flex-col md:flex-row gap-6">
-      {planos.map((plano) => (
+    <div className="flex justify-center flex-col md:flex-row gap-6">
+      {!ativandoCartao ? (
+      planos.map((plano) => (
         <main
           key={plano.id}
           className="shadow-[0_30px_30px_-25px_rgba(0,38,255,0.205)] bg-white text-[#697e91] max-w-[300px] rounded-2xl"
@@ -141,10 +147,10 @@ export default function Assinaturas() {
               style={{ marginTop: 20 }}
               className="w-full flex items-center justify-end"
             >
-              <a
-                href="#"
+              <button
+                onClick={() => setAtivandoCartao(true)}
                 style={{ background: plano.botao }}
-                className="text-white font-medium text-lg text-center w-full no-underline px-[0.75em] rounded-md border-0 outline-0 hover:brightness-90"
+                className="text-white cursor-pointer font-medium text-lg text-center w-full no-underline px-[0.75em] rounded-md border-0 outline-0 hover:brightness-90"
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.background = plano.botaoHover)
                 }
@@ -152,12 +158,15 @@ export default function Assinaturas() {
                   (e.currentTarget.style.background = plano.botao)
                 }
               >
-                Choose plan
-              </a>
+                Escolher plano
+              </button>
             </div>
           </div>
         </main>
-      ))}
+      ))
+      ) : (
+        <CartaoDeCredito setAtivandoCartao={setAtivandoCartao}/>
+      )}
     </div>
   );
 }

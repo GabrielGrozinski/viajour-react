@@ -1,0 +1,74 @@
+@reference "tailwindcss";
+
+* {
+    @apply box-border m-0 p-0;
+    font-family: "Oswald", sans-serif;
+}
+
+.modal {
+  @apply w-fit h-fit shadow-[0px_187px_75px_rgba(0,0,0,0.01),0px_105px_63px_rgba(0,0,0,0.05),0px_47px_47px_rgba(0,0,0,0.09),0px_12px_26px_rgba(0,0,0,0.1),0px_0px_0px_rgba(0,0,0,0.1)] max-w-[450px] rounded-[26px];
+  background: #ffffff;
+}
+.form {
+  @apply flex flex-col gap-5 p-5;
+}
+.payment--options {
+  @apply w-[calc(100%-40px)] grid grid-cols-[33%_34%_33%] gap-5 p-2.5;
+}
+.payment--options button {
+  @apply h-[55px] flex justify-center items-center p-0 rounded-[11px] transition-all duration-300 border-0 cursor-pointer hover:bg-blue-100 active:scale-90;
+  background: #f2f2f2;
+  outline: none;
+}
+.payment--options button svg {
+  @apply h-[18px];
+}
+.payment--options button:last-child svg {
+  @apply h-[22px];
+}
+.separator {
+  @apply w-[calc(100%-20px)] grid grid-cols-[1fr_2fr_1fr] gap-2.5 text-[#8b8e98] mx-2.5 my-0;
+}
+.separator > p {
+  @apply break-keep block text-center font-semibold text-[11px] m-auto;
+}
+.separator .line {
+  @apply inline-block w-full h-px bg-[#e8e8e8] m-auto border-0;
+}
+.credit-card-info--form {
+  @apply flex flex-col gap-[15px];
+}
+.input_container {
+  @apply w-full h-fit flex flex-col gap-[5px];
+}
+.split {
+  @apply grid grid-cols-[4fr_2fr] gap-[15px];
+}
+.split input {
+  @apply w-full;
+}
+.input_label {
+  @apply text-sm text-slate-800 font-semibold;
+}
+.input_field {
+  @apply w-auto h-10 bg-[#f2f2f2] border transition-all duration-300 ease-[cubic-bezier(0.15,0.83,0.66,1)] pl-4 pr-0 py-0 rounded-[9px] border-solid border-[#e5e5e500] focus:border focus:shadow-[0px_0px_0px_2px_#242424] focus:bg-transparent focus:border-solid focus:border-transparent;
+  outline: none;
+}
+.purchase--btn {
+  @apply h-[55px] cursor-pointer text-white text-[15px] font-bold shadow-[0px_0px_0px_0px_#ffffff,0px_0px_0px_0px_#000000] transition-all duration-300 ease-[cubic-bezier(0.15,0.83,0.66,1)] rounded-[11px] border-0 hover:shadow-[0px_0px_0px_2px_#ffffff,0px_0px_0px_4px_#0000003a] active:scale-95;
+  background: #f2f2f2;
+  outline: none;
+  background: linear-gradient(180deg, #363636 0%, #1b1b1b 50%, #000000 100%);
+}
+
+/* Reset input number styles */
+.input_field::-webkit-outer-spin-button,
+.input_field::-webkit-inner-spin-button {
+  @apply m-0;
+  -webkit-appearance: none;
+}
+.input_field[type="number"] {
+  appearance: textfield;        /* padrão */
+  -webkit-appearance: textfield; /* Chrome / Safari */
+  -moz-appearance: textfield;    /* Firefox */
+}

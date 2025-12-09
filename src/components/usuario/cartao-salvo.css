@@ -1,0 +1,36 @@
+@reference "tailwindcss";
+
+* {
+    @apply box-border m-0 p-0;
+    font-family: "Oswald", sans-serif;
+}
+
+.logo svg {
+  @apply h-12 w-[54px];
+}
+::selection {
+  @apply bg-[rgba(0,0,0,0)];
+}
+.card {
+  @apply w-[300px] shadow-[1px_1px_2px_#2222224a] bg-[#a6c2ef] h-[200px] relative rounded-[20px];
+}
+.card .remove,
+.card .logo {
+  @apply absolute inline-block cursor-pointer;
+}
+.card .remove {
+  @apply opacity-90 text-[black] right-[30px] top-[30px] hover:text-[#f06b5d];
+}
+.card .logo {
+  @apply text-[3em] opacity-100 left-[30px] top-5;
+}
+.card .number,
+.card .owner {
+  @apply block absolute cursor-default text-[black] opacity-90 transition-[color] duration-700 ease-[ease-out] left-[30px];
+}
+.card .number {
+  @apply tracking-[4px] bottom-[60px];
+}
+.card .owner {
+  @apply tracking-[1px] bottom-[30px];
+}
