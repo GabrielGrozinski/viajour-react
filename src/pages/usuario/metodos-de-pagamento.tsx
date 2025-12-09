@@ -21,6 +21,12 @@ export default function MetodosDePagamento() {
     });
   }, [topicoEscolhido]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setCartaoSalvo(!cartaoSalvo);
+    }, 10000);
+  }, [])
+
   return (
     <main id="adicionar-cartao" style={{padding: '20px 10px'}} className="w-full flex flex-col md:flex-row justify-center gap-10 items-center">
       {!ativandoCartao ? (

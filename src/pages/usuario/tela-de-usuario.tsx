@@ -161,6 +161,12 @@ export default function TelaDeUsuario() {
     const [topicoEscolhido, setTopicoEscolhido] = useState<string>('');
     const [destacar, setDestacar] = useState<string>('');
     const [largura, setLargura] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => setLargura(window.innerWidth);
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [])
     const { dark } = useContext(TemaContext);
 
     const topicosFiltrados = useMemo(() => {
