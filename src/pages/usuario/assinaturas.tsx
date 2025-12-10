@@ -93,64 +93,67 @@ export default function Assinaturas() {
     },
   ];
 
-  return (
-    <div id="escolher-plano" className="flex justify-center items-center flex-col md:flex-row md:items-stretch gap-6">
-      {!ativandoCartao ? (
+return ( 
+  <div
+    id="escolher-plano"
+    className="assinaturas-outlet flex justify-center items-center flex-col md:flex-row md:items-stretch gap-6"
+  >
+    {!ativandoCartao ? (
       planos.map((plano) => (
         <main
           key={plano.id}
           id={plano.idInput}
-          className="shadow-[0_30px_30px_-25px_rgba(0,38,255,0.205)] bg-white text-[#697e91] max-w-[300px] rounded-2xl"
+          className="assinaturas-outlet shadow-[0_30px_30px_-25px_rgba(0,38,255,0.205)] bg-white text-[#697e91] max-w-[300px] rounded-2xl"
         >
           <div
             style={{ padding: 20, paddingTop: 40, background: plano.corFundo }}
-            className="items-center relative rounded-xl"
+            className="assinaturas-outlet items-center relative rounded-xl"
           >
             {/* Pricing */}
             <span
               style={{ padding: 8, background: plano.corBadge }}
-              className="absolute flex items-center text-xl font-semibold px-[0.75em] rounded-[99em_0_0_99em] right-0 top-0"
+              className="assinaturas-outlet absolute flex items-center text-xl font-semibold px-[0.75em] rounded-[99em_0_0_99em] right-0 top-0"
             >
-              <span style={{ color: plano.corTitulo }}>
+              <span style={{ color: plano.corTitulo }} className="assinaturas-outlet">
                 ${plano.preco}
-                <small className="text-[#707a91] text-[0.75em]">/ m</small>
+                <small className="assinaturas-outlet text-[#707a91] text-[0.75em]">/ m</small>
               </span>
             </span>
 
             {/* Title */}
             <p
-              className="font-semibold text-xl"
+              className="assinaturas-outlet font-semibold text-xl"
               style={{ color: plano.corTitulo }}
             >
               {plano.titulo}
             </p>
 
             {/* Description */}
-            <p style={{ marginBottom: 8 }}>{plano.desc}</p>
+            <p style={{ marginBottom: 8 }} className="assinaturas-outlet">
+              {plano.desc}
+            </p>
 
             {/* Features */}
-            <ul className="flex flex-col gap-2">
+            <ul className="assinaturas-outlet flex flex-col gap-2">
               {todasAsFeatures.map((feat, idx) => {
                 const desbloqueada = plano.featuresLiberadas.includes(feat);
                 return (
-                  <li key={idx} className="flex items-center gap-2">
+                  <li key={idx} className="assinaturas-outlet flex items-center gap-2">
                     
                     {/* Ícone */}
                     {desbloqueada ? (
-                      <span className="bg-[#1FCAC5] inline-flex items-center justify-center text-white w-5 h-5 rounded-full">
+                      <span className="assinaturas-outlet bg-[#1FCAC5] inline-flex items-center justify-center text-white w-5 h-5 rounded-full">
                         ✓
                       </span>
                     ) : (
-                      <span className="bg-red-200 inline-flex items-center justify-center text-red-600 w-5 h-5 rounded-full">
+                      <span className="assinaturas-outlet bg-red-200 inline-flex items-center justify-center text-red-600 w-5 h-5 rounded-full">
                         ✕
                       </span>
                     )}
 
                     {/* Nome da feature */}
                     <span
-                      className={
-                        desbloqueada ? "" : "opacity-50 line-through"
-                      }
+                      className={`assinaturas-outlet ${desbloqueada ? "" : "opacity-50 line-through"}`}
                     >
                       {feat}
                     </span>
@@ -162,12 +165,12 @@ export default function Assinaturas() {
             {/* Button */}
             <div
               style={{ marginTop: 20 }}
-              className="w-full flex items-center justify-end"
+              className="assinaturas-outlet w-full flex items-center justify-end"
             >
               <button
                 onClick={() => setAtivandoCartao(true)}
                 style={{ background: plano.botao }}
-                className="text-white cursor-pointer font-medium text-lg text-center w-full no-underline px-[0.75em] rounded-md border-0 outline-0 hover:brightness-90"
+                className="assinaturas-outlet text-white cursor-pointer font-medium text-lg text-center w-full no-underline px-[0.75em] rounded-md border-0 outline-0 hover:brightness-90"
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.background = plano.botaoHover)
                 }
@@ -181,9 +184,12 @@ export default function Assinaturas() {
           </div>
         </main>
       ))
-      ) : (
-        <CartaoDeCredito setAtivandoCartao={setAtivandoCartao}/>
-      )}
-    </div>
-  );
+    ) : (
+      <CartaoDeCredito
+        setAtivandoCartao={setAtivandoCartao}
+      />
+    )}
+  </div>
+);
+
 }

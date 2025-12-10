@@ -5,3 +5,11 @@
     font-family: 'Majesty';
     src: url(assets/fonts/majesty.otf) format("truetype");
 }
+
+h1::selection, h2::selection, h3::selection, h4::selection, p::selection, span::selection, div::selection, input::selection, label::selection, button::selection, textarea::selection {
+    @apply bg-sky-200;
+}
+
+html.dark h1::selection, html.dark h2::selection, html.dark h3::selection, html.dark h4::selection, html.dark p::selection, html.dark span::selection, html.dark div::selection, html.dark input::selection, html.dark label::selection, html.dark button::selection, html.dark textarea::selection {
+    @apply bg-sky-600;
+}

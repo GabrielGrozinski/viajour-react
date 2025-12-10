@@ -13,13 +13,13 @@
   @apply w-full min-h-screen flex flex-col items-center bg-cover bg-fixed;
 }
 main.sua-aventura-screen {
-@apply w-full min-h-full pb-16 flex flex-col items-center px-[30px] lg:px-0;
+@apply w-full flex-1 min-h-0 pb-16 flex flex-col items-center px-[30px] lg:px-0;
 }
 .sua-aventura-screen.titulo {
-  @apply text-[32px] cursor-pointer text-center w-full text-white my-2;
+  @apply text-[32px] text-center w-full text-white my-2;
 }
 .sua-aventura-screen.card {
-  @apply p-5 w-full bg-white max-w-[600px] shadow-[0_4px_10px_rgba(0,0,0,0.15)] mb-[25px] rounded-[14px];
+  @apply p-5 w-full min-h-0 h-auto bg-white max-w-[600px] shadow-[0_4px_10px_rgba(0,0,0,0.15)] mb-[25px] rounded-[14px];
 }
 
 .sua-aventura-screen.card h2 {
@@ -37,10 +37,10 @@ main.sua-aventura-screen {
   @apply outline-blue-400;
 }
 .sua-aventura-screen textarea {
-  @apply resize-none overflow-hidden;
+  @apply resize-none overflow-hidden text-neutral-700 text-shadow-[1px_1px_1px_#0000001a];
 }
-.sua-aventura-screen.select > option {
-  @apply bg-[red];
+.sua-aventura-screen textarea::placeholder {
+  @apply text-gray-400 text-shadow-none;
 }
 .sua-aventura-screen.card textarea {
   @apply min-h-20;
@@ -99,4 +99,12 @@ html.dark .btn-montar.sua-aventura-screen {
 
 html.dark h2.sua-aventura-screen {
 @apply text-white text-shadow-[1px_1px_1px_#2222223a];
+}
+
+html.dark .sua-aventura-screen textarea {
+  @apply text-slate-200
+}
+
+html.dark .sua-aventura-screen textarea::placeholder {
+  @apply text-gray-500;
 }

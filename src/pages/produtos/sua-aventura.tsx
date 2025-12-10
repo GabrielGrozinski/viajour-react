@@ -18,6 +18,12 @@ interface DiaRoteiro {
   tipo: string;
   adicionarNota: boolean;
   nota: string;
+  custoDia: number;
+}
+
+interface custoDosDias {
+  id: number,
+  custo: string,
 }
 
 const opcoesTipo = [
@@ -30,12 +36,12 @@ export default function MonteSuaAventura() {
   const { dark, setDark } = useContext(TemaContext);
   const [destino, setDestino] = useState<string>("");
   const [dataInicio, setDataInicio] = useState<string>("");
+  const [custoDia, setCustoDia] = useState<custoDosDias[]>([{id: 1, custo: ''}]);
   const [quantidadeDias, setQuantidadeDias] = useState<number>(1);
   const [largura, setLargura] = useState(window.innerWidth);
   const [dias, setDias] = useState<DiaRoteiro[]>([]);
   const inputRefData = useRef<HTMLInputElement | null>(null);
   const pickerRef = useRef<any>(null);
-
 
   const customStyles = {
     control: (base: any) => ({
@@ -66,10 +72,20 @@ export default function MonteSuaAventura() {
         tipo: "turismo",
         adicionarNota: false,
         nota: "",
+        custoDia: 0,
+      })
+    );
+
+    const novosCustos: custoDosDias[] = Array.from(
+      { length: quantidadeDias },
+      (_, i) => ({
+        id: i + 1,
+        custo: ''
       })
     );
 
     setDias(novosDias);
+    setCustoDia(novosCustos);
   };
 
   useEffect(() => {
@@ -80,10 +96,10 @@ export default function MonteSuaAventura() {
     return () => window.removeEventListener('resize', handleResize);
   });
 
-  const atualizarDia = (id: number, campo: keyof DiaRoteiro, valor: any) => {
+  const atualizarDia = (id: number, campo: keyof DiaRoteiro, value: any) => {
     setDias((prev) =>
       prev.map((dia) =>
-        dia.id === id ? { ...dia, [campo]: valor } : dia
+        dia.id === id ? { ...dia, [campo]: campo === 'custoDia' ? parseInt(value.replace(/\D/g, '')) : value } : dia
       )
     );
   };
@@ -111,11 +127,26 @@ export default function MonteSuaAventura() {
   const autoResize = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.target.style.height = "auto";     // reseta
     e.target.style.height = `${e.target.scrollHeight}px`; // ajusta
-    };
+  };
 
   function expandirMargem() {
     // Não faz nada, pois não é necessário expandir a margem.
   }
+
+  function handleChangeCusto(e: React.ChangeEvent<HTMLInputElement>, id_do_dia: Number) {
+    // Remove tudo que não for número
+    const numero = e.target.value.replace(/\D/g, "");
+
+    // Formata adicionando R$ no final
+    const formatado = numero ? "R$ " + numero : "";
+
+    setCustoDia((prev) => prev.map((c) => c.id === id_do_dia ? { ...c, custo: formatado} : c
+    ));
+  }
+
+  useEffect(() => {
+    console.log(dias)
+  }, [dias]);
 
 return (
   <div
@@ -131,7 +162,7 @@ return (
     )
     }
 
-    <h1 onClick={() => setDark(!dark)} className="titulo sua-aventura-screen">Monte sua Aventura</h1>
+    <h1 className="titulo sua-aventura-screen">Monte sua Aventura</h1>
 
     {/* Dados iniciais */}
     <main className="sua-aventura-screen">
@@ -228,6 +259,7 @@ return (
               <>
                 <label className="sua-aventura-screen">Nota do dia:</label>
                 <textarea
+                  placeholder="Adicione alguma informação importante para sua viagem aqui."
                   value={dia.nota}
                   onChange={(e) => {
                     atualizarDia(dia.id, "nota", e.target.value);
@@ -237,6 +269,21 @@ return (
                 />
               </>
             )}
+
+            <label htmlFor="custo-dias" className="sua-aventura-screen">Custo do dia</label>
+            <input
+              type="Text"
+              min={1}
+              max={100000}
+              id="custo-dias"
+              value={custoDia[dia.id - 1].custo}
+              placeholder="Quanto você pretende gastar nesse dia?"
+              className="sua-aventura-screen"
+              onChange={(e) => {
+                atualizarDia(dia.id, "custoDia", e.target.value);
+                handleChangeCusto(e, dia.id);
+              }}
+            />
 
             {dias.length > 0 && dias.length === dia.id && (
               <button className="btn-salvar sua-aventura-screen">

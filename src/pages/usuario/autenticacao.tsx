@@ -118,109 +118,121 @@ export default function Autenticacao() {
     };
   }
 
-    return (
-      <main className="flex flex-col gap-6 min-h-full min-w-full">
-        {subTopicos.map((subTopico: sub_topicos) => {
-          const isCheckedButton = 
-          subTopico.id === 2 ? senha.length < 23 && senha.length > 7 : false;
+return ( 
+  <main className="flex flex-col gap-6 min-h-full min-w-full autenticacao-outlet">
+    {subTopicos.map((subTopico: sub_topicos) => {
+      const isCheckedButton = 
+      subTopico.id === 2 ? senha.length < 23 && senha.length > 7 && forcaDaSenha.nivel !== 'Fraca' : false;
 
-          return(
-            <section 
-              style={{padding: 12, backgroundColor: dark ? '#1c19172a' : '#fefeff'}} key={subTopico.id} className="flex relative flex-col gap-2 min-w-full min-h-[100px] bg-[#fefeff] border-l-4 border-l-amber-400 border border-[#a1a1aa] shadow-[0px_0px_3px_#2222221a] rounded-4xl rounded-l-xl" id={subTopico.identificador}>
+      return(
+        <section 
+          style={{padding: 12, backgroundColor: dark ? '#1c19172a' : '#fefeff'}} 
+          key={subTopico.id} 
+          className="flex relative flex-col gap-2 min-w-full min-h-[100px] bg-[#fefeff] border-l-4 border-l-amber-400 border border-[#a1a1aa] shadow-[0px_0px_3px_#2222221a] rounded-4xl rounded-l-xl autenticacao-outlet" 
+          id={subTopico.identificador}
+        >
 
-              <h1
-                style={{color: dark ? '#e7e5e4' : '#222222'}}
-                className="text-xl font-medium"
-                dangerouslySetInnerHTML={{
-                  __html: highlight(subTopico.titulo, textoDigitado)
-                }}
-              />
+          <h1
+            style={{color: dark ? '#e7e5e4' : '#222222'}}
+            className="text-xl font-medium autenticacao-outlet"
+            dangerouslySetInnerHTML={{
+              __html: highlight(subTopico.titulo, textoDigitado)
+            }}
+          />
 
-              <p className="font-normal text-sm text-neutral-500">{subTopico.paragrafo}</p>
+          <p className="font-normal text-sm text-neutral-500 autenticacao-outlet">{subTopico.paragrafo}</p>
 
-            {subTopico.id === 2 ? (
-                <>
-                    <button 
+        {subTopico.id === 2 ? (
+            <>
+                <button 
+                    className={
+                    `absolute right-0 top-0 -translate-x-1/3 translate-y-1/3 rounded-md  min-h-[30px] min-w-[50px] cursor-not-allowed text-center text-shadow-[1px_1px_1px_0000005a] autenticacao-outlet
+                    ${
+                      isCheckedButton ? 'bg-amber-500 cursor-pointer text-slate-100 pointer-events-auto' 
+                      : 
+                      dark ? 'bg-neutral-600/40 text-black/60' 
+                      : 'bg-neutral-100 text-black/20'
+                    }
+                    `}>
+                    Salvar
+                </button>
+
+                <div className="relative w-full autenticacao-outlet">
+                  <input 
+                      onChange={(event) => {
+                      setSenha(event.target.value);
+                      setForcaDaSenha(calcularForcaSenha(event.target.value));
+                      }}
+                      style={{padding: 6, marginTop: '14px'}}
+                      placeholder={subTopico.placeHolderInput} 
+                      className={`min-w-full rounded-md border ${dark ? 'text-slate-100 border-gray-400' : 'text-slate-800 border-black/60'} md:min-w-[60%] md:max-w-[60%] placeholder-neutral-400 autenticacao-outlet`} 
+                      type={mostrarSenha ? subTopico.inputTipo : 'password'}
+                      name={subTopico.inputId} 
+                      id={subTopico.inputId}
+                  />
+                  <i 
+                  onClick={() => setMostrarSenha(!mostrarSenha)}
+                  className={`fa-regular ${mostrarSenha ? 'fa-eye' : 'fa-eye-slash'} cursor-pointer absolute top-1/2 translate-x-[-150%] autenticacao-outlet`}></i>
+                </div>
+
+                <p className="autenticacao-outlet">
+                  <span className={`${senha.length < 8 && 'opacity-40 text-red-500'} text-green-500 text-shadow-[1px_1px_1px_#2222222a] autenticacao-outlet`}>Mínimo: 8 caracteres</span> <br />
+                  <span className={`${senha.length > 22 && 'opacity-40 text-red-500'} text-green-500 text-shadow-[1px_1px_1px_#2222222a] autenticacao-outlet`}>Máximo: 22 caracteres</span>
+                </p>
+
+                {forcaDaSenha && (
+                  <div className="mt-2 min-w-full md:min-w-[60%] md:max-w-[60%] autenticacao-outlet">
+                    <div className={`h-2 rounded w-full bg-gray-300 autenticacao-outlet`}>
+                      <div
+                        className="h-2 rounded autenticacao-outlet"
+                        style={{
+                          width: `${(forcaDaSenha.score / 5) * 100}%`,
+                          backgroundColor: forcaDaSenha.cor
+                        }}
+                      ></div>
+                    </div>
+
+                    <p className="mt-1 text-lg autenticacao-outlet">
+                      
+                      <span
                         className={
-                        `absolute right-0 top-0 -translate-x-1/3 translate-y-1/3 rounded-md  min-h-[30px] min-w-[50px] cursor-not-allowed text-center text-shadow-[1px_1px_1px_0000005a]
-                        ${isCheckedButton ? 'bg-amber-500 cursor-pointer text-slate-100 pointer-events-auto' : dark ? 'bg-neutral-600/40 text-black/60' : 'bg-neutral-100 text-black/20'
-                        }`}>
-                        Salvar
-                    </button>
-                    <div className="relative w-full">
-                      <input 
-                          onChange={(event) => {
-                          setSenha(event.target.value);
-                          setForcaDaSenha(calcularForcaSenha(event.target.value));
-                          }}
-                          style={{padding: 6, marginTop: '14px'}}
-                          placeholder={subTopico.placeHolderInput} 
-                          className={`min-w-full rounded-md border ${dark ? 'text-slate-100 border-gray-400' : 'text-slate-800 border-black/60'} md:min-w-[60%] md:max-w-[60%] placeholder-neutral-400`} 
-                          type={mostrarSenha ? subTopico.inputTipo : 'password'}
-                          name={subTopico.inputId} 
-                          id={subTopico.inputId}
-                      />
-                      <i 
-                      onClick={() => setMostrarSenha(!mostrarSenha)}
-                      className={`fa-regular ${mostrarSenha ? 'fa-eye' : 'fa-eye-slash'} cursor-pointer absolute top-1/2 translate-x-[-150%]`}></i>
-                    </div>
-                    <p>
-                      <span className={`${senha.length < 8 && 'opacity-40 text-red-500'} text-green-500 text-shadow-[1px_1px_1px_#2222222a]`}>Mínimo: 8 caracteres</span> <br />
-                      <span className={`${senha.length > 22 && 'opacity-40 text-red-500'} text-green-500 text-shadow-[1px_1px_1px_#2222222a]`}>Máximo: 22 caracteres</span>
+                          forcaDaSenha.nivel === "Forte"
+                            ? "text-green-400 autenticacao-outlet"
+                            : forcaDaSenha.nivel === "Média"
+                            ? "text-amber-400 autenticacao-outlet"
+                            : "text-red-400 autenticacao-outlet"
+                        }
+                      >
+                        {forcaDaSenha.nivel}
+                      </span>
                     </p>
-                    {forcaDaSenha && (
-                      <div className="mt-2 min-w-full md:min-w-[60%] md:max-w-[60%]">
-                        <div className={`h-2 rounded w-full bg-gray-300`}>
-                          <div
-                            className="h-2 rounded"
-                            style={{
-                              width: `${(forcaDaSenha.score / 5) * 100}%`,
-                              backgroundColor: forcaDaSenha.cor
-                            }}
-                          ></div>
-                        </div>
-
-                        <p className="mt-1 text-lg">
-                          
-                          <span
-                            className={
-                              forcaDaSenha.nivel === "Forte"
-                                ? "text-green-400"
-                                : forcaDaSenha.nivel === "Média"
-                                ? "text-amber-400"
-                                : "text-red-400"
-                            }
-                          >
-                            {forcaDaSenha.nivel}
-                          </span>
-                        </p>
-                      </div>
-                    )}
-                </>
-            ) : (
-                <>
-                    <button
-                        style={{padding: 4}}
-                        className='
-                        absolute right-0 top-0 -translate-x-1/6 translate-y-1/3 rounded-md min-h-[30px] min-w-[50px] text-center text-shadow-[1px_1px_1px_0000005a] bg-amber-500 cursor-pointer text-slate-100'
-                        >
-                        Verificar email
-                    </button>
-
-                    <div
-                        style={{padding: 6, marginTop: '14px'}} 
-                        className={`rounded-md border ${dark ? 'text-slate-100 border-gray-400' : 'text-slate-800 border-black/60'} min-w-full md:min-w-[60%] md:max-w-[60%]`}  
-                        id={subTopico.inputId}
+                  </div>
+                )}
+            </>
+        ) : (
+            <>
+                <button
+                    style={{padding: 4}}
+                    className='
+                    absolute right-0 top-0 -translate-x-1/6 translate-y-1/3 rounded-md min-h-[30px] min-w-[50px] text-center text-shadow-[1px_1px_1px_0000005a] bg-amber-500 cursor-pointer text-slate-100 autenticacao-outlet'
                     >
-                        {subTopico.placeHolderInput}
-                    </div>
-                </>
-            )}
+                    Verificar email
+                </button>
 
+                <div
+                    style={{padding: 6, marginTop: '14px'}} 
+                    className={`rounded-md border ${dark ? 'text-slate-100 border-gray-400' : 'text-slate-800 border-black/60'} min-w-full md:min-w-[60%] md:max-w-[60%] autenticacao-outlet`}  
+                    id={subTopico.inputId}
+                >
+                    {subTopico.placeHolderInput}
+                </div>
+            </>
+        )}
 
-            </section>
-          );
-        })}
-      </main>
-    )
+        </section>
+      );
+    })}
+  </main>
+)
+
 }
