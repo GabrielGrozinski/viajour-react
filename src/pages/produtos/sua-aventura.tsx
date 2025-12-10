@@ -11,6 +11,7 @@ import Select from "react-select";
 import MenuLateral from "../../components/menu-lateral";
 import MenuVertical from "../../components/menu-vertical";
 import AnuncioDesktop from "../../components/anuncio-desktop";
+import { AnimatePresence, motion } from 'framer-motion';
 
 
 interface DiaRoteiro {
@@ -33,7 +34,26 @@ const opcoesTipo = [
 ];
 
 export default function MonteSuaAventura() {
-  const { dark, setDark } = useContext(TemaContext);
+  const { dark } = useContext(TemaContext);
+  let custosSalvos = [
+    {
+      id: 1,
+      custo: '40'
+    },
+    {
+      id: 2,
+      custo: '22'
+    },
+    {
+      id: 3,
+      custo: '85'
+    },
+    {
+      id: 4,
+      custo: '120'
+    }
+  ]
+  const [condicaoCustos, setCondicaoCustos] = useState<boolean>(false);
   const [destino, setDestino] = useState<string>("");
   const [dataInicio, setDataInicio] = useState<string>("");
   const [custoDia, setCustoDia] = useState<custoDosDias[]>([{id: 1, custo: ''}]);
@@ -133,20 +153,42 @@ export default function MonteSuaAventura() {
     // Não faz nada, pois não é necessário expandir a margem.
   }
 
-  function handleChangeCusto(e: React.ChangeEvent<HTMLInputElement>, id_do_dia: Number) {
+  function formatarCustoDia(custo: string) {
     // Remove tudo que não for número
-    const numero = e.target.value.replace(/\D/g, "");
+    const numero = custo.replace(/\D/g, "");
 
     // Formata adicionando R$ no final
-    const formatado = numero ? "R$ " + numero : "";
+    return numero ? "R$ " + numero : "";
+  }
 
-    setCustoDia((prev) => prev.map((c) => c.id === id_do_dia ? { ...c, custo: formatado} : c
+  function handleChangeCusto(e: React.ChangeEvent<HTMLInputElement>, id_do_dia: Number) {
+
+    setCustoDia((prev) => prev.map((c) => c.id === id_do_dia ? { ...c, custo: formatarCustoDia(e.target.value)} : c
     ));
   }
 
   useEffect(() => {
-    console.log(dias)
+    console.log(dias);
   }, [dias]);
+
+  function adicionarCustosAutomaticamente() {
+    if (dias.length !== custosSalvos.length) {
+      setCondicaoCustos(true);
+      return setTimeout(() => {
+        setCondicaoCustos(false);
+      }, 3000);
+    }
+
+    let custoDiaAutomatico = custoDia.slice();
+    let diasAutomatico = dias.slice();
+    for (let i = 0; i < custoDia.length; i++) {
+      custoDiaAutomatico[i].custo = formatarCustoDia(custosSalvos[i].custo);
+      diasAutomatico[i].custoDia = parseInt(custosSalvos[i].custo);
+    }
+    setCustoDia(custoDiaAutomatico);
+    setDias(diasAutomatico);
+    setCondicaoCustos(false);
+  }
 
 return (
   <div
@@ -154,6 +196,20 @@ return (
     style={{backgroundImage: dark ? `url(${fundoDark})` : `url(${fundo})`}} 
     className="sua-aventura-screen"
   >
+    <AnimatePresence mode="wait">
+      {condicaoCustos && (
+        <motion.div
+          key="aviso-custos"
+          initial={{ opacity: 0, y: 0 }}
+          animate={{ opacity: 1, y: 20 }}
+          exit={{ opacity: 0, y: 0 }}
+          transition={{ duration: 0.5}}
+          className="aviso sua-aventura-screen">
+            {dias.length > custosSalvos.length ? `Seu número de dias atual é maior que o número de dias do Cálculo de Custos. Por favor, remova ${dias.length - custosSalvos.length} dia${dias.length - custosSalvos.length === 1 ? '' : 's'}.` : `Seu número de dias atual é menor que o número de dias do Cálculo de Custos. Por favor, adicione ${custosSalvos.length - dias.length} dia${custosSalvos.length - dias.length > 1 ? 's' : ''}.`}
+        </motion.div>
+      )}
+    </AnimatePresence>
+
     {largura >= 1024 ? (
       <MenuLateral expandirMargem={expandirMargem}/>
     ) : 
@@ -162,7 +218,7 @@ return (
     )
     }
 
-    <h1 className="titulo sua-aventura-screen">Monte sua Aventura</h1>
+    <h1 onClick={() => setCondicaoCustos(!condicaoCustos)} className="titulo cursor-pointer sua-aventura-screen">Monte sua Aventura</h1>
 
     {/* Dados iniciais */}
     <main className="sua-aventura-screen">
@@ -270,7 +326,7 @@ return (
               </>
             )}
 
-            <label htmlFor="custo-dias" className="sua-aventura-screen">Custo do dia</label>
+            <label htmlFor="custo-dias" className="sua-aventura-screen">Custo do dia:</label>
             <input
               type="Text"
               min={1}
@@ -286,9 +342,14 @@ return (
             />
 
             {dias.length > 0 && dias.length === dia.id && (
-              <button className="btn-salvar sua-aventura-screen">
-                Salvar aventura
-              </button>
+              <>
+                <button onClick={() => adicionarCustosAutomaticamente()} className="btn-custo-automatico sua-aventura-screen">
+                  Adicionar automaticamente os gastos da ferramenta Cálculo de Custos
+                </button>
+                <button className="btn-salvar sua-aventura-screen">
+                  Salvar aventura
+                </button>
+              </>
             )}
           </div>
         ))}
