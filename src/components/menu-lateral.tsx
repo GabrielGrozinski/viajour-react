@@ -32,8 +32,8 @@ export default function MenuLateral({ expandirMargem }: {expandirMargem: () => v
             <i className="fa-solid fa-robot menu-lateral-component" /> Ferramentas de I.A
             </div>
 
-            <article  className="itens-do-viajour-desktop menu-lateral-component">
-            <a href="" className="menu-lateral-component">
+            <article onClick={() => navigate('/roteiro-automatico')} className="itens-do-viajour-desktop menu-lateral-component">
+            <a className="menu-lateral-component">
                 <i className="fa-solid fa-chess menu-lateral-component" />
                 <p className="menu-lateral-component">Roteiro Automático</p>
             </a>

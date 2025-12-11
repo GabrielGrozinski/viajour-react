@@ -199,7 +199,7 @@ return (
                 <label id={item} key={index} htmlFor={item} className="geral-outlet">
                   <span className={`geral-outlet flex ${isChecked ? dark ? 'text-[#fefefe] font-medium' : 'text-[#222222] font-medium' : dark ? 'text-zinc-300/80' : 'text-slate-700'} flex-col whitespace-nowrap gap-1 text-sm md:text-lg`}>
                     {item}
-                  <input 
+                  <input
                     checked={isChecked} 
                     onChange={() => 
                       subTopico.id === 4 ? setTipoPerfilViagem(item) 

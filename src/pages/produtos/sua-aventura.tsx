@@ -218,7 +218,7 @@ return (
     )
     }
 
-    <h1 onClick={() => setCondicaoCustos(!condicaoCustos)} className="titulo cursor-pointer sua-aventura-screen">Monte sua Aventura</h1>
+    <h1 className="titulo sua-aventura-screen">Monte sua Aventura</h1>
 
     {/* Dados iniciais */}
     <main className="sua-aventura-screen">

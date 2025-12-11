@@ -42,8 +42,8 @@ export default function MenuVertical() {
         
         <aside ref={ref_barra} id='barra-vertical' className="menu-lateral menu-vertical-component">
 
-            <article  className="itens-do-viajour-desktop menu-vertical-component">
-            <a href="" className="menu-vertical-component">
+            <article onClick={() => navigate('/roteiro-automatico')} className="itens-do-viajour-desktop menu-vertical-component">
+            <a className="menu-vertical-component">
                 <i className="fa-solid fa-chess menu-vertical-component" />
                 <p className="menu-vertical-component">Roteiro Automático</p>
             </a>

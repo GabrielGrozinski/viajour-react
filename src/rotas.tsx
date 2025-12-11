@@ -13,6 +13,7 @@ import Geral from "./pages/usuario/geral";
 import MetodosDePagamento from "./pages/usuario/metodos-de-pagamento";
 import Autenticacao from "./pages/usuario/autenticacao";
 import Assinaturas from "./pages/usuario/assinaturas";
+import RoteiroAutomatico from "./pages/produtos/roteiro-automatico";
 
 
 export default function Rotas() {
@@ -36,6 +37,8 @@ export default function Rotas() {
         <Route path="/monte-sua-aventura" element={<MonteSuaAventura />} />
 
         <Route path="/viagens-baratas" element={<ViagensBaratas />} />
+
+        <Route path="/roteiro-automatico" element={<RoteiroAutomatico />} />
 
         <Route path="/usuario" element={<TelaDeUsuario />}>
           <Route index element={<Geral />} />
