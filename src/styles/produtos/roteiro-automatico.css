@@ -9,111 +9,120 @@
   font-family: "Oswald", sans-serif;
 }
 
-.sua-aventura-screen#body {
+.roteiro-automatico-screen#body {
   @apply w-full min-h-screen flex flex-col items-center bg-cover bg-fixed;
 }
-.sua-aventura-screen.aviso {
+.roteiro-automatico-screen.aviso {
   @apply fixed top-[2%] pointer-events-none left-1/2 translate-x-[-50%] min-h-[40px] min-w-auto px-2 z-1 text-center flex justify-center items-center bg-red-500 rounded-md shadow-[0px_0px_2px_#0000002a] text-slate-100 text-shadow-[1px_1px_1px_#0000001a];
 }
-main.sua-aventura-screen {
+main.roteiro-automatico-screen {
 @apply w-full flex-1 min-h-0 pb-16 flex flex-col items-center px-[30px] lg:px-0;
 }
-.sua-aventura-screen.titulo {
+.roteiro-automatico-screen.titulo {
   @apply text-[32px] text-center w-full text-white my-2;
 }
-.sua-aventura-screen.card {
+.roteiro-automatico-screen.card {
   @apply p-5 w-full min-h-0 h-auto bg-white max-w-[600px] shadow-[0_4px_10px_rgba(0,0,0,0.15)] mb-[25px] rounded-[14px];
 }
 
-.sua-aventura-screen.card h2 {
+.roteiro-automatico-screen.card h2 {
   @apply text-[1.2em] mb-[15px];
 }
-.sua-aventura-screen.card label {
+.roteiro-automatico-screen.card label {
   @apply block font-semibold mt-2.5 mb-1.5 mx-0;
 }
-.sua-aventura-screen.card input,
-.sua-aventura-screen.card select,
-.sua-aventura-screen.card textarea {
+.roteiro-automatico-screen.card input,
+.roteiro-automatico-screen.card select,
+.roteiro-automatico-screen.card textarea {
   @apply w-full border text-base p-2.5 rounded-lg border-solid border-[#ccc];
 }
-.sua-aventura-screen.card input:focus {
+.roteiro-automatico-screen.card input:focus {
   @apply outline-blue-400;
 }
-.btn-custo-automatico.sua-aventura-screen {
+.btn-custo-automatico.roteiro-automatico-screen {
   @apply text-lg min-w-full transition-all duration-300 cursor-pointer text-white text-shadow-[1px_1px_1px_#0000003a] bg-sky-400 rounded-xl mt-2 p-2;
 }
-.btn-custo-automatico.sua-aventura-screen:active {
+.btn-custo-automatico.roteiro-automatico-screen:active {
   @apply scale-98;
 }
-.sua-aventura-screen textarea {
+.opcoes-preferencia.roteiro-automatico-screen {
+  @apply px-2 py-1.5 max-w-[30%] cursor-pointer rounded-md shadow-[1px_1px_2px_#0000001a] bg-neutral-100;
+}
+.preferencias-titulo.roteiro-automatico-screen {
+  @apply mt-4 font-medium;
+}
+.valor-titulo.roteiro-automatico-screen {
+  @apply mt-4 font-medium;
+}
+.roteiro-automatico-screen textarea {
   @apply resize-none overflow-hidden text-neutral-700 text-shadow-[1px_1px_1px_#0000001a];
 }
-.sua-aventura-screen textarea::placeholder {
+.roteiro-automatico-screen textarea::placeholder {
   @apply text-gray-400 text-shadow-none;
 }
-.sua-aventura-screen.card textarea {
+.roteiro-automatico-screen.card textarea {
   @apply min-h-20;
 }
-#label-anotacao.sua-aventura-screen {
+#label-anotacao.roteiro-automatico-screen {
   @apply mb-0 mt-4;
 }
-.sua-aventura-screen.radio-group {
+.roteiro-automatico-screen.radio-group {
   @apply flex gap-[25px] mt-0 mx-0 my-2.5;
 }
-.sua-aventura-screen.radio-group > label {
+.roteiro-automatico-screen.radio-group > label {
   @apply text-center;
 }
-.sua-aventura-screen.btn-montar,
-.sua-aventura-screen.btn-salvar {
+.roteiro-automatico-screen.btn-montar,
+.roteiro-automatico-screen.btn-salvar {
   @apply w-full text-lg cursor-pointer text-white transition-[0.2s] mt-[15px] p-3 rounded-lg;
 }
-.sua-aventura-screen.btn-montar {
+.roteiro-automatico-screen.btn-montar {
   background: #4d7cff;
 }
-.sua-aventura-screen.btn-montar:hover {
+.roteiro-automatico-screen.btn-montar:hover {
   background: #3a63d6;
 }
-.sua-aventura-screen.btn-salvar {
+.roteiro-automatico-screen.btn-salvar {
   background: #2ecc71;
 }
-.sua-aventura-screen.btn-salvar:hover {
+.roteiro-automatico-screen.btn-salvar:hover {
   background: #25a75a;
 }
-.sua-aventura-screen.dias-container {
+.roteiro-automatico-screen.dias-container {
   @apply w-full max-w-[700px] flex flex-col items-center mx-auto my-0;
 }
 
 /* -----------------------------------------------------------
    Modo Dark
 ----------------------------------------------------------- */
-html.dark .sua-aventura-screen.card {
+html.dark .roteiro-automatico-screen.card {
   @apply bg-[#1e293b];
 }
 
-html.dark label.sua-aventura-screen {
+html.dark label.roteiro-automatico-screen {
   @apply text-white text-shadow-[1px_1px_1px_#2222223a];
 }
 
-html.dark .sua-aventura-screen::placeholder {
+html.dark .roteiro-automatico-screen::placeholder {
   @apply text-slate-400 text-shadow-[1px_1px_1px_#2222223a];
 }
 
-html.dark input.sua-aventura-screen {
+html.dark input.roteiro-automatico-screen {
   @apply text-slate-100;
 }
 
-html.dark .btn-montar.sua-aventura-screen {
+html.dark .btn-montar.roteiro-automatico-screen {
   @apply border border-black;
 }
 
-html.dark h2.sua-aventura-screen {
+html.dark h2.roteiro-automatico-screen {
 @apply text-white text-shadow-[1px_1px_1px_#2222223a];
 }
 
-html.dark .sua-aventura-screen textarea {
+html.dark .roteiro-automatico-screen textarea {
   @apply text-slate-200
 }
 
-html.dark .sua-aventura-screen textarea::placeholder {
+html.dark .roteiro-automatico-screen textarea::placeholder {
   @apply text-gray-500;
 }
