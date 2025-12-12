@@ -22,7 +22,7 @@ main.roteiro-automatico-screen {
   @apply text-[32px] text-center w-full text-white my-2;
 }
 .roteiro-automatico-screen.card {
-  @apply p-5 w-full flex flex-col min-h-0 h-auto bg-white max-w-[600px] shadow-[0_4px_10px_rgba(0,0,0,0.15)] mb-[25px] rounded-[14px];
+  @apply p-5 w-full flex flex-col gap-4 min-h-0 h-auto bg-white max-w-[600px] shadow-[0_4px_10px_rgba(0,0,0,0.15)] mb-[25px] rounded-[14px];
 }
 
 .roteiro-automatico-screen.card h2 {
@@ -39,6 +39,9 @@ main.roteiro-automatico-screen {
 .roteiro-automatico-screen.card input:focus {
   @apply outline-blue-400;
 }
+.roteiro-automatico-screen.card input::placeholder {
+  @apply text-neutral-500;
+}
 .btn-custo-automatico.roteiro-automatico-screen {
   @apply text-lg min-w-full transition-all duration-300 cursor-pointer text-white text-shadow-[1px_1px_1px_#0000003a] bg-sky-400 rounded-xl mt-2 p-2;
 }
@@ -46,13 +49,13 @@ main.roteiro-automatico-screen {
   @apply scale-98;
 }
 .opcoes-preferencia.roteiro-automatico-screen {
-  @apply px-2 py-1.5 max-w-[30%] cursor-pointer rounded-md shadow-[1px_1px_2px_#0000001a] bg-neutral-100;
+  @apply px-2 py-1.5 max-w-[80%] sm:max-w-[48.5%] md:max-w-[31%] cursor-pointer rounded-md shadow-[1px_1px_2px_#0000001a] bg-neutral-100;
 }
 .preferencias-titulo.roteiro-automatico-screen {
-  @apply mt-4 font-medium;
+  @apply mt-2 font-medium;
 }
 .valor-titulo.roteiro-automatico-screen {
-  @apply mt-4 font-medium;
+  @apply mt-2 font-medium;
 }
 .roteiro-automatico-screen textarea {
   @apply resize-none overflow-hidden text-neutral-700 text-shadow-[1px_1px_1px_#0000001a];

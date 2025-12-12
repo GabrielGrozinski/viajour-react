@@ -144,7 +144,7 @@ export default function MonteSuaAventura() {
     }
   }, [dataInicio]);
 
-  const autoResize = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const autoResize = (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => {
     e.target.style.height = "auto";     // reseta
     e.target.style.height = `${e.target.scrollHeight}px`; // ajusta
   };
@@ -333,7 +333,7 @@ return (
               max={100000}
               id="custo-dias"
               value={custoDia[dia.id - 1].custo}
-              placeholder="Quanto você pretende gastar nesse dia?"
+              placeholder={`Quanto você pretende gastar${largura < 1024 ? '?' : ' nesse dia?'}`}
               className="sua-aventura-screen"
               onChange={(e) => {
                 atualizarDia(dia.id, "custoDia", e.target.value);

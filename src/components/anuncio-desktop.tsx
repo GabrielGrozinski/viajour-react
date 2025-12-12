@@ -6,13 +6,18 @@ export default function AnuncioDesktop() {
 
     return (
       <>
-        <div style={{backgroundImage: `url(${anuncioVertical})`}} className="
+        <div style={{backgroundImage: `url(${anuncioVertical})`}} 
+        className="
         fixed right-[1%] top-[50%] translate-y-[-50%]
         bg-cover bg-center bg-no-repeat cursor-pointer
         col-3 row-span-full
-        min-w-[200px] min-h-[550px] max-w-[200px] max-h-[550px]"
+        min-w-[200px] min-h-[550px] max-w-[200px] max-h-[550px]
+        "
         >
-          <span className='bg-blue-400 absolute cursor-pointer shadow-[0px_0px_1px_#2222225a] top-[-3%] text-shadow-[1px_1px_1px_#2222222a] text-white text-center max-w-[200px] min-w-[200px]'>
+          <span 
+          className=
+          "bg-blue-400 absolute cursor-pointer shadow-[0px_0px_1px_#2222225a] top-[-3%] text-shadow-[1px_1px_1px_#2222222a] text-white text-center max-w-[200px] min-w-[200px]"
+          >
               Remover Anúncio
           </span>
 

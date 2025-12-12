@@ -11,6 +11,7 @@ import Select from "react-select";
 import MenuLateral from "../../components/menu-lateral";
 import MenuVertical from "../../components/menu-vertical";
 import AnuncioDesktop from "../../components/anuncio-desktop";
+import AnuncioMobile from "../../components/anuncio-mobile";
 import { AnimatePresence, motion } from 'framer-motion';
 import Slider from '@mui/material/Slider';
 import {styled} from '@mui/material/styles';
@@ -99,10 +100,14 @@ export default function RoteiroAutomatico() {
   const pickerRef = useRef<any>(null);
 
   const customStyles = {
-    control: (base: any) => ({
+    control: (base: any, state: any) => ({
         ...base,
-        backgroundColor: dark ? "#e2e8f0" : "white",
+        backgroundColor: dark ? state.hasValue ? '#6c63ff' : "#e2e8f0" : state.hasValue ? '#6c63ff' : "white",
         borderColor: dark ? "#555" : "#ccc",
+    }),
+    singleValue: (base: any, state: any) => ({
+      ...base,
+      color: state.hasValue ? '#f1f5f9' : ''
     }),
     menu: (base: any) => ({
         ...base,
@@ -255,77 +260,87 @@ return (
           gerarDias();
           }} 
         className="card roteiro-automatico-screen">
-        <label htmlFor="destino-viagem" className="roteiro-automatico-screen">Destino da viagem:</label>
-        <input
-          placeholder="Escolha um destino"
-          id="destino-viagem"
-          required
-          className="roteiro-automatico-screen"
-          type="text"
-          value={viagem?.destino}
-          onChange={(opcao) => atualizarViagem("destino", opcao.target.value)}
-        />
+        <div>
+          <label htmlFor="destino-viagem" className="roteiro-automatico-screen">Destino da viagem:</label>
+          <input
+            placeholder="Escolha um destino"
+            id="destino-viagem"
+            required
+            className="roteiro-automatico-screen"
+            type="text"
+            value={viagem?.destino}
+            onChange={(opcao) => atualizarViagem("destino", opcao.target.value)}
+          />
+        </div>
 
-        <label htmlFor="data-viagem" className="roteiro-automatico-screen">Data de início:</label>
-        <input
-          onInvalid={(e) => {
-            if (e.currentTarget.id === 'data-viagem') {
-            e.preventDefault();
-            e.currentTarget.reportValidity();
-            }
-          }}
-          id="data-viagem"
-          required
-          ref={inputRefData}
-          type="text"
-          placeholder="Selecione uma data"
-          className="roteiro-automatico-screen"
-          onChange={(opcao) => atualizarViagem("inicio", opcao.target.value)}
-        />
+        <div>
+          <label htmlFor="data-viagem" className="roteiro-automatico-screen">Data de início:</label>
+          <input
+            onInvalid={(e) => {
+              if (e.currentTarget.id === 'data-viagem') {
+              e.preventDefault();
+              e.currentTarget.reportValidity();
+              }
+            }}
+            id="data-viagem"
+            required
+            ref={inputRefData}
+            type="text"
+            placeholder="Selecione uma data"
+            className="roteiro-automatico-screen"
+            onChange={(opcao) => atualizarViagem("inicio", opcao.target.value)}
+          />
+        </div>
 
-        <label htmlFor="quant-dias" className="roteiro-automatico-screen">Quantidade de dias:</label>
-        <input
-          placeholder="Selecione entre 1-14 dias"
-          type="number"
-          min={1}
-          max={14}
-          id="quant-dias"
-          value={viagem?.quantDias > 0 ? viagem?.quantDias : ''}
-          className="roteiro-automatico-screen"
-          onChange={(opcao) => atualizarViagem("quantDias", Number(opcao.target.value))}
-        />
+        <div>
+          <label htmlFor="quant-dias" className="roteiro-automatico-screen">Quantidade de dias:</label>
+          <input
+            placeholder="Selecione entre 1-14 dias"
+            type="number"
+            min={1}
+            max={14}
+            id="quant-dias"
+            value={viagem?.quantDias > 0 ? viagem?.quantDias : ''}
+            className="roteiro-automatico-screen"
+            onChange={(opcao) => atualizarViagem("quantDias", Number(opcao.target.value))}
+          />
+        </div>
 
-        <label htmlFor="tipo-viagem" className="roteiro-automatico-screen">Tipo da viagem:</label>
-        <Select
-          placeholder="Selecione o tipo da sua viagem"
-          inputId="tipo-viagem"
-          styles={customStyles}
-          options={opcoesTipo}
-          value={opcoesTipo.find((opcao) => opcao.value === viagem?.tipo) || null}
-          onChange={(opcao: any) => atualizarViagem("tipo", opcao?.value)}
-          className="roteiro-automatico-screen"
-        />
+        <div>
+          <label htmlFor="tipo-viagem" className="roteiro-automatico-screen">Tipo da viagem:</label>
+          <Select
+            placeholder="Selecione o tipo da sua viagem"
+            inputId="tipo-viagem"
+            styles={customStyles}
+            options={opcoesTipo}
+            value={opcoesTipo.find((opcao) => opcao.value === viagem?.tipo) || null}
+            onChange={(opcao: any) => atualizarViagem("tipo", opcao?.value)}
+            className="roteiro-automatico-screen"
+          />
+        </div>
 
-        <label htmlFor="quant-pessoas" className="roteiro-automatico-screen">Quantidade de pessoas:</label>
-        <input
-          placeholder="Quantas pessoas vão viajar além de você?"
-          type="number"
-          min={0}
-          max={30}
-          id="quant-pessoas"
-          value={viagem?.quantViajantes > 0 ? viagem?.quantViajantes : ''}
-          className="roteiro-automatico-screen"
-          onChange={(opcao) => atualizarViagem("quantViajantes", Number(opcao.target.value))}
-        />
+        <div>
+          <label htmlFor="quant-pessoas" className="roteiro-automatico-screen">Quantidade de pessoas na viagem (além de você):</label>
+          <input
+            placeholder="Escolha entre 0-30"
+            type="number"
+            min={0}
+            max={30}
+            id="quant-pessoas"
+            value={viagem?.quantViajantes > 0 ? viagem?.quantViajantes : ''}
+            className="roteiro-automatico-screen"
+            onChange={(opcao) => atualizarViagem("quantViajantes", Number(opcao.target.value))}
+          />
+        </div>
 
-        <h2 style={{fontSize: '1.05em'}} className="valor-titulo roteiro-automatico-screen">
-            Escolha quanto você pretende gastar na sua viagem
-        </h2>
         {trocaValores ? (
-          <>
+          <div>
+            <h2 style={{fontSize: '1.05em'}} className="valor-titulo roteiro-automatico-screen">
+                Escolha quanto você pretende gastar na sua viagem
+            </h2>
             <label htmlFor="custo-viagem" className="roteiro-automatico-screen"></label>
             <Select
-              placeholder="Selecione quanto você pretende gastar"
+              placeholder="Selecione um valor"
               inputId="custo-viagem"
               styles={customStyles}
               options={opcoesCusto}
@@ -333,9 +348,13 @@ return (
               onChange={(opcao: any) => atualizarViagem("custoViagem", opcao?.value)}
               className="roteiro-automatico-screen"
             />
-          </>
+            <a style={{marginTop: 20}} className={`${dark ? 'text-blue-500' : 'text-blue-700'} text-shadow-[1px_1px_1px_#0000001a] flex justify-center`}><h3 className="cursor-pointer" onClick={() => setTrocaValores(!trocaValores)}>Usar valores literais</h3></a>
+          </div>
         ) : (
-        <>
+        <div>
+          <h2 style={{fontSize: '1.05em'}} className="valor-titulo roteiro-automatico-screen">
+              Escolha um valor mínimo e máximo para sua viagem
+          </h2>
           <SliderCustomizado step={100} value={valorViagem} onChange={(_, newValue) => {
               if (Array.isArray(newValue)) {
               setValorViagem(newValue);
@@ -348,47 +367,53 @@ return (
               <h3 className={`${dark ? 'text-slate-100' : ''}`}>{valorViagem[0]}</h3>
               <h3 className={`${dark ? 'text-slate-100' : ''}`}>{valorViagem[1]}</h3>
           </div>
-        </>
+
+          <a className={`${dark ? 'text-blue-500' : 'text-blue-700'} text-shadow-[1px_1px_1px_#0000001a] flex justify-center`}><h3 className="cursor-pointer" onClick={() => setTrocaValores(!trocaValores)}>Usar valores subjetivos</h3></a>
+        </div>
         )}
 
-        <a style={{marginTop: trocaValores ? '20px' : ''}} className='text-blue-700 cursor-pointer text-shadow-[1px_1px_1px_#0000002a] flex justify-center' onClick={() => setTrocaValores(!trocaValores)}>Usar valores {trocaValores ? 'literais' : 'subjetivos'}</a>
-
         
-        <h2 className="preferencias-titulo roteiro-automatico-screen">Escolha até três preferências</h2>
-        <div className="flex flex-wrap gap-4">
-            {opcoesPreferencia.map((item: string, index: number) => (
-            <input
-                type="button"
-                onClick={() => {
-                if (viagem?.preferencias.includes(item)) {
-                    const preferenciaViagemDesmarcada = viagem?.preferencias.filter((preferencia: string) => preferencia !== item);
-                    atualizarViagem("preferencias", preferenciaViagemDesmarcada);
-                } else {
-                    if (viagem?.preferencias.length === 4) return;
-                    const preferenciasAtuais = [...viagem?.preferencias!, item];
-                    atualizarViagem("preferencias", preferenciasAtuais);
-                }
-                }}
-                className="opcoes-preferencia roteiro-automatico-screen"
-                style={{
-                backgroundColor: viagem?.preferencias.includes(item) ? '#9333ea' : '', 
-                color: viagem?.preferencias.includes(item) ? '#f8fafc' : '#222222',
-                cursor: viagem?.preferencias.includes(item) ? '' : viagem?.preferencias.length === 4 ? 'not-allowed' : 'pointer'
-                }} 
-                key={index}
-                value={item}
-            />
-            ))}
+        <div>
+          <h2 className="preferencias-titulo roteiro-automatico-screen">Escolha até três preferências</h2>
+          <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
+              {opcoesPreferencia.map((item: string, index: number) => (
+              <input
+                  type="button"
+                  onClick={() => {
+                  if (viagem?.preferencias.includes(item)) {
+                      const preferenciaViagemDesmarcada = viagem?.preferencias.filter((preferencia: string) => preferencia !== item);
+                      atualizarViagem("preferencias", preferenciaViagemDesmarcada);
+                  } else {
+                      if (viagem?.preferencias.length === 4) return;
+                      const preferenciasAtuais = [...viagem?.preferencias!, item];
+                      atualizarViagem("preferencias", preferenciasAtuais);
+                  }
+                  }}
+                  className="opcoes-preferencia roteiro-automatico-screen"
+                  style={{
+                  backgroundColor: viagem?.preferencias.includes(item) ? '#9333ea' : '',
+                  color: viagem?.preferencias.includes(item) ? '#f8fafc' : '#222222',
+                  cursor: viagem?.preferencias.includes(item) ? '' : viagem?.preferencias.length === 4 ? 'not-allowed' : 'pointer'
+                  }}
+                  key={index}
+                  value={item}
+              />
+              ))}
+          </div>
         </div>
 
-        <label htmlFor="btn-montar-aventura" className="roteiro-automatico-screen"></label>
-        <input className="btn-montar roteiro-automatico-screen" id="btn-montar-aventura" type="submit" value="Montar Aventura" />
+        <div>
+          <label htmlFor="btn-montar-aventura" className="roteiro-automatico-screen"></label>
+          <input onClick={() => setCondicaoCustos(false)} className="btn-montar roteiro-automatico-screen" id="btn-montar-aventura" type="submit" value="Montar Aventura" />
+        </div>
       </form>
 
     </main>
 
-    {largura >= 1024 && (
+    {largura >= 1024 ? (
       <AnuncioDesktop/>
+    ) : (
+      <AnuncioMobile/>
     )}
   </div>
 );

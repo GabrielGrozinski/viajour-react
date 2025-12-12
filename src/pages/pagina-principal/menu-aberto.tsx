@@ -128,8 +128,8 @@ return (
         </section>
 
         <main className="main-aberto menu-aberto-screen">
-            <article className="itens-do-viajour itens-ia menu-aberto-screen">
-            <a href="" className="menu-aberto-screen">
+            <article onClick={() => navigate('/roteiro-automatico')} className="itens-do-viajour itens-ia menu-aberto-screen">
+            <a className="menu-aberto-screen">
                 <i className="fa-solid fa-chess icones-referencia menu-aberto-screen" />
                 <p className="menu-aberto-screen">Roteiro Automático</p>
                 <i className="fa-solid fa-robot icones-ia menu-aberto-screen" />
@@ -172,8 +172,8 @@ return (
             </a>
             </article>
             {/*Itens Custos*/}
-            <article className="itens-do-viajour itens-planejamento menu-aberto-screen">
-            <a href="" className="menu-aberto-screen">
+            <article onClick={() => navigate('/monte-sua-aventura')} className="itens-do-viajour itens-planejamento menu-aberto-screen">
+            <a className="menu-aberto-screen">
                 <i className="fa-solid fa-icons icones-referencia menu-aberto-screen" />
                 <p className="menu-aberto-screen">Monte sua Aventura</p>
                 <i className="fa-regular fa-pen-to-square icones-planejamento menu-aberto-screen" />
