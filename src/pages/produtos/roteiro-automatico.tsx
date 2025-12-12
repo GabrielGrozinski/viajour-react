@@ -29,7 +29,7 @@ interface ViagemRoteiro {
     inicio: string,
     quantDias: number,
     tipo: string,
-    custoViagem: number,
+    custoViagem: number[] | string,
     quantViajantes: number,
     preferencias: string[],
 }
@@ -38,6 +38,13 @@ const opcoesTipo = [
   { value: 'turismo', label: 'Turismo' },
   { value: 'compras', label: 'Compras' },
   { value: 'trabalho', label: 'Trabalho' },
+];
+
+const opcoesCusto = [
+  { value: 'minimo-possivel', label: 'Mínimo Possível' },
+  { value: 'pouco', label: 'Pouco' },
+  { value: 'moderadamente', label: 'Moderadamente' },
+  { value: 'muito', label: 'Muito' },
 ];
 
 const opcoesPreferencia = [
@@ -75,6 +82,7 @@ export default function RoteiroAutomatico() {
     }
   ]
   const [condicaoCustos, setCondicaoCustos] = useState<boolean>(false);
+  const [trocaValores, setTrocaValores] = useState<boolean>(false);
   const [dataInicio, setDataInicio] = useState<string>("");
   const [largura, setLargura] = useState(window.innerWidth);
   const [viagem, setViagem] = useState<ViagemRoteiro>({
@@ -82,7 +90,7 @@ export default function RoteiroAutomatico() {
     inicio: '',
     quantDias: 0,
     tipo: '',
-    custoViagem: 0,
+    custoViagem: '',
     quantViajantes: 0,
     preferencias: [''], 
   });
@@ -310,20 +318,41 @@ return (
           onChange={(opcao) => atualizarViagem("quantViajantes", Number(opcao.target.value))}
         />
 
-        <h2 style={{fontSize: '1.1em'}} className="valor-titulo roteiro-automatico-screen">
-            Escolha um valor mínimo e máximo para sua viagem
+        <h2 style={{fontSize: '1.05em'}} className="valor-titulo roteiro-automatico-screen">
+            Escolha quanto você pretende gastar na sua viagem
         </h2>
-        <SliderCustomizado step={100} value={valorViagem} onChange={(_, newValue) => {
-            if (Array.isArray(newValue)) {
-            setValorViagem(newValue);
-            } else return;
-            }} 
-            valueLabelDisplay="auto" min={0} max={50000} 
-        />
-        <div className="w-full flex justify-between">
-            <h3 className={`${dark ? 'text-slate-100' : ''}`}>{valorViagem[0]}</h3>
-            <h3 className={`${dark ? 'text-slate-100' : ''}`}>{valorViagem[1]}</h3>
-        </div>
+        {trocaValores ? (
+          <>
+            <label htmlFor="custo-viagem" className="roteiro-automatico-screen"></label>
+            <Select
+              placeholder="Selecione quanto você pretende gastar"
+              inputId="custo-viagem"
+              styles={customStyles}
+              options={opcoesCusto}
+              value={opcoesCusto.find((opcao) => opcao.value === viagem?.custoViagem) || null}
+              onChange={(opcao: any) => atualizarViagem("custoViagem", opcao?.value)}
+              className="roteiro-automatico-screen"
+            />
+          </>
+        ) : (
+        <>
+          <SliderCustomizado step={100} value={valorViagem} onChange={(_, newValue) => {
+              if (Array.isArray(newValue)) {
+              setValorViagem(newValue);
+              atualizarViagem("custoViagem", newValue);
+              } else return;
+              }} 
+              valueLabelDisplay="auto" min={0} max={50000} 
+          />
+          <div className="w-full flex justify-between">
+              <h3 className={`${dark ? 'text-slate-100' : ''}`}>{valorViagem[0]}</h3>
+              <h3 className={`${dark ? 'text-slate-100' : ''}`}>{valorViagem[1]}</h3>
+          </div>
+        </>
+        )}
+
+        <a style={{marginTop: trocaValores ? '20px' : ''}} className='text-blue-700 cursor-pointer text-shadow-[1px_1px_1px_#0000002a] flex justify-center' onClick={() => setTrocaValores(!trocaValores)}>Usar valores {trocaValores ? 'literais' : 'subjetivos'}</a>
+
         
         <h2 className="preferencias-titulo roteiro-automatico-screen">Escolha até três preferências</h2>
         <div className="flex flex-wrap gap-4">

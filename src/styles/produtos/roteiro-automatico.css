@@ -22,7 +22,7 @@ main.roteiro-automatico-screen {
   @apply text-[32px] text-center w-full text-white my-2;
 }
 .roteiro-automatico-screen.card {
-  @apply p-5 w-full min-h-0 h-auto bg-white max-w-[600px] shadow-[0_4px_10px_rgba(0,0,0,0.15)] mb-[25px] rounded-[14px];
+  @apply p-5 w-full flex flex-col min-h-0 h-auto bg-white max-w-[600px] shadow-[0_4px_10px_rgba(0,0,0,0.15)] mb-[25px] rounded-[14px];
 }
 
 .roteiro-automatico-screen.card h2 {
