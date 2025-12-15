@@ -6,6 +6,7 @@ import AnuncioDesktop from "../../components/anuncio-desktop";
 import AnuncioMobile from "../../components/anuncio-mobile";
 import Slider from '@mui/material/Slider';
 import {styled} from '@mui/material/styles';
+import CardViagem from "../../components/cardViagem";
 
 interface Viagem {
   id: number;
@@ -1019,6 +1020,7 @@ const SliderCustomizado = styled(Slider)({
 
 
 export default function ViagensNatal() {
+  const [mostrarCard, setMostrarCard] = useState<boolean>(false);
   const [filtro, setFiltro] = useState<"nacional" | "internacional">("nacional");
   const [pesquisaAtiva, setPesquisaAtiva] = useState<boolean>(false);
   const [pesquisaAtual, setPesquisaAtual] = useState<string>('');
@@ -1125,7 +1127,7 @@ export default function ViagensNatal() {
       behavior: 'smooth'
     })
   }
-  
+
 
   return (
   <div id="body" className="viagens-natalinas-screen">
@@ -1136,6 +1138,11 @@ export default function ViagensNatal() {
       <MenuVertical />
     )
     }
+
+    {mostrarCard && (
+      <CardViagem setMostrarCard={setMostrarCard}/>
+    )}
+
     <header id="header" className="viagens-natalinas-screen">
       {/* Filtros */}
       {largura >= 1024 && !menuExpandidoH1 && (
@@ -1222,6 +1229,7 @@ export default function ViagensNatal() {
         {itemsToShow.map((v) => (
           <div
             key={v.id}
+            onClick={() => setMostrarCard(!mostrarCard)}
             className="card-viagem viagens-natalinas-screen"
           >
             {v.img && (
@@ -1257,7 +1265,6 @@ export default function ViagensNatal() {
         )}
       </div>
     </main>
-
     
     {largura >= 1024 ? (
       <AnuncioDesktop isTelaDeViagens={true} />

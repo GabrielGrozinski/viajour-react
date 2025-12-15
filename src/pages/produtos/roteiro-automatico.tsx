@@ -411,8 +411,9 @@ return (
                   }}
                   className="opcoes-preferencia roteiro-automatico-screen"
                   style={{
-                  backgroundColor: viagem?.preferencias.includes(item) ? '#9333ea' : '',
-                  color: viagem?.preferencias.includes(item) ? '#f8fafc' : '#222222',
+                  backgroundColor: dark ? viagem?.preferencias.includes(item) ? '#9333ea' : '#334155' : viagem?.preferencias.includes(item) ? '#9333ea' : '' ,
+                  color: dark ? viagem?.preferencias.includes(item) ? '#f8fafc' : '#f1f5f9' : viagem?.preferencias.includes(item) ? '#f8fafc' : '#222222',
+                  borderColor: dark ? '#334155' : '',
                   cursor: viagem?.preferencias.includes(item) ? '' : viagem?.preferencias.length === 4 ? 'not-allowed' : 'pointer'
                   }}
                   key={index}
@@ -424,7 +425,7 @@ return (
 
         <div>
           <label htmlFor="btn-montar-aventura" className="roteiro-automatico-screen"></label>
-          <input onClick={() => verificarInputs()} className="btn-montar roteiro-automatico-screen" id="btn-montar-aventura" type="submit" value="Montar Aventura" />
+          <input onClick={() => verificarInputs()} className="btn-montar roteiro-automatico-screen" id="btn-montar-aventura" type="submit" value="Montar Roteiro" />
         </div>
       </form>
 

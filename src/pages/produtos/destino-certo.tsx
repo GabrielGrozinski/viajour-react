@@ -1,11 +1,8 @@
-import { useState, useContext, useRef, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { TemaContext } from "../../context/TemaContext";
 import "../../styles/produtos/destino-certo.css";
 import fundo from '../../assets/imagens/fundo.png';
 import fundoDark from '../../assets/imagens/fundo-dark.png';
-import flatpickr from "flatpickr";
-import "flatpickr/dist/flatpickr.min.css";
-import { Portuguese } from "flatpickr/dist/l10n/pt.js";
 import "flatpickr/dist/themes/airbnb.css";
 import Select from "react-select";
 import MenuLateral from "../../components/menu-lateral";
@@ -15,11 +12,10 @@ import AnuncioMobile from "../../components/anuncio-mobile";
 import { AnimatePresence, motion } from 'framer-motion';
 
 
-interface ViagemRoteiro {
-    destino: string,
-    inicio: string,
+interface DestinoCerto {
     quantDias: number,
     tipo: string,
+    nacionalidade: string,
     custoViagem: number[] | string,
     quantViajantes: number,
     preferencias: string[],
@@ -29,6 +25,11 @@ const opcoesTipo = [
   { value: 'turismo', label: 'Turismo' },
   { value: 'compras', label: 'Compras' },
   { value: 'trabalho', label: 'Trabalho' },
+];
+
+const opcoesNacionalidade = [
+  { value: 'nacional', label: 'Nacional'},
+  { value: 'internacional', label: 'Internacional'},
 ];
 
 const opcoesCusto = [
@@ -57,19 +58,15 @@ export default function DestinoCerto() {
   const [condicaoInputs, setCondicaoInputs] = useState<boolean>(false);
   const [avisoErro, setAvisoErro] = useState<string>('');
   const [trocaValores, setTrocaValores] = useState<boolean>(false);
-  const [dataInicio, setDataInicio] = useState<string>("");
   const [largura, setLargura] = useState(window.innerWidth);
-  const [viagem, setViagem] = useState<ViagemRoteiro>({
-    destino: '',
-    inicio: '',
+  const [viagem, setViagem] = useState<DestinoCerto>({
     quantDias: 0,
     tipo: '',
+    nacionalidade: '',
     quantViajantes: 0,
     custoViagem: [0, 0],
     preferencias: [''], 
   });
-  const inputRefData = useRef<HTMLInputElement | null>(null);
-  const pickerRef = useRef<any>(null);
 
   const customStyles = {
     control: (base: any, state: any) => ({
@@ -105,25 +102,11 @@ export default function DestinoCerto() {
     return () => window.removeEventListener('resize', handleResize);
   });
 
-  const atualizarViagem = (campo: keyof ViagemRoteiro, value: any) => {
+  const atualizarDestino = (campo: keyof DestinoCerto, value: any) => {
     setViagem((prev) => ({
         ...prev!, [campo]: value
     }));
   };
-
-  useEffect(() => {
-    if (inputRefData.current) {
-        flatpickr(inputRefData.current, {
-          allowInput: true,
-          dateFormat: 'd/m/Y',
-          locale: Portuguese,
-          defaultDate: dataInicio,
-          onChange: (_, dateStr) => {
-            setDataInicio(dateStr);
-          }
-        });
-    }
-  }, []);
 
   useEffect(() => {
     const inputDia: HTMLInputElement | null = window.document.getElementById('quant-dias') as HTMLInputElement;
@@ -154,20 +137,14 @@ export default function DestinoCerto() {
     }
   }, [])
 
-  useEffect(() => {
-    if (pickerRef.current) {
-        pickerRef.current.setDate(dataInicio, false);
-    }
-  }, [dataInicio]);
-
   function expandirMargem() {
     // Não faz nada, pois não é necessário expandir a margem.
   }
 
   function definirValoresViagem(novoValor: number, indice: number) {
-    let copiaAtualizarViagem = [...valorViagem];
-    copiaAtualizarViagem[indice] = novoValor;
-    atualizarViagem("custoViagem", copiaAtualizarViagem);
+    let copiaatualizarDestino = [...valorViagem];
+    copiaatualizarDestino[indice] = novoValor;
+    atualizarDestino("custoViagem", copiaatualizarDestino);
     setValorViagem(prev => {
       let copia = [...prev];
       copia[indice] = novoValor;
@@ -190,17 +167,14 @@ export default function DestinoCerto() {
         if (!value || value[0] === '') {
           setCondicaoInputs(true);
           switch (key) {
-            case "destino":
-              setAvisoErro('');
-              break;
-            case "inicio": 
-              setAvisoErro('');
-              break;
             case "quantDias":
               setAvisoErro('Escolha quantos dias sua viagem terá.');
               break;
             case "tipo":
               setAvisoErro('Defina o tipo da sua viagem.');
+              break;
+            case "nacionalidade":
+              setAvisoErro('Defina se a viagem é nacional ou internacional');
               break;
             case "quantViajantes":
               setAvisoErro('Escolha quantas pessoas irão viajar com você.');
@@ -220,9 +194,9 @@ export default function DestinoCerto() {
 
   useEffect(() => {
     if (trocaValores) {
-      return atualizarViagem("custoViagem", '');
+      return atualizarDestino("custoViagem", '');
     } else {
-      return atualizarViagem("custoViagem", [0, 0]);
+      return atualizarDestino("custoViagem", [0, 0]);
     }
   }, [trocaValores]);
 
@@ -264,37 +238,6 @@ return (
           e.preventDefault();
           }} 
         className="card destino-certo-screen">
-        <div>
-          <label htmlFor="destino-viagem" className="destino-certo-screen">Destino da viagem:</label>
-          <input
-            placeholder="Escolha um destino"
-            id="destino-viagem"
-            required
-            className="destino-certo-screen"
-            type="text"
-            value={viagem?.destino}
-            onChange={(opcao) => atualizarViagem("destino", opcao.target.value)}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="data-viagem" className="destino-certo-screen">Data de início:</label>
-          <input
-            onInvalid={(e) => {
-              if (e.currentTarget.id === 'data-viagem') {
-              e.preventDefault();
-              e.currentTarget.reportValidity();
-              }
-            }}
-            id="data-viagem"
-            required
-            ref={inputRefData}
-            type="text"
-            placeholder="Selecione uma data"
-            className="destino-certo-screen"
-            onChange={(opcao) => atualizarViagem("inicio", opcao.target.value)}
-          />
-        </div>
 
         <div>
           <label htmlFor="quant-dias" className="destino-certo-screen">Quantidade de dias:</label>
@@ -306,7 +249,7 @@ return (
             id="quant-dias"
             value={viagem?.quantDias > 0 ? viagem?.quantDias : ''}
             className="destino-certo-screen"
-            onChange={(opcao) => atualizarViagem("quantDias", Number(opcao.target.value))}
+            onChange={(opcao) => atualizarDestino("quantDias", Number(opcao.target.value))}
           />
         </div>
 
@@ -318,7 +261,20 @@ return (
             styles={customStyles}
             options={opcoesTipo}
             value={opcoesTipo.find((opcao) => opcao.value === viagem?.tipo) || null}
-            onChange={(opcao: any) => atualizarViagem("tipo", opcao?.value)}
+            onChange={(opcao: any) => atualizarDestino("tipo", opcao?.value)}
+            className="destino-certo-screen"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="nacionalidade-viagem" className="destino-certo-screen">Nacionalidade da viagem:</label>
+          <Select
+            placeholder="Sua viagem é internacional ou nacional?"
+            inputId="nacionalidade-viagem"
+            styles={customStyles}
+            options={opcoesNacionalidade}
+            value={opcoesNacionalidade.find((opcao) => opcao.value === viagem?.nacionalidade) || null}
+            onChange={(opcao: any) => atualizarDestino("nacionalidade", opcao?.value)}
             className="destino-certo-screen"
           />
         </div>
@@ -333,7 +289,7 @@ return (
             id="quant-pessoas"
             value={viagem?.quantViajantes > 0 ? viagem?.quantViajantes : ''}
             className="destino-certo-screen"
-            onChange={(opcao) => atualizarViagem("quantViajantes", Number(opcao.target.value))}
+            onChange={(opcao) => atualizarDestino("quantViajantes", Number(opcao.target.value))}
           />
         </div>
 
@@ -349,7 +305,7 @@ return (
               styles={customStyles}
               options={opcoesCusto}
               value={opcoesCusto.find((opcao) => opcao.value === viagem?.custoViagem) || null}
-              onChange={(opcao: any) => atualizarViagem("custoViagem", opcao?.value)}
+              onChange={(opcao: any) => atualizarDestino("custoViagem", opcao?.value)}
               className="destino-certo-screen"
             />
             <a 
@@ -370,7 +326,7 @@ return (
           </h2>
           <div style={{marginBottom: 12}} className="flex justify-between gap-2">
             <input 
-            onChange={(e) => definirValoresViagem(Number(e.target.value), 0)} className="max-w-1/2 text-slate-100"
+            onChange={(e) => definirValoresViagem(Number(e.target.value), 0)} className={`max-w-1/2 ${dark ? 'text-slate-100' : ''}`}
             min={0}
             placeholder="Mínimo" 
             type="number" 
@@ -379,7 +335,7 @@ return (
             />
 
             <input 
-            onChange={(e) => definirValoresViagem(Number(e.target.value), 1)} className="max-w-1/2 text-slate-100" 
+            onChange={(e) => definirValoresViagem(Number(e.target.value), 1)} className={`max-w-1/2 ${dark ? 'text-slate-100' : ''}`}
             placeholder="Máximo"
             min={0} 
             type="number" 
@@ -402,17 +358,18 @@ return (
                   if (viagem?.preferencias.includes(item)) {
                       let preferenciaViagemDesmarcada = viagem?.preferencias.filter((preferencia: string) => preferencia !== item);
                       preferenciaViagemDesmarcada = preferenciaViagemDesmarcada.length === 0 ? [''] : preferenciaViagemDesmarcada;
-                      atualizarViagem("preferencias", preferenciaViagemDesmarcada);
+                      atualizarDestino("preferencias", preferenciaViagemDesmarcada);
                   } else {
                       if (viagem?.preferencias.length === 4) return;
                       const preferenciasAtuais = viagem.preferencias[0] === '' ? [item] : [...viagem?.preferencias!, item];
-                      atualizarViagem("preferencias", preferenciasAtuais);
+                      atualizarDestino("preferencias", preferenciasAtuais);
                   }
                   }}
                   className="opcoes-preferencia destino-certo-screen"
                   style={{
-                  backgroundColor: viagem?.preferencias.includes(item) ? '#9333ea' : '',
-                  color: viagem?.preferencias.includes(item) ? '#f8fafc' : '#222222',
+                  backgroundColor: dark ? viagem?.preferencias.includes(item) ? '#9333ea' : '#334155' : viagem?.preferencias.includes(item) ? '#9333ea' : '' ,
+                  color: dark ? viagem?.preferencias.includes(item) ? '#f8fafc' : '#f1f5f9' : viagem?.preferencias.includes(item) ? '#f8fafc' : '#222222',
+                  borderColor: dark ? '#334155' : '',
                   cursor: viagem?.preferencias.includes(item) ? '' : viagem?.preferencias.length === 4 ? 'not-allowed' : 'pointer'
                   }}
                   key={index}
@@ -424,7 +381,7 @@ return (
 
         <div>
           <label htmlFor="btn-montar-aventura" className="destino-certo-screen"></label>
-          <input onClick={() => verificarInputs()} className="btn-montar destino-certo-screen" id="btn-montar-aventura" type="submit" value="Montar Aventura" />
+          <input onClick={() => verificarInputs()} className="btn-montar destino-certo-screen" id="btn-montar-aventura" type="submit" value="Definir Destino" />
         </div>
       </form>
 
