@@ -379,8 +379,8 @@ i.pagina-inicial-screen:hover {
   span#seta-desktop.seta-virada.pagina-inicial-screen {
     @apply -rotate-90 translate-x-1/4 translate-y-[5%];
   }
-  header.pagina-inicial-screen > #produtos-desktop-container.container-ativado.pagina-inicial-screen {
-    @apply overflow-hidden min-h-[20%] transition-all duration-400 opacity-100 translate-y-0 mt-6 pointer-events-auto h-auto col-[2/4] row-2 grid-cols-[1fr_1fr_1fr] grid-rows-[20%_85%] bg-(--fundo-menu-pressionado) border-(--texto-tag-pressionada) pt-[1%] pb-[2%] rounded-[15px] border-2;
+  header.pagina-inicial-screen > #produtos-desktop-container.pagina-inicial-screen {
+    @apply overflow-hidden min-h-[20%] opacity-100 translate-y-0 mt-6 pointer-events-auto h-auto col-[2/4] row-2 grid-cols-[1fr_1fr_1fr] grid-rows-[20%_85%] bg-(--fundo-menu-pressionado) border-(--texto-tag-pressionada) pt-[1%] pb-[2%] rounded-[15px] border-2;
   }
   header.pagina-inicial-screen > #produtos-desktop-container > h2.pagina-inicial-screen {
     @apply row-1 justify-self-center text-2xl;

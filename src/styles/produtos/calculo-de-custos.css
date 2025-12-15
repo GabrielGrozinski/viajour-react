@@ -11,7 +11,7 @@
 }
 
 div#body.calculo-de-custos-screen {
-  @apply transition-all relative bg-fixed bg-cover bg-no-repeat duration-300 h-screen flex flex-col overflow-hidden;
+  @apply  relative bg-fixed bg-cover bg-no-repeat h-screen flex flex-col overflow-hidden;
 }
 
 main.calculo-de-custos-screen {
@@ -31,7 +31,7 @@ button#btn-rotina-automatica.calculo-de-custos-screen {
 }
 
 main.calculo-de-custos-screen > .container.calculo-de-custos-screen {
-  @apply overflow-y-auto min-w-full transition-all duration-300 bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] p-[25px];
+  @apply overflow-y-auto min-w-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] p-[25px];
 }
 
 main.calculo-de-custos-screen .dias-container.calculo-de-custos-screen {
@@ -70,7 +70,7 @@ main.calculo-de-custos-screen .dia.calculo-de-custos-screen input {
 }
 
 main.calculo-de-custos-screen button#btn-adicionar-dias.calculo-de-custos-screen {
-  @apply w-full text-white text-xl cursor-pointer transition-[0.2s] duration-[ease] mt-2 p-2.5 rounded-md border-[none];
+  @apply w-full text-white text-xl cursor-pointer mt-2 p-2.5 rounded-md border-[none];
   background: #4f46e5;
 }
 
@@ -164,27 +164,27 @@ footer.calculo-de-custos-screen > div.imagem.calculo-de-custos-screen {
 
 @media screen and (min-width:1024px) {
   div#body.calculo-de-custos-screen {
-    @apply relative grid grid-rows-3 grid-cols-[4vw_auto_1fr] gap-4;
+    @apply relative grid grid-rows-3 grid-cols-[4vw_1fr_1fr_210px] gap-4;
   }
 
   div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen {
-    @apply col-2 transition-all duration-300 row-[span_3] min-w-full grid grid-cols-[1fr_1fr] grid-rows-[30%_30%_auto] gap-4 mt-6;
+    @apply col-2 row-[span_3] transition-all duration-300  grid grid-cols-[1fr_1fr] grid-rows-[30%_30%_auto] gap-4 mt-6 bg-red-400;
   }
 
   div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > section.container-gerar-rotina {
-    @apply row-3 flex flex-col gap-1 bg-sky-50 col-[span_2] rounded-xl max-h-[65%] p-4 text-center;
+    @apply row-3 transition-all duration-300 flex flex-col gap-1 bg-sky-50 col-[span_2] rounded-xl max-h-[60%] justify-center p-4 text-center;
   }
 
-  div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > section.container-gerar-rotina > h1 {
+  div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > section.container-gerar-rotina > div > h1 {
     @apply font-[450] text-xl text-[#222222];
   }
 
-  div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > section.container-gerar-rotina > p {
+  div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > section.container-gerar-rotina > div > p {
     @apply text-neutral-800;
   }
 
   div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > section.container-gerar-rotina > button {
-    @apply bg-sky-400 py-2 text-shadow-[1px_1px_1px_#0000005a] mt-6 rounded-md text-white text-lg shadow-[1px_1px_1px_#0000002a] transition-all duration-300 min-w-2/3 cursor-pointer;
+    @apply bg-sky-400 py-2 transition-all duration-200 text-shadow-[1px_1px_1px_#0000005a] mt-6 rounded-md text-white text-lg shadow-[1px_1px_1px_#0000002a] min-w-2/3 cursor-pointer;
   }
 
   div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > section#section-rotina-automatica.container-gerar-rotina > button {
@@ -192,11 +192,11 @@ footer.calculo-de-custos-screen > div.imagem.calculo-de-custos-screen {
   }
 
   div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > section.container-gerar-rotina > button:active {
-    @apply scale-95;
+    @apply scale-98;
   }
 
   div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > div.grafico-dia {
-      @apply bg-sky-50 col-1 px-1 py-[4%] min-h-full rounded-xl;
+      @apply bg-sky-50 col-1 px-1 py-[4%] min-h-full max-w-[100%] rounded-xl;
   }
 
   div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > div#grafico-dia-1 {
@@ -217,7 +217,7 @@ footer.calculo-de-custos-screen > div.imagem.calculo-de-custos-screen {
 
 
   div#body.calculo-de-custos-screen > .graficos.calculo-de-custos-screen > div#grafico-final {
-    @apply bg-sky-50 max-h-full pt-1 pb-0 col-2 row-[span_2] rounded-xl w-full;
+    @apply bg-sky-50 max-h-full pt-1 pb-0 col-2 row-[span_2] rounded-xl max-w-[100%];
   }
 
   div#body.calculo-de-custos-screen > .graficos.calculo-de-custos-screen > div#grafico-final > h3 {
@@ -225,11 +225,13 @@ footer.calculo-de-custos-screen > div.imagem.calculo-de-custos-screen {
   }
 
   main.calculo-de-custos-screen {
-    @apply row-[span_3] pt-6 grid grid-cols-[78%_22%] transition-all duration-300;
+    @apply row-[span_3] pt-6 grid grid-cols-[78%_22%];
   }
 
   main.calculo-de-custos-screen > .container.calculo-de-custos-screen {
-    @apply overflow-y-auto rounded-xl max-h-[92%] max-w-full transition-all duration-300 bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] p-[25px];
+    @apply overflow-y-auto rounded-xl max-h-[92%] col-span-full max-w-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] p-[25px];
+    align-self: normal;
+    justify-self: normal;
   }
 
   div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen.menu-lateral-expandido {

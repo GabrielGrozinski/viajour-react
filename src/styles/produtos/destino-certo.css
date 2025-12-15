@@ -9,123 +9,123 @@
   font-family: "Oswald", sans-serif;
 }
 
-.roteiro-automatico-screen#body {
+.destino-certo-screen#body {
   @apply w-full min-h-screen flex flex-col items-center bg-cover;
 }
-.roteiro-automatico-screen.aviso {
-  @apply fixed top-[2%] pointer-events-none left-1/2 translate-x-[-50%] min-h-[40px] min-w-auto px-2 z-1 text-center flex justify-center items-center bg-red-500 rounded-md shadow-[0px_0px_2px_#0000002a] text-slate-100 text-shadow-[1px_1px_1px_#0000001a];
+.destino-certo-screen.aviso {
+  @apply fixed top-[2%] pointer-events-none left-1/2 translate-x-[-50%] min-h-10 min-w-auto px-2 z-1 text-center flex justify-center items-center bg-red-500 rounded-md shadow-[0px_0px_2px_#0000002a] text-slate-100 text-shadow-[1px_1px_1px_#0000001a];
 }
-main.roteiro-automatico-screen {
+main.destino-certo-screen {
 @apply w-full flex-1 min-h-0 pb-16 flex flex-col items-center px-[30px] lg:px-0;
 }
-.roteiro-automatico-screen.titulo {
+.destino-certo-screen.titulo {
   @apply text-[32px] text-center w-full text-white my-2;
 }
-.roteiro-automatico-screen.card {
+.destino-certo-screen.card {
   @apply p-5 w-full flex flex-col gap-4 min-h-0 h-auto bg-white max-w-[600px] shadow-[0_4px_10px_rgba(0,0,0,0.15)] mb-[25px] rounded-[14px];
 }
 
-.roteiro-automatico-screen.card h2 {
+.destino-certo-screen.card h2 {
   @apply text-[1.2em] mb-[15px];
 }
-.roteiro-automatico-screen.card label {
+.destino-certo-screen.card label {
   @apply block font-semibold mt-2.5 mb-1.5 mx-0;
 }
-.roteiro-automatico-screen.card input,
-.roteiro-automatico-screen.card select,
-.roteiro-automatico-screen.card textarea {
+.destino-certo-screen.card input,
+.destino-certo-screen.card select,
+.destino-certo-screen.card textarea {
   @apply w-full border text-base p-2.5 rounded-lg border-solid border-[#ccc];
 }
-.roteiro-automatico-screen.card input:focus {
+.destino-certo-screen.card input:focus {
   @apply outline-blue-400;
 }
-.roteiro-automatico-screen.card input::placeholder {
+.destino-certo-screen.card input::placeholder {
   @apply text-neutral-500;
 }
-.btn-custo-automatico.roteiro-automatico-screen {
+.btn-custo-automatico.destino-certo-screen {
   @apply text-lg min-w-full transition-all duration-300 cursor-pointer text-white text-shadow-[1px_1px_1px_#0000003a] bg-sky-400 rounded-xl mt-2 p-2;
 }
-.btn-custo-automatico.roteiro-automatico-screen:active {
+.btn-custo-automatico.destino-certo-screen:active {
   @apply scale-98;
 }
-.opcoes-preferencia.roteiro-automatico-screen {
+.opcoes-preferencia.destino-certo-screen {
   @apply px-2 py-1.5 max-w-[80%] sm:max-w-[48.5%] md:max-w-[31%] cursor-pointer rounded-md shadow-[1px_1px_2px_#0000001a] bg-neutral-100;
 }
-.preferencias-titulo.roteiro-automatico-screen {
+.preferencias-titulo.destino-certo-screen {
   @apply mt-2 font-medium;
 }
-.valor-titulo.roteiro-automatico-screen {
+.valor-titulo.destino-certo-screen {
   @apply mt-2 font-medium;
 }
-.roteiro-automatico-screen textarea {
+.destino-certo-screen textarea {
   @apply resize-none overflow-hidden text-neutral-700 text-shadow-[1px_1px_1px_#0000001a];
 }
-.roteiro-automatico-screen textarea::placeholder {
+.destino-certo-screen textarea::placeholder {
   @apply text-gray-400 text-shadow-none;
 }
-.roteiro-automatico-screen.card textarea {
+.destino-certo-screen.card textarea {
   @apply min-h-20;
 }
-#label-anotacao.roteiro-automatico-screen {
+#label-anotacao.destino-certo-screen {
   @apply mb-0 mt-4;
 }
-.roteiro-automatico-screen.radio-group {
+.destino-certo-screen.radio-group {
   @apply flex gap-[25px] mt-0 mx-0 my-2.5;
 }
-.roteiro-automatico-screen.radio-group > label {
+.destino-certo-screen.radio-group > label {
   @apply text-center;
 }
-.roteiro-automatico-screen.btn-montar,
-.roteiro-automatico-screen.btn-salvar {
+.destino-certo-screen.btn-montar,
+.destino-certo-screen.btn-salvar {
   @apply w-full text-lg cursor-pointer text-white transition-[0.2s] mt-[15px] p-3 rounded-lg;
 }
-.roteiro-automatico-screen.btn-montar {
+.destino-certo-screen.btn-montar {
   background: #4d7cff;
 }
-.roteiro-automatico-screen.btn-montar:hover {
+.destino-certo-screen.btn-montar:hover {
   background: #3a63d6;
 }
-.roteiro-automatico-screen.btn-salvar {
+.destino-certo-screen.btn-salvar {
   background: #2ecc71;
 }
-.roteiro-automatico-screen.btn-salvar:hover {
+.destino-certo-screen.btn-salvar:hover {
   background: #25a75a;
 }
-.roteiro-automatico-screen.dias-container {
+.destino-certo-screen.dias-container {
   @apply w-full max-w-[700px] flex flex-col items-center mx-auto my-0;
 }
 
 /* -----------------------------------------------------------
    Modo Dark
 ----------------------------------------------------------- */
-html.dark .roteiro-automatico-screen.card {
+html.dark .destino-certo-screen.card {
   @apply bg-[#1e293b];
 }
 
-html.dark label.roteiro-automatico-screen {
+html.dark label.destino-certo-screen {
   @apply text-white text-shadow-[1px_1px_1px_#2222223a];
 }
 
-html.dark .roteiro-automatico-screen::placeholder {
+html.dark .destino-certo-screen::placeholder {
   @apply text-slate-400 text-shadow-[1px_1px_1px_#2222223a];
 }
 
-html.dark input.roteiro-automatico-screen {
+html.dark input.destino-certo-screen {
   @apply text-slate-100;
 }
 
-html.dark .btn-montar.roteiro-automatico-screen {
+html.dark .btn-montar.destino-certo-screen {
   @apply border border-black;
 }
 
-html.dark h2.roteiro-automatico-screen {
+html.dark h2.destino-certo-screen {
 @apply text-white text-shadow-[1px_1px_1px_#2222223a];
 }
 
-html.dark .roteiro-automatico-screen textarea {
+html.dark .destino-certo-screen textarea {
   @apply text-slate-200
 }
 
-html.dark .roteiro-automatico-screen textarea::placeholder {
+html.dark .destino-certo-screen textarea::placeholder {
   @apply text-gray-500;
 }

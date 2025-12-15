@@ -390,12 +390,16 @@ html.dark div.filtro-busca:hover.viagens-de-sete-dias-screen {
   @apply shadow-[0px_0px_3px_#f8fafc];
 }
 
-html.dark .custo-estimado.viagens-de-sete-dias-screen > h3 {
+html.dark .custo-estimado.viagens-de-sete-dias-screen {
   @apply text-slate-200;
 }
 
 html.dark .card-viagem.viagens-de-sete-dias-screen {
   @apply bg-[#171c28] transition-shadow duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)] active:shadow-[0_4px_16px_rgba(0,0,0,0.4)];
+}
+
+html.dark .card-titulo.viagens-de-sete-dias-screen {
+  @apply text-slate-100;
 }
 
 html.dark .card-descricao.viagens-de-sete-dias-screen {

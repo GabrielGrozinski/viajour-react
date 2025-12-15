@@ -29,7 +29,7 @@ div#body.viagens-baratas-screen {
    HEADER (TOPO)
 ----------------------------------------------------------- */
 header.viagens-baratas-screen {
-  @apply row-1 sticky top-0 left-0 pl-4 border-b border-neutral-300
+  @apply row-1 sticky top-0 bg-white left-0 pl-4 border-b border-neutral-300
          pb-6 pt-4 col-[2/-1] flex justify-between items-center pr-4
          transition-all duration-300;
 }
@@ -392,12 +392,16 @@ html.dark div.filtro-busca:hover.viagens-baratas-screen {
   @apply shadow-[0px_0px_3px_#f8fafc];
 }
 
-html.dark .custo-estimado.viagens-baratas-screen > h3 {
+html.dark .custo-estimado.viagens-baratas-screen {
   @apply text-slate-200;
 }
 
 html.dark .card-viagem.viagens-baratas-screen {
   @apply bg-[#171c28] transition-shadow duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)] active:shadow-[0_4px_16px_rgba(0,0,0,0.4)];
+}
+
+html.dark .card-titulo.viagens-baratas-screen {
+  @apply text-slate-100;
 }
 
 html.dark .card-descricao.viagens-baratas-screen {

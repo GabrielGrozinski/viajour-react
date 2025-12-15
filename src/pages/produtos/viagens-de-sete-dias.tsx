@@ -3,6 +3,7 @@ import '../../styles/produtos/viagens-de-sete-dias.css';
 import MenuLateral from "../../components/menu-lateral";
 import MenuVertical from "../../components/menu-vertical";
 import AnuncioDesktop from "../../components/anuncio-desktop";
+import AnuncioMobile from "../../components/anuncio-mobile";
 import Slider from '@mui/material/Slider';
 import {styled} from '@mui/material/styles';
 
@@ -1257,8 +1258,10 @@ return (
       </div>
     </main>
     
-    {largura >= 1024 && (
-      <AnuncioDesktop/>
+    {largura >= 1024 ? (
+      <AnuncioDesktop isTelaDeViagens={true} />
+    ) : (
+      <AnuncioMobile/>
     )}
 
   </div>

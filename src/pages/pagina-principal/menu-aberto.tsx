@@ -149,10 +149,10 @@ return (
                 <i className="fa-solid fa-robot icones-ia menu-aberto-screen" />
             </a>
             </article>
-            <article className="itens-do-viajour itens-ia menu-aberto-screen">
-            <a href="" className="menu-aberto-screen">
+            <article onClick={() => navigate('/destino-certo')}  className="itens-do-viajour itens-ia menu-aberto-screen">
+            <a className="menu-aberto-screen">
                 <i className="fa-solid fa-plane icones-referencia menu-aberto-screen" />
-                <p className="menu-aberto-screen">Viagem Certa</p>
+                <p className="menu-aberto-screen">Destino Certo</p>
                 <i className="fa-solid fa-robot icones-ia menu-aberto-screen" />
             </a>
             </article>

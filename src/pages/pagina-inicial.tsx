@@ -1,6 +1,8 @@
 import {useState, useRef, useEffect} from "react"
 import { useNavigate } from "react-router-dom"
 import '../styles/pagina-inicial.css';
+import { AnimatePresence, motion } from 'framer-motion';
+
 
 export default function Teste() {
   const navigate = useNavigate();
@@ -176,70 +178,75 @@ return (
         <h3 className="cadastro-desktop pagina-inicial-screen" onClick={() => navigate('/cadastro')} id="c-desktop">Cadastrar</h3>
       </nav>
       {/* Produtos Desktop Dropdown */}
-      <div
-        onMouseLeave={() => setProdutosDesktop(false)}
-        id="produtos-desktop-container"
-        className={
-          produtosDesktop
-            ? "container-ativado pagina-inicial-screen"
-            : "pagina-inicial-screen"
-        }
-      >
-        <h2 className="pagina-inicial-screen">Ferramentas I.A</h2>
+      <AnimatePresence mode="wait">
+        {produtosDesktop && (
+          <motion.div
+            key="produtos-desktop"
+            transition={{duration: 0.3}}
+            initial={{opacity: 0}}
+            animate={{opacity: 100}}
+            exit={{opacity: 0}}
+            onMouseLeave={() => setProdutosDesktop(false)}
+            id="produtos-desktop-container"
+            className="pagina-inicial-screen"
+          >
+            <h2 className="pagina-inicial-screen">Ferramentas I.A</h2>
 
-        <div className="produtos-pai pagina-inicial-screen">
-          <div className="pagina-inicial-screen">
-            <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
-            <h3 className="pagina-inicial-screen">Roteiro Automático</h3>
-          </div>
-          <div className="pagina-inicial-screen">
-            <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
-            <h3 className="pagina-inicial-screen">Chat Auxiliar</h3>
-          </div>
-          <div className="pagina-inicial-screen">
-            <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
-            <h3 className="pagina-inicial-screen">Busca Paraíso</h3>
-          </div>
-          <div className="pagina-inicial-screen">
-            <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
-            <h3 className="pagina-inicial-screen">Viagem Certa</h3>
-          </div>
-        </div>
+            <div className="produtos-pai pagina-inicial-screen">
+              <div className="pagina-inicial-screen">
+                <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
+                <h3 className="pagina-inicial-screen">Roteiro Automático</h3>
+              </div>
+              <div className="pagina-inicial-screen">
+                <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
+                <h3 className="pagina-inicial-screen">Chat Auxiliar</h3>
+              </div>
+              <div className="pagina-inicial-screen">
+                <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
+                <h3 className="pagina-inicial-screen">Busca Paraíso</h3>
+              </div>
+              <div className="pagina-inicial-screen">
+                <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
+                <h3 className="pagina-inicial-screen">Viagem Certa</h3>
+              </div>
+            </div>
 
-        {/* Custos */}
-        <h2 className="pagina-inicial-screen">Custos</h2>
-        <div id="custo" className="produtos-pai pagina-inicial-screen">
-          <div className="pagina-inicial-screen">
-            <i className="fa-solid fa-pen-to-square pagina-inicial-screen"></i>
-            <h3 className="pagina-inicial-screen">Cálculo de Custos</h3>
-          </div>
-          <div className="pagina-inicial-screen">
-            <i className="fa-solid fa-pen-to-square pagina-inicial-screen"></i>
-            <h3 className="pagina-inicial-screen">Viagens Baratas</h3>
-          </div>
-        </div>
+            {/* Custos */}
+            <h2 className="pagina-inicial-screen">Custos</h2>
+            <div id="custo" className="produtos-pai pagina-inicial-screen">
+              <div className="pagina-inicial-screen">
+                <i className="fa-solid fa-pen-to-square pagina-inicial-screen"></i>
+                <h3 className="pagina-inicial-screen">Cálculo de Custos</h3>
+              </div>
+              <div className="pagina-inicial-screen">
+                <i className="fa-solid fa-pen-to-square pagina-inicial-screen"></i>
+                <h3 className="pagina-inicial-screen">Viagens Baratas</h3>
+              </div>
+            </div>
 
-        {/* Planejamento */}
-        <h2 className="pagina-inicial-screen">Planejamento</h2>
-        <div id="planejamento" className="produtos-pai pagina-inicial-screen">
-          <div className="pagina-inicial-screen">
-            <i className="fa-solid fa-camera-retro pagina-inicial-screen"></i>
-            <h3 className="pagina-inicial-screen">Monte sua Aventura</h3>
-          </div>
-          <div className="pagina-inicial-screen">
-            <i className="fa-solid fa-camera-retro pagina-inicial-screen"></i>
-            <h3 className="pagina-inicial-screen">Viagens de 7 dias</h3>
-          </div>
-          <div className="pagina-inicial-screen">
-            <i className="fa-solid fa-camera-retro pagina-inicial-screen"></i>
-            <h3 className="pagina-inicial-screen">Viagens Românticas</h3>
-          </div>
-          <div className="pagina-inicial-screen">
-            <i className="fa-solid fa-camera-retro pagina-inicial-screen"></i>
-            <h3 className="pagina-inicial-screen">Viagens de Natal</h3>
-          </div>
-        </div>
-      </div>
+            {/* Planejamento */}
+            <h2 className="pagina-inicial-screen">Planejamento</h2>
+            <div id="planejamento" className="produtos-pai pagina-inicial-screen">
+              <div className="pagina-inicial-screen">
+                <i className="fa-solid fa-camera-retro pagina-inicial-screen"></i>
+                <h3 className="pagina-inicial-screen">Monte sua Aventura</h3>
+              </div>
+              <div className="pagina-inicial-screen">
+                <i className="fa-solid fa-camera-retro pagina-inicial-screen"></i>
+                <h3 className="pagina-inicial-screen">Viagens de 7 dias</h3>
+              </div>
+              <div className="pagina-inicial-screen">
+                <i className="fa-solid fa-camera-retro pagina-inicial-screen"></i>
+                <h3 className="pagina-inicial-screen">Viagens Românticas</h3>
+              </div>
+              <div className="pagina-inicial-screen">
+                <i className="fa-solid fa-camera-retro pagina-inicial-screen"></i>
+                <h3 className="pagina-inicial-screen">Viagens de Natal</h3>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <i
         className="fa-solid fa-bars pagina-inicial-screen"

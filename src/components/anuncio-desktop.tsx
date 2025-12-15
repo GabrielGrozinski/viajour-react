@@ -1,18 +1,23 @@
 import {useState} from 'react';
 import anuncioVertical from '../assets/imagens/anuncio-3.png';
 import anuncioHorizontal from '../assets/imagens/anuncio.png';
-export default function AnuncioDesktop() {
+
+interface Props {
+  isTelaDeViagens: boolean
+}
+
+export default function AnuncioDesktop({isTelaDeViagens}: Props) {
     const [adOpen, setAdOpen] = useState<boolean>(false);
 
     return (
       <>
-        <div style={{backgroundImage: `url(${anuncioVertical})`}} 
-        className="
-        fixed right-[1%] top-[50%] translate-y-[-50%]
+        <div style={{backgroundImage: `url(${anuncioVertical})`, top: isTelaDeViagens ? '57.5%' : '50%'}} 
+        className={`
+        fixed right-[1%] translate-y-[-50%]
         bg-cover bg-center bg-no-repeat cursor-pointer
         col-3 row-span-full
         min-w-[200px] min-h-[550px] max-w-[200px] max-h-[550px]
-        "
+        `}
         >
           <span 
           className=

@@ -9,7 +9,7 @@ export default function AnuncioMobile() {
         className={`
         fixed bg-cover bg-no-repeat bg-center bottom-0 left-1/2 -translate-x-1/2 z-1 min-w-[300px] max-w-[900px] overflow-hidden transition-all duration-300 ease-in-out rounded-t-xl
         ${!adOpen ? "h-20 shadow-[0_-12px_40px_rgba(0,0,0,0.25)]" : 
-        "h-[30px] bg-white shadow-[0_-8px_25px_rgba(0,0,0,0.18)]"
+        "h-[22px] bg-white shadow-[0_-8px_25px_rgba(0,0,0,0.18)]"
         }
         `}>
 

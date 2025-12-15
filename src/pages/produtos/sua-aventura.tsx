@@ -57,7 +57,7 @@ export default function MonteSuaAventura() {
   const [destino, setDestino] = useState<string>("");
   const [dataInicio, setDataInicio] = useState<string>("");
   const [custoDia, setCustoDia] = useState<custoDosDias[]>([{id: 1, custo: ''}]);
-  const [quantidadeDias, setQuantidadeDias] = useState<number>(1);
+  const [quantidadeDias, setQuantidadeDias] = useState<number>(0);
   const [largura, setLargura] = useState(window.innerWidth);
   const [dias, setDias] = useState<DiaRoteiro[]>([]);
   const inputRefData = useRef<HTMLInputElement | null>(null);
@@ -115,6 +115,22 @@ export default function MonteSuaAventura() {
 
     return () => window.removeEventListener('resize', handleResize);
   });
+
+  useEffect(() => {
+    const inputDia: HTMLInputElement | null = window.document.getElementById('quant-dias') as HTMLInputElement;
+
+    function handleInputDia() {
+        if (!inputDia) return;
+        const max = inputDia.max;
+        const min = inputDia.min;
+        const value = inputDia.value;
+        if (Number(max) < Number(value)) inputDia.value = String(max);
+        if (Number(min) > Number(value)) inputDia.value = String(min);
+    }
+
+    inputDia?.addEventListener('input', handleInputDia);
+    return () => inputDia.removeEventListener('input', handleInputDia);
+  }, [])
 
   const atualizarDia = (id: number, campo: keyof DiaRoteiro, value: any) => {
     setDias((prev) =>
@@ -257,10 +273,12 @@ return (
 
         <label htmlFor="quant-dias" className="sua-aventura-screen">Quantidade de dias:</label>
         <input
+          placeholder="Selecione entre 1-14 dias"
           type="number"
           min={1}
+          max={14}
           id="quant-dias"
-          value={quantidadeDias}
+          value={quantidadeDias > 0 ? quantidadeDias : ''}
           className="sua-aventura-screen"
           onChange={(e) => setQuantidadeDias(Number(e.target.value))}
         />
@@ -329,6 +347,8 @@ return (
             <label htmlFor="custo-dias" className="sua-aventura-screen">Custo do dia:</label>
             <input
               type="Text"
+              inputMode="numeric"
+              pattern="[0-9]*"
               min={1}
               max={100000}
               id="custo-dias"
@@ -357,7 +377,7 @@ return (
     </main>
 
     {largura >= 1024 && (
-      <AnuncioDesktop/>
+      <AnuncioDesktop isTelaDeViagens={false}/>
     )}
   </div>
 );

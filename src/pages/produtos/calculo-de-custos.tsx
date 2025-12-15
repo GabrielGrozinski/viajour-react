@@ -5,7 +5,8 @@ import MenuVertical from "../../components/menu-vertical";
 import MenuLateral from "../../components/menu-lateral";
 import "../../styles/produtos/calculo-de-custos.css";
 import RotinaAutomatica from "../../components/produtos/calculo-de-custos/rotina-automatica"; 
-import anuncio1 from '../../assets/imagens/anuncio1.png';
+import AnuncioDesktop from "../../components/anuncio-desktop";
+import AnuncioMobile from "../../components/anuncio-mobile";
 import fundo from '../../assets/imagens/fundo.png';
 import fundoDark from '../../assets/imagens/fundo-dark.png';
 
@@ -265,8 +266,10 @@ return (
 
               {rotinaAtual === 'rotina-manual' && (
                 <section className="container-gerar-rotina calculo-de-custos-screen">
-                  <h1>Gerador Automático de Rotina de Gastos</h1>
-                  <p>Crie automaticamente uma rotina de gastos completa com base no seu orçamento e perfil de viagem.</p>
+                  <div>
+                    <h1>Gerador Automático de Rotina de Gastos</h1>
+                    <p>Crie automaticamente uma rotina de gastos completa com base no seu orçamento e perfil de viagem.</p>
+                  </div>
                   <button onClick={() => setRotina('rotina-automatica')}>
                     Gerar rotina automaticamente
                   </button>
@@ -405,22 +408,17 @@ return (
           <RotinaAutomatica setRotina={setRotina} />
         )}
       </div>
-    
-      {largura >= 1024 && (
-          <div style={{backgroundImage: `url(${anuncio1})`}} className="imagem-desktop calculo-de-custos-screen">
-          </div>
-      )}
     </main>
-
-    {largura < 1024 && (
-      <footer className="calculo-de-custos-screen">
-        <div style={{backgroundImage: `url(${anuncio1})`}} className="imagem calculo-de-custos-screen">
-        </div>
-      </footer>
-    )}
+ 
+    {largura >= 1024 ? (
+      <AnuncioDesktop isTelaDeViagens={false} />
+    ) : (
+      <AnuncioMobile/>
+    )}  
 
   </div>
 );
 
 
 }
+

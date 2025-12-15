@@ -1,6 +1,6 @@
 import { useState, useContext, useRef, useEffect } from "react";
 import { TemaContext } from "../../context/TemaContext";
-import "../../styles/produtos/roteiro-automatico.css";
+import "../../styles/produtos/destino-certo.css";
 import fundo from '../../assets/imagens/fundo.png';
 import fundoDark from '../../assets/imagens/fundo-dark.png';
 import flatpickr from "flatpickr";
@@ -52,7 +52,7 @@ const opcoesPreferencia = [
     'Tecnologia',
 ]
 
-export default function RoteiroAutomatico() {
+export default function DestinoCerto() {
   const { dark } = useContext(TemaContext);
   const [condicaoInputs, setCondicaoInputs] = useState<boolean>(false);
   const [avisoErro, setAvisoErro] = useState<string>('');
@@ -230,7 +230,7 @@ return (
   <div
     id="body" 
     style={{backgroundImage: dark ? `url(${fundoDark})` : `url(${fundo})`}} 
-    className="roteiro-automatico-screen"
+    className="destino-certo-screen"
   >
     <AnimatePresence mode="wait">
       {condicaoInputs && avisoErro && (
@@ -240,7 +240,7 @@ return (
           animate={{ opacity: 1, y: 20 }}
           exit={{ opacity: 0, y: 0 }}
           transition={{ duration: 0.5}}
-          className="aviso roteiro-automatico-screen"
+          className="aviso destino-certo-screen"
         >
          {avisoErro}
         </motion.div>
@@ -255,22 +255,22 @@ return (
     )
     }
 
-    <h1 className="titulo roteiro-automatico-screen">Roteiro Automático</h1>
+    <h1 className="titulo destino-certo-screen">Destino Certo</h1>
 
     {/* Dados iniciais */}
-    <main className="roteiro-automatico-screen">
+    <main className="destino-certo-screen">
       <form 
         onSubmit={(e) => {
           e.preventDefault();
           }} 
-        className="card roteiro-automatico-screen">
+        className="card destino-certo-screen">
         <div>
-          <label htmlFor="destino-viagem" className="roteiro-automatico-screen">Destino da viagem:</label>
+          <label htmlFor="destino-viagem" className="destino-certo-screen">Destino da viagem:</label>
           <input
             placeholder="Escolha um destino"
             id="destino-viagem"
             required
-            className="roteiro-automatico-screen"
+            className="destino-certo-screen"
             type="text"
             value={viagem?.destino}
             onChange={(opcao) => atualizarViagem("destino", opcao.target.value)}
@@ -278,7 +278,7 @@ return (
         </div>
 
         <div>
-          <label htmlFor="data-viagem" className="roteiro-automatico-screen">Data de início:</label>
+          <label htmlFor="data-viagem" className="destino-certo-screen">Data de início:</label>
           <input
             onInvalid={(e) => {
               if (e.currentTarget.id === 'data-viagem') {
@@ -291,13 +291,13 @@ return (
             ref={inputRefData}
             type="text"
             placeholder="Selecione uma data"
-            className="roteiro-automatico-screen"
+            className="destino-certo-screen"
             onChange={(opcao) => atualizarViagem("inicio", opcao.target.value)}
           />
         </div>
 
         <div>
-          <label htmlFor="quant-dias" className="roteiro-automatico-screen">Quantidade de dias:</label>
+          <label htmlFor="quant-dias" className="destino-certo-screen">Quantidade de dias:</label>
           <input
             placeholder="Selecione entre 1-14 dias"
             type="number"
@@ -305,13 +305,13 @@ return (
             max={14}
             id="quant-dias"
             value={viagem?.quantDias > 0 ? viagem?.quantDias : ''}
-            className="roteiro-automatico-screen"
+            className="destino-certo-screen"
             onChange={(opcao) => atualizarViagem("quantDias", Number(opcao.target.value))}
           />
         </div>
 
         <div>
-          <label htmlFor="tipo-viagem" className="roteiro-automatico-screen">Tipo da viagem:</label>
+          <label htmlFor="tipo-viagem" className="destino-certo-screen">Tipo da viagem:</label>
           <Select
             placeholder="Selecione o tipo da sua viagem"
             inputId="tipo-viagem"
@@ -319,12 +319,12 @@ return (
             options={opcoesTipo}
             value={opcoesTipo.find((opcao) => opcao.value === viagem?.tipo) || null}
             onChange={(opcao: any) => atualizarViagem("tipo", opcao?.value)}
-            className="roteiro-automatico-screen"
+            className="destino-certo-screen"
           />
         </div>
 
         <div>
-          <label htmlFor="quant-pessoas" className="roteiro-automatico-screen">Quantidade de pessoas na viagem (incluindo você):</label>
+          <label htmlFor="quant-pessoas" className="destino-certo-screen">Quantidade de pessoas na viagem (incluindo você):</label>
           <input
             placeholder="Escolha entre 1-30"
             type="number"
@@ -332,17 +332,17 @@ return (
             max={30}
             id="quant-pessoas"
             value={viagem?.quantViajantes > 0 ? viagem?.quantViajantes : ''}
-            className="roteiro-automatico-screen"
+            className="destino-certo-screen"
             onChange={(opcao) => atualizarViagem("quantViajantes", Number(opcao.target.value))}
           />
         </div>
 
         {trocaValores ? (
           <div>
-            <h2 style={{fontSize: '1.05em'}} className="valor-titulo roteiro-automatico-screen">
+            <h2 style={{fontSize: '1.05em'}} className="valor-titulo destino-certo-screen">
                 Escolha quanto você pretende gastar na sua viagem
             </h2>
-            <label htmlFor="custo-viagem" className="roteiro-automatico-screen"></label>
+            <label htmlFor="custo-viagem" className="destino-certo-screen"></label>
             <Select
               placeholder="Selecione um valor"
               inputId="custo-viagem"
@@ -350,7 +350,7 @@ return (
               options={opcoesCusto}
               value={opcoesCusto.find((opcao) => opcao.value === viagem?.custoViagem) || null}
               onChange={(opcao: any) => atualizarViagem("custoViagem", opcao?.value)}
-              className="roteiro-automatico-screen"
+              className="destino-certo-screen"
             />
             <a 
               style={{marginTop: 20}} 
@@ -365,7 +365,7 @@ return (
           </div>
         ) : (
         <div>
-          <h2 style={{fontSize: '1.05em'}} className="valor-titulo roteiro-automatico-screen">
+          <h2 style={{fontSize: '1.05em'}} className="valor-titulo destino-certo-screen">
               Escolha um valor mínimo e máximo para sua viagem
           </h2>
           <div style={{marginBottom: 12}} className="flex justify-between gap-2">
@@ -393,7 +393,7 @@ return (
         )}
         
         <div>
-          <h2 className="preferencias-titulo roteiro-automatico-screen">Escolha até três preferências</h2>
+          <h2 className="preferencias-titulo destino-certo-screen">Escolha até três preferências</h2>
           <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
               {opcoesPreferencia.map((item: string, index: number) => (
               <input
@@ -409,7 +409,7 @@ return (
                       atualizarViagem("preferencias", preferenciasAtuais);
                   }
                   }}
-                  className="opcoes-preferencia roteiro-automatico-screen"
+                  className="opcoes-preferencia destino-certo-screen"
                   style={{
                   backgroundColor: viagem?.preferencias.includes(item) ? '#9333ea' : '',
                   color: viagem?.preferencias.includes(item) ? '#f8fafc' : '#222222',
@@ -423,8 +423,8 @@ return (
         </div>
 
         <div>
-          <label htmlFor="btn-montar-aventura" className="roteiro-automatico-screen"></label>
-          <input onClick={() => verificarInputs()} className="btn-montar roteiro-automatico-screen" id="btn-montar-aventura" type="submit" value="Montar Aventura" />
+          <label htmlFor="btn-montar-aventura" className="destino-certo-screen"></label>
+          <input onClick={() => verificarInputs()} className="btn-montar destino-certo-screen" id="btn-montar-aventura" type="submit" value="Montar Aventura" />
         </div>
       </form>
 
