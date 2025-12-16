@@ -3,7 +3,7 @@
 
 @font-face {
     font-family: 'Majesty';
-    src: url(assets/fonts/majesty.otf) format("truetype");
+    src: url(./assets/fonts/majesty.otf) format("truetype");
 }
 
 h1::selection, h2::selection, h3::selection, h4::selection, p::selection, span::selection, div::selection, input::selection, label::selection, button::selection, textarea::selection {

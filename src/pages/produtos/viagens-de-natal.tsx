@@ -1101,6 +1101,21 @@ export default function ViagensNatal() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Disable page scroll when CardViagem is open so only the card scrolls
+  useEffect(() => {
+    if (mostrarCard) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
+  }, [mostrarCard]);
 
   function ativarPesquisa() {
     window.document.getElementById('searchViagem')?.classList.toggle('ativado');
@@ -1138,10 +1153,11 @@ export default function ViagensNatal() {
       <MenuVertical />
     )
     }
-
-    {mostrarCard && (
-      <CardViagem setMostrarCard={setMostrarCard}/>
-    )}
+      {mostrarCard && (
+        <CardViagem 
+        key="card-viagem"
+        setMostrarCard={setMostrarCard}/>
+      )}
 
     <header id="header" className="viagens-natalinas-screen">
       {/* Filtros */}
@@ -1230,7 +1246,15 @@ export default function ViagensNatal() {
           <div
             key={v.id}
             style={{filter: mostrarCard ? 'blur(1.5px)' : ''}}
-            onClick={() => setMostrarCard(!mostrarCard)}
+            onClick={() => {
+              setMostrarCard(true);
+              if (window.pageYOffset < 120) {
+                window.scrollTo({
+                  top: 120,
+                  behavior: 'smooth',
+                });
+              }
+            }}
             className="card-viagem viagens-natalinas-screen"
           >
             {v.img && (
