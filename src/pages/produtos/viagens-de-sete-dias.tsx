@@ -6,6 +6,8 @@ import AnuncioDesktop from "../../components/anuncio-desktop";
 import AnuncioMobile from "../../components/anuncio-mobile";
 import Slider from '@mui/material/Slider';
 import {styled} from '@mui/material/styles';
+import CardViagem from "../../components/cardViagem";
+
 
 interface Viagem {
   id: number;
@@ -1019,6 +1021,7 @@ const SliderCustomizado = styled(Slider)({
 
 
 export default function ViagensSeteDias() {
+  const [mostrarCard, setMostrarCard] = useState<boolean>(false);
   const [filtro, setFiltro] = useState<"nacional" | "internacional">("nacional");
   const [pesquisaAtiva, setPesquisaAtiva] = useState<boolean>(false);
   const [pesquisaAtual, setPesquisaAtual] = useState<string>('');
@@ -1099,6 +1102,29 @@ export default function ViagensSeteDias() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const header = window.document.getElementById('header');
+    const main = window.document.getElementById('container');
+    if (!header || !main) return;
+    if (mostrarCard) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      header.style.pointerEvents = 'none';
+      main.style.pointerEvents = 'none';
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      header.style.pointerEvents = 'auto';
+      main.style.pointerEvents = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      header.style.pointerEvents = 'auto';
+      main.style.pointerEvents = 'auto';
+    };
+  }, [mostrarCard]);
 
   function ativarPesquisa() {
     window.document.getElementById('searchViagem')?.classList.toggle('ativado');
@@ -1106,6 +1132,7 @@ export default function ViagensSeteDias() {
   }
 
   function expandirMargem() {
+    setMostrarCard(false);
     window.document.getElementById('container')?.classList.toggle('menu-lateral-expandido');
     window.document.getElementById('header')?.classList.toggle('menu-lateral-expandido');
     setMenuExpandidoH1(!menuExpandidoH1);
@@ -1136,6 +1163,13 @@ return (
       <MenuVertical />
     )
     }
+
+    {mostrarCard && (
+      <CardViagem 
+      key="card-viagem"
+      setMostrarCard={setMostrarCard}/>
+    )}
+
     <header id="header" className="viagens-de-sete-dias-screen">
       {/* Filtros */}
       {largura >= 1024 && !menuExpandidoH1 && (
@@ -1222,6 +1256,16 @@ return (
         {itemsToShow.map((v) => (
           <div
             key={v.id}
+            style={{filter: mostrarCard ? 'blur(1.5px)' : ''}}
+            onClick={() => {
+              setMostrarCard(true);
+              if (window.pageYOffset < 120) {
+                window.scrollTo({
+                  top: 120,
+                  behavior: 'smooth',
+                });
+              }
+            }}
             className="card-viagem viagens-de-sete-dias-screen"
           >
             {v.img && (

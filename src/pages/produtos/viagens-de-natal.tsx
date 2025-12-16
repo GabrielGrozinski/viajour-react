@@ -1101,19 +1101,27 @@ export default function ViagensNatal() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Disable page scroll when CardViagem is open so only the card scrolls
   useEffect(() => {
+    const header = window.document.getElementById('header');
+    const main = window.document.getElementById('container');
+    if (!header || !main) return;
     if (mostrarCard) {
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
+      header.style.pointerEvents = 'none';
+      main.style.pointerEvents = 'none';
     } else {
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
+      header.style.pointerEvents = 'auto';
+      main.style.pointerEvents = 'auto';
     }
 
     return () => {
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
+      header.style.pointerEvents = 'auto';
+      main.style.pointerEvents = 'auto';
     };
   }, [mostrarCard]);
 
@@ -1123,6 +1131,7 @@ export default function ViagensNatal() {
   }
 
   function expandirMargem() {
+    setMostrarCard(false);
     window.document.getElementById('container')?.classList.toggle('menu-lateral-expandido');
     window.document.getElementById('header')?.classList.toggle('menu-lateral-expandido');
     setMenuExpandidoH1(!menuExpandidoH1);
@@ -1153,11 +1162,12 @@ export default function ViagensNatal() {
       <MenuVertical />
     )
     }
-      {mostrarCard && (
-        <CardViagem 
-        key="card-viagem"
-        setMostrarCard={setMostrarCard}/>
-      )}
+    
+    {mostrarCard && (
+      <CardViagem 
+      key="card-viagem"
+      setMostrarCard={setMostrarCard}/>
+    )}
 
     <header id="header" className="viagens-natalinas-screen">
       {/* Filtros */}

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { TemaContext } from "../context/TemaContext";
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -107,10 +107,14 @@ export default function CardViagem({ setMostrarCard }: Props) {
             },
         ],
     };
-
+    const [largura, setLargura] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => setLargura(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     const { dark } = useContext(TemaContext);
     const [viagemFavoritada, setViagemFavoritada] = useState<boolean>(false);
-
 
     return (
         <AnimatePresence mode="wait">
@@ -121,40 +125,40 @@ export default function CardViagem({ setMostrarCard }: Props) {
             exit={{opacity: 0, y: 0}}
             transition={{duration: 0.3}}
             style={{
-                minWidth: 'calc(88% - 48px)',
-                maxWidth: 'calc(88% - 48px)',
+                minWidth: largura >= 1024 ? 'calc((100% - 4vw - 200px)*0.9 - 48px)' : largura > 768 ? 'calc(68% - 48px)' : 'calc(88% - 48px)',
+                maxWidth: largura >= 1024 ? 'calc((100% - 4vw - 200px)*0.9 - 48px)' : largura > 768 ? 'calc(68% - 48px)' : 'calc(88% - 48px)',
                 maxHeight: '60vh',
-                left: 'calc(6% + 24px)',
+                left: largura >= 1024 ? 'calc(0% + 4vw + 24px + (100% - 4vw - 200px)*0.05)' : largura > 768 ? 'calc(16% + 24px)' : 'calc(6% + 24px)',
                 top: 'calc(50vh - 30vh)',
-                paddingBottom: 10,
             }}
-            className={`fixed rounded-md z-2 overflow-y-auto scroll-smooth shadow-[0px_0px_3px_#0000004a] min-h-[350px] h-auto grid grid-rows-[200px_1fr] ${dark ? 'bg-slate-900' : 'bg-white'}
-            
+            className={`fixed rounded-md z-2 overflow-y-auto scroll-smooth shadow-[0px_0px_3px_#0000009a] min-h-[350px] h-auto grid grid-rows-[200px_1fr] sm:grid-rows-[300px_1fr] lg:grid-rows-1 lg:grid-cols-2 lg:overflow-y-hidden ${dark ? 'bg-slate-900' : 'bg-white'}
             `}>
                 <i
                 onClick={() => setViagemFavoritada(!viagemFavoritada)}
-                className={`fa-${viagemFavoritada ? 'solid' : 'regular'} fa-star absolute z-1 text-amber-400 text-shadow-[1px_1px_1px_#0000003a] top-[2%] left-[2%] cursor-pointer`}
+                className={`fa-${viagemFavoritada ? 'solid' : 'regular'} fa-star absolute z-1 text-amber-400 text-shadow-[1px_1px_1px_#0000003a] top-[2%] left-[2%] cursor-pointer lg:-translate-x-1/2 lg:text-2xl`}
                 >
                 </i>
 
                 <i 
                 onClick={() => setMostrarCard(false)}
-                className="fa-solid fa-xmark absolute z-1 text-red-400 text-shadow-[1px_1px_1px_#0000003a] top-[2%] right-[2%] cursor-pointer"></i>
+                style={{right: largura >= 1024 ? 'calc(2% + 15px)' : ''}}
+                className="fa-solid fa-xmark absolute z-1 text-red-400 text-shadow-[1px_1px_1px_#0000003a] top-[2%] right-[2%] cursor-pointer lg:translate-x-1/2 lg:text-2xl"></i>
+
                 <div
-                className="min-h-full row-1"
+                className="min-h-full max-h-full row-1 lg:col-1"
                 >
                     <img
                     src="https://cdn.pixabay.com/photo/2014/10/24/18/27/magic-kingdom-501634_1280.jpg"
                     alt="imagem-card"
                     loading="lazy"
                     style={{objectPosition: 'center'}}
-                    className="w-full h-[200px] object-cover block"
+                    className="w-full h-[200px] sm:h-[300px] lg:h-full lg:max-h-full object-cover block"
                     />
                 </div>
-                <section style={{paddingTop: 6}} className="row-2">
+                <section style={{paddingTop: 6, paddingBottom: largura >= 1024 ? '' : 12, padding: largura >= 1024 ? 40 : '', marginLeft: largura >= 1024 ? 15 : ''}} className="row-2 lg:row-1 lg:col-2 lg:overflow-y-auto">
                     <h1 
                     style={{fontFamily: 'Majesty', padding: '0px 2px'}} 
-                    className={`text-center tracking-wider text-lg ${dark ? 'text-white' : ''}`}>
+                    className={`text-center tracking-wider text-lg ${dark ? 'text-white' : ''} lg:text-3xl`}>
                         {viagem.nome}
                     </h1>
                     <p 
@@ -184,7 +188,7 @@ export default function CardViagem({ setMostrarCard }: Props) {
                                     <li 
                                     key={index}
                                     style={{margin: '3px 4px'}}
-                                    className={`text-shadow-[1px_1px-1px_#0000002a] text-sm relative before:content-['•'] before:mr-1 ${dark ? 'before:text-slate-100 text-blue-100' : 'before:text-slate-700 text-sky-800'} `}>
+                                    className={`text-shadow-[1px_1px-1px_#0000002a] text-sm relative before:content-['•'] before:mr-1 ${dark ? 'before:text-slate-100 text-blue-100' : 'before:text-slate-700 text-sky-900'} `}>
                                         {atividade}
                                     </li>
                                 ))}
@@ -192,11 +196,11 @@ export default function CardViagem({ setMostrarCard }: Props) {
                             </ol>
                         </div>
                     ))}
+                    <button style={{padding: 4, marginTop: -10}} className="bg-blue-500 scale-90 text-lg text-white/95 text-shadow-[1px_1px_1px_#0000002a] rounded-md cursor-pointer transition-transform duration-300 active:scale-88 max-h-14 row-2 w-full">
+                        Procurar reservas para essa viagem
+                    </button>
                 </section>
 
-                <button style={{padding: 4, marginTop: -10}} className="bg-blue-500 scale-90 text-lg text-white/95 text-shadow-[1px_1px_1px_#0000002a] rounded-md cursor-pointer transition-transform duration-300 active:scale-85">
-                    Procurar reservas para essa viagem
-                </button>
             </motion.main>
         </AnimatePresence>
     );
