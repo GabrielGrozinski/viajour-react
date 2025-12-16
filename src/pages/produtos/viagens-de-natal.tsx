@@ -1229,6 +1229,7 @@ export default function ViagensNatal() {
         {itemsToShow.map((v) => (
           <div
             key={v.id}
+            style={{filter: mostrarCard ? 'blur(1.5px)' : ''}}
             onClick={() => setMostrarCard(!mostrarCard)}
             className="card-viagem viagens-natalinas-screen"
           >
