@@ -38,7 +38,7 @@ export default function MenuVertical() {
             <i onClick={() => navigate('/principal')} className="fa-solid fa-house"></i>
             <i className="fa-solid fa-bars"></i>
             <i onClick={() => navigate('/usuario')} className="fa-solid fa-circle-user"></i>
-            </nav>
+        </nav>
         
         <aside ref={ref_barra} id='barra-vertical' className="menu-lateral menu-vertical-component">
 
@@ -49,17 +49,10 @@ export default function MenuVertical() {
             </a>
             </article>
 
-            <article  className="itens-do-viajour-desktop menu-vertical-component">
-            <a href="" className="menu-vertical-component">
+            <article onClick={() => navigate('./chat-auxiliar')} className="itens-do-viajour-desktop menu-vertical-component">
+            <a className="menu-vertical-component">
                 <i className="fa-solid fa-brain menu-vertical-component" />
                 <p className="menu-vertical-component">Chat Auxiliar</p>
-            </a>
-            </article>
-
-            <article  className="itens-do-viajour-desktop menu-vertical-component">
-            <a href="" className="menu-vertical-component">
-                <i className="fa-solid fa-cart-flatbed-suitcase menu-vertical-component" />
-                <p className="menu-vertical-component">Busca Paraíso</p>
             </a>
             </article>
 

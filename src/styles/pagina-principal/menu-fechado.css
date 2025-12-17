@@ -73,7 +73,7 @@ main.main-fechado.menu-fechado-screen {
 }
 
 main.main-fechado.menu-fechado-screen > div.icones.menu-fechado-screen {
-  @apply grid min-w-[90%] grid-rows-[1fr_1fr] place-items-center shadow-[0px_0px_2px_rgba(0,0,0,0.5)] cursor-pointer transition-[0.3s] duration-[ease] ml-[15px] mr-3.5 mt-[5px] mb-3.5 pt-2.5 rounded-[15px] active:bg-[whitesmoke];
+  @apply grid min-w-[90%] grid-rows-[1fr_1fr] place-items-center shadow-[0px_0px_2px_rgba(0,0,0,0.5)] transition-[0.3s] duration-[ease] ml-[15px] mr-3.5 mt-[5px] mb-3.5 pt-2.5 rounded-[15px];
 }
 
 main.main-fechado.menu-fechado-screen > div.icones.menu-fechado-screen > i.menu-fechado-screen {

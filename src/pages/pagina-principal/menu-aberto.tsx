@@ -135,20 +135,15 @@ return (
                 <i className="fa-solid fa-robot icones-ia menu-aberto-screen" />
             </a>
             </article>
-            <article className="itens-do-viajour itens-ia menu-aberto-screen">
-            <a href="" className="menu-aberto-screen">
+
+            <article onClick={() => navigate('./chat-auxiliar')} className="itens-do-viajour itens-ia menu-aberto-screen">
+            <a className="menu-aberto-screen">
                 <i className="fa-solid fa-brain icones-referencia menu-aberto-screen" />
                 <p className="menu-aberto-screen">Chat Auxiliar</p>
                 <i className="fa-solid fa-robot icones-ia menu-aberto-screen" />
             </a>
             </article>
-            <article className="itens-do-viajour itens-ia menu-aberto-screen">
-            <a href="" className="menu-aberto-screen">
-                <i className="fa-solid fa-cart-flatbed-suitcase icones-referencia menu-aberto-screen" />
-                <p className="menu-aberto-screen">Busca Paraíso</p>
-                <i className="fa-solid fa-robot icones-ia menu-aberto-screen" />
-            </a>
-            </article>
+
             <article onClick={() => navigate('/destino-certo')}  className="itens-do-viajour itens-ia menu-aberto-screen">
             <a className="menu-aberto-screen">
                 <i className="fa-solid fa-plane icones-referencia menu-aberto-screen" />
@@ -157,6 +152,7 @@ return (
             </a>
             </article>
             {/*Itens I.A*/}
+
             <article onClick={() => navigate('/calculo-de-custos')} className="itens-do-viajour itens-custo menu-aberto-screen">
             <a className="menu-aberto-screen">
                 <i className="fa-solid fa-hand-holding-dollar icones-referencia menu-aberto-screen" />
@@ -164,14 +160,16 @@ return (
                 <i className="fa-solid fa-dollar-sign icones-custo menu-aberto-screen" />
             </a>
             </article>
-            <article className="itens-do-viajour itens-custo menu-aberto-screen">
-            <a href="" className="menu-aberto-screen">
+
+            <article onClick={() => navigate('/viagens-baratas')} className="itens-do-viajour itens-custo menu-aberto-screen">
+            <a className="menu-aberto-screen">
                 <i className="fa-regular fa-lightbulb icones-referencia menu-aberto-screen" />
                 <p className="menu-aberto-screen">Viagens Baratas</p>
                 <i className="fa-solid fa-dollar-sign icones-custo menu-aberto-screen" />
             </a>
             </article>
             {/*Itens Custos*/}
+
             <article onClick={() => navigate('/monte-sua-aventura')} className="itens-do-viajour itens-planejamento menu-aberto-screen">
             <a className="menu-aberto-screen">
                 <i className="fa-solid fa-icons icones-referencia menu-aberto-screen" />
@@ -179,20 +177,23 @@ return (
                 <i className="fa-regular fa-pen-to-square icones-planejamento menu-aberto-screen" />
             </a>
             </article>
-            <article className="itens-do-viajour itens-planejamento menu-aberto-screen">
-            <a href="" className="menu-aberto-screen">
+
+            <article onClick={() => navigate('/viagens-de-sete-dias')} className="itens-do-viajour itens-planejamento menu-aberto-screen">
+            <a className="menu-aberto-screen">
                 <i className="fa-solid fa-mountain-city icones-referencia menu-aberto-screen" />
                 <p className="menu-aberto-screen">Viagens de 7 dias</p>
                 <i className="fa-regular fa-pen-to-square icones-planejamento menu-aberto-screen" />
             </a>
             </article>
-            <article className="itens-do-viajour itens-planejamento menu-aberto-screen">
-            <a href="" className="menu-aberto-screen">
+
+            <article onClick={() => navigate('/viagens-romanticas')} className="itens-do-viajour itens-planejamento menu-aberto-screen">
+            <a className="menu-aberto-screen">
                 <i className="fa-solid fa-heart icones-referencia menu-aberto-screen" />
                 <p className="menu-aberto-screen">Viagens Românticas</p>
                 <i className="fa-regular fa-pen-to-square icones-planejamento menu-aberto-screen" />
             </a>
             </article>
+
             <article onClick={() => navigate('/viagens-de-natal')} className="itens-do-viajour itens-planejamento menu-aberto-screen">
             <a className="menu-aberto-screen">
                 <i className="fa-solid fa-gift icones-referencia menu-aberto-screen" />
@@ -204,5 +205,4 @@ return (
         </main>
     </div>
 )
-
 }
