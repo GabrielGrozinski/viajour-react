@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MenuLateral from "../../components/menu-lateral";
 import '../../styles/pagina-principal/menu-fechado.css';
 import imagemCelular from '../../assets/imagens/celular-icone.png';
+import ChatCard from "../../components/chat-card";
 
 
 export default function MenuFechado({ abrir }: {abrir: () => void}) {
@@ -170,6 +171,7 @@ return (
                 <img className="baixar-app menu-fechado-screen" src={imagemCelular} alt="" />
             </div>
         </main>
+        <ChatCard/>
     </div>
 );
 
