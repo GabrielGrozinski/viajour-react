@@ -10,166 +10,204 @@
   font-family: "Oswald", sans-serif;
 }
 
-div.body-menu-aberto.menu-aberto-screen {
+.body-menu-aberto.menu-aberto-screen {
   @apply  bg-none bg-[#001c43];
 }
-div.body-menu-aberto.menu-aberto-screen > header.header-aberto.menu-aberto-screen {
+
+.header-aberto.menu-aberto-screen {
   @apply items-start justify-items-start grid w-full text-[white] grid-cols-[15%_40%_1fr] p-4;
 }
-header.header-aberto.menu-aberto-screen > i#fechar-icone.menu-aberto-screen {
-  @apply col-1 text-3xl;
+
+.header-aberto.menu-aberto-screen > i#fechar-icone.menu-aberto-screen {
+  @apply col-1 text-3xl cursor-pointer;
 }
-header.header-aberto.menu-aberto-screen > h1.menu-aberto-screen {
+
+.header-aberto.menu-aberto-screen > h1.menu-aberto-screen {
   @apply col-2 text-3xl font-['Majesty'] tracking-[2px] font-light;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-header.header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen {
+
+.header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen {
   @apply col-3 -mt-3 scale-[0.84] flex bg-[#1d3a6d3d] w-full h-[60px] justify-center items-center gap-[5px] text-[1.4em] font-light cursor-pointer rounded-[40px];
 }
-header.header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen.ativado {
+
+.header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen.ativado {
   @apply bg-[#1d3a6d8c];
 }
-header.header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen > img.menu-aberto-screen {
+
+.header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen > img.menu-aberto-screen {
   @apply shadow-[0px_0px_1px_rgba(0,0,0,0.2)] rounded;
 }
-header.header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen > p.menu-aberto-screen,
-header.header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen > span#seta-moeda.menu-aberto-screen {
+
+.header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen > p.menu-aberto-screen,
+.header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen > span#seta-moeda.menu-aberto-screen {
   text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.4);
 }
-span#seta-moeda.menu-aberto-screen {
+
+#seta-moeda.menu-aberto-screen {
   @apply inline-block text-[1em] rotate-90 translate-x-[60%] translate-y-[-0%] transition-[0.1s] font-normal;
 }
-span#seta-moeda.menu-aberto-screen.ativado {
+
+#seta-moeda.menu-aberto-screen.ativado {
   @apply -rotate-90 translate-x-[60%] translate-y-[0%];
 }
-section#container-moeda-e-idioma.menu-aberto-screen {
+
+#container-moeda-e-idioma.menu-aberto-screen {
   @apply opacity-0 h-0 flex gap-y-2.5 justify-between flex-wrap justify-items-center pointer-events-none overflow-hidden translate-y-10 bg-[none];
   transition: all 0.4s ease-in-out, opacity 1ms ease-out, background-color 1ms linear;
 }
-section#container-moeda-e-idioma.menu-aberto-screen.ativado {
+
+#container-moeda-e-idioma.menu-aberto-screen.ativado {
   @apply h-auto opacity-100 pointer-events-auto translate-y-0 bg-[lightskyblue] transition-all duration-[1ms] pb-2.5;
 }
-section#container-moeda-e-idioma.menu-aberto-screen > article.menu-aberto-screen {
+
+#container-moeda-e-idioma.menu-aberto-screen > article.menu-aberto-screen {
   @apply flex justify-start gap-2 w-2/5 bg-[white] mx-[5%] my-0 px-0 py-2 rounded-md active:bg-[rgb(241,232,232)] active:scale-[0.98];
   transition: all 0.2s linear, background-color 200ms ease;
 }
-section#container-moeda-e-idioma.menu-aberto-screen > h2.menu-aberto-screen {
+
+#container-moeda-e-idioma.menu-aberto-screen > h2.menu-aberto-screen {
   @apply w-full text-center text-[white];
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-article.idiomas-e-moedas-itens.menu-aberto-screen {
+
+.idiomas-e-moedas-itens.menu-aberto-screen {
   @apply flex justify-between items-center text-[1em] font-normal cursor-pointer shadow-[1px_1px_1px_rgba(0,0,0,0.3)];
 }
-article.idiomas-e-moedas-itens.menu-aberto-screen > img.menu-aberto-screen {
+
+.idiomas-e-moedas-itens.menu-aberto-screen > img.menu-aberto-screen {
   @apply shadow-[0px_0px_1px_rgba(0,0,0,0.2)] rounded ml-[5%];
 }
-article.idiomas-e-moedas-itens.menu-aberto-screen > p.menu-aberto-screen {
+
+.idiomas-e-moedas-itens.menu-aberto-screen > p.menu-aberto-screen {
   @apply mr-[5%];
   text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.4);
 }
-hr#hr-header-main.menu-aberto-screen {
+
+#hr-header-main.menu-aberto-screen {
   @apply border border-solid border-[rgba(158,186,250,0.122)];
 }
-section#section-instrucoes.menu-aberto-screen {
+
+#section-instrucoes.menu-aberto-screen {
   @apply block mx-0 my-2.5;
 }
-section#section-instrucoes.menu-aberto-screen > div.menu-aberto-screen {
+
+#section-instrucoes.menu-aberto-screen > .menu-aberto-screen {
   @apply text-[white] pl-2;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
 }
 
-section#section-instrucoes.menu-aberto-screen > div.menu-aberto-screen > span.menu-aberto-screen {
+#section-instrucoes.menu-aberto-screen > .menu-aberto-screen > .menu-aberto-screen {
     @apply ml-1;
 }
 
-section#section-instrucoes.menu-aberto-screen > div#div-ferramentas-ia.menu-aberto-screen > i.menu-aberto-screen {
+#section-instrucoes.menu-aberto-screen > #div-ferramentas-ia.menu-aberto-screen > i.menu-aberto-screen {
   @apply text-[lightblue];
 }
-section#section-instrucoes.menu-aberto-screen > div#div-custos.menu-aberto-screen > i.menu-aberto-screen {
+
+#section-instrucoes.menu-aberto-screen > #div-custos.menu-aberto-screen > i.menu-aberto-screen {
   @apply text-[lightgreen];
 }
-section#section-instrucoes.menu-aberto-screen > div#div-planejamento-pessoal.menu-aberto-screen > i.menu-aberto-screen {
+
+#section-instrucoes.menu-aberto-screen > #div-planejamento-pessoal.menu-aberto-screen > i.menu-aberto-screen {
   @apply text-[rgb(214,214,103)];
 }
-main.main-aberto.menu-aberto-screen {
+
+.main-aberto.menu-aberto-screen {
   @apply flex flex-wrap justify-between gap-y-[30px] px-[5%] py-2.5;
 }
-main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen {
+
+.main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen {
   @apply w-[45%] h-[100px] bg-[#4851d745] shadow-[1px_1px_3px_rgba(0,0,0,0.2)] rounded-[10px];
 }
-main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen {
+
+.main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen {
   @apply flex-nowrap cursor-pointer flex-col no-underline h-full w-full flex justify-evenly relative pl-2.5 pr-[5px];
 }
-main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > p.menu-aberto-screen {
+
+.main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > p.menu-aberto-screen {
   @apply text-[1.2em] text-[white];
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
-main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-referencia.menu-aberto-screen {
+
+.main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-referencia.menu-aberto-screen {
   @apply text-[1.8em] text-[whitesmoke];
   text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
 }
-main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-ia.menu-aberto-screen {
+
+.main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-ia.menu-aberto-screen {
   @apply absolute translate-x-[-20%] translate-y-[30%] text-[lightblue] right-[0%] top-[0%];
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
-main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-custo.menu-aberto-screen {
+
+.main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-custo.menu-aberto-screen {
   @apply absolute translate-x-[-0%] translate-y-1/4 text-[lightgreen] right-[0%] top-[0%];
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
-main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-planejamento.menu-aberto-screen {
+
+.main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-planejamento.menu-aberto-screen {
   @apply absolute translate-x-[-10%] translate-y-1/4 text-[rgb(214,214,103)] right-[0%] top-[0%];
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
-
 @media screen and (max-width: 320px) {
-div.body-menu-aberto.menu-aberto-screen > header.header-aberto.menu-aberto-screen {
-  @apply items-start justify-items-start grid w-full text-[white] grid-cols-[10%_35%_1fr] p-4;
-}
+  .body-menu-aberto.menu-aberto-screen > header.header-aberto.menu-aberto-screen {
+    @apply items-start justify-items-start grid w-full text-[white] grid-cols-[10%_35%_1fr] p-4;
+  }
 
-  section#container-moeda-e-idioma.menu-aberto-screen {
+  #container-moeda-e-idioma.menu-aberto-screen {
     @apply justify-center;
   }
-  section#container-moeda-e-idioma.menu-aberto-screen > article.menu-aberto-screen {
+
+  #container-moeda-e-idioma.menu-aberto-screen > .menu-aberto-screen {
     @apply w-6/12;
   }
-  header.header-aberto.menu-aberto-screen > i#fechar-icone.menu-aberto-screen,
-  header.header-aberto.menu-aberto-screen > h1.menu-aberto-screen,
-  header.header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen {
+
+  .header-aberto.menu-aberto-screen > i#fechar-icone.menu-aberto-screen,
+  .header-aberto.menu-aberto-screen > h1.menu-aberto-screen,
+  .header-aberto.menu-aberto-screen > #moeda-item.menu-aberto-screen {
     @apply scale-75;
   }
-  main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen {
+
+  .main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen {
     @apply h-[120px];
   }
 }
 
 @media screen and (min-width: 768px) {
-  div.body-menu-aberto.menu-aberto-screen > header.header-aberto.menu-aberto-screen {
+  .body-menu-aberto.menu-aberto-screen > header.header-aberto.menu-aberto-screen {
     @apply grid-cols-[10%_15%_1fr];
   }
-  header.header-aberto.menu-aberto-screen > i#fechar-icone.menu-aberto-screen,
-  header.header-aberto.menu-aberto-screen > h1.menu-aberto-screen,
-  section#container-moeda-e-idioma.menu-aberto-screen {
+
+  .header-aberto.menu-aberto-screen > i#fechar-icone.menu-aberto-screen,
+  .header-aberto.menu-aberto-screen > h1.menu-aberto-screen,
+  #container-moeda-e-idioma.menu-aberto-screen {
     @apply pb-[30px];
   }
-  section#container-moeda-e-idioma.menu-aberto-screen > h2.menu-aberto-screen {
+
+  #container-moeda-e-idioma.menu-aberto-screen > h2.menu-aberto-screen {
     @apply text-[1.8em] mb-2.5;
   }
-  main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen {
+
+  .main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen {
     @apply h-[140px];
   }
-  main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen {
+
+  .main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen {
     @apply justify-center gap-2.5 items-center px-2.5;
   }
-  main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > p.menu-aberto-screen {
+
+  .main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > p.menu-aberto-screen {
     @apply text-[1.6em];
   }
-  main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-referencia.menu-aberto-screen {
+
+  .main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-referencia.menu-aberto-screen {
     @apply text-[2.2em];
   }
-  main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-ia.menu-aberto-screen,
-  main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-custo.menu-aberto-screen,
-  main.main-aberto.menu-aberto-screen > article.itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-planejamento.menu-aberto-screen {
+
+  .main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-ia.menu-aberto-screen,
+  .main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-custo.menu-aberto-screen,
+  .main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-planejamento.menu-aberto-screen {
     @apply text-[1.4em] cursor-default;
   }
 }
