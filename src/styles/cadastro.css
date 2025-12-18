@@ -3,6 +3,7 @@
 * {
   @apply box-border m-0 p-0 font-['Oswald',sans-serif];
 }
+
 @font-face {
   font-family: "Majesty";
   src: url(../assets/fonts/majesty.otf);
@@ -11,55 +12,71 @@
 main.cadastro-screen {
   @apply h-screen bg-[url(https://cdn.pixabay.com/photo/2017/08/17/20/05/disney-2652684_1280.jpg)] relative bg-cover transition-[0.5s];
 }
+
 main.cadastro-screen > .form-container.cadastro-screen {
   @apply w-4/5 absolute -translate-x-2/4 left-2/4 top-[50%] px-[4%] py-[2%] -translate-y-2/4 pb-[6%] bg-white border shadow-[rgba(0,0,0,0.25)_1px_1px_1px] rounded-[15px] border-[rgba(0,0,0,0.701)] scale-[1];
 }
+
 .title.cadastro-screen {
   @apply text-center text-[2.8em] font-['Majesty'] font-normal text-[#222222] mb-[4%];
 }
+
 .form.cadastro-screen {
   @apply w-full flex flex-col gap-[18px] mb-[1%];
 }
+
 .input.cadastro-screen {
   @apply border outline-0 p-[5%] rounded-[10px] border-[#c0c0c0];
 }
+
 .page-link-label.cadastro-screen {
   @apply text-[rgb(0,94,255)] text-shadow-black text-end text-[0.9em] font-normal cursor-pointer w-fit m-0;
 }
+
 .page-link-label.cadastro-screen:hover,
 .page-link-label.cadastro-screen:active {
   @apply text-[rgb(61,129,247)];
 }
+
 .form-btn.cadastro-screen {
   @apply text-[1.5em] text-[white] cursor-pointer shadow-[rgba(0,0,0,0.24)_0px_3px_8px] transition-all duration-200 text-shadow-black bg-blue-600 outline-0 pt-0.5 pb-1 px-0 rounded-[20px] border-0 active:shadow-none active:scale-[0.96];
 }
+
 .sign-up-label.cadastro-screen {
   @apply text-[1em] text-[#504f4f] mt-2.5 m-0;
 }
+
 .sign-up-link.cadastro-screen {
   @apply text-[0.9em] text-[rgb(0,94,255)] cursor-pointer font-extrabold ml-1.5;
 }
+
 .sign-up-link.cadastro-screen:hover,
 .sign-up-link.cadastro-screen:active {
   @apply text-[rgb(61,129,247)];
 }
+
 .buttons-container.cadastro-screen {
   @apply w-full flex flex-col justify-start gap-[15px] mt-5;
 }
+
 .apple-login-button.cadastro-screen,
 .google-login-button.cadastro-screen {
   @apply shadow-[rgba(0,0,0,0.16)_0px_10px_36px_0px,rgba(0,0,0,0.06)_0px_0px_0px_1px] cursor-pointer flex justify-center items-center gap-[5px] text-[1.2em] transition-all duration-200 pt-[1.5%] pb-[2.5%] px-[3.5%] rounded-[20px];
 }
+
 .apple-login-button.cadastro-screen:active,
 .google-login-button.cadastro-screen:active {
   @apply scale-[0.96];
 }
+
 .apple-login-button.cadastro-screen {
   @apply bg-black text-white border-2 border-solid border-black;
 }
+
 .google-login-button.cadastro-screen {
   @apply border-2 border-solid border-[#747474];
 }
+
 .apple-icon.cadastro-screen,
 .google-icon.cadastro-screen {
   @apply text-lg mb-px;
@@ -76,6 +93,7 @@ div.form-container.cadastro-screen {
   main#imagem.cadastro-screen {
     @apply h-screen flex flex-col items-start justify-start;
   }
+
   main#imagem > div.form-container.cadastro-screen {
     @apply relative w-[400px] px-[20px] py-[10px] pb-[30px];
   }

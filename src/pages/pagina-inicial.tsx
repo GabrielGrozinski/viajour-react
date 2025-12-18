@@ -1,8 +1,13 @@
-import {useState, useRef, useEffect} from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import '../styles/pagina-inicial.css';
 import { AnimatePresence, motion } from 'framer-motion';
 import BotaoTema from "../components/botao-tema";
+import iconeAventura from '../assets/imagens/icone-monte-sua-aventura.png';
+import iconeRoteiro from '../assets/imagens/icone-roteiro-automatico.png';
+import iconeCalculator from '../assets/imagens/icone-calculator.png';
+import iconeNatal from '../assets/imagens/icone-viagens-de-natal.png';
+
 
 interface Produtos {
   imagem: string,
@@ -13,22 +18,22 @@ interface Produtos {
 export default function Teste() {
   const produtosExibicao: Produtos[] = [
     {
-      imagem: '',
+      imagem: iconeNatal,
       titulo: 'Viagens de Natal',
       subtitulo: 'Tenha acesso gratuito a milhares de roteiros personalizados para viajar no Natal!'
     },
     {
-      imagem: '',
+      imagem: iconeCalculator,
       titulo: 'Calculator',
       subtitulo: 'Com o Calculator, ficou muito mais fácil de separar os gastos da sua viagem!'
     },
     {
-      imagem: '',
+      imagem: iconeAventura,
       titulo: 'Monte sua Aventura',
       subtitulo: 'Quer controlar cada detalhe da sua viagem e deixá-la mais organizada? com a ferramente Monte sua Aventura, você pode!'
     },
     {
-      imagem: '',
+      imagem: iconeRoteiro,
       titulo: 'Roteiro Automático',
       subtitulo: 'Use nossa ferramente de I.A para criar um roteito inteiro para a sua viagem em segundos!'
     },
@@ -39,21 +44,10 @@ export default function Teste() {
   const [produtosMobile, setProdutosMobile] = useState(false);
   const [produtosDesktop, setProdutosDesktop] = useState(false);
 
-  const servico1Ref = useRef<HTMLElement>(null);
-  const servico2Ref = useRef<HTMLElement>(null);
-  const servico3Ref = useRef<HTMLElement>(null);
-
-  const retomarFoco = (id: string) => {
-
-    setTimeout(() => {
-      if (id === 'servico-1') servico1Ref.current?.focus();
-      if (id === 'servico-2') servico2Ref.current?.focus();
-      if (id === 'servico-3') servico3Ref.current?.focus();
-    }, 0);
-  }
-
 return (
-  <div id="body" className="pagina-inicial-screen">
+  <div 
+  id="body" 
+  className="pagina-inicial-screen">
     {/* MENU MOBILE */}
     <div
       id="menu-pressionado"
@@ -77,6 +71,7 @@ return (
         >
           Cadastrar
         </button>
+
         <button
           onClick={() => navigate("/cadastro")}
           id="login"
@@ -282,42 +277,19 @@ return (
         <article id="imagem-3" className="pagina-inicial-screen"></article>
       </section>
 
-      <section id="servicos-section" className="pagina-inicial-screen">
-        <article className="servicos-article pagina-inicial-screen" id="servico-1" ref={servico1Ref} tabIndex={0}>
-          <div className="descricao pagina-inicial-screen">
-            <h2 className="pagina-inicial-screen">Roteiro Automático</h2>
-            <h3 className="pagina-inicial-screen">Gratuito</h3>
-            <p className="pagina-inicial-screen">Descubra novos destinos sem esforço...</p>
-            <button className="botao-servicos pagina-inicial-screen" onClick={() => retomarFoco('servico-1')}>Preparar</button>
-          </div>
-          <article className="servico-imagens pagina-inicial-screen" id="servico-roteiro-automatico"></article>
-        </article>
-
-        <article className="servicos-article pagina-inicial-screen" id="servico-2" ref={servico2Ref} tabIndex={0}>
-          <div className="descricao pagina-inicial-screen">
-            <h2 className="pagina-inicial-screen">Cálculo de Custos</h2>
-            <h3 className="pagina-inicial-screen">Gratuito</h3>
-            <p className="pagina-inicial-screen">Tenha controle total do seu orçamento...</p>
-            <button className="botao-servicos pagina-inicial-screen" onClick={() => retomarFoco('servico-2')}>Ver custos</button>
-          </div>
-          <article className="servico-imagens pagina-inicial-screen" id="servico-calculo-custos"></article>
-        </article>
-
-        <article className="servicos-article pagina-inicial-screen" id="servico-3" ref={servico3Ref} tabIndex={0}>
-          <div className="descricao pagina-inicial-screen">
-            <h2 className="pagina-inicial-screen">Monte sua Aventura</h2>
-            <h3 className="pagina-inicial-screen">Gratuito</h3>
-            <p className="pagina-inicial-screen">Crie o seu próprio caminho!</p>
-            <button className="botao-servicos pagina-inicial-screen" onClick={() => retomarFoco('servico-3')}>Começar</button>
-          </div>
-          <article className="servico-imagens pagina-inicial-screen" id="servico-sua-aventura"></article>
-        </article>
-      </section>
-
       <section id="produtos-section" className="pagina-inicial-screen">
-
+        {produtosExibicao.map((produto: Produtos, index: number) => (
+          <article key={index} className={`flex flex-col xl:items-center xl:gap-12 xl:${index === 0 || index === 2 ? 'flex-row' : 'flex-row-reverse'}`}>
+              <div>
+                <h1>{produto.titulo}</h1>
+                <p>{produto.subtitulo}</p>
+              </div>
+              <img className="xl:max-h-130 xl:max-w-130" style={{marginTop: 2, marginBottom: 52}} src={produto.imagem} alt="imagem-produto" />
+          </article>
+        ))}
       </section>
     </main>
+
     {/* FOOTER */}
     <footer id="footer" className={menuAberto ? "fechado pagina-inicial-screen" : "pagina-inicial-screen"}>
       <h2 className="pagina-inicial-screen">Siga-nos</h2>
