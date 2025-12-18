@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import MenuVertical from "./menu-vertical";
+import { useState, useRef } from "react";
 import iconeChat from '../assets/imagens/icone-chat.png';
 
 
@@ -37,14 +36,7 @@ type EtapaChat =
 
 export default function ChatCard() {
     const [abrirCard, setAbrirCard] = useState<boolean>(false);
-    const [largura, setLargura] = useState(window.innerWidth);
-    useEffect(() => {
-        const handleResize = () => setLargura(window.innerWidth);
-
-        window.addEventListener('resize', handleResize);
-
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    const cardRef = useRef<HTMLDivElement | null>(null);
     const opcoesPerguntas: Opcoes[] = [
         {
             opcaoPrimaria: 'Assinaturas do site',
@@ -344,10 +336,6 @@ export default function ChatCard() {
         }, 3000)
     }
 
-    useEffect(() => {
-        console.log('opcoes', opcoesRespostas)
-    }, [opcoesRespostas]);
-
     function getRespostasTerciarias(
     opcao: Opcoes,
     opcaoSecundaria: string
@@ -363,33 +351,31 @@ export default function ChatCard() {
 
     return (
     <>
-        {largura < 1024 && (
-            <div className="absolute top-0 w-full">
-                <MenuVertical/>
-            </div>
-        )}
-        {largura >= 1024 && !abrirCard && (
+        {!abrirCard && (
             <div
             className="fixed bottom-[1%] right-[1%] h-30 w-30">
                 <img
                 onClick={() => setAbrirCard(true)}
-                 className="cursor-pointer transition-all duration-300 animate-pulse hover:animate-none"
-                 src={iconeChat} alt="icone-chat" />
+                className="cursor-pointer transition-all duration-300 animate-pulse hover:animate-none"
+                src={iconeChat} alt="icone-chat" />
             </div>
         )}
         <main
-            hidden = {!abrirCard && largura >= 1024}
-            style={{
-                marginTop: largura < 1024 ? 30 : 0, 
-                padding: largura < 1024 ? '' : 10,
+            ref={cardRef}
+            hidden = {!abrirCard}
+            style={{ 
+                padding: '22px 16px 10px 16px',
                 scrollbarColor: '#3b82f6 #bfdbfe',
             }}
-            className={`min-h-2/3 max-h-2/3 w-3/4 rounded-xl shadow-[0px_0px_3px_#0000002a] bg-blue-300/80 flex flex-col gap-4 xl:min-h-[500px] xl:max-h-[500px] xl:w-80 xl:fixed xl:bottom-[1%] xl:right-[1%] xl:bg-blue-300`}
+            className={`fixed bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 min-h-2/3 max-h-2/3 w-3/4 rounded-xl shadow-[0px_0px_3px_#0000002a] bg-blue-300 flex flex-col gap-4 xl:min-h-[500px] xl:max-h-[500px] xl:w-80 xl:bottom-[1%] xl:right-[1%] xl:translate-y-0 xl:translate-x-0`}
         >
+            <i 
+            onClick={() => setAbrirCard(false)}
+            className="fa-solid fa-chevron-down fixed top-0 left-1/2 -translate-x-1/2 text-lg text-white text-shadow-[1px_1px_1px_#0000004a] cursor-pointer"></i>
             {/* HEADER */}
             <section
             style={{ padding: '10px' }}
-            className="min-h-10 bg-white border-b border-zinc-400 shrink-0 rounded-md"
+            className="min-h-10 bg-white border-b border-zinc-400 shrink-0 rounded-lg"
             >
             <h1
                 style={{ fontFamily: 'Majesty'}}
@@ -414,8 +400,8 @@ export default function ChatCard() {
                         : { marginRight: '10%', padding: 6 }
                     }
                     className={`bg-${
-                    resposta.isUser ? 'sky-400' : 'white'
-                    } shadow-[0px_0px_3px_#0000002a] min-h-[20px] h-auto col-[1/3] rounded-xl flex items-center justify-center`}
+                    resposta.isUser ? 'blue-600' : 'white'
+                    } shadow-[0px_0px_3px_#0000002a] min-h-5 h-auto col-[1/3] rounded-xl flex items-center justify-center`}
                 >
                     <span
                     className={`text-${
@@ -435,8 +421,8 @@ export default function ChatCard() {
                         : { marginRight: '10%', padding: 6 }
                     }
                     className={`bg-${
-                    loading.isLoadingUser ? 'sky-400' : 'white'
-                    } shadow-[0px_0px_3px_#0000002a] min-h-[20px] h-auto col-[1/3] rounded-xl flex items-center justify-center`}
+                    loading.isLoadingUser ? 'blue-600' : 'white'
+                    } shadow-[0px_0px_3px_#0000002a] min-h-5 h-auto col-[1/3] rounded-xl flex items-center justify-center`}
                 >
                     <span
                     className={`text-${
@@ -546,6 +532,12 @@ export default function ChatCard() {
             if (opcao === 'Sim') {
                 setOpcaoAtiva(null);
                 setEtapaChat('inicio');
+            } else {
+                setEtapaChat('inicio');
+                setAbrirCard(false);
+                setTimeout(() => {
+                    setOpcoesRespostas((prev) => prev.filter((elemento) => elemento.id <= 2));
+                }, 1500)
             }
             }}
             style={{ padding: '6px 8px' }}
