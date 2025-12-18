@@ -231,7 +231,7 @@ export default function ChatCard() {
             ultimaOpcao: ['Sim', 'Não']
         },
         {
-            opcaoPrimaria: 'Política de cancelamento',
+            opcaoPrimaria: 'Cancelamento',
             opcaoSecundaria: [
                 'Planos e assinaturas',
                 'Reservas e serviços',
@@ -356,7 +356,7 @@ export default function ChatCard() {
             className="fixed bottom-[1%] right-[1%] h-30 w-30">
                 <img
                 onClick={() => setAbrirCard(true)}
-                className="cursor-pointer transition-all duration-300 animate-pulse hover:animate-none"
+                className="cursor-pointer transition-all duration-300"
                 src={iconeChat} alt="icone-chat" />
             </div>
         )}
@@ -367,7 +367,7 @@ export default function ChatCard() {
                 padding: '22px 16px 10px 16px',
                 scrollbarColor: '#3b82f6 #bfdbfe',
             }}
-            className={`fixed bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 min-h-2/3 max-h-2/3 w-3/4 rounded-xl shadow-[0px_0px_3px_#0000002a] bg-blue-300 flex flex-col gap-4 xl:min-h-[500px] xl:max-h-[500px] xl:w-80 xl:bottom-[1%] xl:right-[1%] xl:translate-y-0 xl:translate-x-0`}
+            className={`fixed bottom-[1%] right-[1%] translate-y-0 translate-x-0 min-h-2/3 max-h-2/3 w-3/4 rounded-xl shadow-[0px_0px_3px_#0000002a] bg-blue-300 flex flex-col gap-4 xl:min-h-[500px] xl:max-h-[500px] xl:w-80`}
         >
             <i 
             onClick={() => setAbrirCard(false)}

@@ -19,12 +19,12 @@
   --texto-tag-pressionada: black;
   --fundo-tag-pressionada: rgba(132, 214, 247, 0.229);
   --fundo-tag-aberta: rgba(211, 211, 211, 0.3);
-  --texto-produtos: rgb(108, 107, 107);
+  --texto-produtos: rgb(106, 106, 106);
   --lua-modo-escuro: rgba(0, 0, 139, 0.322);
   --sol-modo-claro: black;
 }
 
-div#body.escuro.pagina-inicial-screen {
+html.dark div#body.pagina-inicial-screen {
   --fundo: #051e2c;
   --texto: #f6f8fb;
   --botao: #f5f6f8;
@@ -111,14 +111,6 @@ article#tema-container.pagina-inicial-screen {
 }
 div#temas.pagina-inicial-screen {
   @apply absolute translate-x-[-30%] -translate-y-2/4 right-[0%] top-2/4;
-}
-div#temas i#modo-escuro.pagina-inicial-screen,
-div#temas-desktop i#modo-escuro.pagina-inicial-screen {
-  @apply text-(--lua-modo-escuro);
-}
-div#temas i#modo-claro.pagina-inicial-screen,
-div#temas-desktop i#modo-claro.pagina-inicial-screen {
-  @apply text-(--sol-modo-claro);
 }
 /* 2/2 Menu-Pressionado */
 header.pagina-inicial-screen,
@@ -364,11 +356,8 @@ i.pagina-inicial-screen:hover {
     @apply flex justify-around row-1 col-2;
   }
   .topicos-desktop.pagina-inicial-screen {
-    @apply text-(--texto-produtos) font-light text-[1.4em] transition-[0.5s] cursor-pointer p-[0.4em] rounded-[10px] hover:bg-[lightskyblue] hover:text-[black];
-    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.4);
-  }
-  #produto-desktop-tag.azul-ativado.pagina-inicial-screen {
-    @apply bg-[lightskyblue] text-[black];
+    @apply text-(--texto-produtos) font-light text-[1.2em] transition-[0.5s] cursor-pointer p-[0.4em] rounded-[10px] hover:bg-sky-500 hover:text-[white];
+    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.2);
   }
   span#seta-desktop.pagina-inicial-screen {
     @apply inline-block rotate-90 translate-x-1/4 translate-y-[5%] transition-[0.1s] duration-[ease];
@@ -383,7 +372,7 @@ i.pagina-inicial-screen:hover {
     @apply overflow-hidden min-h-[20%] opacity-100 translate-y-0 mt-6 pointer-events-auto h-auto col-[2/4] row-2 grid-cols-[1fr_1fr_1fr] grid-rows-[20%_85%] bg-(--fundo-menu-pressionado) border-(--texto-tag-pressionada) pt-[1%] pb-[2%] rounded-[15px] border-2;
   }
   header.pagina-inicial-screen > #produtos-desktop-container > h2.pagina-inicial-screen {
-    @apply row-1 justify-self-center text-2xl;
+    @apply row-1 justify-self-center text-xl;
     text-shadow: 1px 1px 1px var(--fundo-menu-pressionado);
   }
   header.pagina-inicial-screen > #produtos-desktop-container > div.produtos-pai.pagina-inicial-screen {
@@ -393,11 +382,11 @@ i.pagina-inicial-screen:hover {
     @apply flex items-center justify-start rounded transition-all duration-200 cursor-pointer mx-0 my-[0.5vh] px-[1vh] py-[0.5vh] border-(--fundo-menu-pressionado) hover:bg-[lightskyblue] hover:scale-105;
   }
   header.pagina-inicial-screen > #produtos-desktop-container > div.produtos-pai > div > i.pagina-inicial-screen {
-    @apply text-[1em];
+    @apply text-[0.8em];
     text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.326);
   }
   header.pagina-inicial-screen > #produtos-desktop-container > div.produtos-pai > div > h3.pagina-inicial-screen {
-    @apply text-[1.2em] font-normal ml-[5px];
+    @apply text-[1em] translate-y-[-5.6%] font-normal ml-[5px];
     text-shadow: 1px 1px 1px var(--sombra-texto);
   }
   header.pagina-inicial-screen > nav.pagina-inicial-screen {
@@ -406,11 +395,6 @@ i.pagina-inicial-screen:hover {
   .cadastro-desktop.pagina-inicial-screen {
     @apply scale-94 text-(--texto-botao) font-light text-[1.2em] transition-[0.5s] cursor-pointer bg-(--botao) border-(--texto-tag-pressionada) px-[0.5em] py-[0.3em] rounded-[15px] border-2 border-solid active:scale-[0.9];
     text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.4);
-  }
-  .cadastro-desktop.pagina-inicial-screen:hover,
-  #c-desktop.pagina-inicial-screen:hover {
-    @apply bg-[lightskyblue] border-(--fundo-menu-pressionado) text-[white];
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   }
   #c-desktop.pagina-inicial-screen {
     @apply text-(--texto) bg-(--fundo-menu-pressionado);
@@ -447,7 +431,7 @@ i.pagina-inicial-screen:hover {
       @apply grid-rows-[1fr_1fr_1fr];
   }
   .pagina-inicial-screen .servicos-article {
-      @apply transition-all duration-500 h-[30vh] max-h-[auto] grid-cols-[1fr_1fr] grid-rows-[30vh] focus:grid-cols-[1fr] focus:grid-rows-[30vh_30vh] focus:mb-[40vh];
+      @apply transition-all overflow-hidden duration-500 h-[30vh] max-h-[auto] grid-cols-[1fr_1fr] grid-rows-[30vh] focus:grid-cols-[1fr] focus:grid-rows-[30vh_30vh] focus:mb-[40vh];
   }
   .pagina-inicial-screen main > section#servicos-section > article.servicos-article > article.servico-imagens {
       @apply col-2 bg-cover;

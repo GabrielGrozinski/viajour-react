@@ -2,28 +2,46 @@ import {useState, useRef, useEffect} from "react"
 import { useNavigate } from "react-router-dom"
 import '../styles/pagina-inicial.css';
 import { AnimatePresence, motion } from 'framer-motion';
+import BotaoTema from "../components/botao-tema";
 
+interface Produtos {
+  imagem: string,
+  titulo: string,
+  subtitulo: string
+}
 
 export default function Teste() {
+  const produtosExibicao: Produtos[] = [
+    {
+      imagem: '',
+      titulo: 'Viagens de Natal',
+      subtitulo: 'Tenha acesso gratuito a milhares de roteiros personalizados para viajar no Natal!'
+    },
+    {
+      imagem: '',
+      titulo: 'Calculator',
+      subtitulo: 'Com o Calculator, ficou muito mais fácil de separar os gastos da sua viagem!'
+    },
+    {
+      imagem: '',
+      titulo: 'Monte sua Aventura',
+      subtitulo: 'Quer controlar cada detalhe da sua viagem e deixá-la mais organizada? com a ferramente Monte sua Aventura, você pode!'
+    },
+    {
+      imagem: '',
+      titulo: 'Roteiro Automático',
+      subtitulo: 'Use nossa ferramente de I.A para criar um roteito inteiro para a sua viagem em segundos!'
+    },
+  ]
+
   const navigate = useNavigate();
   const [menuAberto, setMenuAberto] = useState(false);
   const [produtosMobile, setProdutosMobile] = useState(false);
   const [produtosDesktop, setProdutosDesktop] = useState(false);
-  const [temaEscuro, setTemaEscuro] = useState(() => {
-    const temaSalvo = localStorage.getItem('tema');
-    return temaSalvo === 'escuro';
-  });
 
   const servico1Ref = useRef<HTMLElement>(null);
   const servico2Ref = useRef<HTMLElement>(null);
   const servico3Ref = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const bodyArtificial = document.getElementById('body');
-    if (!bodyArtificial) return;
-    bodyArtificial.classList.toggle('escuro', temaEscuro);
-    localStorage.setItem('tema', temaEscuro ? 'escuro' : 'claro');
-  }, [temaEscuro]);
 
   const retomarFoco = (id: string) => {
 
@@ -129,14 +147,7 @@ return (
         <article id="tema-container" className="pagina-inicial-screen">
           <h3 className="pagina-inicial-screen">Tema</h3>
           <div id="temas" className="pagina-inicial-screen">
-            <i
-              className="fa-solid fa-moon pagina-inicial-screen"
-              onClick={() => setTemaEscuro(true)}
-            ></i>
-            <i
-              className="fa-solid fa-sun pagina-inicial-screen"
-              onClick={() => setTemaEscuro(false)}
-            ></i>
+            <BotaoTema/>
           </div>
         </article>
       </section>
@@ -257,11 +268,6 @@ return (
       <h1 className="pagina-inicial-screen">
         Descubra, Planeje, Viaje com <br /> ViaJour
       </h1>
-
-      <div id="temas-desktop" className="pagina-inicial-screen">
-        <i className="fa-solid fa-moon pagina-inicial-screen" onClick={() => setTemaEscuro(true)}></i>
-        <i className="fa-solid fa-sun pagina-inicial-screen" onClick={() => setTemaEscuro(false)}></i>
-      </div>
     </header>
 
     {/* MAIN */}
@@ -306,6 +312,10 @@ return (
           </div>
           <article className="servico-imagens pagina-inicial-screen" id="servico-sua-aventura"></article>
         </article>
+      </section>
+
+      <section id="produtos-section" className="pagina-inicial-screen">
+
       </section>
     </main>
     {/* FOOTER */}
