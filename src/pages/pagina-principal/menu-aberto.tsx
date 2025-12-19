@@ -1,9 +1,156 @@
 import '../../styles/pagina-principal/menu-aberto.css';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+
+interface Moeda {
+    id: string,
+    img: string,
+    alt: string,
+    label: string,
+    value: string,
+}
 
 
 export default function MenuAberto({ fechar }: {fechar: () => void}) {
     const navigate = useNavigate();
+    const idiomasEMoedas: Moeda[] = [
+    {
+        id: 'pt-br',
+        img: 'https://flagcdn.com/w2560/br.png',
+        alt: 'Brazil',
+        label: 'Português - BRL',
+        value: 'PT - BRL'
+    },
+    {
+        id: 'pt-pt',
+        img: 'https://flagcdn.com/w2560/pt.png',
+        alt: 'Portugal',
+        label: 'Português - EUR',
+        value: 'PT - EUR'
+    },
+    {
+        id: 'en-us',
+        img: 'https://flagcdn.com/w2560/us.png',
+        alt: 'Estados Unidos',
+        label: 'English - USD',
+        value: 'EN - USD'
+    },
+    {
+        id: 'es-es',
+        img: 'https://flagcdn.com/w2560/es.png',
+        alt: 'Espanha',
+        label: 'Español - EUR',
+        value: 'ES - EUR'
+    },
+    {
+        id: 'es-uy',
+        img: 'https://flagcdn.com/w2560/uy.png',
+        alt: 'Uruguai',
+        label: 'Español - UYU',
+        value: 'ES - UYU'
+    },
+    {
+        id: 'es-ar',
+        img: 'https://flagcdn.com/w2560/ar.png',
+        alt: 'Argentina',
+        label: 'Español - ARS',
+        value: 'ES - ARS'
+    },
+    {
+        id: 'fr-fr',
+        img: 'https://flagcdn.com/w2560/fr.png',
+        alt: 'França',
+        label: 'Français - EUR',
+        value: 'FR - EUR'
+    },
+    ];
+    const itensMenu = [
+    // I.A
+    {
+        rota: '/roteiro-automatico',
+        classeArticle: 'itens-do-viajour itens-ia menu-aberto-screen',
+        iconeEsquerda: 'fa-solid fa-chess',
+        texto: 'Roteiro Automático',
+        iconeDireita: 'fa-solid fa-robot',
+        classeIconeDireita: 'icones-ia',
+    },
+    {
+        rota: './chat-auxiliar',
+        classeArticle: 'itens-do-viajour itens-ia menu-aberto-screen',
+        iconeEsquerda: 'fa-solid fa-brain',
+        texto: 'Chat Auxiliar',
+        iconeDireita: 'fa-solid fa-robot',
+        classeIconeDireita: 'icones-ia',
+    },
+    {
+        rota: '/destino-certo',
+        classeArticle: 'itens-do-viajour itens-ia menu-aberto-screen',
+        iconeEsquerda: 'fa-solid fa-plane',
+        texto: 'Destino Certo',
+        iconeDireita: 'fa-solid fa-robot',
+        classeIconeDireita: 'icones-ia',
+    },
+
+    // Custos
+    {
+        rota: '/calculo-de-custos',
+        classeArticle: 'itens-do-viajour itens-custo menu-aberto-screen',
+        iconeEsquerda: 'fa-solid fa-hand-holding-dollar',
+        texto: 'Cálculo de Custos',
+        iconeDireita: 'fa-solid fa-dollar-sign',
+        classeIconeDireita: 'icones-custo',
+    },
+    {
+        rota: '/viagens-baratas',
+        classeArticle: 'itens-do-viajour itens-custo menu-aberto-screen',
+        iconeEsquerda: 'fa-regular fa-lightbulb',
+        texto: 'Viagens Baratas',
+        iconeDireita: 'fa-solid fa-dollar-sign',
+        classeIconeDireita: 'icones-custo',
+    },
+
+    // Planejamento
+    {
+        rota: '/monte-sua-aventura',
+        classeArticle: 'itens-do-viajour itens-planejamento menu-aberto-screen',
+        iconeEsquerda: 'fa-solid fa-icons',
+        texto: 'Monte sua Aventura',
+        iconeDireita: 'fa-regular fa-pen-to-square',
+        classeIconeDireita: 'icones-planejamento',
+    },
+    {
+        rota: '/viagens-de-sete-dias',
+        classeArticle: 'itens-do-viajour itens-planejamento menu-aberto-screen',
+        iconeEsquerda: 'fa-solid fa-mountain-city',
+        texto: 'Viagens de 7 dias',
+        iconeDireita: 'fa-regular fa-pen-to-square',
+        classeIconeDireita: 'icones-planejamento',
+    },
+    {
+        rota: '/viagens-romanticas',
+        classeArticle: 'itens-do-viajour itens-planejamento menu-aberto-screen',
+        iconeEsquerda: 'fa-solid fa-heart',
+        texto: 'Viagens Românticas',
+        iconeDireita: 'fa-regular fa-pen-to-square',
+        classeIconeDireita: 'icones-planejamento',
+    },
+    {
+        rota: '/viagens-de-natal',
+        classeArticle: 'itens-do-viajour itens-planejamento menu-aberto-screen',
+        iconeEsquerda: 'fa-solid fa-gift',
+        texto: 'Viagens de Natal',
+        iconeDireita: 'fa-regular fa-pen-to-square',
+        classeIconeDireita: 'icones-planejamento',
+    },
+    ];
+    const [moedaAtual, setMoedaAtual] = useState<Moeda>({
+        id: 'pt-br',
+        img: 'https://flagcdn.com/w2560/br.png',
+        alt: 'Brazil',
+        label: 'Português - BRL',
+        value: 'PT - BRL'
+    });
 
     function mostrarMoedas() {
         const moedasContainer = window.document.getElementById('container-moeda-e-idioma');
@@ -26,91 +173,40 @@ return (
             />
             <h1 className="logo menu-aberto-screen">ViaJour</h1>
             <article onClick={() => mostrarMoedas()} id="moeda-item" className="menu-aberto-screen">
-            <img
-                src="https://flagcdn.com/w2560/br.png"
-                width={30}
-                height={22}
-                alt="Brazil"
-                className="menu-aberto-screen"
-            />
-            <p className="menu-aberto-screen">
-                PT | BRL <span id="seta-moeda" className="menu-aberto-screen">&gt;</span>
-            </p>
+                <img
+                    src={moedaAtual.img}
+                    width={30}
+                    height={22}
+                    alt={moedaAtual.alt}
+                    className="menu-aberto-screen"
+                />
+                <p className="menu-aberto-screen">
+                    {moedaAtual.value} <span id="seta-moeda" className="menu-aberto-screen">&gt;</span>
+                </p>
             </article>
         </header>
 
         <section id="container-moeda-e-idioma" className="menu-aberto-screen">
             <h2 className="menu-aberto-screen">Idiomas e moedas</h2>
-            <article className="idiomas-e-moedas-itens menu-aberto-screen">
-            <img
-                src="https://flagcdn.com/w2560/br.png"
-                width={30}
-                height={22}
-                alt="Brazil"
-                className="menu-aberto-screen"
-            />
-            <p className="menu-aberto-screen">Português - BRL</p>
-            </article>
-            <article className="idiomas-e-moedas-itens menu-aberto-screen">
-            <img
-                src="https://flagcdn.com/w2560/pt.png"
-                width={30}
-                height={22}
-                alt="Portugal"
-                className="menu-aberto-screen"
-            />
-            <p className="menu-aberto-screen">Português - EUR</p>
-            </article>
-            <article className="idiomas-e-moedas-itens menu-aberto-screen">
-            <img
-                src="https://flagcdn.com/w2560/us.png"
-                width={30}
-                height={22}
-                alt="Estados Unidos"
-                className="menu-aberto-screen"
-            />
-            <p className="menu-aberto-screen">English - USD</p>
-            </article>
-            <article className="idiomas-e-moedas-itens menu-aberto-screen">
-            <img
-                src="https://flagcdn.com/w2560/es.png"
-                width={30}
-                height={22}
-                alt="Espanha"
-                className="menu-aberto-screen"
-            />
-            <p className="menu-aberto-screen">Español - EUR</p>
-            </article>
-            <article className="idiomas-e-moedas-itens menu-aberto-screen">
-            <img
-                src="https://flagcdn.com/w2560/uy.png"
-                width={30}
-                height={22}
-                alt="Uruguai"
-                className="menu-aberto-screen"
-            />
-            <p className="menu-aberto-screen">Español - UYU</p>
-            </article>
-            <article className="idiomas-e-moedas-itens menu-aberto-screen">
-            <img
-                src="https://flagcdn.com/w2560/ar.png"
-                width={30}
-                height={22}
-                alt="Argentina"
-                className="menu-aberto-screen"
-            />
-            <p className="menu-aberto-screen">Español - ARS</p>
-            </article>
-            <article className="idiomas-e-moedas-itens menu-aberto-screen">
-            <img
-                src="https://flagcdn.com/w2560/fr.png"
-                width={30}
-                height={22}
-                alt="França"
-                className="menu-aberto-screen"
-            />
-            <p className="menu-aberto-screen">Français - EUR</p>
-            </article>
+            {idiomasEMoedas.map((idioma_e_moeda) => (
+                <article
+                onClick={() => {
+                    setMoedaAtual(idioma_e_moeda);
+                    mostrarMoedas();
+                }}
+                key={idioma_e_moeda.id} 
+                className="idiomas-e-moedas-itens menu-aberto-screen">
+                    <img
+                        src={idioma_e_moeda.img}
+                        width={30}
+                        height={22}
+                        alt={idioma_e_moeda.alt}
+                        className="menu-aberto-screen"
+                    />
+                    <p className="menu-aberto-screen">{idioma_e_moeda.label}</p>
+                </article>
+            ))}
+
         </section>
 
         <hr id="hr-header-main" className="menu-aberto-screen" />
@@ -128,80 +224,18 @@ return (
         </section>
 
         <main className="main-aberto menu-aberto-screen">
-            <article onClick={() => navigate('/roteiro-automatico')} className="itens-do-viajour itens-ia menu-aberto-screen">
-            <a className="menu-aberto-screen">
-                <i className="fa-solid fa-chess icones-referencia menu-aberto-screen" />
-                <p className="menu-aberto-screen">Roteiro Automático</p>
-                <i className="fa-solid fa-robot icones-ia menu-aberto-screen" />
-            </a>
-            </article>
-
-            <article onClick={() => navigate('./chat-auxiliar')} className="itens-do-viajour itens-ia menu-aberto-screen">
-            <a className="menu-aberto-screen">
-                <i className="fa-solid fa-brain icones-referencia menu-aberto-screen" />
-                <p className="menu-aberto-screen">Chat Auxiliar</p>
-                <i className="fa-solid fa-robot icones-ia menu-aberto-screen" />
-            </a>
-            </article>
-
-            <article onClick={() => navigate('/destino-certo')}  className="itens-do-viajour itens-ia menu-aberto-screen">
-            <a className="menu-aberto-screen">
-                <i className="fa-solid fa-plane icones-referencia menu-aberto-screen" />
-                <p className="menu-aberto-screen">Destino Certo</p>
-                <i className="fa-solid fa-robot icones-ia menu-aberto-screen" />
-            </a>
-            </article>
-            {/*Itens I.A*/}
-
-            <article onClick={() => navigate('/calculo-de-custos')} className="itens-do-viajour itens-custo menu-aberto-screen">
-            <a className="menu-aberto-screen">
-                <i className="fa-solid fa-hand-holding-dollar icones-referencia menu-aberto-screen" />
-                <p className="menu-aberto-screen">Cálculo de Custos</p>
-                <i className="fa-solid fa-dollar-sign icones-custo menu-aberto-screen" />
-            </a>
-            </article>
-
-            <article onClick={() => navigate('/viagens-baratas')} className="itens-do-viajour itens-custo menu-aberto-screen">
-            <a className="menu-aberto-screen">
-                <i className="fa-regular fa-lightbulb icones-referencia menu-aberto-screen" />
-                <p className="menu-aberto-screen">Viagens Baratas</p>
-                <i className="fa-solid fa-dollar-sign icones-custo menu-aberto-screen" />
-            </a>
-            </article>
-            {/*Itens Custos*/}
-
-            <article onClick={() => navigate('/monte-sua-aventura')} className="itens-do-viajour itens-planejamento menu-aberto-screen">
-            <a className="menu-aberto-screen">
-                <i className="fa-solid fa-icons icones-referencia menu-aberto-screen" />
-                <p className="menu-aberto-screen">Monte sua Aventura</p>
-                <i className="fa-regular fa-pen-to-square icones-planejamento menu-aberto-screen" />
-            </a>
-            </article>
-
-            <article onClick={() => navigate('/viagens-de-sete-dias')} className="itens-do-viajour itens-planejamento menu-aberto-screen">
-            <a className="menu-aberto-screen">
-                <i className="fa-solid fa-mountain-city icones-referencia menu-aberto-screen" />
-                <p className="menu-aberto-screen">Viagens de 7 dias</p>
-                <i className="fa-regular fa-pen-to-square icones-planejamento menu-aberto-screen" />
-            </a>
-            </article>
-
-            <article onClick={() => navigate('/viagens-romanticas')} className="itens-do-viajour itens-planejamento menu-aberto-screen">
-            <a className="menu-aberto-screen">
-                <i className="fa-solid fa-heart icones-referencia menu-aberto-screen" />
-                <p className="menu-aberto-screen">Viagens Românticas</p>
-                <i className="fa-regular fa-pen-to-square icones-planejamento menu-aberto-screen" />
-            </a>
-            </article>
-
-            <article onClick={() => navigate('/viagens-de-natal')} className="itens-do-viajour itens-planejamento menu-aberto-screen">
-            <a className="menu-aberto-screen">
-                <i className="fa-solid fa-gift icones-referencia menu-aberto-screen" />
-                <p className="menu-aberto-screen">Viagens de Natal</p>
-                <i className="fa-regular fa-pen-to-square icones-planejamento menu-aberto-screen" />
-            </a>
-            </article>
-            {/*Itens Planejamento*/}
+            {itensMenu.map((item, index) => (
+                <article 
+                key={index} 
+                onClick={() => navigate(item.rota)} 
+                className={`${item.classeArticle}`}>
+                <a className="menu-aberto-screen">
+                    <i className={`${item.iconeEsquerda} icones-referencia menu-aberto-screen`} />
+                    <p className="menu-aberto-screen">{item.texto}</p>
+                    <i className={`${item.iconeDireita} ${item.classeIconeDireita} menu-aberto-screen`} />
+                </a>
+                </article>
+            ))}
         </main>
     </div>
 )

@@ -76,12 +76,12 @@
   @apply grid min-w-[90%] grid-rows-[1fr_1fr] place-items-center shadow-[0px_0px_2px_rgba(0,0,0,0.5)] transition-[0.3s] duration-[ease] ml-[15px] mr-3.5 mt-[5px] mb-3.5 pt-2.5 rounded-[15px];
 }
 
-.main-fechado.menu-fechado-screen > .icones.menu-fechado-screen > .menu-fechado-screen {
+.main-fechado.menu-fechado-screen > .icones.menu-fechado-screen > i {
   @apply row-1 text-[2.4em] text-[#0080ff];
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
-.main-fechado.menu-fechado-screen > .icones.menu-fechado-screen > .menu-fechado-screen {
+.main-fechado.menu-fechado-screen > .icones.menu-fechado-screen > h4 {
   @apply row-2 text-[1em] text-center font-normal text-[rgb(1,18,43)];
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.12);
 }
@@ -91,7 +91,7 @@
   justify-content: start;
 }
 
-.main-fechado.menu-fechado-screen > .desc-app.menu-fechado-screen > .menu-fechado-screen {
+.main-fechado.menu-fechado-screen > .desc-app.menu-fechado-screen > p {
   @apply col-1 row-1 text-[1.4em] font-normal text-[#222222];
 }
 
@@ -99,7 +99,7 @@
   @apply row-2 col-1 bg-[linear-gradient(to_right,#5481ff,#47a7fb)] text-[white] text-[1.2em] cursor-pointer pt-[5px] pb-[7px] px-0 rounded-md border-[none];
 }
 
-.main-fechado.menu-fechado-screen > .desc-app.menu-fechado-screen > .menu-fechado-screen {
+.main-fechado.menu-fechado-screen > .desc-app.menu-fechado-screen > img {
   @apply absolute max-h-full max-w-[150px] right-[6.5%] bottom-[0%];
 }
 
@@ -183,7 +183,7 @@
     @apply hidden;
   }
 
-  .header-fechado.menu-fechado-screen > h1 {
+  .header-fechado.menu-fechado-screen > .logo.menu-fechado-screen {
     @apply col-1 row-1 tracking-[2px] font-light text-center transition-all duration-200;
     font-family: "Majesty";
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
@@ -251,11 +251,10 @@ html.dark .main-fechado.menu-fechado-screen {
   @apply bg-[#1e293b];
 }
 
-html.dark .main-fechado.menu-fechado-screen > .desc-app.menu-fechado-screen > .menu-fechado-screen {
+html.dark .main-fechado.menu-fechado-screen > .desc-app.menu-fechado-screen > p {
   @apply text-slate-200;
 }
 
-html.dark .main-fechado.menu-fechado-screen > iv.icones.menu-fechado-screen > .menu-fechado-screen {
-  @apply text-slate-200;
+html.dark .main-fechado.menu-fechado-screen > .icones.menu-fechado-screen > h4 {
+  @apply text-slate-100;
 }
-

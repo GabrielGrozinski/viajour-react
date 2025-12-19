@@ -6,9 +6,94 @@ import imagemCelular from '../../assets/imagens/celular-icone.png';
 import ChatCard from "../../components/chat-card";
 
 
+interface Moeda {
+    id: string,
+    img: string,
+    alt: string,
+    label: string
+}
+
+
 export default function MenuFechado({ abrir }: {abrir: () => void}) {
   const navigate = useNavigate();
   const [largura, setLargura] = useState(window.innerWidth);
+  const topicos = [
+    {
+        icone: 'fa-solid fa-map-location-dot',
+        texto: 'Roteiros Automáticos'
+    },
+    {
+        icone: 'fa-solid fa-location-dot',
+        texto: 'Escolha qualquer lugar!'
+    },
+    {
+        icone: 'fa-solid fa-earth-americas',
+        texto: 'Viagens para o mundo todo!'
+    },
+    {
+        icone: 'fa-solid fa-plane-up',
+        texto: 'Suas viagens'
+    },
+    {
+        icone: 'fa-solid fa-star',
+        texto: 'Promoções'
+    },
+    {
+        icone: 'fa-solid fa-heart',
+        texto: 'Viagens festivas'
+    },
+  ];
+  const idiomasEMoedas: Moeda[] = [
+    {
+        id: 'br',
+        img: 'https://flagcdn.com/w2560/br.png',
+        alt: 'Brazil',
+        label: 'PT - BRL',
+    },
+    {
+        id: 'pt',
+        img: 'https://flagcdn.com/w2560/pt.png',
+        alt: 'Portugal',
+        label: 'PT - EUR',
+    },
+    {
+        id: 'us',
+        img: 'https://flagcdn.com/w2560/us.png',
+        alt: 'Estados Unidos',
+        label: 'EN - USD',
+    },
+    {
+        id: 'es',
+        img: 'https://flagcdn.com/w2560/es.png',
+        alt: 'Espanha',
+        label: 'ES - EUR',
+    },
+    {
+        id: 'uy',
+        img: 'https://flagcdn.com/w2560/uy.png',
+        alt: 'Uruguai',
+        label: 'ES - UYU',
+    },
+    {
+        id: 'ar',
+        img: 'https://flagcdn.com/w2560/ar.png',
+        alt: 'Argentina',
+        label: 'ES - ARS',
+    },
+    {
+        id: 'fr',
+        img: 'https://flagcdn.com/w2560/fr.png',
+        alt: 'França',
+        label: 'FR - EUR',
+    },
+  ];
+  const [moedaAtual, setMoedaAtual] = useState<Moeda>({
+    id: 'br',
+    img: 'https://flagcdn.com/w2560/br.png',
+    alt: 'Brazil',
+    label: 'BR - BRL'
+  });
+
 
   useEffect(() => {
     const handleResize = () => setLargura(window.innerWidth);
@@ -32,85 +117,29 @@ return (
             <i onClick={() => abrir()} id="menu-icone" className="fa-solid fa-bars menu-fechado-screen" />
             <h1 className="logo menu-fechado-screen">ViaJour</h1>
             <section id="container-moeda-e-idioma-desktop" className="menu-fechado-screen">
-                <article className="idiomas-e-moedas-itens-desktop menu-fechado-screen">
+                {idiomasEMoedas.map((idioma_e_moeda) => (
+                    <article
+                    onClick={() => setMoedaAtual(idioma_e_moeda)} 
+                    key={idioma_e_moeda.id} className="idiomas-e-moedas-itens-desktop menu-fechado-screen">
                     <img
-                        src="https://flagcdn.com/w2560/br.png"
+                        src={idioma_e_moeda.img}
                         width={30}
                         height={22}
-                        alt="Brazil"
+                        alt={idioma_e_moeda.alt}
                         className="menu-fechado-screen"
                     />
-                    <p className="menu-fechado-screen">BR - BRL</p>
+                    <p className="menu-fechado-screen">{idioma_e_moeda.label}</p>
                 </article>
-                <article className="idiomas-e-moedas-itens-desktop menu-fechado-screen">
-                    <img
-                        src="https://flagcdn.com/w2560/pt.png"
-                        width={30}
-                        height={22}
-                        alt="Portugal"
-                        className="menu-fechado-screen"
-                    />
-                    <p className="menu-fechado-screen">PT - EUR</p>
-                </article>
-                <article className="idiomas-e-moedas-itens-desktop menu-fechado-screen">
-                    <img
-                        src="https://flagcdn.com/w2560/us.png"
-                        width={30}
-                        height={22}
-                        alt="Estados Unidos"
-                        className="menu-fechado-screen"
-                    />
-                    <p className="menu-fechado-screen">US - USD</p>
-                </article>
-                <article className="idiomas-e-moedas-itens-desktop menu-fechado-screen">
-                    <img
-                        src="https://flagcdn.com/w2560/es.png"
-                        width={30}
-                        height={22}
-                        alt="Espanha"
-                        className="menu-fechado-screen"
-                    />
-                    <p className="menu-fechado-screen">ES - EUR</p>
-                </article>
-                <article className="idiomas-e-moedas-itens-desktop menu-fechado-screen">
-                    <img
-                        src="https://flagcdn.com/w2560/uy.png"
-                        width={30}
-                        height={22}
-                        alt="Uruguai"
-                        className="menu-fechado-screen"
-                    />
-                    <p className="menu-fechado-screen">UY - UYU</p>
-                </article>
-                <article className="idiomas-e-moedas-itens-desktop menu-fechado-screen">
-                    <img
-                        src="https://flagcdn.com/w2560/ar.png"
-                        width={30}
-                        height={22}
-                        alt="Argentina"
-                        className="menu-fechado-screen"
-                    />
-                    <p className="menu-fechado-screen">AR - ARS</p>
-                </article>
-                <article className="idiomas-e-moedas-itens-desktop menu-fechado-screen">
-                    <img
-                        src="https://flagcdn.com/w2560/fr.png"
-                        width={30}
-                        height={22}
-                        alt="França"
-                        className="menu-fechado-screen"
-                    />
-                    <p className="menu-fechado-screen">FR - EUR</p>
-                </article>
+                ))}
                 <article id="moeda-item" className="menu-fechado-screen">
                     <img
-                        src="https://flagcdn.com/w2560/br.png"
+                        src={moedaAtual.img}
                         width={30}
                         height={22}
-                        alt="Brazil"
+                        alt={moedaAtual.alt}
                         className="menu-fechado-screen"
                     />
-                    <p className="menu-fechado-screen">PT | BRL</p>
+                    <p className="menu-fechado-screen">{moedaAtual.label}</p>
                 </article>
             </section>
             <i onClick={() => navigate('/usuario')} id="user-icone" className="fa-solid fa-user user-btn menu-fechado-screen" />
@@ -139,36 +168,19 @@ return (
         </section>
 
         <main id="main-fechado" className="main-fechado menu-fechado-screen">
-            <div className="icones menu-fechado-screen">
-                <i className="fa-solid fa-map-location-dot menu-fechado-screen" />
-                <h4 className="menu-fechado-screen">Roteiros automáticos</h4>
-            </div>
-            <div className="icones menu-fechado-screen">
-                <i className="fa-solid fa-location-dot menu-fechado-screen" />
-                <h4 className="menu-fechado-screen">Escolha qualquer lugar!</h4>
-            </div>
-            <div className="icones menu-fechado-screen">
-                <i className="fa-solid fa-earth-americas menu-fechado-screen" />
-                <h4 className="menu-fechado-screen">Viagens para o mundo todo!</h4>
-            </div>
-            <div className="icones menu-fechado-screen">
-                <i className="fa-solid fa-plane-up menu-fechado-screen" />
-                <h4 className="menu-fechado-screen">Suas viagens</h4>
-            </div>
-            <div className="icones menu-fechado-screen">
-                <i className="fa-solid fa-star menu-fechado-screen" />
-                <h4 className="menu-fechado-screen">Promoções</h4>
-            </div>
-            <div className="icones menu-fechado-screen">
-                <i className="fa-solid fa-heart menu-fechado-screen" />
-                <h4 className="menu-fechado-screen">Viagens festivas</h4>
-            </div>
+            {topicos.map((topico, index) => (
+                <div key={index} className="icones menu-fechado-screen">
+                    <i className={`${topico.icone} menu-fechado-screen`} />
+                    <h4 className="menu-fechado-screen">{topico.texto}</h4>
+                </div>
+            ))}
+
             <div className="desc-app menu-fechado-screen">
                 <p className="menu-fechado-screen">
                     Tenha a melhor <br className="menu-fechado-screen" /> experiencia no app
                 </p>
                 <button className="btn-instalar-app menu-fechado-screen">Baixar agora</button>
-                <img className="baixar-app menu-fechado-screen" src={imagemCelular} alt="" />
+                <img className="baixar-app menu-fechado-screen" src={imagemCelular} alt="imagem-baixar-app" />
             </div>
         </main>
         <ChatCard/>
