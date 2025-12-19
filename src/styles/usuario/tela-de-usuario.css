@@ -1,14 +1,12 @@
 @reference "tailwindcss";
 
+/* ----------------------------------------------------------- FONTES ----------------------------------------------------------- */
 @font-face {
   font-family: "Majesty";
   src: url(../assets/fonts/majesty.otf);
 }
 
-/* -----------------------------------------------------------
-   MOBILE FIRST — antes era o desktop
------------------------------------------------------------ */
-
+/* ----------------------------------------------------------- LAYOUT GERAL DA PAGE ----------------------------------------------------------- */
 #body.tela-de-usuario-screen {
   @apply grid grid-cols-[10%_1fr_10%] pt-0 grid-rows-[auto_auto_1fr_100px]
          min-h-screen transition-all duration-300 bg-cover bg-fixed bg-no-repeat 
@@ -23,6 +21,7 @@ hr.tela-de-usuario-screen {
   @apply col-span-full row-3 border-neutral-200;
 }
 
+/* ----------------------------------------------------------- HEADER ----------------------------------------------------------- */
 .header.tela-de-usuario-screen {
   @apply col-2 flex flex-col row-2 justify-center items-center;
 }
@@ -31,6 +30,7 @@ hr.tela-de-usuario-screen {
   @apply text-[#222222] text-3xl;
 }
 
+/* ----------------------------------------------------------- BARRA DE TÓPICOS ----------------------------------------------------------- */
 #barra-topico.tela-de-usuario-screen {
   @apply col-2 row-3 p-2 mt-5 flex flex-col gap-2;
 }
@@ -39,6 +39,7 @@ hr.tela-de-usuario-screen {
   @apply fixed top-0 mt-0 left-[10%];
 }
 
+/* ----------------------------------------------------------- BUSCA ----------------------------------------------------------- */
 .tela-de-usuario-screen.container-buscar {
   @apply relative;
 }
@@ -55,6 +56,7 @@ hr.tela-de-usuario-screen {
   @apply text-neutral-400 pointer-events-none absolute top-[50%] translate-y-[-50%] left-[85%];
 }
 
+/* ----------------------------------------------------------- LISTA DE TÓPICOS ----------------------------------------------------------- */
 .lista-topicos.tela-de-usuario-screen {
   @apply flex flex-col gap-0;
 }
@@ -67,23 +69,22 @@ hr.tela-de-usuario-screen {
   @apply bg-gray-200/30 shadow-[1px_1px_1px_#0000002a];
 }
 
+/* ----------------------------------------------------------- CONTEÚDO PRINCIPAL ----------------------------------------------------------- */
 .container.tela-de-usuario-screen {
   @apply col-span-full scale-90 mt-0 translate-y-[-3%] row-3;
 }
 
+/* ----------------------------------------------------------- RODAPÉ ----------------------------------------------------------- */
 .rodape.tela-de-usuario-screen {
   @apply col-[2/-1] row-[-1];
 }
 
-/* elementos adicionais do mobile */
+/* ----------------------------------------------------------- ELEMENTOS AUXILIARES ----------------------------------------------------------- */
 div.testando {
   @apply col-span-full mb-4;
 }
 
-/* -----------------------------------------------------------
-   DESKTOP — antes era o mobile
------------------------------------------------------------ */
-
+/* ----------------------------------------------------------- DESKTOP ----------------------------------------------------------- */
 @media screen and (min-width: 1024px) {
 
   #body.tela-de-usuario-screen {
@@ -128,10 +129,7 @@ div.testando {
   }
 }
 
-/* -----------------------------------------------------------
-   Modo Dark (sem alterações)
------------------------------------------------------------ */
-
+/* ----------------------------------------------------------- MODO DARK ----------------------------------------------------------- */
 html.dark #body.tela-de-usuario-screen {
   @apply bg-[url(../../assets/imagens/fundo-dark.png)];
 }
