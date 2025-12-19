@@ -1,34 +1,58 @@
 @reference "tailwindcss";
 
+/* -----------------------------------------------------------
+   RESET GLOBAL
+----------------------------------------------------------- */
 * {
   @apply box-border m-0 p-0 font-['Oswald',sans-serif];
 }
 
+/* -----------------------------------------------------------
+   FONTES
+----------------------------------------------------------- */
 @font-face {
   font-family: "Majesty";
   src: url(../assets/fonts/majesty.otf);
 }
 
+/* -----------------------------------------------------------
+   LAYOUT GERAL DA TELA
+----------------------------------------------------------- */
 main.cadastro-screen {
   @apply h-screen bg-[url(https://cdn.pixabay.com/photo/2017/08/17/20/05/disney-2652684_1280.jpg)] relative bg-cover transition-[0.5s];
 }
 
+/* -----------------------------------------------------------
+   CONTAINER DO FORMULÁRIO
+----------------------------------------------------------- */
 main.cadastro-screen > .form-container.cadastro-screen {
   @apply w-4/5 absolute -translate-x-2/4 left-2/4 top-[50%] px-[4%] py-[2%] -translate-y-2/4 pb-[6%] bg-white border shadow-[rgba(0,0,0,0.25)_1px_1px_1px] rounded-[15px] border-[rgba(0,0,0,0.701)] scale-[1];
 }
 
+/* -----------------------------------------------------------
+   TÍTULO
+----------------------------------------------------------- */
 .title.cadastro-screen {
   @apply text-center text-[2.8em] font-['Majesty'] font-normal text-[#222222] mb-[4%];
 }
 
+/* -----------------------------------------------------------
+   FORMULÁRIO
+----------------------------------------------------------- */
 .form.cadastro-screen {
   @apply w-full flex flex-col gap-[18px] mb-[1%];
 }
 
+/* -----------------------------------------------------------
+   INPUTS
+----------------------------------------------------------- */
 .input.cadastro-screen {
   @apply border outline-0 p-[5%] rounded-[10px] border-[#c0c0c0];
 }
 
+/* -----------------------------------------------------------
+   LINK "ESQUECEU A SENHA"
+----------------------------------------------------------- */
 .page-link-label.cadastro-screen {
   @apply text-[rgb(0,94,255)] text-shadow-black text-end text-[0.9em] font-normal cursor-pointer w-fit m-0;
 }
@@ -38,10 +62,16 @@ main.cadastro-screen > .form-container.cadastro-screen {
   @apply text-[rgb(61,129,247)];
 }
 
+/* -----------------------------------------------------------
+   BOTÃO PRINCIPAL
+----------------------------------------------------------- */
 .form-btn.cadastro-screen {
   @apply text-[1.5em] text-[white] cursor-pointer shadow-[rgba(0,0,0,0.24)_0px_3px_8px] transition-all duration-200 text-shadow-black bg-blue-600 outline-0 pt-0.5 pb-1 px-0 rounded-[20px] border-0 active:shadow-none active:scale-[0.96];
 }
 
+/* -----------------------------------------------------------
+   TEXTO DE CADASTRO
+----------------------------------------------------------- */
 .sign-up-label.cadastro-screen {
   @apply text-[1em] text-[#504f4f] mt-2.5 m-0;
 }
@@ -55,10 +85,16 @@ main.cadastro-screen > .form-container.cadastro-screen {
   @apply text-[rgb(61,129,247)];
 }
 
+/* -----------------------------------------------------------
+   CONTAINER DE BOTÕES SOCIAIS
+----------------------------------------------------------- */
 .buttons-container.cadastro-screen {
   @apply w-full flex flex-col justify-start gap-[15px] mt-5;
 }
 
+/* -----------------------------------------------------------
+   BOTÕES DE LOGIN SOCIAL
+----------------------------------------------------------- */
 .apple-login-button.cadastro-screen,
 .google-login-button.cadastro-screen {
   @apply shadow-[rgba(0,0,0,0.16)_0px_10px_36px_0px,rgba(0,0,0,0.06)_0px_0px_0px_1px] cursor-pointer flex justify-center items-center gap-[5px] text-[1.2em] transition-all duration-200 pt-[1.5%] pb-[2.5%] px-[3.5%] rounded-[20px];
@@ -69,26 +105,41 @@ main.cadastro-screen > .form-container.cadastro-screen {
   @apply scale-[0.96];
 }
 
+/* -----------------------------------------------------------
+   BOTÃO APPLE
+----------------------------------------------------------- */
 .apple-login-button.cadastro-screen {
   @apply bg-black text-white border-2 border-solid border-black;
 }
 
+/* -----------------------------------------------------------
+   BOTÃO GOOGLE
+----------------------------------------------------------- */
 .google-login-button.cadastro-screen {
   @apply border-2 border-solid border-[#747474];
 }
 
+/* -----------------------------------------------------------
+   ÍCONES DOS BOTÕES SOCIAIS
+----------------------------------------------------------- */
 .apple-icon.cadastro-screen,
 .google-icon.cadastro-screen {
   @apply text-lg mb-px;
 }
 
+/* -----------------------------------------------------------
+   RESPONSIVO — ALTURA REDUZIDA
+----------------------------------------------------------- */
 @media screen and (max-height: 656px) {
 
-div.form-container.cadastro-screen {
-  @apply px-[6%] scale-[0.9];
-}
+  div.form-container.cadastro-screen {
+    @apply px-[6%] scale-[0.9];
+  }
 }
 
+/* -----------------------------------------------------------
+   RESPONSIVO — TELAS MAIORES
+----------------------------------------------------------- */
 @media screen and (min-width: 524px) {
   main#imagem.cadastro-screen {
     @apply h-screen flex flex-col items-start justify-start;

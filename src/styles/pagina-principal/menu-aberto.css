@@ -1,49 +1,82 @@
 @reference "tailwindcss";
 
+/* -----------------------------------------------------------
+   FONTES
+----------------------------------------------------------- */
 @font-face {
     font-family: 'Majesty';
     src: url(../../assets/fonts/majesty.otf);
 }
 
+/* -----------------------------------------------------------
+   RESET GLOBAL
+----------------------------------------------------------- */
 * {
   @apply box-border m-0 p-0;
   font-family: "Oswald", sans-serif;
 }
 
+/* -----------------------------------------------------------
+   BODY / FUNDO DO MENU ABERTO
+----------------------------------------------------------- */
 .body-menu-aberto.menu-aberto-screen {
-  @apply  bg-none bg-[#001c43];
+  @apply bg-none bg-[#001c43];
 }
 
+/* -----------------------------------------------------------
+   HEADER - ESTRUTURA PRINCIPAL
+----------------------------------------------------------- */
 .header-aberto.menu-aberto-screen {
   @apply items-start justify-items-start grid w-full text-[white] grid-cols-[15%_40%_1fr] p-4;
 }
 
+/* -----------------------------------------------------------
+   HEADER - ÍCONE DE FECHAR
+----------------------------------------------------------- */
 .header-aberto.menu-aberto-screen > i#fechar-icone.menu-aberto-screen {
   @apply col-1 text-3xl cursor-pointer;
 }
 
+/* -----------------------------------------------------------
+   HEADER - TÍTULO
+----------------------------------------------------------- */
 .header-aberto.menu-aberto-screen > h1.menu-aberto-screen {
   @apply col-2 text-3xl font-['Majesty'] tracking-[2px] font-light;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
+/* -----------------------------------------------------------
+   HEADER - SELETOR DE MOEDA
+----------------------------------------------------------- */
 .header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen {
   @apply col-3 -mt-3 scale-[0.84] flex bg-[#1d3a6d3d] w-full h-[60px] justify-center items-center gap-[5px] text-[1.4em] font-light cursor-pointer rounded-[40px];
 }
 
+/* -----------------------------------------------------------
+   HEADER - SELETOR DE MOEDA (ATIVADO)
+----------------------------------------------------------- */
 .header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen.ativado {
   @apply bg-[#1d3a6d8c];
 }
 
+/* -----------------------------------------------------------
+   HEADER - IMAGEM DA MOEDA
+----------------------------------------------------------- */
 .header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen > img.menu-aberto-screen {
   @apply shadow-[0px_0px_1px_rgba(0,0,0,0.2)] rounded;
 }
 
+/* -----------------------------------------------------------
+   HEADER - TEXTO E SETA DA MOEDA
+----------------------------------------------------------- */
 .header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen > p.menu-aberto-screen,
 .header-aberto.menu-aberto-screen > article#moeda-item.menu-aberto-screen > span#seta-moeda.menu-aberto-screen {
   text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.4);
 }
 
+/* -----------------------------------------------------------
+   SETA DE EXPANSÃO DA MOEDA
+----------------------------------------------------------- */
 #seta-moeda.menu-aberto-screen {
   @apply inline-block text-[1em] rotate-90 translate-x-[60%] translate-y-[-0%] transition-[0.1s] font-normal;
 }
@@ -52,25 +85,40 @@
   @apply -rotate-90 translate-x-[60%] translate-y-[0%];
 }
 
+/* -----------------------------------------------------------
+   CONTAINER DE MOEDAS E IDIOMAS
+----------------------------------------------------------- */
 #container-moeda-e-idioma.menu-aberto-screen {
   @apply opacity-0 h-0 flex gap-y-2.5 justify-between flex-wrap justify-items-center pointer-events-none overflow-hidden translate-y-10 bg-[none];
   transition: all 0.4s ease-in-out, opacity 1ms ease-out, background-color 1ms linear;
 }
 
+/* -----------------------------------------------------------
+   CONTAINER DE MOEDAS E IDIOMAS (ATIVADO)
+----------------------------------------------------------- */
 #container-moeda-e-idioma.menu-aberto-screen.ativado {
   @apply h-auto opacity-100 pointer-events-auto translate-y-0 bg-[lightskyblue] transition-all duration-[1ms] pb-2.5;
 }
 
+/* -----------------------------------------------------------
+   ITENS DO CONTAINER DE MOEDA / IDIOMA
+----------------------------------------------------------- */
 #container-moeda-e-idioma.menu-aberto-screen > article.menu-aberto-screen {
   @apply flex justify-start gap-2 w-2/5 bg-[white] mx-[5%] my-0 px-0 py-2 rounded-md active:bg-[rgb(241,232,232)] active:scale-[0.98];
   transition: all 0.2s linear, background-color 200ms ease;
 }
 
+/* -----------------------------------------------------------
+   TÍTULO DO CONTAINER DE MOEDA / IDIOMA
+----------------------------------------------------------- */
 #container-moeda-e-idioma.menu-aberto-screen > h2.menu-aberto-screen {
   @apply w-full text-center text-[white];
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
+/* -----------------------------------------------------------
+   ITENS DE IDIOMA E MOEDA
+----------------------------------------------------------- */
 .idiomas-e-moedas-itens.menu-aberto-screen {
   @apply flex justify-between items-center text-[1em] font-normal cursor-pointer shadow-[1px_1px_1px_rgba(0,0,0,0.3)];
 }
@@ -84,10 +132,16 @@
   text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.4);
 }
 
+/* -----------------------------------------------------------
+   DIVISÓRIA DO HEADER
+----------------------------------------------------------- */
 #hr-header-main.menu-aberto-screen {
   @apply border border-solid border-[rgba(158,186,250,0.122)];
 }
 
+/* -----------------------------------------------------------
+   SEÇÃO DE INSTRUÇÕES
+----------------------------------------------------------- */
 #section-instrucoes.menu-aberto-screen {
   @apply block mx-0 my-2.5;
 }
@@ -98,9 +152,12 @@
 }
 
 #section-instrucoes.menu-aberto-screen > .menu-aberto-screen > .menu-aberto-screen {
-    @apply ml-1;
+  @apply ml-1;
 }
 
+/* -----------------------------------------------------------
+   CORES DOS ÍCONES POR CATEGORIA
+----------------------------------------------------------- */
 #section-instrucoes.menu-aberto-screen > #div-ferramentas-ia.menu-aberto-screen > i.menu-aberto-screen {
   @apply text-[lightblue];
 }
@@ -113,14 +170,23 @@
   @apply text-[rgb(214,214,103)];
 }
 
+/* -----------------------------------------------------------
+   MAIN - GRID DE FUNCIONALIDADES
+----------------------------------------------------------- */
 .main-aberto.menu-aberto-screen {
   @apply flex flex-wrap justify-between gap-y-[30px] px-[5%] py-2.5;
 }
 
+/* -----------------------------------------------------------
+   CARDS DE FUNCIONALIDADES
+----------------------------------------------------------- */
 .main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen {
   @apply w-[45%] h-[100px] bg-[#4851d745] shadow-[1px_1px_3px_rgba(0,0,0,0.2)] rounded-[10px];
 }
 
+/* -----------------------------------------------------------
+   CONTEÚDO INTERNO DOS CARDS
+----------------------------------------------------------- */
 .main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen {
   @apply flex-nowrap cursor-pointer flex-col no-underline h-full w-full flex justify-evenly relative pl-2.5 pr-[5px];
 }
@@ -130,6 +196,9 @@
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+/* -----------------------------------------------------------
+   ÍCONES DOS CARDS
+----------------------------------------------------------- */
 .main-aberto.menu-aberto-screen > .itens-do-viajour.menu-aberto-screen > a.menu-aberto-screen > i.icones-referencia.menu-aberto-screen {
   @apply text-[1.8em] text-[whitesmoke];
   text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
@@ -150,6 +219,9 @@
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
+/* -----------------------------------------------------------
+   RESPONSIVO - TELAS MUITO PEQUENAS
+----------------------------------------------------------- */
 @media screen and (max-width: 320px) {
   .body-menu-aberto.menu-aberto-screen > header.header-aberto.menu-aberto-screen {
     @apply items-start justify-items-start grid w-full text-[white] grid-cols-[10%_35%_1fr] p-4;
@@ -174,6 +246,9 @@
   }
 }
 
+/* -----------------------------------------------------------
+   RESPONSIVO - TABLETS E DESKTOP
+----------------------------------------------------------- */
 @media screen and (min-width: 768px) {
   .body-menu-aberto.menu-aberto-screen > header.header-aberto.menu-aberto-screen {
     @apply grid-cols-[10%_15%_1fr];

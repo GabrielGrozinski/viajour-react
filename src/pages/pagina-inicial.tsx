@@ -124,7 +124,7 @@ return (
 
           <div className="produtos-unicos pagina-inicial-screen">
             <i className="fa-solid fa-pen-to-square pagina-inicial-screen"></i>
-            <h3 className="pagina-inicial-screen">Cálculo de Custos</h3>
+            <h3 className="pagina-inicial-screen">Calculator</h3>
           </div>
 
           <div className="produtos-unicos pagina-inicial-screen">
@@ -209,10 +209,6 @@ return (
               </div>
               <div className="pagina-inicial-screen">
                 <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
-                <h3 className="pagina-inicial-screen">Busca Paraíso</h3>
-              </div>
-              <div className="pagina-inicial-screen">
-                <i className="fa-solid fa-wand-magic-sparkles pagina-inicial-screen"></i>
                 <h3 className="pagina-inicial-screen">Viagem Certa</h3>
               </div>
             </div>
@@ -222,7 +218,7 @@ return (
             <div id="custo" className="produtos-pai pagina-inicial-screen">
               <div className="pagina-inicial-screen">
                 <i className="fa-solid fa-pen-to-square pagina-inicial-screen"></i>
-                <h3 className="pagina-inicial-screen">Cálculo de Custos</h3>
+                <h3 className="pagina-inicial-screen">Calculator</h3>
               </div>
               <div className="pagina-inicial-screen">
                 <i className="fa-solid fa-pen-to-square pagina-inicial-screen"></i>
@@ -284,7 +280,7 @@ return (
                 <h1>{produto.titulo}</h1>
                 <p>{produto.subtitulo}</p>
               </div>
-              <img className="pagina-inicial-screen" style={{marginBottom: 52}} src={produto.imagem} alt="imagem-produto" />
+              <img className="pagina-inicial-screen" src={produto.imagem} alt="imagem-produto" />
           </article>
         ))}
       </section>

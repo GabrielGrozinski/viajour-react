@@ -1,33 +1,54 @@
 @reference "tailwindcss";
 
+/* -----------------------------------------------------------
+   FONTES
+----------------------------------------------------------- */
 @font-face {
     font-family: 'Majesty';
     src: url(../assets/fonts/majesty.otf);
 }
+
+/* -----------------------------------------------------------
+   RESET GLOBAL
+----------------------------------------------------------- */
 * {
   @apply box-border m-0 p-0;
   font-family: "Oswald", sans-serif;
 }
 
+/* -----------------------------------------------------------
+   MENU LATERAL — CONTAINER PRINCIPAL
+----------------------------------------------------------- */
 aside.menu-lateral.menu-lateral-component {
-  /* make the lateral menu fixed on the side so it doesn't scroll with the page */
   @apply fixed top-0 left-0 z-50 bg-[#082556] transition-all duration-300 w-[4vw] flex flex-col flex-nowrap justify-start items-center overflow-hidden gap-10 pt-[3vh] h-screen;
 }
 
+/* -----------------------------------------------------------
+   ITENS DO MENU — DESKTOP
+----------------------------------------------------------- */
 article.itens-do-viajour-desktop.menu-lateral-component {
   @apply min-h-[50px] h-auto text-[white] mx-[4%] my-0 p-[auto] rounded-md;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
+/* -----------------------------------------------------------
+   ÍCONE DE ABERTURA DO MENU
+----------------------------------------------------------- */
 i#menu-icone-aside.menu-lateral-component {
   @apply self-center text-white text-[1.8em] cursor-pointer text-shadow-[1px_1px_1px_#0000004d];
 }
 
+/* -----------------------------------------------------------
+   ELEMENTOS OCULTOS NO MENU FECHADO
+----------------------------------------------------------- */
 article.itens-do-viajour-desktop.menu-lateral-component,
 div.div-instrucoes.menu-lateral-component {
   @apply hidden;
 }
 
+/* -----------------------------------------------------------
+   MENU FECHADO — ÍCONES
+----------------------------------------------------------- */
 div#div-menu-fechado.menu-lateral-component {
   @apply flex flex-1 items-center min-w-full gap-[30px] text-[1.6em];
   flex-flow: column nowrap;
@@ -42,6 +63,9 @@ div#div-menu-fechado.menu-lateral-component > abbr > i:hover {
   @apply text-slate-400;
 }
 
+/* -----------------------------------------------------------
+   SELETOR DE TEMA (CLARO / ESCURO)
+----------------------------------------------------------- */
 div#temas.menu-lateral-component {
   @apply flex absolute bottom-[2%] text-shadow-[1px_1px_1px_#2222227a] left-[50%] translate-x-[-50%];
 }
@@ -50,12 +74,15 @@ div#temas.menu-lateral-component i {
   @apply text-xl text-slate-200;
 }
 
+/* -----------------------------------------------------------
+   ÍCONES DE TEMA — ESTADOS
+----------------------------------------------------------- */
 #icone-dark.menu-lateral-component {
   @apply opacity-30;
 }
 
 html.dark #icone-dark.menu-lateral-component {
-  @apply opacity-100
+  @apply opacity-100;
 }
 
 #icone-claro.menu-lateral-component {
@@ -66,22 +93,32 @@ html.dark #icone-claro.menu-lateral-component {
   @apply opacity-30;
 }
 
-
+/* -----------------------------------------------------------
+   CURSOR DOS ÍCONES DO MENU FECHADO
+----------------------------------------------------------- */
 div#div-menu-fechado.menu-lateral-component i {
   @apply cursor-pointer;
 }
 
+/* -----------------------------------------------------------
+   MENU LATERAL — ESTADO ATIVADO (ABERTO)
+----------------------------------------------------------- */
 aside.menu-lateral.menu-lateral-component.ativado {
-  /* keep fixed positioning, allow independent scrolling inside the expanded menu */
   @apply h-screen w-[12vw] overflow-y-auto transition-all duration-200 bg-[#082556] flex gap-[15px] px-[2vh] py-[3vh];
   align-items: end;
   flex-flow: column nowrap;
 }
 
+/* -----------------------------------------------------------
+   MENU ATIVADO — ELEMENTOS OCULTOS
+----------------------------------------------------------- */
 aside.menu-lateral.menu-lateral-component.ativado > div#div-menu-fechado.menu-lateral-component {
   @apply hidden;
 }
 
+/* -----------------------------------------------------------
+   MENU ATIVADO — INSTRUÇÕES
+----------------------------------------------------------- */
 aside.menu-lateral.menu-lateral-component.ativado > div.div-instrucoes.menu-lateral-component {
   @apply flex self-center flex-col text-neutral-100 items-center text-center text-[1.4em] font-normal gap-1 mt-5;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
@@ -91,6 +128,9 @@ aside.menu-lateral.menu-lateral-component.ativado > div.div-instrucoes.menu-late
   @apply text-[1em];
 }
 
+/* -----------------------------------------------------------
+   MENU ATIVADO — CORES DOS ÍCONES POR SEÇÃO
+----------------------------------------------------------- */
 aside.menu-lateral.menu-lateral-component.ativado > div#div-ferramentas-ia-desktop.menu-lateral-component > i.menu-lateral-component {
   @apply text-[lightblue];
 }
@@ -103,10 +143,16 @@ aside.menu-lateral.menu-lateral-component.ativado > div#div-planejamento-pessoal
   @apply text-[rgb(214,214,103)];
 }
 
+/* -----------------------------------------------------------
+   MENU ATIVADO — ITENS VISÍVEIS
+----------------------------------------------------------- */
 aside.menu-lateral.menu-lateral-component.ativado > article.itens-do-viajour-desktop.menu-lateral-component {
   @apply block min-w-full max-w-full min-h-[70px] overflow-hidden rounded-md;
 }
 
+/* -----------------------------------------------------------
+   MENU ATIVADO — LINKS DOS ITENS
+----------------------------------------------------------- */
 aside.menu-lateral.menu-lateral-component.ativado > article.itens-do-viajour-desktop.menu-lateral-component > a.menu-lateral-component {
   @apply flex justify-evenly gap-1 cursor-pointer no-underline h-full w-full text-[white] font-normal bg-[rgba(211,211,211,0.062)] transition-all duration-300 pl-[5px] px-0 py-2 hover:bg-[rgb(52,94,219)];
   flex-flow: column nowrap;
@@ -114,8 +160,9 @@ aside.menu-lateral.menu-lateral-component.ativado > article.itens-do-viajour-des
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
+/* -----------------------------------------------------------
+   MENU ATIVADO — ÍCONES DOS ITENS
+----------------------------------------------------------- */
 aside.menu-lateral.menu-lateral-component.ativado > article.itens-do-viajour-desktop.menu-lateral-component > a.menu-lateral-component > i.menu-lateral-component {
   @apply text-[white] text-[1.6em];
 }
-
-

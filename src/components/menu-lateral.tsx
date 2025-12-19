@@ -53,7 +53,7 @@ export default function MenuLateral({ expandirMargem }: {expandirMargem: () => v
             <article onClick={() => navigate('/calculo-de-custos')}  className="itens-do-viajour-desktop menu-lateral-component">
             <a className="menu-lateral-component">
                 <i className="fa-solid fa-hand-holding-dollar menu-lateral-component" />
-                <p className="menu-lateral-component">Cálculo de Custos</p>
+                <p className="menu-lateral-component">Calculator</p>
             </a>
             </article>
 

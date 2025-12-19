@@ -1,14 +1,24 @@
 @reference "tailwindcss";
 
+/* -----------------------------------------------------------
+   FONTES
+----------------------------------------------------------- */
 @font-face {
   font-family: "Majesty";
   src: url(../assets/fonts/majesty.otf);
 }
+
+/* -----------------------------------------------------------
+   RESET GLOBAL
+----------------------------------------------------------- */
 * {
   @apply box-border m-0 p-0;
   font-family: "Oswald", sans-serif;
 }
 
+/* -----------------------------------------------------------
+   VARIÁVEIS DE TEMA (MODO CLARO)
+----------------------------------------------------------- */
 :root {
   --fundo: #e1f0f8;
   --texto: #1e2328;
@@ -24,6 +34,9 @@
   --sol-modo-claro: black;
 }
 
+/* -----------------------------------------------------------
+   VARIÁVEIS DE TEMA (MODO ESCURO)
+----------------------------------------------------------- */
 .dark #body.pagina-inicial-screen {
   --fundo: #051e2c;
   --texto: #f6f8fb;
@@ -39,13 +52,17 @@
   --sol-modo-claro: gray;
 }
 
- #body.pagina-inicial-screen {
+/* -----------------------------------------------------------
+   BODY / LAYOUT PRINCIPAL
+----------------------------------------------------------- */
+#body.pagina-inicial-screen {
   @apply h-screen bg-[--fundo];
 }
 
-/* Menu-Pressionado. Só é ativado em mobiles */
-/* 1/2 Menu-Pressionado */
- #menu-pressionado.pagina-inicial-screen {
+/* -----------------------------------------------------------
+   MENU PRESSIONADO (MOBILE)
+----------------------------------------------------------- */
+#menu-pressionado.pagina-inicial-screen {
   @apply hidden min-h-screen h-auto grid-cols-[1fr_4fr_1fr] grid-rows-[75px_100px_500px] bg-(--fundo-menu-pressionado) gap-y-2.5;
 }
 
@@ -73,6 +90,9 @@ button.pagina-inicial-screen {
   @apply bg-(--fundo-menu-pressionado) text-(--texto) border-(--texto-produtos) border-2 border-solid;
 }
 
+/* -----------------------------------------------------------
+   TÓPICOS E PRODUTOS (MENU)
+----------------------------------------------------------- */
 #topicos.pagina-inicial-screen {
   @apply col-[span_3] row-3;
 }
@@ -82,7 +102,7 @@ button.pagina-inicial-screen {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
- #produtos-container.pagina-inicial-screen {
+#produtos-container.pagina-inicial-screen {
   @apply relative;
 }
 
@@ -110,10 +130,6 @@ p.aberto.pagina-inicial-screen {
   @apply text-(--texto-produtos) text-[1em] font-normal pl-[9vw];
 }
 
-#produtos-a-mostrar.pagina-inicial-screen .produtos-unicos.pagina-inicial-screen:active i {
-  @apply text-(--texto-tag-pressionada);
-}
-
 .produtos-unicos.pagina-inicial-screen {
   @apply relative;
 }
@@ -126,6 +142,9 @@ hr.pagina-inicial-screen {
   @apply mx-[4%] my-0 border-[rgba(211,211,211,0.608)];
 }
 
+/* -----------------------------------------------------------
+   CONTROLE DE TEMA
+----------------------------------------------------------- */
 #tema-container.pagina-inicial-screen {
   @apply relative;
 }
@@ -134,15 +153,15 @@ hr.pagina-inicial-screen {
   @apply absolute translate-x-[-30%] -translate-y-2/4 right-[0%] top-2/4;
 }
 
-/* 2/2 Menu-Pressionado */
+/* -----------------------------------------------------------
+   GRID PADRÃO / VISIBILIDADE
+----------------------------------------------------------- */
 #header.pagina-inicial-screen,
 #main.pagina-inicial-screen,
 #footer.pagina-inicial-screen {
   @apply grid;
 }
-/* Grid por padrão */
 
-/* Conteúdos que só mostram no Desktop */
 #header.pagina-inicial-screen > nav,
 #header.pagina-inicial-screen > section,
 #header.pagina-inicial-screen > #temas-desktop,
@@ -154,20 +173,22 @@ hr.pagina-inicial-screen {
   @apply grid opacity-0 -translate-y-5 pointer-events-none transition-all duration-100 h-0 overflow-hidden;
 }
 
-/* Conteúdos que somem ao clicar no ícone de Menu */
 #header.pagina-inicial-screen.fechado,
 #main.pagina-inicial-screen.fechado,
 #footer.pagina-inicial-screen.fechado {
   @apply hidden;
 }
 
-/* Valor padrão dos ícones */
+/* -----------------------------------------------------------
+   ÍCONES
+----------------------------------------------------------- */
 i.pagina-inicial-screen {
   @apply text-[2em] text-(--botao) transition-[0.5s];
 }
 
-/* Header */
-/* 1/2 Header */
+/* -----------------------------------------------------------
+   HEADER
+----------------------------------------------------------- */
 #header.pagina-inicial-screen {
   @apply bg-(--fundo-menu-pressionado) grid-cols-[1fr_4fr_1fr] grid-rows-[75px_1fr] place-items-center pb-5;
 }
@@ -185,15 +206,6 @@ i.pagina-inicial-screen {
   font-family: "Majesty";
 }
 
-#header.pagina-inicial-screen > h2 > i {
-  @apply text-[1em];
-}
-
-#header.pagina-inicial-screen > h2:active,
-#header.pagina-inicial-screen > h2:hover {
-  @apply tracking-[4px];
-}
-
 #header.pagina-inicial-screen > h1 {
   @apply col-[span_3] row-2 text-center px-[30px] py-0 text-3xl;
 }
@@ -203,8 +215,10 @@ h2.pagina-inicial-screen,
 h3.pagina-inicial-screen {
   @apply text-(--texto);
 }
-/* 2/2 Header */
 
+/* -----------------------------------------------------------
+   MAIN / CONTEÚDO PRINCIPAL
+----------------------------------------------------------- */
 #main.pagina-inicial-screen {
   @apply grid-cols-[auto_80%_auto] grid-rows-[500px_auto] gap-y-[5vh];
 }
@@ -213,6 +227,9 @@ html.dark #main.pagina-inicial-screen {
   @apply bg-[#222222];
 }
 
+/* -----------------------------------------------------------
+   IMAGEM DE DESTAQUE
+----------------------------------------------------------- */
 #main.pagina-inicial-screen > section.imagem.pagina-inicial-screen {
   @apply col-[span_3] row-1 w-full h-full bg-cover;
   background: var(--texto)
@@ -220,12 +237,9 @@ html.dark #main.pagina-inicial-screen {
     center center no-repeat fixed;
 }
 
-#main.pagina-inicial-screen > section.imagem-desktop.pagina-inicial-screen > #imagem-1,
-#main.pagina-inicial-screen > section.imagem-desktop.pagina-inicial-screen > #imagem-2,
-#main.pagina-inicial-screen > section.imagem-desktop.pagina-inicial-screen > #imagem-3 {
-  @apply hidden;
-}
-
+/* -----------------------------------------------------------
+   SEÇÃO DE PRODUTOS
+----------------------------------------------------------- */
 #produtos-section.pagina-inicial-screen {
   @apply flex col-span-full flex-col justify-evenly items-center px-4 py-2;
 }
@@ -246,26 +260,25 @@ html.dark #produtos-section.pagina-inicial-screen p {
   @apply text-neutral-300;
 }
 
-#produtos-section.pagina-inicial-screen img {
-  @apply xl:max-h-130 xl:max-w-130;
-}
-
 #produtos-section.pagina-inicial-screen article {
   @apply flex flex-col xl:items-center xl:gap-12;
 }
 
+#produtos-section.pagina-inicial-screen img {
+  @apply max-h-2/3 max-w-2/3;
+}
 
 #produtos-section.pagina-inicial-screen article:nth-child(odd) {
   @apply xl:flex-row;
 }
 
 #produtos-section.pagina-inicial-screen article:nth-child(even) {
-  @apply xl:flex-row-reverse
+  @apply xl:flex-row-reverse;
 }
 
-
-/* Footer */
-
+/* -----------------------------------------------------------
+   FOOTER
+----------------------------------------------------------- */
 #footer.pagina-inicial-screen {
   @apply bg-white grid-cols-[1fr_5fr_1fr] grid-rows-[1fr_2fr_3fr] gap-y-[3vh] px-0 py-5;
 }
@@ -277,37 +290,48 @@ html.dark #footer.pagina-inicial-screen {
 #footer.pagina-inicial-screen > h2.pagina-inicial-screen {
   @apply col-2 row-1 grid place-self-center text-center text-[2em];
 }
+
 #footer.pagina-inicial-screen > .rodape.pagina-inicial-screen {
-  @apply row-2 col-[1/4] grid grid-cols-[1fr_1fr] grid-rows-[1fr_1fr] auto-rows-auto auto-cols-auto ;
+  @apply row-2 col-[1/4] grid grid-cols-[1fr_1fr] grid-rows-[1fr_1fr] auto-rows-auto auto-cols-auto;
 }
+
 #footer.pagina-inicial-screen > .rodape.pagina-inicial-screen > .imagem-rodape.pagina-inicial-screen {
   @apply bg-cover shadow-[1px_1px_1px_rgba(0,0,0,0.300)] bg-position-[50%_80%];
 }
+
 #imagem-rodape-1.pagina-inicial-screen {
   @apply bg-[url(https://cdn.pixabay.com/photo/2023/04/20/12/22/globe-7939725_1280.jpg)];
 }
+
 #imagem-rodape-2.pagina-inicial-screen {
   @apply bg-[url(https://cdn.pixabay.com/photo/2022/01/10/18/06/girls-6928968_1280.jpg)];
 }
+
 #imagem-rodape-3.pagina-inicial-screen {
   @apply bg-[url(https://cdn.pixabay.com/photo/2023/02/24/21/11/pancake-7811889_1280.jpg)] bg-bottom;
 }
+
 #imagem-rodape-4.pagina-inicial-screen {
   @apply bg-[url(https://cdn.pixabay.com/photo/2020/03/18/05/15/horse-4942698_1280.jpg)];
 }
+
 #footer.pagina-inicial-screen > nav.pagina-inicial-screen {
   @apply grid col-[span_3] row-3 grid-rows-[1fr_100px] gap-y-[15px];
 }
+
 nav.pagina-inicial-screen > h3 {
   @apply text-center row-1 text-[1.8em] mx-2.5 my-0;
 }
+
 #footer.pagina-inicial-screen > nav > ul.pagina-inicial-screen {
   @apply flex self-start gap-5 row-2 justify-center items-center;
   list-style: none;
 }
+
 #footer.pagina-inicial-screen i.pagina-inicial-screen {
   @apply text-(--texto) transition-[0.25s];
 }
+
 i.pagina-inicial-screen:active,
 i.pagina-inicial-screen:hover {
   transform: scale(1.08) translateZ(-10px);
@@ -319,16 +343,19 @@ i.pagina-inicial-screen:hover {
   font-family: "Majesty";
 }
 
-        /* Celulares grandes ou em modo paisagem */
+/* -----------------------------------------------------------
+   RESPONSIVO — CELULARES GRANDES / PAISAGEM
+----------------------------------------------------------- */
 @media screen and (min-width: 568px) and (max-width: 768px) {
   #footer.pagina-inicial-screen {
     @apply grid-rows-[1fr_5fr_3fr];
   }
 }
 
-        /* Tablets */
+/* -----------------------------------------------------------
+   RESPONSIVO — TABLETS
+----------------------------------------------------------- */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-
   #header > i.pagina-inicial-screen,
   #header > h2.pagina-inicial-screen {
     @apply text-[3em];
@@ -347,7 +374,9 @@ i.pagina-inicial-screen:hover {
   }
 }
 
-/* Desktop */
+/* -----------------------------------------------------------
+   RESPONSIVO — DESKTOP
+----------------------------------------------------------- */
 @media screen and (min-width: 1024px) {
   #header.pagina-inicial-screen #menu-icone {
     @apply hidden;
@@ -484,18 +513,19 @@ i.pagina-inicial-screen:hover {
   }
 
   #footer.pagina-inicial-screen {
-    @apply grid-rows-[1fr_7fr_3fr] ;
+    @apply grid-rows-[1fr_7fr_3fr];
   }
 
   footer.pagina-inicial-screen > .rodape {
     @apply col-[2/3];
   }
-
-/* Desktop grande */
 }
 
+/* -----------------------------------------------------------
+   RESPONSIVO — DESKTOP GRANDE
+----------------------------------------------------------- */
 @media screen and (min-width: 1280px) {
-    .pagina-inicial-screen .cadastro-desktop {
-        @apply scale-100 active:scale-[0.94];
-    }
+  .pagina-inicial-screen .cadastro-desktop {
+    @apply scale-100 active:scale-[0.94];
   }
+}

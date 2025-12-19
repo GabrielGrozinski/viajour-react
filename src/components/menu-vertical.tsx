@@ -66,7 +66,7 @@ export default function MenuVertical() {
             <article onClick={() => navigate('/calculo-de-custos')}  className="itens-do-viajour-desktop menu-vertical-component">
             <a className="menu-vertical-component">
                 <i className="fa-solid fa-hand-holding-dollar menu-vertical-component" />
-                <p className="menu-vertical-component">Cálculo de Custos</p>
+                <p className="menu-vertical-component">Calculator</p>
             </a>
             </article>
 

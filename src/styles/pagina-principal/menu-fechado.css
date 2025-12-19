@@ -1,50 +1,83 @@
 @reference "tailwindcss";
 
+/* -----------------------------------------------------------
+   FONTES
+----------------------------------------------------------- */
 @font-face {
   font-family: "Majesty";
   src: url(../../assets/fonts/majesty.otf);
 }
 
+/* -----------------------------------------------------------
+   RESET GLOBAL
+----------------------------------------------------------- */
 * {
   @apply box-border m-0 p-0;
   font-family: "Oswald", sans-serif;
 }
 
+/* -----------------------------------------------------------
+   BODY - MENU FECHADO
+----------------------------------------------------------- */
 .body-menu-fechado.menu-fechado-screen {
   @apply h-screen bg-[linear-gradient(to_bottom,#0244f9,#57adf8_25%)];
 }
 
+/* -----------------------------------------------------------
+   HEADER - ESTRUTURA PRINCIPAL
+----------------------------------------------------------- */
 .header-fechado.menu-fechado-screen {
   @apply bg-transparent w-full grid text-white grid-cols-[1fr_1fr_1fr] row-[1fr] place-items-center p-4;
 }
 
+/* -----------------------------------------------------------
+   HEADER - ÍCONE MENU
+----------------------------------------------------------- */
 .header-fechado.menu-fechado-screen > #menu-icone.menu-fechado-screen {
   @apply col-1 justify-self-start;
 }
 
+/* -----------------------------------------------------------
+   HEADER - CONTAINER MOEDA / IDIOMA (DESKTOP)
+----------------------------------------------------------- */
 .header-fechado.menu-fechado-screen > #container-moeda-e-idioma-desktop {
   @apply hidden;
 }
 
+/* -----------------------------------------------------------
+   HEADER - ÍCONE USUÁRIO
+----------------------------------------------------------- */
 .header-fechado.menu-fechado-screen > #user-icone.menu-fechado-screen {
   @apply col-3 justify-self-end;
 }
 
+/* -----------------------------------------------------------
+   HEADER - LOGO
+----------------------------------------------------------- */
 .header-fechado.menu-fechado-screen > .logo.menu-fechado-screen {
   @apply col-2 font-['Majesty'] text-3xl row-1 tracking-[2px] font-light text-center text-[white];
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
+/* -----------------------------------------------------------
+   HEADER - ÍCONES GERAIS
+----------------------------------------------------------- */
 .header-fechado.menu-fechado-screen i.menu-fechado-screen {
   @apply text-[2em] text-white cursor-pointer transition-[0.4s] duration-[ease-in-out] border-[none] active:scale-[0.94];
   background: none;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
+/* -----------------------------------------------------------
+   CARDS DE ESTATÍSTICAS
+----------------------------------------------------------- */
 .stats-card.menu-fechado-screen {
   @apply w-full grid row-[1fr_1fr] gap-[30px] px-5 py-[30px];
 }
 
+/* -----------------------------------------------------------
+   ITEM DE ESTATÍSTICA
+----------------------------------------------------------- */
 .stat-item.menu-fechado-screen {
   @apply grid grid-cols-[15%_20%_1fr] items-center rounded-[15px];
 }
@@ -68,10 +101,16 @@
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
+/* -----------------------------------------------------------
+   MAIN - GRID PRINCIPAL
+----------------------------------------------------------- */
 .main-fechado.menu-fechado-screen {
   @apply bg-white justify-items-center h-auto grid grid-cols-[repeat(2,1fr)] grid-rows-[repeat(3,1fr)_auto_auto] gap-y-2.5 transition-all duration-[0.4s] pt-5 pb-[100px];
 }
 
+/* -----------------------------------------------------------
+   MAIN - ÍCONES DE FUNCIONALIDADES
+----------------------------------------------------------- */
 .main-fechado.menu-fechado-screen > .icones.menu-fechado-screen {
   @apply grid min-w-[90%] grid-rows-[1fr_1fr] place-items-center shadow-[0px_0px_2px_rgba(0,0,0,0.5)] transition-[0.3s] duration-[ease] ml-[15px] mr-3.5 mt-[5px] mb-3.5 pt-2.5 rounded-[15px];
 }
@@ -86,6 +125,9 @@
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.12);
 }
 
+/* -----------------------------------------------------------
+   MAIN - DESCRIÇÃO DO APP
+----------------------------------------------------------- */
 .main-fechado.menu-fechado-screen > .desc-app.menu-fechado-screen {
   @apply col-[span_2] min-w-[95%] grid grid-cols-[60%_40%] grid-rows-[1fr_1fr] items-center leading-[22px] shadow-[0px_0px_2px_rgba(0,0,0,0.5)] gap-y-[15px] relative mx-[15px] my-0 p-[25px] rounded-md xl:hidden;
   justify-content: start;
@@ -103,6 +145,9 @@
   @apply absolute max-h-full max-w-[150px] right-[6.5%] bottom-[0%];
 }
 
+/* -----------------------------------------------------------
+   RESPONSIVO - TELAS MUITO PEQUENAS
+----------------------------------------------------------- */
 @media screen and (max-width: 320px) {
   .header-fechado.menu-fechado-screen > #user-icone,
   .header-fechado.menu-fechado-screen > #menu-icone {
@@ -118,27 +163,38 @@
   }
 }
 
+/* -----------------------------------------------------------
+   RESPONSIVO - CELULARES GRANDES
+----------------------------------------------------------- */
 @media screen and (min-width: 568px) {
   .main-fechado.menu-fechado-screen > .desc-app > p {
     @apply text-center;
   }
+
   .stats-card.menu-fechado-screen {
     @apply justify-center;
   }
+
   .stats-card.menu-fechado-screen > .stat-item {
     @apply grid-cols-[30%_1fr];
   }
+
   .stats-card.menu-fechado-screen > .stat-item i {
     @apply col-1;
   }
+
   .stats-card.menu-fechado-screen > .stat-item .desc {
     @apply col-2;
   }
+
   #body.body-menu-fechado.menu-fechado-screen {
     @apply bg-[linear-gradient(to_bottom,#0244f9,#57adf8_65%)];
   }
 }
 
+/* -----------------------------------------------------------
+   RESPONSIVO - TABLETS
+----------------------------------------------------------- */
 @media screen and (min-width: 768px) {
   .stats-card.menu-fechado-screen {
     @apply flex justify-evenly px-0 py-[30px];
@@ -151,6 +207,9 @@
   }
 }
 
+/* -----------------------------------------------------------
+   RESPONSIVO - AJUSTES FINOS DE LARGURA
+----------------------------------------------------------- */
 @media screen and (min-width: 568px) and (max-width: 851px) {
   .main-fechado.menu-fechado-screen > .desc-app > .baixar-app.menu-fechado-screen {
     @apply right-[10.5%];
@@ -169,6 +228,9 @@
   }
 }
 
+/* -----------------------------------------------------------
+   RESPONSIVO - DESKTOP
+----------------------------------------------------------- */
 @media screen and (min-width: 1024px) {
   .body-menu-fechado.menu-fechado-screen {
     @apply min-h-screen bg-[linear-gradient(to_bottom,#0244f9,#57adf8_35%)] grid grid-cols-[4vw_1fr] grid-rows-[10vh_20vh_1fr];
@@ -226,11 +288,15 @@
     @apply row-3 col-2;
   }
 
-  .main-fechado.menu-fechado-screen.menu-lateral-expandido, .menu-fechado-screen.menu-lateral-expandido {
+  .main-fechado.menu-fechado-screen.menu-lateral-expandido,
+  .menu-fechado-screen.menu-lateral-expandido {
     padding-left: 8vw;
   }
 }
 
+/* -----------------------------------------------------------
+   RESPONSIVO - TELAS MUITO GRANDES
+----------------------------------------------------------- */
 @media screen and (min-width: 1528px) {
   .header-fechado.menu-fechado-screen > #container-moeda-e-idioma-desktop {
     scale: 0.9;
@@ -244,9 +310,8 @@
 }
 
 /* -----------------------------------------------------------
-   Modo Dark
+   MODO DARK
 ----------------------------------------------------------- */
-
 html.dark .main-fechado.menu-fechado-screen {
   @apply bg-[#1e293b];
 }

@@ -97,7 +97,7 @@ export default function MenuAberto({ fechar }: {fechar: () => void}) {
         rota: '/calculo-de-custos',
         classeArticle: 'itens-do-viajour itens-custo menu-aberto-screen',
         iconeEsquerda: 'fa-solid fa-hand-holding-dollar',
-        texto: 'Cálculo de Custos',
+        texto: 'Calculator',
         iconeDireita: 'fa-solid fa-dollar-sign',
         classeIconeDireita: 'icones-custo',
     },

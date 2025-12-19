@@ -1,103 +1,154 @@
 @reference "tailwindcss";
 
+/* ----------------------------------------------------------- FONTES ----------------------------------------------------------- */
 @font-face {
     font-family: 'Majesty';
     src: url(../../assets/fonts/majesty.otf);
 }
+
+/* ----------------------------------------------------------- RESET GLOBAL ----------------------------------------------------------- */
 * {
   @apply box-border m-0 p-0;
   font-family: "Oswald", sans-serif;
 }
 
+/* ----------------------------------------------------------- LAYOUT GERAL DA TELA ----------------------------------------------------------- */
 .destino-certo-screen#body {
   @apply w-full min-h-screen flex flex-col items-center bg-cover;
 }
+
+/* ----------------------------------------------------------- AVISO FIXO ----------------------------------------------------------- */
 .destino-certo-screen.aviso {
-  @apply fixed top-[2%] pointer-events-none left-1/2 translate-x-[-50%] min-h-10 min-w-auto px-2 z-1 text-center flex justify-center items-center bg-red-500 rounded-md shadow-[0px_0px_2px_#0000002a] text-slate-100 text-shadow-[1px_1px_1px_#0000001a];
+  @apply fixed top-[2%] pointer-events-none left-1/2 translate-x-[-50%]
+         min-h-10 min-w-auto px-2 z-1 text-center
+         flex justify-center items-center bg-red-500 rounded-md
+         shadow-[0px_0px_2px_#0000002a]
+         text-slate-100 text-shadow-[1px_1px_1px_#0000001a];
 }
+
+/* ----------------------------------------------------------- CONTEÚDO PRINCIPAL ----------------------------------------------------------- */
 main.destino-certo-screen {
-@apply w-full flex-1 min-h-0 pb-16 flex flex-col items-center px-[30px] lg:px-0;
+  @apply w-full flex-1 min-h-0 pb-16 flex flex-col items-center px-[30px] lg:px-0;
 }
+
+/* ----------------------------------------------------------- TÍTULO ----------------------------------------------------------- */
 .destino-certo-screen.titulo {
   @apply text-[32px] text-center w-full text-white my-2;
 }
+
+/* ----------------------------------------------------------- CARD PRINCIPAL ----------------------------------------------------------- */
 .destino-certo-screen.card {
-  @apply p-5 w-full flex flex-col gap-4 min-h-0 h-auto bg-white max-w-[600px] shadow-[0_4px_10px_rgba(0,0,0,0.15)] mb-[25px] rounded-[14px];
+  @apply p-5 w-full flex flex-col gap-4 min-h-0 h-auto bg-white
+         max-w-[600px]
+         shadow-[0_4px_10px_rgba(0,0,0,0.15)]
+         mb-[25px] rounded-[14px];
 }
 
 .destino-certo-screen.card h2 {
   @apply text-[1.2em] mb-[15px];
 }
+
 .destino-certo-screen.card label {
   @apply block font-semibold mt-2.5 mb-1.5 mx-0;
 }
+
+/* ----------------------------------------------------------- CAMPOS DE FORMULÁRIO ----------------------------------------------------------- */
 .destino-certo-screen.card input,
 .destino-certo-screen.card select,
 .destino-certo-screen.card textarea {
   @apply w-full border text-base p-2.5 rounded-lg border-solid border-[#ccc];
 }
+
 .destino-certo-screen.card input:focus {
   @apply outline-blue-400;
 }
+
 .destino-certo-screen.card input::placeholder {
   @apply text-neutral-500;
 }
+
+/* ----------------------------------------------------------- BOTÃO DE CUSTO AUTOMÁTICO ----------------------------------------------------------- */
 .btn-custo-automatico.destino-certo-screen {
-  @apply text-lg min-w-full transition-all duration-300 cursor-pointer text-white text-shadow-[1px_1px_1px_#0000003a] bg-sky-400 rounded-xl mt-2 p-2;
+  @apply text-lg min-w-full transition-all duration-300 cursor-pointer
+         text-white text-shadow-[1px_1px_1px_#0000003a]
+         bg-sky-400 rounded-xl mt-2 p-2;
 }
+
 .btn-custo-automatico.destino-certo-screen:active {
   @apply scale-98;
 }
+
+/* ----------------------------------------------------------- OPÇÕES DE PREFERÊNCIA ----------------------------------------------------------- */
 .opcoes-preferencia.destino-certo-screen {
-  @apply px-2 py-1.5 max-w-[80%] sm:max-w-[48.5%] md:max-w-[31%] cursor-pointer rounded-md shadow-[1px_1px_2px_#0000001a] bg-neutral-100;
+  @apply px-2 py-1.5 max-w-[80%] sm:max-w-[48.5%] md:max-w-[31%]
+         cursor-pointer rounded-md
+         shadow-[1px_1px_2px_#0000001a] bg-neutral-100;
 }
+
 .preferencias-titulo.destino-certo-screen {
   @apply mt-2 font-medium;
 }
+
 .valor-titulo.destino-certo-screen {
   @apply mt-2 font-medium;
 }
+
+/* ----------------------------------------------------------- TEXTAREA ----------------------------------------------------------- */
 .destino-certo-screen textarea {
-  @apply resize-none overflow-hidden text-neutral-700 text-shadow-[1px_1px_1px_#0000001a];
+  @apply resize-none overflow-hidden text-neutral-700
+         text-shadow-[1px_1px_1px_#0000001a];
 }
+
 .destino-certo-screen textarea::placeholder {
   @apply text-gray-400 text-shadow-none;
 }
+
 .destino-certo-screen.card textarea {
   @apply min-h-20;
 }
+
 #label-anotacao.destino-certo-screen {
   @apply mb-0 mt-4;
 }
+
+/* ----------------------------------------------------------- RADIO GROUP ----------------------------------------------------------- */
 .destino-certo-screen.radio-group {
   @apply flex gap-[25px] mt-0 mx-0 my-2.5;
 }
+
 .destino-certo-screen.radio-group > label {
   @apply text-center;
 }
+
+/* ----------------------------------------------------------- BOTÕES DE AÇÃO ----------------------------------------------------------- */
 .destino-certo-screen.btn-montar,
 .destino-certo-screen.btn-salvar {
-  @apply w-full text-lg cursor-pointer text-white transition-[0.2s] mt-[15px] p-3 rounded-lg;
+  @apply w-full text-lg cursor-pointer text-white
+         transition-[0.2s] mt-[15px] p-3 rounded-lg;
 }
+
 .destino-certo-screen.btn-montar {
   background: #4d7cff;
 }
+
 .destino-certo-screen.btn-montar:hover {
   background: #3a63d6;
 }
+
 .destino-certo-screen.btn-salvar {
   background: #2ecc71;
 }
+
 .destino-certo-screen.btn-salvar:hover {
   background: #25a75a;
 }
+
+/* ----------------------------------------------------------- CONTAINER DE DIAS ----------------------------------------------------------- */
 .destino-certo-screen.dias-container {
   @apply w-full max-w-[700px] flex flex-col items-center mx-auto my-0;
 }
 
-/* -----------------------------------------------------------
-   Modo Dark
------------------------------------------------------------ */
+/* ----------------------------------------------------------- MODO DARK ----------------------------------------------------------- */
 html.dark .destino-certo-screen.card {
   @apply bg-[#1e293b];
 }
@@ -119,11 +170,11 @@ html.dark .btn-montar.destino-certo-screen {
 }
 
 html.dark h2.destino-certo-screen {
-@apply text-white text-shadow-[1px_1px_1px_#2222223a];
+  @apply text-white text-shadow-[1px_1px_1px_#2222223a];
 }
 
 html.dark .destino-certo-screen textarea {
-  @apply text-slate-200
+  @apply text-slate-200;
 }
 
 html.dark .destino-certo-screen textarea::placeholder {
