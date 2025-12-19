@@ -246,6 +246,24 @@ html.dark #produtos-section.pagina-inicial-screen p {
   @apply text-neutral-300;
 }
 
+#produtos-section.pagina-inicial-screen img {
+  @apply xl:max-h-130 xl:max-w-130;
+}
+
+#produtos-section.pagina-inicial-screen article {
+  @apply flex flex-col xl:items-center xl:gap-12;
+}
+
+
+#produtos-section.pagina-inicial-screen article:nth-child(odd) {
+  @apply xl:flex-row;
+}
+
+#produtos-section.pagina-inicial-screen article:nth-child(even) {
+  @apply xl:flex-row-reverse
+}
+
+
 /* Footer */
 
 #footer.pagina-inicial-screen {

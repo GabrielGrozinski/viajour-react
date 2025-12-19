@@ -279,12 +279,12 @@ return (
 
       <section id="produtos-section" className="pagina-inicial-screen">
         {produtosExibicao.map((produto: Produtos, index: number) => (
-          <article key={index} className={`flex flex-col xl:items-center xl:gap-12 xl:${index === 0 || index === 2 ? 'flex-row' : 'flex-row-reverse'}`}>
+          <article key={index} className="pagina-inicial-screen" >
               <div>
                 <h1>{produto.titulo}</h1>
                 <p>{produto.subtitulo}</p>
               </div>
-              <img className="xl:max-h-130 xl:max-w-130" style={{marginTop: 2, marginBottom: 52}} src={produto.imagem} alt="imagem-produto" />
+              <img className="pagina-inicial-screen" style={{marginBottom: 52}} src={produto.imagem} alt="imagem-produto" />
           </article>
         ))}
       </section>
