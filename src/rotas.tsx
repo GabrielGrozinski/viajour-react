@@ -1,6 +1,8 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import PaginaInicial from './pages/pagina-inicial';
-import Cadastro from './pages/cadastro';
+import LoginLayout from './pages/login-layout';
+import TelaLogin from "./pages/login";
+import TelaCadastro from "./pages/cadastro";
 import PaginaPrincipal from "./pages/pagina-principal/pagina-principal";
 import CalculoDeCustos from "./pages/produtos/calculo-de-custos";
 import ViagensNatal from "./pages/produtos/viagens-de-natal";
@@ -24,7 +26,10 @@ export default function Rotas() {
       <Routes>
         <Route path="/" element={<PaginaInicial />} />
 
-        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/login" element={<LoginLayout />}>
+          <Route index element={<TelaLogin />} />
+          <Route path="cadastro" element={<TelaCadastro />} />
+        </Route>
 
         <Route path="/principal" element={<PaginaPrincipal />} />
 

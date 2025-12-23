@@ -65,7 +65,7 @@ return (
 
       <div className="cadastro pagina-inicial-screen">
         <button
-          onClick={() => navigate("/cadastro")}
+          onClick={() => navigate("/login/cadastro")}
           id="cadastrar"
           className="pagina-inicial-screen"
         >
@@ -73,7 +73,7 @@ return (
         </button>
 
         <button
-          onClick={() => navigate("/cadastro")}
+          onClick={() => navigate("/login")}
           id="login"
           className="pagina-inicial-screen"
         >
@@ -180,8 +180,8 @@ return (
       </section>
 
       <nav onMouseEnter={() => setProdutosDesktop(false)} className="pagina-inicial-screen">
-        <h3 className="cadastro-desktop pagina-inicial-screen" onClick={() => navigate('/cadastro')} id="l-desktop">Fazer Login</h3>
-        <h3 className="cadastro-desktop pagina-inicial-screen" onClick={() => navigate('/cadastro')} id="c-desktop">Cadastrar</h3>
+        <h3 className="cadastro-desktop pagina-inicial-screen" onClick={() => navigate('/login')} id="l-desktop">Fazer Login</h3>
+        <h3 className="cadastro-desktop pagina-inicial-screen" onClick={() => navigate('/login/cadastro')} id="c-desktop">Cadastrar</h3>
       </nav>
       {/* Produtos Desktop Dropdown */}
       <AnimatePresence mode="wait">

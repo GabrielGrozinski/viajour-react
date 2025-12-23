@@ -1,13 +1,12 @@
 import '../styles/login.css'
-import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { AuthUser } from '../context/Autenticacao';
 
 
-export default function TelaCadastro() {
-    const navigate = useNavigate();
-    const { email, setEmail, senha, setSenha } = AuthUser();
+export default function TelaLogin() {
+    const { email, setEmail, senha, setSenha } = AuthUser()
 
-    
+
     return (
         <div className="form-container cadastro-screen">
             <p className="title cadastro-screen">ViaJour</p>
@@ -22,17 +21,18 @@ export default function TelaCadastro() {
                 type="password" 
                 className="input cadastro-screen" 
                 placeholder="Senha" />
+                <a className="page-link-label cadastro-screen">Esqueci a senha</a>
                 <button
                 type='button'
-                className="form-btn cadastro-screen">Cadastrar</button>
+                className="form-btn cadastro-screen">Login</button>
             </form>
             <p className="sign-up-label cadastro-screen">
-                Já tem uma conta?
-                <span
-                onClick={() => navigate('/login')}
+                Não possui uma conta?
+                <NavLink 
+                to="cadastro"
                 className="sign-up-link cadastro-screen">
-                    Faça login
-                </span>
+                    Fazer cadastro
+                </NavLink>
             </p>
             <div className="buttons-container cadastro-screen">
                 <div className="apple-login-button cadastro-screen">

@@ -32,6 +32,7 @@
     "@emotion/styled": "^11.14.1",
     "@fortawesome/fontawesome-free": "^7.1.0",
     "@mui/material": "^7.3.5",
+    "@supabase/supabase-js": "^2.89.0",
     "@tailwindcss/postcss": "^4.1.17",
     "@tailwindcss/vite": "^4.1.17",
     "chart.js": "^4.5.1",

@@ -30,7 +30,4 @@ export function TemaProvider({ children }: Props) {
             {children}
         </TemaContext.Provider>
     )
-
-
 }
-
