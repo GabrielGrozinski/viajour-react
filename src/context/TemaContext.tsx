@@ -15,7 +15,7 @@ export const TemaContext = createContext<TemaContextType>({
     setDark: () => {}
 });
 
-export function TemaProvider({ children }: Props) {
+export default function TemaProvider({ children }: Props) {
     const [dark, setDark] = useState<boolean>(() => {
         return localStorage.getItem("tema") === 'dark'
     });

@@ -1,30 +1,64 @@
 import '../styles/login.css'
 import { useNavigate } from 'react-router-dom';
-import { AuthUser } from '../context/Autenticacao';
+import { userAuth } from '../context/autenticacao';
+import { useEffect, useState, type FormEvent } from 'react';
+import { ClipLoader } from 'react-spinners';
 
 
 export default function TelaCadastro() {
+    const [loading, setLoading] = useState<boolean>(false);
+    const [email, setEmail] = useState<string>('');
+    const [senha, setSenha] = useState<string>('');
     const navigate = useNavigate();
-    const { email, setEmail, senha, setSenha } = AuthUser();
+    const { cadastroNovoUser } = userAuth();
 
-    
+    useEffect(() => {
+        console.log(loading)
+    }, [loading])
+
+    const handleCadastro = async (e: FormEvent) => {
+        e.preventDefault();
+        try {
+            setLoading(true);
+            const result = await cadastroNovoUser(email, senha);
+
+            if (result?.success) {
+                navigate('/principal');
+            }
+
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+
     return (
         <div className="form-container cadastro-screen">
             <p className="title cadastro-screen">ViaJour</p>
             <form className="form cadastro-screen">
                 <input
-                onClick={(e) => setEmail((e.currentTarget.value).toLocaleLowerCase())} 
+                onChange={(e) => setEmail((e.currentTarget.value).toLocaleLowerCase())} 
                 type="email" 
                 className="input cadastro-screen" 
                 placeholder="Email" />
                 <input
-                onClick={(e) => setSenha((e.currentTarget.value).toLocaleLowerCase())} 
+                onChange={(e) => setSenha((e.currentTarget.value).toLocaleLowerCase())} 
                 type="password" 
                 className="input cadastro-screen" 
                 placeholder="Senha" />
-                <button
-                type='button'
-                className="form-btn cadastro-screen">Cadastrar</button>
+                {!loading ? (
+                    <input
+                    onClick={(e) => handleCadastro(e)}
+                    value="Cadastrar"
+                    type='button'
+                    className="form-btn cadastro-screen"/>
+                ) : (
+                    <ClipLoader className='self-center' color='#000' loading size={35} />
+                )
+                }
+
             </form>
             <p className="sign-up-label cadastro-screen">
                 Já tem uma conta?

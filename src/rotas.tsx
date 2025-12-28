@@ -1,4 +1,7 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
+import Providers from "./context/Providers";
+import RotaPrivada from "./auth/rota-privada";
+
 import PaginaInicial from './pages/pagina-inicial';
 import LoginLayout from './pages/login-layout';
 import TelaLogin from "./pages/login";
@@ -22,42 +25,49 @@ import ChatAuxiliar from "./pages/produtos/chat-auxiliar";
 
 export default function Rotas() {
   return (
-    <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <Routes>
-        <Route path="/" element={<PaginaInicial />} />
+    <Providers>
+      <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <Routes>
+          <Route path="/" element={<PaginaInicial />} />
 
-        <Route path="/login" element={<LoginLayout />}>
-          <Route index element={<TelaLogin />} />
-          <Route path="cadastro" element={<TelaCadastro />} />
-        </Route>
+          <Route path="/login" element={<LoginLayout />}>
+            <Route index element={<TelaLogin />} />
+            <Route path="cadastro" element={<TelaCadastro />} />
+          </Route>
 
-        <Route path="/principal" element={<PaginaPrincipal />} />
+          <Route path="/principal" 
+            element={
+              <RotaPrivada>
+                <PaginaPrincipal/>
+              </RotaPrivada> 
+            } />
 
-        <Route path="/calculo-de-custos" element={<CalculoDeCustos />} />
+          <Route path="/calculo-de-custos" element={<CalculoDeCustos />} />
 
-        <Route path="/viagens-de-natal" element={<ViagensNatal />} />
+          <Route path="/viagens-de-natal" element={<ViagensNatal />} />
 
-        <Route path="/viagens-romanticas" element={<ViagensRomanticas />} />
+          <Route path="/viagens-romanticas" element={<ViagensRomanticas />} />
 
-        <Route path="/viagens-de-sete-dias" element={<ViagensSeteDias />} />
+          <Route path="/viagens-de-sete-dias" element={<ViagensSeteDias />} />
 
-        <Route path="/monte-sua-aventura" element={<MonteSuaAventura />} />
+          <Route path="/monte-sua-aventura" element={<MonteSuaAventura />} />
 
-        <Route path="/viagens-baratas" element={<ViagensBaratas />} />
+          <Route path="/viagens-baratas" element={<ViagensBaratas />} />
 
-        <Route path="/roteiro-automatico" element={<RoteiroAutomatico />} />
+          <Route path="/roteiro-automatico" element={<RoteiroAutomatico />} />
 
-        <Route path="/destino-certo" element={<DestinoCerto />} />
+          <Route path="/destino-certo" element={<DestinoCerto />} />
 
-        <Route path="/chat-auxiliar" element={<ChatAuxiliar />} />
+          <Route path="/chat-auxiliar" element={<ChatAuxiliar />} />
 
-        <Route path="/usuario" element={<TelaDeUsuario />}>
-          <Route index element={<Geral />} />
-          <Route path="autenticacao" element={<Autenticacao />} />
-          <Route path="metodos-de-pagamento" element={<MetodosDePagamento />} />
-          <Route path="assinaturas" element={<Assinaturas />} />
-        </Route>
-      </Routes>
-    </HashRouter>
+          <Route path="/usuario" element={<TelaDeUsuario />}>
+            <Route index element={<Geral />} />
+            <Route path="autenticacao" element={<Autenticacao />} />
+            <Route path="metodos-de-pagamento" element={<MetodosDePagamento />} />
+            <Route path="assinaturas" element={<Assinaturas />} />
+          </Route>
+        </Routes>
+      </HashRouter>
+    </Providers>
   );
 }

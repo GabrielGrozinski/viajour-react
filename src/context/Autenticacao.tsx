@@ -1,40 +1,118 @@
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { createContext, useState, useContext } from "react";
+import { supabase } from "../auth/supabase-client";
+import type { Session } from '@supabase/supabase-js';
+
 
 interface Props {
     children: ReactNode
 }
 
 interface AutenticacaoContextType {
-    email: string,
-    setEmail: (value: string) => void,
-    senha: string,
-    setSenha: (value: string) => void,
-    session: undefined,
-    setSession: (value: any) => void
+    avisoErro: string,
+    setAvisoErro: (value: string) => void,
+    condicaoInputs: boolean,
+    setCondicaoInputs: (value: boolean) => void,
+    session: Session | null,
+    setSession: React.Dispatch<React.SetStateAction<Session | null>>;
+    cadastroNovoUser: (email: string, senha: string) => 
+        Promise<{
+            success: boolean;
+            data: any;
+            error?: any;
+        } | undefined>,
+    logarUser: (email: string, senha: string) => 
+        Promise<{
+            success: boolean;
+            data: any;
+            error?: any;
+        } | undefined>,
+    deslogarUsuario: () => void
 }
 
-export const AutenticacaoContext = createContext<AutenticacaoContextType>({
-    email: '',
-    setEmail: () => '',
-    senha: '',
-    setSenha: () => '',
-    session: undefined,
-    setSession: () => {}
-});
+export const AutenticacaoContext = createContext<AutenticacaoContextType>({} as AutenticacaoContextType);
 
-export default function Autenticacao({ children }: Props) {
-    const [email, setEmail] = useState<string>('');
-    const [senha, setSenha] = useState<string>('');
-    const [session, setSession] = useState<any>(undefined);
+export default function AutenticacaoProvider({ children }: Props) {
+    const [condicaoInputs, setCondicaoInputs] = useState<boolean>(false);
+    const [avisoErro, setAvisoErro] = useState<string>('');
+    const [session, setSession] = useState<Session | null>(null);
+
+    // Cadastro
+    const cadastroNovoUser = async (email: string, senha: string) => {
+        try {
+            const { data, error } = await supabase.auth.signUp({
+                email: email,
+                password: senha
+            });
+
+            if (error) {
+                console.error("Houve um erro ao cadastrar o usuário: ", error);
+                return { success: false, data, error };
+            }
+            return { success: true, data};
+        } catch (error) {
+            console.error("Houve um erro: ", error);
+        }
+    }
+
+    // Logar
+    const logarUser = async (email: string, senha: string) => {
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: senha
+            });
+
+            if (error) {
+                console.error("Houve um erro ao fazer login: ", error);
+                return { success: false, data, error};
+            }
+            console.log("Logim bem-sucedido: ", data);
+            return { success: true, data};
+        } catch (error) {
+            console.error("Houve um erro: ", error);
+        }
+    }
+
+    // Deslogar
+    const deslogarUsuario = async () => {
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+            console.error("Houve um erro ao deslogar o usuário: ", error);
+        }
+    }
+
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setSession(session);
+        });
+
+        const { data: {subscription } } =
+            supabase.auth.onAuthStateChange((_event, session) => {
+                setSession(session);
+            });
+
+        return () => subscription.unsubscribe();
+    }, []);
+
 
     return (
-        <AutenticacaoContext.Provider value={{email, setEmail, senha, setSenha, session, setSession}}>
+        <AutenticacaoContext.Provider value={{
+            session, 
+            setSession, 
+            cadastroNovoUser, 
+            deslogarUsuario,
+            logarUser,
+            condicaoInputs,
+            setCondicaoInputs,
+            avisoErro,
+            setAvisoErro
+            }}>
             {children}
         </AutenticacaoContext.Provider>
     )
 }
 
-export const AuthUser = () => {
+export const userAuth = () => {
     return useContext(AutenticacaoContext);
 }

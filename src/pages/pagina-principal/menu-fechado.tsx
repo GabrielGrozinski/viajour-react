@@ -4,6 +4,7 @@ import MenuLateral from "../../components/menu-lateral";
 import '../../styles/pagina-principal/menu-fechado.css';
 import imagemCelular from '../../assets/imagens/celular-icone.png';
 import ChatCard from "../../components/chat-card";
+import { userAuth } from "../../context/autenticacao";
 
 
 interface Moeda {
@@ -15,6 +16,7 @@ interface Moeda {
 
 
 export default function MenuFechado({ abrir }: {abrir: () => void}) {
+    const {session} = userAuth()
   const navigate = useNavigate();
   const [largura, setLargura] = useState(window.innerWidth);
   const topicos = [
@@ -96,6 +98,7 @@ export default function MenuFechado({ abrir }: {abrir: () => void}) {
 
 
   useEffect(() => {
+    console.log('session', session)
     const handleResize = () => setLargura(window.innerWidth);
 
     window.addEventListener("resize", handleResize);

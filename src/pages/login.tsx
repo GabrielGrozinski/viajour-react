@@ -1,30 +1,74 @@
 import '../styles/login.css'
 import { NavLink } from 'react-router-dom';
-import { AuthUser } from '../context/Autenticacao';
+import { userAuth } from '../context/autenticacao';
+import { useState, type FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
 
 
 export default function TelaLogin() {
-    const { email, setEmail, senha, setSenha } = AuthUser()
 
+    const [loading, setLoading] = useState<boolean>(false);
+    const [email, setEmail] = useState<string>('');
+    const [senha, setSenha] = useState<string>('');
+    const navigate = useNavigate();
+    const { logarUser, setCondicaoInputs, setAvisoErro } = userAuth();
 
+    const handleLogin = async (e: FormEvent) => {
+        e.preventDefault();
+        try {
+            setLoading(true);
+            const result = await logarUser(email, senha);
+
+            if (result?.success) {
+                navigate('/principal');
+            } else {
+                let erroAtual = 
+                result?.error == 'AuthApiError: missing email or phone' ? 
+                'Preencha os campos de email e senha.' 
+                : 
+                result?.error == 'AuthApiError: Invalid login credentials' ? 'Digite um email e senha válidos.' 
+                : 
+                result?.error;
+                setAvisoErro(erroAtual)
+                setCondicaoInputs(true);
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+            setTimeout(() => {
+                setCondicaoInputs(false);
+                setAvisoErro('');
+            }, 3000);
+        }
+    }
+ 
     return (
         <div className="form-container cadastro-screen">
             <p className="title cadastro-screen">ViaJour</p>
             <form className="form cadastro-screen">
                 <input
-                onClick={(e) => setEmail((e.currentTarget.value).toLocaleLowerCase())} 
+                onChange={(e) => setEmail((e.currentTarget.value).toLocaleLowerCase())} 
                 type="email" 
                 className="input cadastro-screen" 
                 placeholder="Email" />
                 <input
-                onClick={(e) => setSenha((e.currentTarget.value).toLocaleLowerCase())} 
+                onChange={(e) => setSenha((e.currentTarget.value).toLocaleLowerCase())} 
                 type="password" 
                 className="input cadastro-screen" 
                 placeholder="Senha" />
                 <a className="page-link-label cadastro-screen">Esqueci a senha</a>
-                <button
-                type='button'
-                className="form-btn cadastro-screen">Login</button>
+                {!loading ? (
+                    <input
+                    onClick={(e) => handleLogin(e)}
+                    value="Login"
+                    type='button'
+                    className="form-btn cadastro-screen"/>
+                ) : (
+                    <ClipLoader className='self-center' color='#000' loading size={35} />
+                )
+                }
             </form>
             <p className="sign-up-label cadastro-screen">
                 Não possui uma conta?
