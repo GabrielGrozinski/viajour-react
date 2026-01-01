@@ -45,7 +45,10 @@ export default function TelaCadastro() {
                 placeholder="Email" />
                 <input
                 onChange={(e) => setSenha((e.currentTarget.value).toLocaleLowerCase())} 
-                type="password" 
+                type="password"
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleCadastro(e);
+                }}
                 className="input cadastro-screen" 
                 placeholder="Senha" />
                 {!loading ? (

@@ -30,7 +30,7 @@ export default function TelaLogin() {
                 result?.error == 'AuthApiError: Invalid login credentials' ? 'Digite um email e senha válidos.' 
                 : 
                 result?.error;
-                setAvisoErro(erroAtual)
+                setAvisoErro(erroAtual);
                 setCondicaoInputs(true);
             }
         } catch (error) {
@@ -55,7 +55,10 @@ export default function TelaLogin() {
                 placeholder="Email" />
                 <input
                 onChange={(e) => setSenha((e.currentTarget.value).toLocaleLowerCase())} 
-                type="password" 
+                type="password"
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleLogin(e);
+                }}
                 className="input cadastro-screen" 
                 placeholder="Senha" />
                 <a className="page-link-label cadastro-screen">Esqueci a senha</a>

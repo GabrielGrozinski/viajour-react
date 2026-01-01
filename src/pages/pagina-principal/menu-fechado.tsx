@@ -16,7 +16,7 @@ interface Moeda {
 
 
 export default function MenuFechado({ abrir }: {abrir: () => void}) {
-    const {session} = userAuth()
+    const {session} = userAuth();
   const navigate = useNavigate();
   const [largura, setLargura] = useState(window.innerWidth);
   const topicos = [
@@ -96,9 +96,18 @@ export default function MenuFechado({ abrir }: {abrir: () => void}) {
     label: 'BR - BRL'
   });
 
+  useEffect(() => {
+    console.log('session', session);
+    const moedaAtualStorage = localStorage.getItem('moeda_e_idioma');
+    if (!moedaAtualStorage) {
+        localStorage.setItem('moeda_e_idioma', 'br');
+    } else {
+        const moeda_e_idioma_salvo: Moeda[] = idiomasEMoedas.filter((item) => item.id === moedaAtualStorage);
+        setMoedaAtual(moeda_e_idioma_salvo[0]);
+    }
+  }, []);
 
   useEffect(() => {
-    console.log('session', session)
     const handleResize = () => setLargura(window.innerWidth);
 
     window.addEventListener("resize", handleResize);
@@ -122,7 +131,10 @@ return (
             <section id="container-moeda-e-idioma-desktop" className="menu-fechado-screen">
                 {idiomasEMoedas.map((idioma_e_moeda) => (
                     <article
-                    onClick={() => setMoedaAtual(idioma_e_moeda)} 
+                    onClick={() => {
+                        setMoedaAtual(idioma_e_moeda);
+                        localStorage.setItem('moeda_e_idioma', idioma_e_moeda.id);
+                    }} 
                     key={idioma_e_moeda.id} className="idiomas-e-moedas-itens-desktop menu-fechado-screen">
                     <img
                         src={idioma_e_moeda.img}

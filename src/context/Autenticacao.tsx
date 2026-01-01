@@ -27,12 +27,14 @@ interface AutenticacaoContextType {
             data: any;
             error?: any;
         } | undefined>,
-    deslogarUsuario: () => void
+    deslogarUsuario: () => void,
+    loading: boolean
 }
 
 export const AutenticacaoContext = createContext<AutenticacaoContextType>({} as AutenticacaoContextType);
 
 export default function AutenticacaoProvider({ children }: Props) {
+    const [loading, setLoading] = useState(true);
     const [condicaoInputs, setCondicaoInputs] = useState<boolean>(false);
     const [avisoErro, setAvisoErro] = useState<string>('');
     const [session, setSession] = useState<Session | null>(null);
@@ -84,6 +86,7 @@ export default function AutenticacaoProvider({ children }: Props) {
 
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
+            setLoading(false);
             setSession(session);
         });
 
@@ -98,6 +101,7 @@ export default function AutenticacaoProvider({ children }: Props) {
 
     return (
         <AutenticacaoContext.Provider value={{
+            loading,
             session, 
             setSession, 
             cadastroNovoUser, 
