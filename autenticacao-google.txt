@@ -1,0 +1,69 @@
+
+Para habilitar o login com Google em seu site, siga os passos abaixo:
+
+1. Criar o projeto no Google Cloud
+
+Acesse o Google Cloud Console:
+https://console.cloud.google.com
+
+Crie um novo projeto ou selecione um projeto existente.
+
+2. Configurar a tela de consentimento OAuth
+
+No menu lateral, acesse APIs e serviços → Tela de consentimento OAuth.
+
+Selecione o tipo de usuário Externo.
+
+Preencha as informações obrigatórias (nome do aplicativo, e-mail de suporte, domínio autorizado, etc.).
+
+Salve e continue até concluir a configuração.
+
+3. Criar as credenciais OAuth
+
+Vá em APIs e serviços → Credenciais.
+
+Clique em Criar credencial → ID do cliente OAuth.
+
+Escolha o tipo de aplicação adequado (ex: Aplicativo Web).
+
+Informe a URL de redirecionamento autorizada (Callback URL).
+
+⚠️ Importante: copie essa URL, pois ela será usada posteriormente na configuração do Supabase.
+
+4. Configurar as credenciais no projeto
+
+Após a criação, salve os seguintes dados:
+
+Client ID
+
+Client Secret
+
+Callback URL
+
+Insira essas informações na configuração de autenticação do seu projeto (ex: Supabase).
+
+Implementação do Login com Google
+
+Exemplo de função para autenticação via Google utilizando Supabase:
+
+// Login com Google
+const logarGoogle = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+            redirectTo: "http://localhost:5173/#/principal",
+        },
+    });
+
+    if (error) {
+        console.error("Erro ao autenticar com Google:", error);
+    }
+};
+
+Observações
+
+A propriedade redirectTo deve corresponder exatamente à Callback URL cadastrada no Google Cloud.
+
+Em ambiente de produção, utilize a URL real do seu site em vez de localhost.
+
+Certifique-se de que o login com Google está habilitado no painel de autenticação do Supabase.

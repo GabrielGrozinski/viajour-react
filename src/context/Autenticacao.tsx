@@ -28,6 +28,7 @@ interface AutenticacaoContextType {
             error?: any;
         } | undefined>,
     deslogarUsuario: () => void,
+    logarGoogle: () => void,
     loading: boolean
 }
 
@@ -84,6 +85,20 @@ export default function AutenticacaoProvider({ children }: Props) {
         }
     }
 
+    // Logar Google
+    const logarGoogle = async () => {
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+            redirectTo: 'http://localhost:5173/#/principal'
+            }
+        });
+
+        if (error) {
+            console.error(error);
+        }
+    }
+
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
             setLoading(false);
@@ -107,6 +122,7 @@ export default function AutenticacaoProvider({ children }: Props) {
             cadastroNovoUser, 
             deslogarUsuario,
             logarUser,
+            logarGoogle,
             condicaoInputs,
             setCondicaoInputs,
             avisoErro,

@@ -5,12 +5,13 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { ClipLoader } from 'react-spinners';
 
 
+
 export default function TelaCadastro() {
     const [loading, setLoading] = useState<boolean>(false);
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');
     const navigate = useNavigate();
-    const { cadastroNovoUser } = userAuth();
+    const { cadastroNovoUser, logarGoogle } = userAuth();
 
     useEffect(() => {
         console.log(loading)
@@ -72,60 +73,50 @@ export default function TelaCadastro() {
                 </span>
             </p>
             <div className="buttons-container cadastro-screen">
-                <div className="apple-login-button cadastro-screen">
-                    <svg
-                        stroke="currentColor"
-                        fill="currentColor"
-                        strokeWidth={0}
-                        className="apple-icon cadastro-screen"
-                        viewBox="0 0 1024 1024"
-                        height="1em"
-                        width="1em"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path d="M747.4 535.7c-.4-68.2 30.5-119.6 92.9-157.5-34.9-50-87.7-77.5-157.3-82.8-65.9-5.2-138 38.4-164.4 38.4-27.9 0-91.7-36.6-141.9-36.6C273.1 298.8 163 379.8 163 544.6c0 48.7 8.9 99 26.7 150.8 23.8 68.2 109.6 235.3 199.1 232.6 46.8-1.1 79.9-33.2 140.8-33.2 59.1 0 89.7 33.2 141.9 33.2 90.3-1.3 167.9-153.2 190.5-221.6-121.1-57.1-114.6-167.2-114.6-170.7zm-105.1-305c50.7-60.2 46.1-115 44.6-134.7-44.8 2.6-96.6 30.5-126.1 64.8-32.5 36.8-51.6 82.3-47.5 133.6 48.4 3.7 92.6-21.2 129-63.7z" />
-                    </svg>
-                    <span className="cadastro-screen">Login com Apple</span>
-                </div>
+                <button
+                onClick={() => logarGoogle()} 
+                className="gsi-material-button">
+                    <div className="gsi-material-button-state"></div>
+                    <div className="gsi-material-button-content-wrapper">
+                        <div className="gsi-material-button-icon">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" xmlnsXlink="http://www.w3.org/1999/xlink" className="block;">
+                            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                            <path fill="none" d="M0 0h48v48H0z"></path>
+                        </svg>
+                        </div>
+                        <span className="gsi-material-button-contents">Sign up with Google</span>
+                        <span className="hidden">Sign up with Google</span>
+                    </div>
+                </button>
+                {/* Google */}
 
-                <div className="google-login-button cadastro-screen">
-                    <svg
-                        stroke="currentColor"
-                        fill="currentColor"
-                        strokeWidth={0}
-                        version="1.1"
-                        x="0px"
-                        y="0px"
-                        className="google-icon cadastro-screen"
-                        viewBox="0 0 48 48"
-                        height="1em"
-                        width="1em"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            fill="#FFC107"
-                            d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12
-                c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24
-                c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
-                        />
-                        <path
-                            fill="#FF3D00"
-                            d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657
-                C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
-                        />
-                        <path
-                            fill="#4CAF50"
-                            d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36
-                c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
-                        />
-                        <path
-                            fill="#1976D2"
-                            d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571
-                c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
-                        />
-                    </svg>
-                    <span className="cadastro-screen">Login com Google</span>
-                </div>
+                <button
+                onClick={() => false} 
+                className="gsi-material-button apple-button">
+                    <div className="gsi-material-button-state"></div>
+
+                    <div className="gsi-material-button-content-wrapper">
+                        <div className="gsi-material-button-icon">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="white"
+                            className="block"
+                        >
+                            <path d="M16.365 1.43c0 1.14-.45 2.2-1.22 3.01-.82.86-2.14 1.53-3.36 1.43-.15-1.1.38-2.25 1.13-3.04.82-.86 2.24-1.5 3.45-1.4zm3.63 16.1c-.29.67-.63 1.29-1.03 1.86-.55.8-1 1.35-1.35 1.66-.55.5-1.14.76-1.77.78-.45 0-1-.12-1.64-.36-.65-.24-1.25-.36-1.8-.36-.58 0-1.2.12-1.88.36-.68.24-1.22.37-1.64.39-.6.03-1.2-.25-1.8-.82-.38-.33-.85-.9-1.44-1.72-.63-.86-1.15-1.86-1.56-3-.44-1.23-.66-2.42-.66-3.57 0-1.32.28-2.45.84-3.4.44-.75 1.02-1.34 1.75-1.78.73-.44 1.52-.67 2.36-.68.46 0 1.06.14 1.8.42.74.28 1.21.42 1.41.42.15 0 .66-.16 1.52-.48.82-.3 1.5-.42 2.06-.36 1.52.12 2.66.72 3.42 1.8-1.36.82-2.03 1.98-2.01 3.47.01 1.16.43 2.12 1.26 2.88.38.36.8.64 1.27.84-.1.29-.21.57-.33.85z" />
+                        </svg>
+                        </div>
+
+                        <span className="gsi-material-button-contents">
+                        Sign up with Apple
+                        </span>
+                        <span className="hidden">Sign up with Apple</span>
+                    </div>
+                </button>
+                {/* Apple */}
             </div>
         </div>
     )
