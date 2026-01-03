@@ -30,7 +30,11 @@ interface AutenticacaoContextType {
         } | undefined>,
     deslogarUsuario: () => void,
     logarGoogle: () => void,
-    buscarUser: () => Promise<User | null>
+    buscarUser: (value: User) => Promise<{
+        success: boolean;
+        error?: any;
+        skipped?: boolean;
+    }>
     
 }
 
@@ -54,7 +58,8 @@ export default function AutenticacaoProvider({ children }: Props) {
                 console.error("Houve um erro ao cadastrar o usuário: ", error);
                 return { success: false, data, error };
             }
-            return { success: true, data};
+            
+            return { success: true, data };
         } catch (error) {
             console.error("Houve um erro: ", error);
         }
@@ -72,6 +77,7 @@ export default function AutenticacaoProvider({ children }: Props) {
                 console.error("Houve um erro ao fazer login: ", error);
                 return { success: false, data, error};
             }
+
             console.log("Logim bem-sucedido: ", data);
             return { success: true, data};
         } catch (error) {
@@ -102,14 +108,80 @@ export default function AutenticacaoProvider({ children }: Props) {
     }
 
     // Buscar User
-    const buscarUser = async () => {
-        const { data, error } = await supabase.auth.getUser();
-        if (error) {
-            console.error('Erro ao buscar usuário', error);
-            return null;
-        } else {
-            return data.user;
+    const buscarUser = async (user: User) => {
+        if (!user) return {success: false};
+
+        const { data, error } = await supabase
+            .from('profiles')
+            .select('id')
+            .eq('id', user.id)
+            .single();
+        if (error && error.code !== 'PGRST116') {
+            console.error('Erro ao verificar usuário', error);
+            return { success: false, error };
         }
+
+        if (data) {
+            // Usuário já existe, não precisa criar
+            console.log('Usuário já existe, pulando criação.');
+            return { success: true, skipped: true };
+        }
+
+        // User database
+        const { error: profileError } = await supabase
+            .from('profiles')
+            .upsert({
+                id: user.id,
+                name: 
+                    user.user_metadata?.full_name ??
+                    user.user_metadata.name ??
+                    user.email?.split('@')[0],
+                avatar_url: 
+                    user.user_metadata?.avatar_url ??
+                    'https://cdn.pixabay.com/photo/2020/05/11/15/38/tom-5158824_1280.png',
+                email: user.email,
+                phone: user.phone?? '',
+                number_of_companions: 0,
+                number_of_travels: 0,
+                type_of_traveler: '',
+                travel_profile: '',
+                travel_cost: '',
+                travel_preferences: [''],
+                saved_money: '0.000,00',
+                saved_time: '0 days',
+            },
+            {
+                onConflict: 'id',
+                ignoreDuplicates: true,
+            }
+        );
+
+        // User Subscription
+        const today = new Date();
+        const a_month_later = new Date(today);
+        a_month_later.setMonth(a_month_later.getMonth() + 1);
+
+        const { error: subscriptionError } = await supabase
+            .from('subscription')
+            .upsert({
+                user_id: user.id,
+                plan_id: 1,
+                status: 'Expired',
+                current_period_start: today.toISOString(),
+                current_period_end: a_month_later.toISOString(),
+                provider: '',
+            });
+
+        if (profileError) {
+            console.error('Houve um erro ao criar o banco de dados do usuário', profileError);
+            return {success: false, profileError};
+        }
+
+        if (subscriptionError) {
+            console.error('Houve um erro ao criar o banco de dados de assinatura do usuário', subscriptionError);
+            return {success: false, subscriptionError};
+        }
+        return {success: true};
     }
 
     useEffect(() => {
