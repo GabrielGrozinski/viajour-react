@@ -32,6 +32,9 @@ export default function CartaoDeCredito({setAtivandoCartao}: setAtivandoCartaoPr
         <form className="form">
             <div className="credit-card-info--form">
             <div className="input_container">
+                <i 
+                onClick={() => setAtivandoCartao(false)}
+                className="fa-solid fa-xmark absolute right-0 top-0 -translate-x-1/2 translate-y-1/2 text-lg text-[#222222] cursor-pointer"></i>
                 <label className="input_label" htmlFor="password_field"
                 >Nome Completo do Titular do Cartão</label
                 >

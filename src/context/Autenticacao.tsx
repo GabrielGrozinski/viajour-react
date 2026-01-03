@@ -15,7 +15,9 @@ interface AutenticacaoContextType {
     condicaoInputs: boolean,
     setCondicaoInputs: (value: boolean) => void,
     session: Session | null,
-    setSession: React.Dispatch<React.SetStateAction<Session | null>>;
+    setSession: React.Dispatch<React.SetStateAction<Session | null>>,
+    user: User | null,
+    setUser: React.Dispatch<React.SetStateAction<User | null>>,
     cadastroNovoUser: (email: string, senha: string) => 
         Promise<{
             success: boolean;
@@ -34,7 +36,11 @@ interface AutenticacaoContextType {
         success: boolean;
         error?: any;
         skipped?: boolean;
-    }>
+    }>,
+    alterarAssinatura: (month: number, plan_id: number, provider: string) => Promise<{
+        success: boolean;
+        error?: any;
+    }>;
     
 }
 
@@ -45,6 +51,7 @@ export default function AutenticacaoProvider({ children }: Props) {
     const [condicaoInputs, setCondicaoInputs] = useState<boolean>(false);
     const [avisoErro, setAvisoErro] = useState<string>('');
     const [session, setSession] = useState<Session | null>(null);
+    const [user, setUser] = useState<User | null>(null);
 
     // Cadastro
     const cadastroNovoUser = async (email: string, senha: string) => {
@@ -154,23 +161,24 @@ export default function AutenticacaoProvider({ children }: Props) {
                 onConflict: 'id',
                 ignoreDuplicates: true,
             }
-        );
+            );
 
         // User Subscription
-        const today = new Date();
-        const a_month_later = new Date(today);
-        a_month_later.setMonth(a_month_later.getMonth() + 1);
+        const period_start = new Date();
+        const period_end = new Date(period_start);
+        period_end.setMonth(period_end.getMonth() + 1);
 
         const { error: subscriptionError } = await supabase
             .from('subscription')
-            .upsert({
+            .insert({
                 user_id: user.id,
                 plan_id: 1,
                 status: 'Expired',
-                current_period_start: today.toISOString(),
-                current_period_end: a_month_later.toISOString(),
+                current_period_start: period_start.toISOString(),
+                current_period_end: period_end.toISOString(),
                 provider: '',
-            });
+            }
+            );
 
         if (profileError) {
             console.error('Houve um erro ao criar o banco de dados do usuário', profileError);
@@ -184,15 +192,47 @@ export default function AutenticacaoProvider({ children }: Props) {
         return {success: true};
     }
 
+    // Alterar Assinatura
+    const alterarAssinatura = async (month: number, plan_id: number, provider: string) => {
+        const period_start = new Date();
+        const period_end = new Date(period_start);
+        period_end.setMonth(period_end.getMonth() + month);
+
+        const { error } = await supabase
+            .from('subscription')
+            .insert({
+                user_id: user?.id,
+                plan_id,
+                status: 'active',
+                current_period_start: period_start,
+                current_period_end: period_end,
+                provider,
+            });
+        
+        if (error) {
+            console.error('Houve um erro', error);
+            return { success: false, error };
+        }
+
+        return { success: true }
+
+    }
+
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
             setLoading(false);
             setSession(session);
         });
 
-        const { data: {subscription } } =
+        supabase.auth.getUser().then(({data: {user}}) => {
+            setLoading(false);
+            setUser(user);
+        });
+
+        const { data: { subscription } } =
             supabase.auth.onAuthStateChange((_event, session) => {
                 setSession(session);
+                if (session) setUser(session.user);
             });
 
         return () => subscription.unsubscribe();
@@ -207,12 +247,15 @@ export default function AutenticacaoProvider({ children }: Props) {
             avisoErro,
             setAvisoErro,
             session, 
-            setSession, 
+            setSession,
+            user,
+            setUser, 
             cadastroNovoUser, 
             deslogarUsuario,
             logarUser,
             logarGoogle,
-            buscarUser
+            buscarUser,
+            alterarAssinatura
             }}>
             {children}
         </AutenticacaoContext.Provider>

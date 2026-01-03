@@ -1,10 +1,31 @@
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import CartaoDeCredito from "../../components/usuario/cartao-de-credito";
+import { supabase } from "../../auth/supabase-client";
+import { motion, AnimatePresence } from "framer-motion";
+import { userAuth } from "../../context/autenticacao";
+
+
+interface plansType {
+    id: number,
+    name: string,
+    idinput: string,
+    description: string,
+    features: string[],
+    price: number,
+    bgcolor: string,
+    badgecolor: string,
+    titlecolor: string,
+    button: string,
+    buttonhover: string,
+}
+
 
 export default function Assinaturas() {
+  const { user } = userAuth();
   const [ativandoCartao, setAtivandoCartao] = useState<boolean>(false);
   const { topicoEscolhido }: any = useOutletContext();
+  const [plans, setPlans] = useState<plansType[] | null>(null);
 
   useEffect(() => {
     if (!topicoEscolhido) return;
@@ -17,80 +38,38 @@ export default function Assinaturas() {
     });
   }, [topicoEscolhido]);
 
+  useEffect(() => {
+    console.log('user', user);
+  }, [user]);
+
+  useEffect(() => {
+    async function fetchPlans() {
+      const { data, error } = await supabase
+        .from('plans')
+        .select('*');
+
+      if (error) {
+        console.error('Erro ao buscar planos', error);
+        setPlans(null);
+      }
+
+        setPlans(data as any);
+    }
+
+    fetchPlans();
+  }, []);
+
   // LISTA GLOBAL DE TODAS AS FEATURES (9 no total)
   const todasAsFeatures = [
-    "Acesso limitado",
-    "Busca por viagens",
-    "Suporte básico",
-    "Acesso ilimitado",
-    "Sem anúncios",
-    "Ferramentas de I.A",
-    "Usuários ilimitados",
-    "Viagens exclusivas",
-    "Acesso antecipado a ferramentas",
-  ];
-
-  const planos = [
-    {
-      id: 1,
-      idInput: 'plano-gratuito',
-      titulo: "Gratuito",
-      preco: "0",
-      desc: "A boa opção para quem está começando e quer testar nossa plataforma.",
-      corFundo: "#e3ffe9",
-      corBadge: "#b0f5c4",
-      corTitulo: "#3e6b45",
-      botao: "#3fa26b",
-      botaoHover: "#2a764a",
-      featuresLiberadas: [
-        "Acesso limitado",
-        "Busca por viagens",
-        "Suporte básico",
-      ],
-    },
-    {
-      id: 2,
-      idInput: 'plano-aventureiro',
-      titulo: "Aventureiro",
-      preco: "5",
-      desc: "Esse plano é ideal para quem viaja ativamente ou busca extrair o melhor delas.",
-      corFundo: "#ecf0ff",
-      corBadge: "#bed6fb",
-      corTitulo: "#425675",
-      botao: "#6558d3",
-      botaoHover: "#4133B7",
-      featuresLiberadas: [
-        "Acesso limitado",
-        "Busca por viagens",
-        "Suporte básico",
-        "Acesso ilimitado",
-        "Sem anúncios",
-        "Ferramentas de I.A",
-      ],
-    },
-    {
-      id: 3,
-      idInput: 'plano-viajante',
-      titulo: "Viajante",
-      preco: "20",
-      desc: "Perfeito para aqueles que têm sangue de viajante!",
-      corFundo: "#fff3e0",
-      corBadge: "#ffd7a3",
-      corTitulo: "#8a5623",
-      botao: "#e08a1e",
-      botaoHover: "#b86d16",
-      featuresLiberadas: [
-        "Acesso limitado",
-        "Busca por viagens",
-        "Suporte básico",
-        "Acesso ilimitado",
-        "Sem anúncios",
-        "Ferramentas de I.A",
-        "Usuários ilimitados",
-        "Viagens exclusivas",
-        "Acesso antecipado a ferramentas",
-      ],
-    },
+    "Limited access",
+    "Trip search",
+    "Basic support",
+    "Unlimited access",
+    "No ads",
+    "AI tools",
+    "Unlimited users",
+    "Exclusive trips",
+    "Early access to tools"
   ];
 
 return ( 
@@ -99,23 +78,23 @@ return (
     className="assinaturas-outlet flex justify-center items-center flex-col md:flex-row md:items-stretch gap-6"
   >
     {!ativandoCartao ? (
-      planos.map((plano) => (
+      plans?.map((plan: plansType) => (
         <main
-          key={plano.id}
-          id={plano.idInput}
+          key={plan.id}
+          id={plan.idinput}
           className="assinaturas-outlet shadow-[0_30px_30px_-25px_rgba(0,38,255,0.205)] bg-white text-[#697e91] max-w-[300px] rounded-2xl"
         >
           <div
-            style={{ padding: 20, paddingTop: 40, background: plano.corFundo }}
+            style={{ padding: 20, paddingTop: 40, background: plan.bgcolor }}
             className="assinaturas-outlet items-center relative rounded-xl"
           >
             {/* Pricing */}
             <span
-              style={{ padding: 8, background: plano.corBadge }}
+              style={{ padding: 8, background: plan.badgecolor }}
               className="assinaturas-outlet absolute flex items-center text-xl font-semibold px-[0.75em] rounded-[99em_0_0_99em] right-0 top-0"
             >
-              <span style={{ color: plano.corTitulo }} className="assinaturas-outlet">
-                ${plano.preco}
+              <span style={{ color: plan.titlecolor }} className="assinaturas-outlet">
+                ${plan.price}
                 <small className="assinaturas-outlet text-[#707a91] text-[0.75em]">/ m</small>
               </span>
             </span>
@@ -123,20 +102,20 @@ return (
             {/* Title */}
             <p
               className="assinaturas-outlet font-semibold text-xl"
-              style={{ color: plano.corTitulo }}
+              style={{ color: plan.titlecolor }}
             >
-              {plano.titulo}
+              {plan.name}
             </p>
 
             {/* Description */}
             <p style={{ marginBottom: 8 }} className="assinaturas-outlet">
-              {plano.desc}
+              {plan.description}
             </p>
 
             {/* Features */}
             <ul className="assinaturas-outlet flex flex-col gap-2">
               {todasAsFeatures.map((feat, idx) => {
-                const desbloqueada = plano.featuresLiberadas.includes(feat);
+                const desbloqueada = plan.features.includes(feat);
                 return (
                   <li key={idx} className="assinaturas-outlet flex items-center gap-2">
                     
@@ -147,7 +126,7 @@ return (
                       </span>
                     ) : (
                       <span className="assinaturas-outlet bg-red-200 inline-flex items-center justify-center text-red-600 w-5 h-5 rounded-full">
-                        ✕
+                        <span style={{marginTop: -2, marginRight: -0.4}}>✕</span>
                       </span>
                     )}
 
@@ -168,28 +147,40 @@ return (
               className="assinaturas-outlet w-full flex items-center justify-end"
             >
               <button
-                onClick={() => setAtivandoCartao(true)}
-                style={{ background: plano.botao }}
+                onClick={() => {
+                  setAtivandoCartao(true);
+                  
+                }}
+                style={{ background: plan.button }}
                 className="assinaturas-outlet text-white cursor-pointer font-medium text-lg text-center w-full no-underline px-[0.75em] rounded-md border-0 outline-0 hover:brightness-90"
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = plano.botaoHover)
+                  (e.currentTarget.style.background = plan.buttonhover)
                 }
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.background = plano.botao)
+                  (e.currentTarget.style.background = plan.button)
                 }
               >
-                Escolher plano
+                Choose plan
               </button>
             </div>
           </div>
         </main>
       ))
     ) : (
-      <CartaoDeCredito
-        setAtivandoCartao={setAtivandoCartao}
-      />
+      <AnimatePresence mode="wait">
+        <motion.div
+        key="creditCard"
+        initial={{y: -40}}
+        animate={{y: 0}}
+        exit={{y: -40}}
+        transition={{duration: 0.3}}
+        >
+          <CartaoDeCredito
+            setAtivandoCartao={setAtivandoCartao}
+          />
+        </motion.div>
+      </AnimatePresence>
     )}
   </div>
 );
-
 }

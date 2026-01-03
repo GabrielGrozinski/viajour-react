@@ -17,27 +17,40 @@ CREATE TABLE profiles (
 
 CREATE TABLE plans (
   id integer primary key,
+  idInput text not null,
   name text not null,
   description text not null,
   features text[] not null,
-  price integer not null
+  price integer not null,
+  bgColor text not null,
+  badgeColor text not null,
+  titleColor text not null,
+  button text not null,
+  buttonHover text not null
 );
 
-INSERT INTO plans (id, name, description, features, price) VALUES
+INSERT INTO plans (id, name, idInput, description, features, price, bgColor, badgeColor, titleColor, button, buttonHover) VALUES
 (
   1, 
-  'Free', 
+  'Free',
+  'free-plan',
   'A good option for those who are starting out and want to try our platform.',
   array[
     'Limited access',
     'Trip search',
     'Basic support'
   ],
-  0
+  0,
+  '#e3ffe9',
+  '#b0f5c4',
+  '#3e6b45',
+  '#3fa26b',
+  '#2a764a'
 ),
 (
   2, 
-  'Adventurer', 
+  'Adventurer',
+  'adventurer-plan',
   'This plan is ideal for those who travel actively or want to get the most out of them.',
   array[
     'Limited access',
@@ -47,11 +60,17 @@ INSERT INTO plans (id, name, description, features, price) VALUES
     'No ads',
     'AI tools'
   ],
-  5
+  5,
+  '#ecf0ff',
+  '#bed6fb',
+  '#425675',
+  '#6558d3',
+  '#4133B7'
 ),
 (
   3, 
-  'Traveler', 
+  'Traveler',
+  'traveler-plan',
   'Perfect for those who have a traveler''s blood!',
   array[
     'Limited access',
@@ -64,7 +83,12 @@ INSERT INTO plans (id, name, description, features, price) VALUES
     'Exclusive trips',
     'Early access to tools'
   ],
-  10
+  10,
+  '#fff3e0',
+  '#ffd7a3',
+  '#8a5623',
+  '#e08a1e',
+  '#b86d16'
 );
 
 CREATE TABLE subscription (
@@ -136,3 +160,8 @@ on subscription
 for DELETE
 USING (user_id = auth.uid());
 // Alterando Tabela Assinaturas //
+
+CREATE POLICY "Allow read plans"
+ON public.plans
+FOR SELECT
+USING (true);

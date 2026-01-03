@@ -10,7 +10,7 @@
 #body.tela-de-usuario-screen {
   @apply grid grid-cols-[10%_1fr_10%] pt-0 grid-rows-[auto_auto_1fr_100px]
          min-h-screen transition-all duration-300 bg-cover bg-fixed bg-no-repeat 
-         bg-[url(../../assets/imagens/fundo1.png)];
+         bg-white;
 }
 
 #body.tela-de-usuario-screen.menu-expandido {
