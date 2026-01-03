@@ -1,7 +1,7 @@
 import { useEffect, type ReactNode } from "react";
 import { createContext, useState, useContext } from "react";
 import { supabase } from "../auth/supabase-client";
-import type { Session } from '@supabase/supabase-js';
+import type { Session, User } from '@supabase/supabase-js';
 
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
 
 interface AutenticacaoContextType {
     avisoErro: string,
+    loading: boolean,
     setAvisoErro: (value: string) => void,
     condicaoInputs: boolean,
     setCondicaoInputs: (value: boolean) => void,
@@ -29,7 +30,8 @@ interface AutenticacaoContextType {
         } | undefined>,
     deslogarUsuario: () => void,
     logarGoogle: () => void,
-    loading: boolean
+    buscarUser: () => Promise<User | null>
+    
 }
 
 export const AutenticacaoContext = createContext<AutenticacaoContextType>({} as AutenticacaoContextType);
@@ -99,6 +101,17 @@ export default function AutenticacaoProvider({ children }: Props) {
         }
     }
 
+    // Buscar User
+    const buscarUser = async () => {
+        const { data, error } = await supabase.auth.getUser();
+        if (error) {
+            console.error('Erro ao buscar usuário', error);
+            return null;
+        } else {
+            return data.user;
+        }
+    }
+
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
             setLoading(false);
@@ -117,16 +130,17 @@ export default function AutenticacaoProvider({ children }: Props) {
     return (
         <AutenticacaoContext.Provider value={{
             loading,
+            condicaoInputs,
+            setCondicaoInputs,
+            avisoErro,
+            setAvisoErro,
             session, 
             setSession, 
             cadastroNovoUser, 
             deslogarUsuario,
             logarUser,
             logarGoogle,
-            condicaoInputs,
-            setCondicaoInputs,
-            avisoErro,
-            setAvisoErro
+            buscarUser
             }}>
             {children}
         </AutenticacaoContext.Provider>

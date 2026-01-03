@@ -176,8 +176,8 @@ return (
                 </div>
 
                 <p className="autenticacao-outlet">
-                  <span className={`${senha.length < 8 && 'opacity-40 text-red-500'} text-green-500 text-shadow-[1px_1px_1px_#2222222a] autenticacao-outlet`}>Mínimo: 8 caracteres</span> <br />
-                  <span className={`${senha.length > 22 && 'opacity-40 text-red-500'} text-green-500 text-shadow-[1px_1px_1px_#2222222a] autenticacao-outlet`}>Máximo: 22 caracteres</span>
+                  <span className={`${senha.length < 8 && 'opacity-40 text-red-500'} text-green-500 autenticacao-outlet`}>Mínimo: 8 caracteres</span> <br />
+                  <span className={`${senha.length > 22 && 'opacity-40 text-red-500'} text-green-500 autenticacao-outlet`}>Máximo: 22 caracteres</span>
                 </p>
 
                 {forcaDaSenha && (

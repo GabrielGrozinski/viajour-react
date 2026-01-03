@@ -4,7 +4,6 @@ import MenuLateral from "../../components/menu-lateral";
 import '../../styles/pagina-principal/menu-fechado.css';
 import imagemCelular from '../../assets/imagens/celular-icone.png';
 import ChatCard from "../../components/chat-card";
-import { userAuth } from "../../context/autenticacao";
 
 
 interface Moeda {
@@ -16,7 +15,6 @@ interface Moeda {
 
 
 export default function MenuFechado({ abrir }: {abrir: () => void}) {
-    const {session} = userAuth();
   const navigate = useNavigate();
   const [largura, setLargura] = useState(window.innerWidth);
   const topicos = [
@@ -97,7 +95,6 @@ export default function MenuFechado({ abrir }: {abrir: () => void}) {
   });
 
   useEffect(() => {
-    console.log('session', session);
     const moedaAtualStorage = localStorage.getItem('moeda_e_idioma');
     if (!moedaAtualStorage) {
         localStorage.setItem('moeda_e_idioma', 'br');
@@ -164,7 +161,7 @@ return (
         )}
         <section className="stats-card menu-fechado-screen">
             <div id="item-money" className="stat-item menu-fechado-screen">
-                <i className="fa-solid fa-sack-dollar menu-fechado-screen" />
+                <abbr title="Dinheiro"><i className="fa-solid fa-sack-dollar menu-fechado-screen" /></abbr>
                 <div className="desc menu-fechado-screen">
                     <span className="value menu-fechado-screen">R$ 1.440,52</span>
                     <br className="menu-fechado-screen" />
@@ -173,7 +170,7 @@ return (
             </div>
 
             <div id="item-date" className="stat-item menu-fechado-screen">
-                <i className="fa-solid fa-hourglass-end menu-fechado-screen" />
+                <abbr title="Tempo"><i className="fa-solid fa-hourglass-end menu-fechado-screen" /></abbr>
                 <div className="desc menu-fechado-screen">
                     <span className="value menu-fechado-screen">13 dias</span>
                     <br className="menu-fechado-screen" />

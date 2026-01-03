@@ -1,0 +1,138 @@
+CREATE TABLE profiles (
+  id uuid primary key,
+  name text not null,
+  avatar_url text not null,
+  email text unique not null,
+  phone text not null,
+  number_of_companions integer not null,
+  number_of_travels integer not null,
+  type_of_traveler text not null,
+  travel_profile text not null,
+  travel_cost text not null,
+  travel_preferences text[] not null,
+  saved_money text not null,
+  saved_time text not null,
+  created_at timestamptz DEFAULT now()
+);
+
+CREATE TABLE plans (
+  id integer primary key,
+  name text not null,
+  description text not null,
+  features text[] not null,
+  price integer not null
+);
+
+INSERT INTO plans (id, name, description, features, price) VALUES
+(
+  1, 
+  'Free', 
+  'A good option for those who are starting out and want to try our platform.',
+  array[
+    'Limited access',
+    'Trip search',
+    'Basic support'
+  ],
+  0
+),
+(
+  2, 
+  'Adventurer', 
+  'This plan is ideal for those who travel actively or want to get the most out of them.',
+  array[
+    'Limited access',
+    'Trip search',
+    'Basic support',
+    'Unlimited access',
+    'No ads',
+    'AI tools'
+  ],
+  5
+),
+(
+  3, 
+  'Traveler', 
+  'Perfect for those who have a traveler''s blood!',
+  array[
+    'Limited access',
+    'Trip search',
+    'Basic support',
+    'Unlimited access',
+    'No ads',
+    'AI tools',
+    'Unlimited users',
+    'Exclusive trips',
+    'Early access to tools'
+  ],
+  10
+);
+
+CREATE TABLE subscription (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null,
+  plan_id integer not null,
+  status text not null,
+  current_period_start timestamp not null,
+  current_period_end timestamp not null,
+  provider text not null,
+  created_at timestamp default now(),
+
+  foreign key (user_id)
+    references auth.users(id)
+    on delete cascade,
+
+  foreign key (plan_id)
+    references plans(id)
+);
+// Criando Tabela //
+
+
+
+alter TABLE profiles enable row level security;
+
+CREATE policy "user_info_SELECT"
+on profiles
+for SELECT
+USING (id = auth.uid());
+
+CREATE policy "user_info_INSERT"
+on profiles
+for INSERT
+WITH CHECK (id = auth.uid());
+
+CREATE policy "user_info_UPDATE"
+on profiles
+for UPDATE
+USING (id = auth.uid());
+
+CREATE policy "user_info_DELETE"
+on profiles
+for DELETE
+USING (id = auth.uid());
+// Alterando Tabela Usuário //
+
+
+
+
+alter TABLE subscription enable row level security;
+
+CREATE policy "subscription_info_SELECT"
+on subscription
+for SELECT
+USING (user_id = auth.uid());
+
+CREATE policy "subscription_info_INSERT"
+on subscription
+for INSERT
+WITH CHECK (user_id = auth.uid());
+
+CREATE policy "subscription_info_UPDATE"
+on subscription
+for UPDATE
+USING (user_id = auth.uid());
+
+CREATE policy "subscription_info_DELETE"
+on subscription
+for DELETE
+USING (user_id = auth.uid());
+// Alterando Tabela Assinaturas //
