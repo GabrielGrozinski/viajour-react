@@ -4,6 +4,7 @@ import { userAuth } from '../context/autenticacao';
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
+import { supabase } from '../auth/supabase-client';
 
 
 export default function TelaLogin() {
@@ -12,7 +13,7 @@ export default function TelaLogin() {
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');
     const navigate = useNavigate();
-    const { logarUser, setCondicaoInputs, setAvisoErro, logarGoogle } = userAuth();
+    const { logarUser, setCondicaoInputs, setAvisoErro, logarGoogle, setAvisoSucesso } = userAuth();
 
     const handleLogin = async (e: FormEvent) => {
         e.preventDefault();
@@ -44,6 +45,25 @@ export default function TelaLogin() {
         }
     }
 
+    async function handlePassword() {
+        const { error } = await supabase.auth.resetPasswordForEmail(email ?? '', {
+        redirectTo: 'http://localhost:5173/#/reset-password'
+        });
+        setCondicaoInputs(true);
+        if (error) {
+            console.error('Houve um erro ao enviar o email: ', error);
+            setAvisoErro(email ? 'Houve um erro ao enviar o email para redefinir sua senha. Por favor, tente de novo.' : 'Digite o seu email para recuperar a senha.');
+        } else {
+            setAvisoSucesso('Um link para redefir sua senha foi enviado ao seu email.');
+        }
+
+        setTimeout(() => {
+        setCondicaoInputs(false);
+        setAvisoErro('');
+        setAvisoSucesso('');
+        }, 3000);
+    }
+
  
     return (
         <div className="form-container cadastro-screen">
@@ -62,7 +82,7 @@ export default function TelaLogin() {
                 }}
                 className="input cadastro-screen" 
                 placeholder="Senha" />
-                <a className="page-link-label cadastro-screen">Esqueci a senha</a>
+                <a onClick={() => handlePassword()} className="page-link-label cadastro-screen">Esqueci a senha</a>
                 {!loading ? (
                     <input
                     onClick={(e) => handleLogin(e)}

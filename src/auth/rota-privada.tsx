@@ -1,8 +1,8 @@
 import { type ReactNode, useEffect, useRef} from "react";
 import { userAuth } from "../context/autenticacao";
 import { Navigate } from "react-router-dom";
-import { ClipLoader } from 'react-spinners';
 import { supabase } from "./supabase-client";
+import TelaLoading from "../components/tela-loading";
 
 
 interface Props {
@@ -43,7 +43,7 @@ export default function RotaPrivada({ children }: Props) {
         <>
         {loading ?
         <>
-            <ClipLoader className='self-center' color='#000' loading size={35} />
+            <TelaLoading />
         </>
         :
         session ?

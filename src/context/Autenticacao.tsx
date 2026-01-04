@@ -176,7 +176,7 @@ export default function AutenticacaoProvider({ children }: Props) {
             .insert({
                 user_id: user.id,
                 plan_id: 1,
-                status: 'Expired',
+                status: 'expired',
                 current_period_start: period_start.toISOString(),
                 current_period_end: period_end.toISOString(),
                 provider: '',
@@ -206,7 +206,7 @@ export default function AutenticacaoProvider({ children }: Props) {
             .insert({
                 user_id: user?.id,
                 plan_id,
-                status: 'active',
+                status: plan_id !== 1 ? 'active' : 'expired',
                 current_period_start: period_start,
                 current_period_end: period_end,
                 provider,

@@ -17,6 +17,7 @@ import TelaDeUsuario from "./pages/usuario/tela-de-usuario";
 import Geral from "./pages/usuario/geral";
 import MetodosDePagamento from "./pages/usuario/metodos-de-pagamento";
 import Autenticacao from "./pages/usuario/autenticacao";
+import ResetPassword from './pages/usuario/reset-password';
 import Assinaturas from "./pages/usuario/assinaturas";
 import RoteiroAutomatico from "./pages/produtos/roteiro-automatico";
 import DestinoCerto from "./pages/produtos/destino-certo";
@@ -66,6 +67,8 @@ export default function Rotas() {
             <Route path="metodos-de-pagamento" element={<MetodosDePagamento />} />
             <Route path="assinaturas" element={<Assinaturas />} />
           </Route>
+
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </HashRouter>
     </Providers>

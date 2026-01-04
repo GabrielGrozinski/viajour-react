@@ -1,6 +1,8 @@
 import { useState, useEffect, useContext } from "react"
 import { TemaContext } from "../../context/TemaContext";
 import { useOutletContext } from "react-router-dom"
+import { supabase } from "../../auth/supabase-client";
+import { userAuth } from "../../context/autenticacao";
 
 interface sub_topicos {
   id: number,
@@ -12,7 +14,13 @@ interface sub_topicos {
   placeHolderInput: string,
 }
 
+interface quantidadeTipo {
+  key: string,
+  value: number
+}
+
 export default function Geral() {
+  const { setCondicaoInputs, setAvisoErro } = userAuth();
   const subTopicos: sub_topicos[] = [
     {
       id: 1,
@@ -112,14 +120,14 @@ export default function Geral() {
 
 
   const [nomeDigitado, setNomeDigitado] = useState<string>('');
-  const [avatar, setAvatar] = useState<boolean>(false);
+  const [avatar, setAvatar] = useState<string>('');
   const [numeroTelefone, setNumeroTelefone] = useState<string>('');
   const [tipoPerfilViagem, setTipoPerfilViagem] = useState<string>('');
-  const [quantPessoasViagem, setQuantPessoasViagem] = useState<string>('');
-  const [quantViagens, setQuantViagens] = useState<string>('');
+  const [quantPessoasViagem, setQuantPessoasViagem] = useState<quantidadeTipo>({key: '', value: 0});
+  const [quantViagens, setQuantViagens] = useState<quantidadeTipo>({key: '', value: 0});
   const [tipoViajante, setTipoViajante] = useState<string>('');
   const [custoViagens, setCustoViagens] = useState<string>('');
-  const [preferenciaViagens, setPreferenciaViagens] = useState<string[]>(['']);
+  const [preferenciaViagens, setPreferenciaViagens] = useState<string[]>([]);
 
   function highlight(text: string, search: string) {
     if (!search || search.trim() === "") return text;
@@ -130,6 +138,51 @@ export default function Geral() {
       regex,
       `<span style="color:#3b82f6; font-weight:800">$1</span>`
     );
+  }
+
+  async function handleInfoUser(subTopico: number) {
+    const resetStateByKey: Record<string, () => void> = {
+      name: () => setNomeDigitado(''),
+      avatar_url: () => setAvatar(''),
+      phone: () => setNumeroTelefone(''),
+      travel_profile: () => setTipoPerfilViagem(''),
+      number_of_companions: () => setQuantPessoasViagem({key: '', value: 0}),
+      number_of_travels: () => setQuantViagens({key: '', value: 0}),
+      type_of_traveler: () => setTipoViajante(''),
+      travel_cost: () => setCustoViagens(''),
+      travel_preferences: () => setPreferenciaViagens([]),
+    };
+
+    type Entry = [string, string | number | string[]];
+
+    let entry: Entry =
+      subTopico === 1 ? ['name', nomeDigitado] :
+      subTopico === 2 ? ['avatar_url', avatar] :
+      subTopico === 3 ? ['phone', numeroTelefone] :
+      subTopico === 4 ? ['travel_profile', tipoPerfilViagem] :
+      subTopico === 5 ? ['number_of_companions', quantPessoasViagem.value] :
+      subTopico === 6 ? ['number_of_travels', quantViagens.value] :
+      subTopico === 7 ? ['type_of_traveler', tipoViajante] :
+      subTopico === 8 ? ['travel_cost', custoViagens] :
+      ['travel_preferences', preferenciaViagens]
+
+    if (entry) {
+      const [key, value] = entry;
+
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+            [key]: value,
+        });
+
+      if (error) {
+        console.error('Houve um erro ao salvar a informação', error);
+        setCondicaoInputs(true);
+        setAvisoErro('Houve um erro ao salvar a informação. Por favor, tente de novo.');
+      }
+
+      resetStateByKey[key]?.();
+    }
   }
 
 return (
@@ -155,7 +208,9 @@ return (
           id={subTopico.identificador}
         >
 
-          <button 
+          <button
+            onClick={() => handleInfoUser(subTopico.id)}
+            disabled={!isCheckedButton}
             className={
               `geral-outlet absolute right-0 top-0 -translate-x-1/3 translate-y-1/3 rounded-md min-h-[30px] min-w-[50px] cursor-not-allowed text-center text-shadow-[1px_1px_1px_0000005a]
               ${isCheckedButton ? 'bg-blue-500 cursor-pointer text-slate-100 pointer-events-auto' : dark ? 'bg-neutral-600/40 text-black/60' : 'bg-neutral-100 text-black/20'
@@ -176,7 +231,7 @@ return (
           {subTopico.inputTipo === 'image' ? (
             <input
               id={subTopico.inputId}
-              onClick={() => setAvatar(!avatar)} 
+              onClick={() => setAvatar('')} 
               className="geral-outlet max-h-12 max-w-12" 
               type="image"   
               src="https://cdn.pixabay.com/photo/2020/05/11/15/38/tom-5158824_1280.png" 
@@ -189,8 +244,8 @@ return (
               {subTopico.placeHolderInput.split('  ').map((item: string, index: number) => {
               const isChecked =
                 subTopico.id === 4 ? tipoPerfilViagem === item 
-                : subTopico.id === 5 ? quantPessoasViagem === item
-                : subTopico.id === 6 ? quantViagens === item
+                : subTopico.id === 5 ? quantPessoasViagem.key === item
+                : subTopico.id === 6 ? quantViagens.key === item
                 : subTopico.id === 7 ? tipoViajante === item
                 : subTopico.id === 8 ? custoViagens === item
                 : false;
@@ -203,8 +258,14 @@ return (
                     checked={isChecked} 
                     onChange={() => 
                       subTopico.id === 4 ? setTipoPerfilViagem(item) 
-                      : subTopico.id === 5 ? setQuantPessoasViagem(item) 
-                      : subTopico.id === 6 ? setQuantViagens(item) 
+                      : subTopico.id === 5 ? setQuantPessoasViagem(() => ({
+                        key: item,
+                        value: index
+                      })) 
+                      : subTopico.id === 6 ? setQuantViagens(() => ({
+                        key: item,
+                        value: index
+                      })) 
                       : subTopico.id === 7 ? setTipoViajante(item)
                       : subTopico.id === 8 ? setCustoViagens(item)
                       : false
