@@ -14,13 +14,9 @@ interface sub_topicos {
   placeHolderInput: string,
 }
 
-interface quantidadeTipo {
-  key: string,
-  value: number
-}
 
 export default function Geral() {
-  const { setCondicaoInputs, setAvisoErro } = userAuth();
+  const { setCondicaoInputs, setAvisoErro, user, setAvisoSucesso } = userAuth();
   const subTopicos: sub_topicos[] = [
     {
       id: 1,
@@ -42,15 +38,6 @@ export default function Geral() {
     },
     {
       id: 3,
-      identificador: 'celular',
-      titulo: 'Celular',
-      paragrafo: 'Insira seu número de telefone.',
-      inputTipo: 'tel',
-      inputId: 'telefoneInput',
-      placeHolderInput: 'Ex: +55 (11) 94444-5511'
-    },
-    {
-      id: 4,
       identificador: 'perfil-viagens',
       titulo: 'Perfil de Viagens',
       paragrafo: 'Escolha o seu tipo de viagens (você pode mudar a qualquer momento).',
@@ -59,7 +46,7 @@ export default function Geral() {
       placeHolderInput: 'Trabalho  Lazer  Compras'
     },
     {
-      id: 5,
+      id: 4,
       identificador: 'quantidade-de-pessoas',
       titulo: 'Número de Acompanhantes',
       paragrafo: 'Escolha com quantas pessoas você costuma viajar (você pode mudar a qualquer momento).',
@@ -68,16 +55,16 @@ export default function Geral() {
       placeHolderInput: 'Sozinho  Eu e mais alguém  Viajo com muitas pessoas'
     },
     {
-      id: 6,
+      id: 5,
       identificador: 'numero-de-viagens',
       titulo: 'Número de Viagens',
       paragrafo: 'Escolha quantas viagens você costuma fazer no ano (você pode mudar a qualquer momento).',
       inputTipo: 'radio',
       inputId: 'numero-de-viagens-Input',
-      placeHolderInput: 'Nenhuma  Uma ou mais  Três ou mais  Cinco ou mais'
+      placeHolderInput: 'Nenhuma  Uma ou mais  Cinco ou mais  Dez ou mais'
     },
     {
-      id: 7,
+      id: 6,
       identificador: 'tipo-viajante',
       titulo: 'Tipo de Viajante',
       paragrafo: 'Escolha qual tipo de viajante te representa melhor (você pode mudar a qualquer momento).',
@@ -86,7 +73,7 @@ export default function Geral() {
       placeHolderInput: 'Mochileiro  Aventureiro  Família  Romântico  Gastador'
     },
     {
-      id: 8,
+      id: 7,
       identificador: 'custo-viagens',
       titulo: 'Custo de Viagens',
       paragrafo: 'Escolha quanto você costuma gastar em suas viagens (você pode mudar a qualquer momento).',
@@ -95,7 +82,7 @@ export default function Geral() {
       placeHolderInput: 'O mínimo possível  Pouco  Moderadamente  Muito'
     },
     {
-      id: 9,
+      id: 8,
       identificador: 'preferencia-viagens',
       titulo: 'Preferência de Viagens',
       paragrafo: 'Escolha até três preferências de viagens (você pode mudar a qualquer momento).',
@@ -118,16 +105,15 @@ export default function Geral() {
     });
   }, [topicoEscolhido]);
 
-
   const [nomeDigitado, setNomeDigitado] = useState<string>('');
   const [avatar, setAvatar] = useState<string>('');
-  const [numeroTelefone, setNumeroTelefone] = useState<string>('');
   const [tipoPerfilViagem, setTipoPerfilViagem] = useState<string>('');
-  const [quantPessoasViagem, setQuantPessoasViagem] = useState<quantidadeTipo>({key: '', value: 0});
-  const [quantViagens, setQuantViagens] = useState<quantidadeTipo>({key: '', value: 0});
+  const [quantPessoasViagem, setQuantPessoasViagem] = useState<string>('');
+  const [quantViagens, setQuantViagens] = useState<string>('');
   const [tipoViajante, setTipoViajante] = useState<string>('');
   const [custoViagens, setCustoViagens] = useState<string>('');
   const [preferenciaViagens, setPreferenciaViagens] = useState<string[]>([]);
+
 
   function highlight(text: string, search: string) {
     if (!search || search.trim() === "") return text;
@@ -144,27 +130,25 @@ export default function Geral() {
     const resetStateByKey: Record<string, () => void> = {
       name: () => setNomeDigitado(''),
       avatar_url: () => setAvatar(''),
-      phone: () => setNumeroTelefone(''),
       travel_profile: () => setTipoPerfilViagem(''),
-      number_of_companions: () => setQuantPessoasViagem({key: '', value: 0}),
-      number_of_travels: () => setQuantViagens({key: '', value: 0}),
+      number_of_companions: () => setQuantPessoasViagem(''),
+      number_of_travels: () => setQuantViagens(''),
       type_of_traveler: () => setTipoViajante(''),
       travel_cost: () => setCustoViagens(''),
       travel_preferences: () => setPreferenciaViagens([]),
     };
 
-    type Entry = [string, string | number | string[]];
+    type Entry = [string, string | number | string[]] | undefined;
 
     let entry: Entry =
       subTopico === 1 ? ['name', nomeDigitado] :
       subTopico === 2 ? ['avatar_url', avatar] :
-      subTopico === 3 ? ['phone', numeroTelefone] :
-      subTopico === 4 ? ['travel_profile', tipoPerfilViagem] :
-      subTopico === 5 ? ['number_of_companions', quantPessoasViagem.value] :
-      subTopico === 6 ? ['number_of_travels', quantViagens.value] :
-      subTopico === 7 ? ['type_of_traveler', tipoViajante] :
-      subTopico === 8 ? ['travel_cost', custoViagens] :
-      ['travel_preferences', preferenciaViagens]
+      subTopico === 3 ? ['travel_profile', tipoPerfilViagem] :
+      subTopico === 4 ? ['number_of_companions', quantPessoasViagem] :
+      subTopico === 5 ? ['number_of_travels', quantViagens] :
+      subTopico === 6 ? ['type_of_traveler', tipoViajante] :
+      subTopico === 7 ? ['travel_cost', custoViagens] :
+      ['travel_preferences', preferenciaViagens];
 
     if (entry) {
       const [key, value] = entry;
@@ -173,17 +157,31 @@ export default function Geral() {
         .from('profiles')
         .update({
             [key]: value,
-        });
+        })
+        .eq('id', user?.id)
+;
 
       if (error) {
         console.error('Houve um erro ao salvar a informação', error);
         setCondicaoInputs(true);
         setAvisoErro('Houve um erro ao salvar a informação. Por favor, tente de novo.');
+        setTimeout(() => {
+          setCondicaoInputs(false);
+          setAvisoErro('');
+        }, 3000);
+      } else {
+          setCondicaoInputs(true);
+          setAvisoSucesso('Informação salva com sucesso!');
+          setTimeout(() => {
+            setCondicaoInputs(false);
+            setAvisoSucesso('');
+          }, 3000);
       }
 
       resetStateByKey[key]?.();
     }
   }
+
 
 return (
   <main className="geral-outlet flex flex-col gap-6 min-h-full min-w-full">
@@ -191,13 +189,12 @@ return (
       const isCheckedButton = 
         subTopico.id === 1 ? nomeDigitado
         : subTopico.id === 2 ? avatar
-        : subTopico.id === 3 ? numeroTelefone
-        : subTopico.id === 4 ? tipoPerfilViagem
-        : subTopico.id === 5 ? quantPessoasViagem
-        : subTopico.id === 6 ? quantViagens
-        : subTopico.id === 7 ? tipoViajante
-        : subTopico.id === 8 ? custoViagens
-        : subTopico.id === 9 ? preferenciaViagens.length !== 4 ? false : true
+        : subTopico.id === 3 ? tipoPerfilViagem
+        : subTopico.id === 4 ? quantPessoasViagem
+        : subTopico.id === 5 ? quantViagens
+        : subTopico.id === 6 ? tipoViajante
+        : subTopico.id === 7 ? custoViagens
+        : subTopico.id === 8 ? preferenciaViagens.length !== 3 ? false : true
         : false;
 
       return(
@@ -243,11 +240,11 @@ return (
             <div id={subTopico.inputId} style={{rowGap: 4}} className="geral-outlet gap-2 md:gap-10 grid grid-cols-[1fr_1fr_1fr] justify-items-center grid-rows-[auto] md:flex">
               {subTopico.placeHolderInput.split('  ').map((item: string, index: number) => {
               const isChecked =
-                subTopico.id === 4 ? tipoPerfilViagem === item 
-                : subTopico.id === 5 ? quantPessoasViagem.key === item
-                : subTopico.id === 6 ? quantViagens.key === item
-                : subTopico.id === 7 ? tipoViajante === item
-                : subTopico.id === 8 ? custoViagens === item
+                subTopico.id === 3 ? tipoPerfilViagem === item 
+                : subTopico.id === 4 ? quantPessoasViagem === item
+                : subTopico.id === 5 ? quantViagens === item
+                : subTopico.id === 6 ? tipoViajante === item
+                : subTopico.id === 7 ? custoViagens === item
                 : false;
 
               return (
@@ -257,17 +254,11 @@ return (
                   <input
                     checked={isChecked} 
                     onChange={() => 
-                      subTopico.id === 4 ? setTipoPerfilViagem(item) 
-                      : subTopico.id === 5 ? setQuantPessoasViagem(() => ({
-                        key: item,
-                        value: index
-                      })) 
-                      : subTopico.id === 6 ? setQuantViagens(() => ({
-                        key: item,
-                        value: index
-                      })) 
-                      : subTopico.id === 7 ? setTipoViajante(item)
-                      : subTopico.id === 8 ? setCustoViagens(item)
+                      subTopico.id === 3 ? setTipoPerfilViagem(item) 
+                      : subTopico.id === 4 ? setQuantPessoasViagem(item)
+                      : subTopico.id === 5 ? setQuantViagens(item)
+                      : subTopico.id === 6 ? setTipoViajante(item)
+                      : subTopico.id === 7 ? setCustoViagens(item)
                       : false
                     } 
                     type={subTopico.inputTipo} 
@@ -293,7 +284,7 @@ return (
                       const preferenciaViagemDesmarcada = preferenciaViagens.filter((preferencia: string) => preferencia !== item);
                       setPreferenciaViagens(preferenciaViagemDesmarcada);
                     } else {
-                      if (preferenciaViagens.length === 4) return;
+                      if (preferenciaViagens.length === 3) return;
                       setPreferenciaViagens([...preferenciaViagens, item]);
                     }
                   }} 
@@ -301,7 +292,7 @@ return (
                     padding: '4px 6px', 
                     backgroundColor: preferenciaViagens.includes(item) ? '#3b82f6' : '', 
                     color: preferenciaViagens.includes(item) ? '#f8fafc' : '#222222',
-                    cursor: preferenciaViagens.includes(item) ? '' : preferenciaViagens.length === 4 ? 'not-allowed' : 'pointer'
+                    cursor: preferenciaViagens.includes(item) ? '' : preferenciaViagens.length === 3 ? 'not-allowed' : 'pointer'
                   }} 
                   className="geral-outlet cursor-pointer rounded-md shadow-[1px_1px_2px_#0000001a] bg-neutral-100" 
                   key={index}
@@ -315,16 +306,7 @@ return (
           :
           (
           <input 
-            onChange={(event) => {
-              switch (subTopico.id) {
-                case 1: 
-                  setNomeDigitado(event.target.value);
-                  break;
-                case 3: 
-                  setNumeroTelefone(event.target.value);
-                  break;
-              }
-            }} 
+            onChange={(e) => setNomeDigitado(e.target.value)} 
             style={{padding: 6, marginTop: '14px'}} 
             placeholder={subTopico.placeHolderInput} 
             className={`geral-outlet min-w-full rounded-md border ${dark ? 'text-slate-100 border-gray-400' : 'text-slate-800 border-black/60'} md:min-w-[60%] md:max-w-[60%] placeholder-neutral-400 focus:outline-blue-400`} 

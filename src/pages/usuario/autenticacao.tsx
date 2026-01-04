@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { TemaContext } from "../../context/TemaContext";
 import { useOutletContext } from "react-router-dom";
 import { supabase } from "../../auth/supabase-client";
@@ -17,6 +17,10 @@ interface sub_topicos {
 
 export default function Autenticacao() {
   const { setCondicaoInputs, setAvisoErro, setAvisoSucesso, user } = userAuth();
+  const { dark } = useContext(TemaContext);
+  const [phone, setPhone] = useState<string>('');
+  const [code, setCode] = useState<string>('');
+
   const subTopicos: sub_topicos[] = [
     {
       id: 1,
@@ -36,8 +40,16 @@ export default function Autenticacao() {
       inputId: 'senhaInput',
       placeHolderInput: 'Não deixe os piratas roubarem sua senha!'
     },
+    {
+      id: 3,
+      identificador: 'celular',
+      titulo: 'Celular',
+      paragrafo: 'Insira seu número de telefone.',
+      inputTipo: 'tel',
+      inputId: 'telefoneInput',
+      placeHolderInput: 'Ex: +55 (11) 94444-5511'
+    },
   ];
-  const { dark } = useContext(TemaContext);
   
   const { topicoEscolhido, textoDigitado }: any = useOutletContext();
   
@@ -82,6 +94,18 @@ export default function Autenticacao() {
     }, 3000);
   }
 
+  const confirmPhoneChange = async () => {
+    const { error } = await supabase.auth.verifyOtp({
+      phone,
+      token: code,
+      type: 'phone_change'
+    });
+
+    if (error) {
+      console.error('Erro ao confirmar telefone:', error);
+    }
+  };
+
 return ( 
   <main className="flex flex-col gap-6 min-h-full min-w-full autenticacao-outlet">
     {subTopicos.map((subTopico: sub_topicos) => {
@@ -120,7 +144,7 @@ return (
                     className='
                     absolute right-0 top-0 -translate-x-1/6 translate-y-1/3 rounded-md min-h-[30px] min-w-[50px] text-center text-shadow-[1px_1px_1px_0000005a] bg-amber-500 cursor-pointer text-slate-100 autenticacao-outlet'
                     >
-                    Verificar email
+                    {subTopico.id === 1 ? 'Verificar email' : 'Salvar telefone'}
                 </button>
 
                 <div
