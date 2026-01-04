@@ -4,6 +4,9 @@ import { TemaContext } from "../../context/TemaContext";
 import { NavLink, Outlet } from "react-router-dom";
 import MenuLateral from "../../components/menu-lateral";
 import MenuVertical from "../../components/menu-vertical";
+import { motion, AnimatePresence } from "framer-motion";
+import { userAuth } from "../../context/autenticacao";
+
 
 interface Topicos {
     nome: string,
@@ -40,6 +43,7 @@ const topicosPadrao: Topicos[] = [
 ]
 
 export default function TelaDeUsuario() {
+    const { condicaoInputs, avisoSucesso, avisoErro } = userAuth();
     const topicos: Topicos[] = [
         {
             nome: 'Geral',
@@ -220,6 +224,25 @@ export default function TelaDeUsuario() {
 
     return (
         <div id="body" className="tela-de-usuario-screen">
+            
+            <AnimatePresence mode="wait">
+                {(avisoSucesso || avisoErro) && condicaoInputs && (
+                    <motion.div
+                    key="aviso-inputs"
+                    initial={{ opacity: 0, y: 0 }}
+                    animate={{ opacity: 1, y: 20 }}
+                    exit={{ opacity: 0, y: 0 }}
+                    transition={{ duration: 0.3}}
+                    style={{padding: '0px 8px'}}
+                    className={`
+                        fixed top-[2%] pointer-events-none left-1/2 translate-x-[-50%] min-h-10 min-w-auto z-1 text-center flex justify-center items-center ${avisoSucesso ? 'bg-green-500' : 'bg-red-500'} rounded-md shadow-[0px_0px_2px_#0000002a] text-slate-100 text-shadow-[1px_1px_1px_#0000001a]
+                    `}
+                    >
+                    {avisoSucesso ? avisoSucesso : avisoErro}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {largura >= 1024 ? (
                 <MenuLateral expandirMargem={expandirMargem}/>
             ) : (

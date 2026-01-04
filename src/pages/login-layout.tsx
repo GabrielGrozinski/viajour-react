@@ -46,7 +46,7 @@ return (
                 initial={{ opacity: 0, y: 0 }}
                 animate={{ opacity: 1, y: 20 }}
                 exit={{ opacity: 0, y: 0 }}
-                transition={{ duration: 0.5}}
+                transition={{ duration: 0.3}}
                 style={{padding: '0px 8px'}}
                 className="
                     fixed top-[2%] pointer-events-none left-1/2 translate-x-[-50%] min-h-10 min-w-auto z-1 text-center flex justify-center items-center bg-red-500 rounded-md shadow-[0px_0px_2px_#0000002a] text-slate-100 text-shadow-[1px_1px_1px_#0000001a]

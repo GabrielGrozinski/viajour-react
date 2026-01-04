@@ -10,8 +10,10 @@ interface Props {
 
 interface AutenticacaoContextType {
     avisoErro: string,
+    avisoSucesso: string,
     loading: boolean,
     setAvisoErro: (value: string) => void,
+    setAvisoSucesso: (value: string) => void,
     condicaoInputs: boolean,
     setCondicaoInputs: (value: boolean) => void,
     session: Session | null,
@@ -50,6 +52,7 @@ export default function AutenticacaoProvider({ children }: Props) {
     const [loading, setLoading] = useState(true);
     const [condicaoInputs, setCondicaoInputs] = useState<boolean>(false);
     const [avisoErro, setAvisoErro] = useState<string>('');
+    const [avisoSucesso, setAvisoSucesso] = useState<string>('');
     const [session, setSession] = useState<Session | null>(null);
     const [user, setUser] = useState<User | null>(null);
 
@@ -246,6 +249,8 @@ export default function AutenticacaoProvider({ children }: Props) {
             setCondicaoInputs,
             avisoErro,
             setAvisoErro,
+            avisoSucesso,
+            setAvisoSucesso,
             session, 
             setSession,
             user,

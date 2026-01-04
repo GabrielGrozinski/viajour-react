@@ -22,7 +22,7 @@ interface plansType {
 
 
 export default function Assinaturas() {
-  const { user } = userAuth();
+  const { user, alterarAssinatura, setCondicaoInputs, setAvisoSucesso } = userAuth();
   const [ativandoCartao, setAtivandoCartao] = useState<boolean>(false);
   const { topicoEscolhido }: any = useOutletContext();
   const [plans, setPlans] = useState<plansType[] | null>(null);
@@ -59,6 +59,18 @@ export default function Assinaturas() {
     fetchPlans();
   }, []);
 
+  const handleAssinatura = async (month: number, plan_id: number, provider: string) => {
+    const result = await alterarAssinatura(month, plan_id, provider);
+    if (result.success) {
+      setCondicaoInputs(true);
+      setAvisoSucesso('Parabéns! Seu plano de assinatura foi ativado!');
+      setTimeout(() => {
+        setCondicaoInputs(false);
+        setAvisoSucesso('');
+      }, 3000);
+    }
+  }
+
   // LISTA GLOBAL DE TODAS AS FEATURES (9 no total)
   const todasAsFeatures = [
     "Limited access",
@@ -75,7 +87,7 @@ export default function Assinaturas() {
 return ( 
   <div
     id="escolher-plano"
-    className="assinaturas-outlet flex justify-center items-center flex-col md:flex-row md:items-stretch gap-6"
+    className="assinaturas-outlet flex justify-center items-center flex-col lg:flex-row lg:items-stretch gap-6"
   >
     {!ativandoCartao ? (
       plans?.map((plan: plansType) => (
@@ -148,8 +160,8 @@ return (
             >
               <button
                 onClick={() => {
-                  setAtivandoCartao(true);
                   
+                  handleAssinatura(3, plan.id, 'Google')
                 }}
                 style={{ background: plan.button }}
                 className="assinaturas-outlet text-white cursor-pointer font-medium text-lg text-center w-full no-underline px-[0.75em] rounded-md border-0 outline-0 hover:brightness-90"
