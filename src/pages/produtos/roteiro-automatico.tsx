@@ -185,6 +185,7 @@ export default function RoteiroAutomatico() {
             setCondicaoInputs(true);
             setAvisoErro(`${value[0] > value[1] ? 'O valor mínimo é maior que o valor máximo.' : 'Defina um valor mínimo e máximo.'}`);
             setTimeout(() => setCondicaoInputs(false), 3000);
+            return;
           }
         }
         if (!value || value[0] === '') {
@@ -213,9 +214,16 @@ export default function RoteiroAutomatico() {
               break;
           }
           setTimeout(() => setCondicaoInputs(false), 3000);
+          return;
         }
       });
     }, 350);
+
+    gerarRoteiro();
+  }
+
+  function gerarRoteiro() {
+    // Toda a lógia da I.A em gerar o roteiro aqui.
   }
 
   useEffect(() => {
@@ -264,6 +272,7 @@ return (
           e.preventDefault();
           }} 
         className="card roteiro-automatico-screen">
+        <p className={`text-center text-lg ${dark ? 'text-slate-100' : 'text-slate-900'}`}>Gere um roteiro completo para suas viagens com I.A.</p>
         <div>
           <label htmlFor="destino-viagem" className="roteiro-automatico-screen">Destino da viagem:</label>
           <input
@@ -370,7 +379,7 @@ return (
           </h2>
           <div style={{marginBottom: 12}} className="flex justify-between gap-2">
             <input 
-            onChange={(e) => definirValoresViagem(Number(e.target.value), 0)} className="max-w-1/2 text-slate-100"
+            onChange={(e) => definirValoresViagem(Number(e.target.value), 0)} className={`max-w-1/2 ${dark ? 'text-slate-100' : 'text-slate-900'}`}
             min={0}
             placeholder="Mínimo" 
             type="number" 
@@ -379,7 +388,7 @@ return (
             />
 
             <input 
-            onChange={(e) => definirValoresViagem(Number(e.target.value), 1)} className="max-w-1/2 text-slate-100" 
+            onChange={(e) => definirValoresViagem(Number(e.target.value), 1)} className={`max-w-1/2 ${dark ? 'text-slate-100' : 'text-slate-900'}`} 
             placeholder="Máximo"
             min={0} 
             type="number" 

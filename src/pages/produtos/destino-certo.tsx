@@ -162,6 +162,7 @@ export default function DestinoCerto() {
             setCondicaoInputs(true);
             setAvisoErro(`${value[0] > value[1] ? 'O valor mínimo é maior que o valor máximo.' : 'Defina um valor mínimo e máximo.'}`);
             setTimeout(() => setCondicaoInputs(false), 3000);
+            return;
           }
         }
         if (!value || value[0] === '') {
@@ -187,9 +188,16 @@ export default function DestinoCerto() {
               break;
           }
           setTimeout(() => setCondicaoInputs(false), 3000);
+          return;
         }
       });
     }, 350);
+
+    gerarRoteiro();
+  }
+
+  function gerarRoteiro() {
+    // Toda a lógia da I.A em gerar o roteiro aqui.
   }
 
   useEffect(() => {
@@ -238,7 +246,7 @@ return (
           e.preventDefault();
           }} 
         className="card destino-certo-screen">
-
+        <p className={`text-center text-lg ${dark ? 'text-slate-100' : 'text-slate-900'}`}>Descubra o destino ideal para a sua próxima viagem com ajuda da I.A.</p>
         <div>
           <label htmlFor="quant-dias" className="destino-certo-screen">Quantidade de dias:</label>
           <input

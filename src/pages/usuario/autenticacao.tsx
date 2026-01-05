@@ -12,7 +12,8 @@ interface sub_topicos {
   paragrafo: string,
   inputTipo: string,
   inputId: string,
-  placeHolderInput: string,
+  placeHolderInput: string | undefined,
+  value?: string | undefined
 }
 
 export default function Autenticacao() {
@@ -20,6 +21,7 @@ export default function Autenticacao() {
   const { dark } = useContext(TemaContext);
   const [phone, setPhone] = useState<string>('');
   const [code, setCode] = useState<string>('');
+  const [codeSuccess, setCodeSuccess] = useState<boolean>(false);
 
   const subTopicos: sub_topicos[] = [
     {
@@ -27,9 +29,10 @@ export default function Autenticacao() {
       identificador: 'email',
       titulo: 'Email',
       paragrafo: 'O seu endereço de email padrão.',
-      inputTipo: '',
+      inputTipo: 'text',
       inputId: 'emailInput',
-      placeHolderInput: user?.email ?? ''
+      placeHolderInput: user?.email ? undefined : 'Ex: viajour@gmail.com',
+      value: user?.email ? user.email : undefined
     },
     {
       id: 2,
@@ -47,7 +50,8 @@ export default function Autenticacao() {
       paragrafo: 'Insira seu número de telefone.',
       inputTipo: 'tel',
       inputId: 'telefoneInput',
-      placeHolderInput: 'Ex: +55 (11) 94444-5511'
+      placeHolderInput: user?.phone ? undefined : 'Ex: +55 (11) 94444-5511',
+      value: user?.phone ? user.phone : undefined
     },
   ];
   
@@ -94,6 +98,39 @@ export default function Autenticacao() {
     }, 3000);
   }
 
+  const formatPhoneToE164 = (input: string) => {
+    let digits = input.replace(/\D/g, '');
+
+    if (digits.startsWith('55')) {
+      return `+${digits}`;
+    }
+
+    if (digits.length === 10 || digits.length === 11) {
+      return `+55${digits}`;
+    }
+
+    return `+${digits}`;
+  };
+
+  const updatePhone = async (phone: string) => {
+    const newPhone = formatPhoneToE164(phone);
+
+    const { error } = await supabase.auth.updateUser({
+      phone: newPhone
+    });
+
+    if (error) {
+      console.error('Erro ao solicitar troca de telefone:', error);
+      setCondicaoInputs(true);
+      setAvisoErro(newPhone ? 'Erro ao solicitar troca de telefone. Por favor, tente de novo.' : 'Digite um número válido.');
+      setTimeout(() => {
+        setCondicaoInputs(false);
+        setAvisoErro('');
+      }, 3000);
+    }
+
+  };
+
   const confirmPhoneChange = async () => {
     const { error } = await supabase.auth.verifyOtp({
       phone,
@@ -103,8 +140,33 @@ export default function Autenticacao() {
 
     if (error) {
       console.error('Erro ao confirmar telefone:', error);
+      setCondicaoInputs(true);
+      setAvisoErro('Erro ao confirmar telefone. Por favor, tente de novo.');
+      setTimeout(() => {
+        setCondicaoInputs(false);
+        setAvisoErro('');
+      }, 3000);
+    } else {
+      setCondicaoInputs(true);
+      setAvisoSucesso('telefone adicionado com sucesso!');
+      setTimeout(() => {
+        setCondicaoInputs(false);
+        setAvisoErro('');
+      }, 3000);
     }
   };
+
+  const confirmEmail = async () => {
+    // Lógica de confirmação de email.
+  }
+
+  useEffect(() => {
+    if (code.length === 6) {
+      setCodeSuccess(true);
+    } else {
+      setCodeSuccess(false);
+    }
+  }, [code]);
 
 return ( 
   <main className="flex flex-col gap-6 min-h-full min-w-full autenticacao-outlet">
@@ -138,23 +200,52 @@ return (
                     </button>
                 </div>
         ) : (
-            <>
+            <div>
                 <button
-                    style={{padding: 4}}
-                    className='
-                    absolute right-0 top-0 -translate-x-1/6 translate-y-1/3 rounded-md min-h-[30px] min-w-[50px] text-center text-shadow-[1px_1px_1px_0000005a] bg-amber-500 cursor-pointer text-slate-100 autenticacao-outlet'
-                    >
-                    {subTopico.id === 1 ? 'Verificar email' : 'Salvar telefone'}
+                  onClick={() => subTopico.id === 3 ? confirmPhoneChange() : confirmEmail()}
+                  disabled={subTopico.id === 3 ? codeSuccess : true}
+                  style={{padding: 4}}
+                  className={`
+                    absolute right-0 top-0 -translate-x-1/6 translate-y-1/3 rounded-md min-h-[30px] min-w-[50px] text-center text-shadow-[1px_1px_1px_0000005a] bg-amber-500 text-slate-100 autenticacao-outlet ${subTopico.id === 3 ? codeSuccess ? 'opacity-100 cursor-pointer' : 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`
+                  }
+                  >
+                  {subTopico.id === 1 ? 'Verificar email' : 'Salvar telefone'}
                 </button>
 
-                <div
+                <input
+                  type={subTopico.inputTipo}
+                  onChange={(e) => setPhone(e.currentTarget.value)}
+                  value={subTopico.value}
+                  disabled={subTopico.value !== undefined}
+                  placeholder={subTopico.placeHolderInput}
+                  style={{padding: 6, marginTop: '14px'}} 
+                  className={`rounded-md border ${dark ? 'text-slate-100 border-gray-400' : 'text-slate-800 border-black/60'} min-w-full md:min-w-[60%] md:max-w-[60%] autenticacao-outlet`}  
+                  id={subTopico.inputId}
+                />
+
+                {subTopico.id === 3 && (
+                  <>
+                  <button
+                  onClick={() => updatePhone(phone)}
+                  style={{padding: 4, marginLeft: 10}}
+                  className="inline min-h-9 min-w-12 bg-amber-700 cursor-pointer rounded-lg text-slate-100 text-shadow-[1px_0px_0px_#0000001a]"
+                  >
+                    Enviar código de segurança
+                  </button>
+
+                  <input
+                    onChange={(e) => setCode(e.currentTarget.value)}
+                    maxLength={6}
+                    placeholder='Digite o código enviado para o seu celular aqui.'
                     style={{padding: 6, marginTop: '14px'}} 
                     className={`rounded-md border ${dark ? 'text-slate-100 border-gray-400' : 'text-slate-800 border-black/60'} min-w-full md:min-w-[60%] md:max-w-[60%] autenticacao-outlet`}  
-                    id={subTopico.inputId}
-                >
-                    {subTopico.placeHolderInput}
-                </div>
-            </>
+                    id="code-phone-input"
+                  />
+                  </>
+                )}
+
+                
+            </div>
         )}
 
         </section>
