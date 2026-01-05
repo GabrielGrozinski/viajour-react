@@ -164,3 +164,26 @@ CREATE POLICY "Allow read plans"
 ON public.plans
 FOR SELECT
 USING (true);
+
+// Viagens
+
+create extension if not exists "pgcrypto";
+
+  CREATE table trips (
+      id uuid primary key default gen_random_uuid(),
+      destination text not null,
+      cost text not null,
+      gross_cost integer not null,
+      type text not null,
+      nationality text not null,
+      img text not null,
+      description text not null,
+      keywords text[] not null,
+      created_at timestamp with time zone default now()
+  );
+
+create table favoriteTrips (
+  user_id uuid not null references auth.users(id) on delete cascade,
+  trip_id uuid not null references trips(id) on delete cascade,
+  unique (user_id, trip_id)
+);

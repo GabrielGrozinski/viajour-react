@@ -196,8 +196,11 @@ export default function CardViagem({ setMostrarCard }: Props) {
                             </ol>
                         </div>
                     ))}
-                    <button style={{padding: 4, marginTop: -10}} className="bg-blue-500 scale-90 text-lg text-white/95 text-shadow-[1px_1px_1px_#0000002a] rounded-md cursor-pointer transition-transform duration-300 active:scale-88 max-h-14 row-2 w-full">
+                    <button style={{padding: 4, marginTop: -10, marginBottom: 5}} className="bg-blue-500 scale-90 text-lg text-white/95 text-shadow-[1px_1px_1px_#0000002a] rounded-md cursor-pointer transition-transform duration-300 active:scale-88 max-h-14 row-2 w-full">
                         Procurar reservas para essa viagem
+                    </button>
+                    <button style={{padding: 4}} className="bg-green-500 scale-90 text-lg text-white/95 text-shadow-[1px_1px_1px_#0000002a] rounded-md cursor-pointer transition-transform duration-300 active:scale-88 max-h-14 row-2 w-full">
+                        Salvar o roteiro dessa viagem em pdf
                     </button>
                 </section>
 

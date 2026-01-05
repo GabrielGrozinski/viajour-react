@@ -7,9 +7,10 @@ import AnuncioMobile from "../../components/anuncio-mobile";
 import Slider from '@mui/material/Slider';
 import {styled} from '@mui/material/styles';
 import CardViagem from "../../components/cardViagem";
+import { supabase } from "../../auth/supabase-client";
 
 
-interface Viagem {
+interface RawViagem {
   id: number;
   destino: string;
   custo: string;
@@ -21,7 +22,18 @@ interface Viagem {
   keywords: string[],
 }
 
-const viagens: Viagem[] = [
+interface Viagem {
+  destination: string;
+  cost: string;
+  gross_cost: number;
+  type: string;
+  nationality: "nacional" | "internacional";
+  description: string;
+  img: string;
+  keywords: string[];
+}
+
+const rawViagens: RawViagem[] = [
   {
     id: 1,
     destino: "Gramado - RS",
@@ -970,6 +982,16 @@ const viagens: Viagem[] = [
   },
 ];
 
+const viagens: Viagem[] = rawViagens.map(({ id, destino, custo, custoBruto, tipo, categoria, descricao, ...rest }) => ({
+  destination: destino,
+  cost: custo,
+  gross_cost: custoBruto,
+  type: tipo,
+  nationality: categoria,
+  description: descricao,
+  ...rest,
+}));
+
 // Add continent keywords dynamically so we don't need to edit each entry by hand.
 // We check destination + existing keywords for country names and append Portuguese
 // continent keywords when a match is found.
@@ -984,7 +1006,7 @@ const continentRules: { matches: string[]; add: string[] }[] = [
 ];
 
 const viagensAugmented: Viagem[] = viagens.map((v) => {
-  const text = normalizeText([v.destino, ...(v.keywords || [])].join(' '));
+  const text = normalizeText([v.destination, ...(v.keywords || [])].join(' '));
   const extras = new Set<string>();
 
   for (const rule of continentRules) {
@@ -1021,6 +1043,20 @@ const SliderCustomizado = styled(Slider)({
 
 
 export default function ViagensSeteDias() {
+  useEffect(() => {
+    const fetchTrip = async () => {
+      const {error} = await supabase
+        .from('trips')
+        .insert(viagens);
+      if (error) {
+        console.error('erro', error);
+      }
+    }
+    setTimeout(() => {
+      fetchTrip();
+    }, 5000)
+  }, []);
+
   const [mostrarCard, setMostrarCard] = useState<boolean>(false);
   const [filtro, setFiltro] = useState<"nacional" | "internacional">("nacional");
   const [pesquisaAtiva, setPesquisaAtiva] = useState<boolean>(false);
@@ -1030,7 +1066,7 @@ export default function ViagensSeteDias() {
   const [menuExpandidoH1, setMenuExpandidoH1] = useState<boolean>(false);
   const viagensFiltradasCusto = useMemo(() =>
 
-    viagensAugmented.filter((v) => v.custoBruto >= value[0] && v.custoBruto <= value[1])
+    viagensAugmented.filter((v) => v.gross_cost >= value[0] && v.gross_cost <= value[1])
   , [value]);
 
   const viagensFiltradasTextoDigitado = useMemo(() => 
@@ -1040,7 +1076,7 @@ export default function ViagensSeteDias() {
   [pesquisaAtual, viagensFiltradasCusto]);
 
   const viagensFiltradas = useMemo(
-    () => viagensFiltradasTextoDigitado.filter((v) => v.categoria === filtro),
+    () => viagensFiltradasTextoDigitado.filter((v) => v.nationality === filtro),
     [viagensFiltradasTextoDigitado, filtro]
   );
 
@@ -1192,7 +1228,7 @@ return (
             scrollToHeader();
             const textoDigitado = event.target.value;
             const textoFormatado = formatarString(textoDigitado);
-            setPesquisaAtual(textoFormatado)}} placeholder="Feliz Natal!" type="text" className="viagens-de-sete-dias-screen" name="searchViagem" id="searchViagem"
+            setPesquisaAtual(textoFormatado)}} placeholder="Boa viagem!" type="text" className="viagens-de-sete-dias-screen" name="searchViagem" id="searchViagem"
             onKeyUp={(e) => {
               if (e.key === 'Enter') {
                 ativarPesquisa();
@@ -1253,9 +1289,9 @@ return (
     <main id="container" className="pagina-natal viagens-de-sete-dias-screen">
       {/* Cards */}
       <div className="lista-viagens viagens-de-sete-dias-screen">
-        {itemsToShow.map((v) => (
+        {itemsToShow.map((v, index) => (
           <div
-            key={v.id}
+            key={index}
             style={{filter: mostrarCard ? 'blur(1.5px)' : ''}}
             onClick={() => {
               setMostrarCard(true);
@@ -1271,21 +1307,21 @@ return (
             {v.img && (
               <img
                 src={v.img}
-                alt={v.destino}
+                alt={v.destination}
                 className="card-img viagens-de-sete-dias-screen"
               />
             )}
             <div className="card-info viagens-de-sete-dias-screen">
               <div className="viagens-de-sete-dias-screen">
-                <h2 className="card-titulo viagens-de-sete-dias-screen">{v.destino}</h2>
-                <p className="card-descricao viagens-de-sete-dias-screen">{v.descricao}</p>
+                <h2 className="card-titulo viagens-de-sete-dias-screen">{v.destination}</h2>
+                <p className="card-descricao viagens-de-sete-dias-screen">{v.description}</p>
                 <p className="card-custo viagens-de-sete-dias-screen">
                   Custo estimado (7 dias):{" "}
-                  <span className="viagens-de-sete-dias-screen">{v.custo}</span>
+                  <span className="viagens-de-sete-dias-screen">{v.cost}</span>
                 </p>
               </div>
               <span className="tag-natalina viagens-de-sete-dias-screen">
-                {v.tipo}
+                {v.type}
               </span>
             </div>
           </div>
