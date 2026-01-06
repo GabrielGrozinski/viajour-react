@@ -194,7 +194,7 @@ return (
                 <div className="relative w-full autenticacao-outlet">
                     <button
                     onClick={() => handlePassword()}
-                    style={{padding: 6}}
+                    style={{padding: '6px 8px'}}
                     className="bg-amber-500 rounded-md text-slate-100 text-shadow-[1px_1px_1px_#0000004a] cursor-pointer">
                       Clique aqui para receber um email e alterar sua senha.
                     </button>
@@ -227,7 +227,7 @@ return (
                   <>
                   <button
                   onClick={() => updatePhone(phone)}
-                  style={{padding: 4, marginLeft: 10}}
+                  style={{padding: '4px 6px', marginLeft: 10}}
                   className="inline min-h-9 min-w-12 bg-amber-700 cursor-pointer rounded-lg text-slate-100 text-shadow-[1px_0px_0px_#0000001a]"
                   >
                     Enviar código de segurança

@@ -12,6 +12,8 @@ import MenuLateral from "../../components/menu-lateral";
 import MenuVertical from "../../components/menu-vertical";
 import AnuncioDesktop from "../../components/anuncio-desktop";
 import { AnimatePresence, motion } from 'framer-motion';
+import { userAuth } from "../../context/autenticacao";
+import { Check, X  } from "lucide-react";
 
 
 interface DiaRoteiro {
@@ -35,6 +37,7 @@ const opcoesTipo = [
 
 export default function MonteSuaAventura() {
   const { dark } = useContext(TemaContext);
+  const { avisoErro, setAvisoErro, setAvisoSucesso, avisoSucesso, condicaoInputs, setCondicaoInputs } = userAuth();
   let custosSalvos = [
     {
       id: 1,
@@ -53,7 +56,6 @@ export default function MonteSuaAventura() {
       custo: '120'
     }
   ]
-  const [condicaoCustos, setCondicaoCustos] = useState<boolean>(false);
   const [destino, setDestino] = useState<string>("");
   const [dataInicio, setDataInicio] = useState<string>("");
   const [custoDia, setCustoDia] = useState<custoDosDias[]>([{id: 1, custo: ''}]);
@@ -189,9 +191,16 @@ export default function MonteSuaAventura() {
 
   function adicionarCustosAutomaticamente() {
     if (dias.length !== custosSalvos.length) {
-      setCondicaoCustos(true);
+      setCondicaoInputs(true);
+      const erroAtual = 
+        dias.length > custosSalvos.length ? 
+        `Seu número de dias atual é maior que o número de dias do Cálculo de Custos. Por favor, remova ${dias.length - custosSalvos.length} dia${dias.length - custosSalvos.length === 1 ? '' : 's'}.` 
+        : 
+        `Seu número de dias atual é menor que o número de dias do Cálculo de Custos. Por favor, adicione ${custosSalvos.length - dias.length} dia${custosSalvos.length - dias.length > 1 ? 's' : ''}.`;
+      setAvisoErro(erroAtual);
       return setTimeout(() => {
-        setCondicaoCustos(false);
+        setCondicaoInputs(false);
+        setAvisoErro('');
       }, 3000);
     }
 
@@ -203,7 +212,8 @@ export default function MonteSuaAventura() {
     }
     setCustoDia(custoDiaAutomatico);
     setDias(diasAutomatico);
-    setCondicaoCustos(false);
+    setCondicaoInputs(true);
+    setAvisoSucesso('Seus custos foram adicionados com sucesso!');
   }
 
 return (
@@ -212,18 +222,37 @@ return (
     style={{backgroundImage: dark ? `url(${fundoDark})` : `url(${fundo})`}} 
     className="sua-aventura-screen"
   >
+
     <AnimatePresence mode="wait">
-      {condicaoCustos && (
-        <motion.div
-          key="aviso-custos"
-          initial={{ opacity: 0, y: 0 }}
-          animate={{ opacity: 1, y: 20 }}
-          exit={{ opacity: 0, y: 0 }}
-          transition={{ duration: 0.5}}
-          className="aviso sua-aventura-screen">
-            {dias.length > custosSalvos.length ? `Seu número de dias atual é maior que o número de dias do Cálculo de Custos. Por favor, remova ${dias.length - custosSalvos.length} dia${dias.length - custosSalvos.length === 1 ? '' : 's'}.` : `Seu número de dias atual é menor que o número de dias do Cálculo de Custos. Por favor, adicione ${custosSalvos.length - dias.length} dia${custosSalvos.length - dias.length > 1 ? 's' : ''}.`}
-        </motion.div>
-      )}
+        {(avisoSucesso || avisoErro) && condicaoInputs && (
+            <motion.div
+            key="aviso-inputs"
+            initial={{ opacity: 0, y: 0 }}
+            animate={{ opacity: 1, y: 10 }}
+            exit={{ opacity: 0, y: 0 }}
+            transition={{ duration: 0.3}}
+            style={{padding: '4px 10px'}}
+            className='
+                fixed top-[2%] right-[3%] min-h-15 h-auto min-w-30 max-w-1/4 z-1 text-center flex justify-center items-center bg-gray-100 rounded-md shadow-[0px_0px_4px_#0000004a] text-slate-100 text-shadow-[1px_1px_1px_#0000001a]
+            '
+            >
+            {avisoSucesso ? (
+                <span style={{padding: '3px 3.2px 2px 2.8px'}} className="bg-green-500 rounded-full">
+                    <Check size={20} />
+                </span>
+            ) : (
+                <span style={{padding: '2.4px 2.3px 2px 2px'}} className="bg-red-500 rounded-full">
+                    <X size={20} />
+                </span>
+            )}
+            <h2 style={{margin: '2px 50px 2px 8px'}} className='text-slate-800 text-shadow-[1px_1px_1px_#0000001a]'>
+                {avisoSucesso ? avisoSucesso : avisoErro}
+            </h2>
+
+                <X size={16} className="absolute cursor-pointer text-gray-600 top-[3.5%] right-[1%] hover:text-red-400" />
+
+            </motion.div>
+        )}
     </AnimatePresence>
 
     {largura >= 1024 ? (

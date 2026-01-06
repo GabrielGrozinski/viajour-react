@@ -14,12 +14,13 @@ type Dia = {
   transporte: string;
   hospedagem: string;
   alimentacao: string;
+  lazer: string;
 };
 
 export default function CalculoDeCustos() {
   const { dark } = useContext(TemaContext);
   const [dias, setDias] = useState<Dia[]>([
-    { transporte: '', hospedagem: '', alimentacao: '' }
+    { transporte: '', hospedagem: '', alimentacao: '', lazer: '' }
   ]);
   const [largura, setLargura] = useState(window.innerWidth);
   const [rotinaAtual, setRotina] = useState<'rotina-manual' | 'rotina-automatica'> ('rotina-manual');
@@ -59,12 +60,12 @@ export default function CalculoDeCustos() {
 
     setDias(prev => [
       ...prev,
-      { transporte: '', hospedagem: '', alimentacao: '' }
+      { transporte: '', hospedagem: '', alimentacao: '', lazer: '' }
     ]);
   }
 
   function removerDia(index: number) {
-    if (dias.length === 1) return; // impede remover tudo
+    if (dias.length === 1) return;
 
     if (dias.length <= 8) {
       window.document.getElementById('grafico-dia-1')?.classList.remove('grafico-extra');
@@ -96,12 +97,14 @@ export default function CalculoDeCustos() {
     let totalTransporte = 0;
     let totalHospedagem = 0;
     let totalAlimentacao = 0;
+    let totalLazer = 0;
 
     dias.forEach((dia, i) => {
       const subtotal =
         Number(dia.transporte || 0) +
         Number(dia.hospedagem || 0) +
-        Number(dia.alimentacao || 0);
+        Number(dia.alimentacao || 0) +
+        Number(dia.lazer || 0);
 
       if (i < LIMITE_GRAFICO) {
         labels1.push(`Dia ${i + 1}`);
@@ -114,6 +117,7 @@ export default function CalculoDeCustos() {
       totalTransporte += Number(dia.transporte);
       totalHospedagem += Number(dia.hospedagem);
       totalAlimentacao += Number(dia.alimentacao);
+      totalLazer += Number(dia.lazer);
     });
 
     // Gráfico 1
@@ -191,15 +195,16 @@ export default function CalculoDeCustos() {
       graficoCategorias.current = new Chart(canvasCategorias.current, {
         type: "pie",
         data: {
-          labels: ["Transporte", "Hospedagem", "Alimentação"],
+          labels: ["Transporte", "Hospedagem", "Alimentação", "Lazer"],
           datasets: [
             {
               data: [
                 totalTransporte,
                 totalHospedagem,
-                totalAlimentacao
+                totalAlimentacao,
+                totalLazer
               ],
-              backgroundColor: ["#2563eb", "#16a34a", "#ea580c"],
+              backgroundColor: ["#2563eb", "#16a34a", "#ea580c", "#fbbf24"],
             }
           ]
         },
@@ -220,7 +225,8 @@ export default function CalculoDeCustos() {
     (acc, d) => acc + 
     Number(d.transporte || 0) + 
     Number(d.hospedagem || 0) + 
-    Number(d.alimentacao || 0),
+    Number(d.alimentacao || 0) +
+    Number(d.lazer),
     0
   );
 
@@ -267,8 +273,8 @@ return (
               {rotinaAtual === 'rotina-manual' && (
                 <section className="container-gerar-rotina calculo-de-custos-screen">
                   <div>
-                    <h1>Gerador Automático de Rotina de Gastos</h1>
-                    <p>Crie automaticamente uma rotina de gastos completa com base no seu orçamento e perfil de viagem.</p>
+                    <h1 className={`${dark ? 'text-slate-100 text-shadow-[1px_1px_1px_#0000002a]' : 'text-slate-900'} text-xl`}>Gerador Automático de Rotina de Gastos</h1>
+                    <p className={`${dark ? 'text-slate-100 text-shadow-[1px_1px_1px_#0000002a]' : 'text-slate-900'} text-sm`}>Crie automaticamente uma rotina de gastos completa com base no seu orçamento e perfil de viagem.</p>
                   </div>
                   <button onClick={() => setRotina('rotina-automatica')}>
                     Gerar rotina automaticamente
@@ -309,7 +315,8 @@ return (
                 const subtotal =
                   Number(dia.transporte || 0) +
                   Number(dia.hospedagem || 0) +
-                  Number(dia.alimentacao || 0);
+                  Number(dia.alimentacao || 0) +
+                  Number(dia.lazer || 0);
 
                 return (
                   <div key={index} className="dia calculo-de-custos-screen">
@@ -358,6 +365,17 @@ return (
                       className="calculo-de-custos-screen"
                     />
 
+                    <input
+                      type="text"
+                      inputMode="decimal"
+                      placeholder="Lazer (R$)"
+                      value={dia.lazer}
+                      onChange={e =>
+                        atualizarValor(index, "lazer", e.target.value)
+                      }
+                      className="calculo-de-custos-screen"
+                    />
+
                     <div className="subtotal calculo-de-custos-screen">
                       Total do dia: R$ {subtotal.toFixed(2)}
                     </div>
@@ -382,6 +400,8 @@ return (
                 R$ {totalGeral.toFixed(2)}
               </span>
             </div>
+
+
 
             {largura < 1024 && (
               <div className="graficos calculo-de-custos-screen">

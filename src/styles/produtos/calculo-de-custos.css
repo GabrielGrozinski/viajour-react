@@ -74,7 +74,7 @@ main.calculo-de-custos-screen button#btn-adicionar-dias.calculo-de-custos-screen
   background: #4f46e5;
 }
 
-main.calculo-de-custos-screen button#btn-adicionar-dias.desativado.calculo-de-custos-screen {
+main.calculo-de-custos-screen button.desativado.calculo-de-custos-screen {
   @apply pointer-events-none opacity-50;
 }
 
@@ -175,14 +175,6 @@ footer.calculo-de-custos-screen > div.imagem.calculo-de-custos-screen {
     @apply row-3 transition-all duration-300 flex flex-col gap-1 bg-sky-50 col-[span_2] rounded-xl max-h-[60%] justify-center p-4 text-center;
   }
 
-  div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > section.container-gerar-rotina > div > h1 {
-    @apply font-[450] text-xl text-[#222222];
-  }
-
-  div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > section.container-gerar-rotina > div > p {
-    @apply text-neutral-800;
-  }
-
   div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > section.container-gerar-rotina > button {
     @apply bg-sky-400 py-2 transition-all duration-200 text-shadow-[1px_1px_1px_#0000005a] mt-6 rounded-md text-white text-lg shadow-[1px_1px_1px_#0000002a] min-w-2/3 cursor-pointer;
   }
@@ -214,7 +206,6 @@ footer.calculo-de-custos-screen > div.imagem.calculo-de-custos-screen {
   div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > div.grafico-dia > h3 {
       @apply text-[#222222] text-xl text-center;
   }
-
 
   div#body.calculo-de-custos-screen > .graficos.calculo-de-custos-screen > div#grafico-final {
     @apply bg-sky-50 max-h-full pt-1 pb-0 col-2 row-[span_2] rounded-xl max-w-full;
@@ -298,11 +289,6 @@ html.dark .subtotal.calculo-de-custos-screen {
 html.dark div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > section.container-gerar-rotina {
   @apply bg-[#1c2b4e];
 }
-
-html.dark div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > section.container-gerar-rotina > h1, html.dark div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > section.container-gerar-rotina > p {
-  @apply text-white text-shadow-[1px_1px_1px_#0000005a];
-}
-
 
 html.dark div#body.calculo-de-custos-screen > div.graficos.calculo-de-custos-screen > div.grafico-dia {
     @apply bg-[#1c2b4e];

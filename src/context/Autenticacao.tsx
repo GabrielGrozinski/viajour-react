@@ -222,15 +222,15 @@ export default function AutenticacaoProvider({ children }: Props) {
     }
 
     useEffect(() => {
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            setLoading(false);
-            setSession(session);
-        });
+        supabase.auth.getSession()
+        .then(({ data: { session } }) => setSession(session))
+        .catch(({ error }) => console.error('Houve um erro ao buscar a session', error))
+        .finally(() => setLoading(false));
 
-        supabase.auth.getUser().then(({data: {user}}) => {
-            setLoading(false);
-            setUser(user);
-        });
+        supabase.auth.getUser()
+        .then(({data: {user}}) => setUser(user))
+        .catch(({ error }) => console.error('Houve um erro ao buscar o user', error))
+        .finally(() => setLoading(false));
 
         const { data: { subscription } } =
             supabase.auth.onAuthStateChange((_event, session) => {
