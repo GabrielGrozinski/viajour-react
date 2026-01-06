@@ -9,6 +9,8 @@ import AnuncioDesktop from "../../components/anuncio-desktop";
 import AnuncioMobile from "../../components/anuncio-mobile";
 import fundo from '../../assets/imagens/fundo.png';
 import fundoDark from '../../assets/imagens/fundo-dark.png';
+import { RoteiroModal } from "../../components/modal-salvar-roteiro";
+
 
 type Dia = {
   transporte: string;
@@ -19,6 +21,7 @@ type Dia = {
 
 export default function CalculoDeCustos() {
   const { dark } = useContext(TemaContext);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [dias, setDias] = useState<Dia[]>([
     { transporte: '', hospedagem: '', alimentacao: '', lazer: '' }
   ]);
@@ -299,6 +302,7 @@ return (
       <div id="container" className="container calculo-de-custos-screen">
         {rotinaAtual === 'rotina-manual' ? (
           <>
+
             {largura < 1024 && (
               <div id="btn-rotinas" className="calculo-de-custos-screen">
                 <button onClick={() => setRotina('rotina-manual')} id="btn-rotina-manual" className="calculo-de-custos-screen">Rotina Manual</button>
@@ -397,12 +401,15 @@ return (
               Custo total da viagem:
               <br className="calculo-de-custos-screen" />
               <span className="total calculo-de-custos-screen">
-                R$ {totalGeral.toFixed(2)}
+                  R$ {totalGeral.toFixed(2)} 
+              </span>
+              <br />
+              <br />
+              <span style={{padding: 6}} className="bg-sky-700 shadow-[1px_1px_1px_#0000002a] rounded-full">
+                <i onClick={() => setShowModal(true)} className="fa-solid fa-download text-2xl text-white text-shadow-[1px_1px_1px_#0000002a] cursor-pointer"></i>
               </span>
             </div>
-
-
-
+            <br />
             {largura < 1024 && (
               <div className="graficos calculo-de-custos-screen">
                 <div className="grafico-dia calculo-de-custos-screen">
@@ -429,6 +436,11 @@ return (
         )}
       </div>
     </main>
+
+    <RoteiroModal
+      open={showModal}
+      onClose={() => setShowModal(false)}
+      />
  
     {largura >= 1024 ? (
       <AnuncioDesktop isTelaDeViagens={false} />

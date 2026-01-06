@@ -179,46 +179,48 @@ export default function RoteiroAutomatico() {
   function verificarInputs() {
     setCondicaoInputs(false);
 
-    setTimeout(() => {
-      Object.entries(viagem).forEach(([key, value]) => {
-        if (!trocaValores && key === "custoViagem") {
-          if (value[0] > value[1] || !value[0] || !value[1]) {
-            setCondicaoInputs(true);
-            setAvisoErro(`${value[0] > value[1] ? 'O valor mínimo é maior que o valor máximo.' : 'Defina um valor mínimo e máximo.'}`);
-            setTimeout(() => setCondicaoInputs(false), 3000);
-            return;
-          }
-        }
-        if (!value || value[0] === '') {
+    Object.entries(viagem).forEach(([key, value]) => {
+      if (!trocaValores && key === "custoViagem") {
+        if (value[0] > value[1] || !value[0] || !value[1]) {
           setCondicaoInputs(true);
-          switch (key) {
-            case "destino":
-              setAvisoErro('');
-              break;
-            case "inicio": 
-              setAvisoErro('');
-              break;
-            case "quantDias":
-              setAvisoErro('Escolha quantos dias sua viagem terá.');
-              break;
-            case "tipo":
-              setAvisoErro('Defina o tipo da sua viagem.');
-              break;
-            case "quantViajantes":
-              setAvisoErro('Escolha quantas pessoas irão viajar com você.');
-              break;
-            case "custoViagem":
-              setAvisoErro('Defina o custo da sua viagem.');
-              break;
-            case "preferencias":
-              setAvisoErro('Defina ao menos uma preferência');
-              break;
-          }
-          setTimeout(() => setCondicaoInputs(false), 3000);
-          return;
+          setAvisoErro(`${value[0] > value[1] ? 'O valor mínimo é maior que o valor máximo.' : 'Defina um valor mínimo e máximo.'}`);
+          setTimeout(() => {
+            setCondicaoInputs(false);
+            setAvisoErro('');
+          }, 3000);
         }
-      });
-    }, 350);
+      }
+      if (!value || value[0] === '') {
+        setCondicaoInputs(true);
+        switch (key) {
+          case "destino":
+            setAvisoErro('');
+            break;
+          case "inicio": 
+            setAvisoErro('');
+            break;
+          case "quantDias":
+            setAvisoErro('Escolha quantos dias sua viagem terá.');
+            break;
+          case "tipo":
+            setAvisoErro('Defina o tipo da sua viagem.');
+            break;
+          case "quantViajantes":
+            setAvisoErro('Escolha quantas pessoas irão viajar com você.');
+            break;
+          case "custoViagem":
+            setAvisoErro('Defina o custo da sua viagem.');
+            break;
+          case "preferencias":
+            setAvisoErro('Defina ao menos uma preferência.');
+            break;
+        }
+        setTimeout(() => {
+          setCondicaoInputs(false);
+          setAvisoErro('');
+        }, 3000);
+      }
+    });
 
     gerarRoteiro();
   }
@@ -267,7 +269,7 @@ return (
                 {avisoSucesso ? avisoSucesso : avisoErro}
             </h2>
 
-                <X size={16} className="absolute cursor-pointer text-gray-600 top-[3.5%] right-[1%] hover:text-red-400" />
+                <X onClick={() => setCondicaoInputs(false)} size={16} className="absolute cursor-pointer text-gray-600 top-[3.5%] right-[1%] hover:text-red-400" />
 
             </motion.div>
         )}

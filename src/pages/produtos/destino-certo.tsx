@@ -176,7 +176,7 @@ export default function DestinoCerto() {
               setAvisoErro('Defina o tipo da sua viagem.');
               break;
             case "nacionalidade":
-              setAvisoErro('Defina se a viagem é nacional ou internacional');
+              setAvisoErro('Defina se a viagem é nacional ou internacional.');
               break;
             case "quantViajantes":
               setAvisoErro('Escolha quantas pessoas irão viajar com você.');
@@ -185,7 +185,7 @@ export default function DestinoCerto() {
               setAvisoErro('Defina o custo da sua viagem.');
               break;
             case "preferencias":
-              setAvisoErro('Defina ao menos uma preferência');
+              setAvisoErro('Defina ao menos uma preferência.');
               break;
           }
           setTimeout(() => setCondicaoInputs(false), 3000);
@@ -194,11 +194,11 @@ export default function DestinoCerto() {
       });
     }, 350);
 
-    gerarRoteiro();
+    gerarDestino();
   }
 
-  function gerarRoteiro() {
-    // Toda a lógia da I.A em gerar o roteiro aqui.
+  function gerarDestino() {
+    // Toda a lógia da I.A em gerar o destino aqui.
   }
 
   useEffect(() => {
@@ -241,7 +241,7 @@ return (
                   {avisoSucesso ? avisoSucesso : avisoErro}
               </h2>
 
-                  <X size={16} className="absolute cursor-pointer text-gray-600 top-[3.5%] right-[1%] hover:text-red-400" />
+                  <X onClick={() => setCondicaoInputs(false)} size={16} className="absolute cursor-pointer text-gray-600 top-[3.5%] right-[1%] hover:text-red-400" />
 
               </motion.div>
           )}

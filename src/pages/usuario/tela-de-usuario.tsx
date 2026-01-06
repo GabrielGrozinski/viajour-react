@@ -44,7 +44,7 @@ const topicosPadrao: Topicos[] = [
 ]
 
 export default function TelaDeUsuario() {
-    const { condicaoInputs, avisoSucesso, avisoErro } = userAuth();
+    const { condicaoInputs, avisoSucesso, avisoErro, setCondicaoInputs } = userAuth();
     const topicos: Topicos[] = [
         {
             nome: 'Geral',
@@ -252,7 +252,7 @@ export default function TelaDeUsuario() {
                         {avisoSucesso ? avisoSucesso : avisoErro}
                     </h2>
 
-                        <X size={16} className="absolute cursor-pointer text-gray-600 top-[3.5%] right-[1%] hover:text-red-400" />
+                        <X onClick={() => setCondicaoInputs(false)} size={16} className="absolute cursor-pointer text-gray-600 top-[3.5%] right-[1%] hover:text-red-400" />
 
                     </motion.div>
                 )}

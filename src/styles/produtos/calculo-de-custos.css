@@ -82,7 +82,7 @@ main.calculo-de-custos-screen button.calculo-de-custos-screen:hover {
   background: #3730a3;
 }
 main.calculo-de-custos-screen #total.calculo-de-custos-screen {
-  @apply text-center font-[bold] text-lg mt-[15px];
+  @apply text-center font-[bold] block flex-row text-lg mt-[15px];
 }
 main.calculo-de-custos-screen .subtotal.calculo-de-custos-screen {
   @apply font-semibold text-green-700 mt-[5px];

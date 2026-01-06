@@ -214,6 +214,10 @@ export default function MonteSuaAventura() {
     setDias(diasAutomatico);
     setCondicaoInputs(true);
     setAvisoSucesso('Seus custos foram adicionados com sucesso!');
+    return setTimeout(() => {
+      setCondicaoInputs(false);
+      setAvisoSucesso('');
+    }, 3000);
   }
 
 return (
@@ -249,7 +253,7 @@ return (
                 {avisoSucesso ? avisoSucesso : avisoErro}
             </h2>
 
-                <X size={16} className="absolute cursor-pointer text-gray-600 top-[3.5%] right-[1%] hover:text-red-400" />
+                <X onClick={() => setCondicaoInputs(false)} size={16} className="absolute cursor-pointer text-gray-600 top-[3.5%] right-[1%] hover:text-red-400" />
 
             </motion.div>
         )}

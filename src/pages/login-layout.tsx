@@ -9,7 +9,7 @@ import { Check, X  } from "lucide-react";
 
 export default function LoginLayout() {
   const navigate = useNavigate();
-  const { avisoErro, condicaoInputs, avisoSucesso, session, loading } = userAuth();
+  const { avisoErro, condicaoInputs, avisoSucesso, session, loading, setCondicaoInputs } = userAuth();
 
   const arrayDeImagens = [
     'https://cdn.pixabay.com/photo/2017/08/17/20/05/disney-2652684_1280.jpg',
@@ -78,7 +78,7 @@ export default function LoginLayout() {
                         {avisoSucesso ? avisoSucesso : avisoErro}
                     </h2>
 
-                        <X size={16} className="absolute cursor-pointer text-gray-600 top-[3.5%] right-[1%] hover:text-red-400" />
+                        <X onClick={() => setCondicaoInputs(false)} size={16} className="absolute cursor-pointer text-gray-600 top-[3.5%] right-[1%] hover:text-red-400" />
 
                     </motion.div>
                 )}
