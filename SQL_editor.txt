@@ -187,3 +187,18 @@ create table favoriteTrips (
   trip_id uuid not null references trips(id) on delete cascade,
   unique (user_id, trip_id)
 );
+
+create table calculator (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  name text not null,
+  days integer not null,
+  days_cost integer[] not null,
+  total_cost integer not null,
+  lodging integer[] not null,
+  food integer[] not null,
+  transportation integer[] not null,
+  leisure integer[] not null,
+  created_at timestamp default now(),
+  unique (user_id, id)
+);

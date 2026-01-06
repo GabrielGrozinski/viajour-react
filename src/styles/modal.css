@@ -21,6 +21,11 @@
   animation: modalIn 0.25s ease-out;
 }
 
+/* Input */
+.modal-error {
+  outline-color: red;
+}
+
 /* Animação */
 @keyframes modalIn {
   from {

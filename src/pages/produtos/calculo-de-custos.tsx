@@ -9,7 +9,10 @@ import AnuncioDesktop from "../../components/anuncio-desktop";
 import AnuncioMobile from "../../components/anuncio-mobile";
 import fundo from '../../assets/imagens/fundo.png';
 import fundoDark from '../../assets/imagens/fundo-dark.png';
+import { supabase } from "../../auth/supabase-client";
 import { RoteiroModal } from "../../components/modal-salvar-roteiro";
+import { userAuth } from "../../context/autenticacao";
+import MensagemModal from "../../components/mensagem-modal";
 
 
 type Dia = {
@@ -19,8 +22,10 @@ type Dia = {
   lazer: string;
 };
 
+
 export default function CalculoDeCustos() {
   const { dark } = useContext(TemaContext);
+  const { user, setCondicaoInputs, setAvisoErro, setAvisoSucesso } = userAuth();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [dias, setDias] = useState<Dia[]>([
     { transporte: '', hospedagem: '', alimentacao: '', lazer: '' }
@@ -246,211 +251,276 @@ export default function CalculoDeCustos() {
     graficosDesktop?.classList.toggle('menu-lateral-expandido');
   }
 
-
-return (
-  <div id="body" style={{backgroundImage: largura >= 1024 ? `url(${fundoAtual})` : 'none'}} className="calculo-de-custos-screen">
-    {largura < 1024 ?
-    (<MenuVertical />)
-    :
-    (
-      <MenuLateral expandirMargem={expandirMargem} />
-    )
+  const handleSave = async (nomeRoteiro: string) => {
+    if (!totalGeral) {
+      setCondicaoInputs(true);
+      setAvisoErro('Insira um valor para o Calculator funcionar.');
+      setTimeout(() => {
+        setCondicaoInputs(false);
+        setAvisoErro('');
+      }, 3000);
+      return;
     }
-    {largura >= 1024 && (
-      <div id="graficos-desktop" className="graficos calculo-de-custos-screen">
-              <div id="grafico-dia-1" className="grafico-dia calculo-de-custos-screen">
-                  <h3 className="calculo-de-custos-screen">Gastos por dia</h3>
-                  <canvas ref={canvas1} className="calculo-de-custos-screen"></canvas>
-              </div>
-              {dias.length > LIMITE_GRAFICO && (
-                  <div id="grafico-dia-2" className="grafico-dia calculo-de-custos-screen">
-                  <h3 className="calculo-de-custos-screen">Gastos por dia (continuação)</h3>
-                  <canvas ref={canvas2} className="calculo-de-custos-screen"></canvas>
-                  </div>
-              )}
-              <div id="grafico-final" className="calculo-de-custos-screen">
-                  <h3 className="calculo-de-custos-screen">Gastos por categoria</h3>
-                  <canvas ref={canvasCategorias} className="calculo-de-custos-screen"></canvas>
-              </div>
 
-              {rotinaAtual === 'rotina-manual' && (
-                <section className="container-gerar-rotina calculo-de-custos-screen">
-                  <div>
-                    <h1 className={`${dark ? 'text-slate-100 text-shadow-[1px_1px_1px_#0000002a]' : 'text-slate-900'} text-xl`}>Gerador Automático de Rotina de Gastos</h1>
-                    <p className={`${dark ? 'text-slate-100 text-shadow-[1px_1px_1px_#0000002a]' : 'text-slate-900'} text-sm`}>Crie automaticamente uma rotina de gastos completa com base no seu orçamento e perfil de viagem.</p>
-                  </div>
-                  <button onClick={() => setRotina('rotina-automatica')}>
-                    Gerar rotina automaticamente
-                  </button>
-                </section>
-              )}
+    const quantDias = dias.length;
+    const custoCadaDia: number[] = [];
+    const custoTransporte: number[] = [];
+    const custoLazer: number[] = [];
+    const custoHospedagem: number[] = [];
+    const custoAlimentacao: number[] = [];
+    dias.forEach((dia: Dia) => {
+      const transporte = Number(dia.transporte);
+      const lazer = Number(dia.lazer);
+      const hospedagem = Number(dia.hospedagem);
+      const alimentacao = Number(dia.alimentacao);
+      const valorTotal = transporte + lazer + hospedagem + alimentacao;
+      custoCadaDia.push(valorTotal);
+      custoTransporte.push(transporte);
+      custoLazer.push(lazer);
+      custoHospedagem.push(hospedagem);
+      custoAlimentacao.push(alimentacao);
+    });
 
-              {rotinaAtual === 'rotina-automatica' && (
-                <section id="section-rotina-automatica" className="container-gerar-rotina calculo-de-custos-screen">
-                  <h1>Gerador Manual de Rotina de Gastos</h1>
-                  <p>Crie você mesmo uma rotina de gastos completa com base no seu orçamento e perfil de viagem.</p>
-                  <button onClick={() => setRotina('rotina-manual')}>
-                    Gerar rotina manualmente
-                  </button>
-                </section>
-              )}
-      </div>
-    )}
+    const allInsert = {
+      user_id: user?.id,
+      name: nomeRoteiro,
+      days: quantDias,
+      days_cost: custoCadaDia,
+      total_cost: totalGeral,
+      lodging: custoHospedagem,
+      food: custoAlimentacao,
+      transportation: custoTransporte,
+      leisure: custoLazer,
+    }
 
-    <main className="calculo-de-custos-screen">
-      
-      <div id="container" className="container calculo-de-custos-screen">
-        {rotinaAtual === 'rotina-manual' ? (
-          <>
+    console.log('Insert', allInsert);
 
-            {largura < 1024 && (
-              <div id="btn-rotinas" className="calculo-de-custos-screen">
-                <button onClick={() => setRotina('rotina-manual')} id="btn-rotina-manual" className="calculo-de-custos-screen">Rotina Manual</button>
-                <button onClick={() => setRotina('rotina-automatica')} id="btn-rotina-automatica" className="calculo-de-custos-screen">Rotina Automática</button>
-              </div>
-            )}
+    const { error } = await supabase
+      .from('calculator')
+      .insert(allInsert);
+    
+    setCondicaoInputs(true);
+    if (error) {
+      console.error('Houve um erro ao salvar o Calculator', error);
+      setAvisoErro('Houve um erro ao salvar o Calculator');
+    } else {
+      setAvisoSucesso('O seu Calculator foi salvo com sucesso!');
+    }
 
-            <h2 className="calculo-de-custos-screen">
-              Calculadora de Custos da Viagem
-            </h2>
+    setTimeout(() => {
+      setCondicaoInputs(false);
+      setAvisoErro('');
+      setAvisoSucesso('');
+    }, 3000);
 
-            <div className="dias-container calculo-de-custos-screen">
-              {dias.map((dia, index) => {
-                const subtotal =
-                  Number(dia.transporte || 0) +
-                  Number(dia.hospedagem || 0) +
-                  Number(dia.alimentacao || 0) +
-                  Number(dia.lazer || 0);
+  }
 
-                return (
-                  <div key={index} className="dia calculo-de-custos-screen">
-                    <div className="dia-header calculo-de-custos-screen">
-                      Dia {index + 1}
-                      {dias.length > 1 && (
-                        <span
-                          className="btn-remover-dia calculo-de-custos-screen"
-                          onClick={() => removerDia(index)}
-                        >
-                          <i className="fa-solid fa-xmark calculo-de-custos-screen"></i>
-                        </span>
-                      )}
-                    </div>
 
-                    <input
-                      type="text"
-                      inputMode="decimal"
-                      placeholder="Transporte (R$)"
-                      value={dia.transporte}
-                      onChange={e =>
-                        atualizarValor(index, "transporte", e.target.value)
-                      }
-                      className="calculo-de-custos-screen"
-                    />
+  return (
+    <div id="body" style={{backgroundImage: largura >= 1024 ? `url(${fundoAtual})` : 'none'}} className="calculo-de-custos-screen">
 
-                    <input
-                      type="text"
-                      inputMode="decimal"
-                      placeholder="Hospedagem (R$)"
-                      value={dia.hospedagem}
-                      onChange={e =>
-                        atualizarValor(index, "hospedagem", e.target.value)
-                      }
-                      className="calculo-de-custos-screen"
-                    />
+      <MensagemModal />
 
-                    <input
-                      type="text"
-                      inputMode="decimal"
-                      placeholder="Alimentação (R$)"
-                      value={dia.alimentacao}
-                      onChange={e =>
-                        atualizarValor(index, "alimentacao", e.target.value)
-                      }
-                      className="calculo-de-custos-screen"
-                    />
-
-                    <input
-                      type="text"
-                      inputMode="decimal"
-                      placeholder="Lazer (R$)"
-                      value={dia.lazer}
-                      onChange={e =>
-                        atualizarValor(index, "lazer", e.target.value)
-                      }
-                      className="calculo-de-custos-screen"
-                    />
-
-                    <div className="subtotal calculo-de-custos-screen">
-                      Total do dia: R$ {subtotal.toFixed(2)}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            <button
-              id="btn-adicionar-dias"
-              className={`${dias.length >= LIMITE_MAX_DIAS ? "desativado" : ""} calculo-de-custos-screen`}
-              onClick={adicionarDia}
-              disabled={dias.length >= LIMITE_MAX_DIAS}
-            >
-              + Adicionar dia
-            </button>
-
-            <div id="total" className="calculo-de-custos-screen">
-              Custo total da viagem:
-              <br className="calculo-de-custos-screen" />
-              <span className="total calculo-de-custos-screen">
-                  R$ {totalGeral.toFixed(2)} 
-              </span>
-              <br />
-              <br />
-              <span style={{padding: 6}} className="bg-sky-700 shadow-[1px_1px_1px_#0000002a] rounded-full">
-                <i onClick={() => setShowModal(true)} className="fa-solid fa-download text-2xl text-white text-shadow-[1px_1px_1px_#0000002a] cursor-pointer"></i>
-              </span>
-            </div>
-            <br />
-            {largura < 1024 && (
-              <div className="graficos calculo-de-custos-screen">
-                <div className="grafico-dia calculo-de-custos-screen">
-                  <h3 className="calculo-de-custos-screen">Gastos por dia</h3>
-                  <canvas ref={canvas1} className="calculo-de-custos-screen"></canvas>
+      {largura < 1024 ?
+        (<MenuVertical />)
+        :
+        (
+          <MenuLateral expandirMargem={expandirMargem} />
+        )
+      }
+      {largura >= 1024 && (
+        <div id="graficos-desktop" className="graficos calculo-de-custos-screen">
+                <div id="grafico-dia-1" className="grafico-dia calculo-de-custos-screen">
+                    <h3 className="calculo-de-custos-screen">Gastos por dia</h3>
+                    <canvas ref={canvas1} className="calculo-de-custos-screen"></canvas>
                 </div>
-
                 {dias.length > LIMITE_GRAFICO && (
-                  <div className="grafico-dia calculo-de-custos-screen">
+                    <div id="grafico-dia-2" className="grafico-dia calculo-de-custos-screen">
                     <h3 className="calculo-de-custos-screen">Gastos por dia (continuação)</h3>
                     <canvas ref={canvas2} className="calculo-de-custos-screen"></canvas>
-                  </div>
+                    </div>
+                )}
+                <div id="grafico-final" className="calculo-de-custos-screen">
+                    <h3 className="calculo-de-custos-screen">Gastos por categoria</h3>
+                    <canvas ref={canvasCategorias} className="calculo-de-custos-screen"></canvas>
+                </div>
+
+                {rotinaAtual === 'rotina-manual' && (
+                  <section className="container-gerar-rotina calculo-de-custos-screen">
+                    <div>
+                      <h1 className={`${dark ? 'text-slate-100 text-shadow-[1px_1px_1px_#0000002a]' : 'text-slate-900'} text-xl`}>Gerador Automático de Rotina de Gastos</h1>
+                      <p className={`${dark ? 'text-slate-100 text-shadow-[1px_1px_1px_#0000002a]' : 'text-slate-900'} text-sm`}>Crie automaticamente uma rotina de gastos completa com base no seu orçamento e perfil de viagem.</p>
+                    </div>
+                    <button onClick={() => setRotina('rotina-automatica')}>
+                      Gerar rotina automaticamente
+                    </button>
+                  </section>
                 )}
 
-                <div id="grafico-final" className="calculo-de-custos-screen">
-                  <h3 className="calculo-de-custos-screen">Gastos por categoria</h3>
-                  <canvas ref={canvasCategorias} className="calculo-de-custos-screen"></canvas>
+                {rotinaAtual === 'rotina-automatica' && (
+                  <section id="section-rotina-automatica" className="container-gerar-rotina calculo-de-custos-screen">
+                    <h1>Gerador Manual de Rotina de Gastos</h1>
+                    <p>Crie você mesmo uma rotina de gastos completa com base no seu orçamento e perfil de viagem.</p>
+                    <button onClick={() => setRotina('rotina-manual')}>
+                      Gerar rotina manualmente
+                    </button>
+                  </section>
+                )}
+        </div>
+      )}
+
+      <main className="calculo-de-custos-screen">
+        
+        <div id="container" className="container calculo-de-custos-screen">
+          {rotinaAtual === 'rotina-manual' ? (
+            <>
+
+              {largura < 1024 && (
+                <div id="btn-rotinas" className="calculo-de-custos-screen">
+                  <button onClick={() => setRotina('rotina-manual')} id="btn-rotina-manual" className="calculo-de-custos-screen">Rotina Manual</button>
+                  <button onClick={() => setRotina('rotina-automatica')} id="btn-rotina-automatica" className="calculo-de-custos-screen">Rotina Automática</button>
                 </div>
+              )}
+
+              <h2 className="calculo-de-custos-screen">
+                Calculadora de Custos da Viagem
+              </h2>
+
+              <div className="dias-container calculo-de-custos-screen">
+                {dias.map((dia, index) => {
+                  const subtotal =
+                    Number(dia.transporte || 0) +
+                    Number(dia.hospedagem || 0) +
+                    Number(dia.alimentacao || 0) +
+                    Number(dia.lazer || 0);
+
+                  return (
+                    <div key={index} className="dia calculo-de-custos-screen">
+                      <div className="dia-header calculo-de-custos-screen">
+                        Dia {index + 1}
+                        {dias.length > 1 && (
+                          <span
+                            className="btn-remover-dia calculo-de-custos-screen"
+                            onClick={() => removerDia(index)}
+                          >
+                            <i className="fa-solid fa-xmark calculo-de-custos-screen"></i>
+                          </span>
+                        )}
+                      </div>
+
+                      <input
+                        type="text"
+                        inputMode="decimal"
+                        placeholder="Transporte (R$)"
+                        value={dia.transporte}
+                        onChange={e =>
+                          atualizarValor(index, "transporte", e.target.value)
+                        }
+                        className="calculo-de-custos-screen"
+                      />
+
+                      <input
+                        type="text"
+                        inputMode="decimal"
+                        placeholder="Hospedagem (R$)"
+                        value={dia.hospedagem}
+                        onChange={e =>
+                          atualizarValor(index, "hospedagem", e.target.value)
+                        }
+                        className="calculo-de-custos-screen"
+                      />
+
+                      <input
+                        type="text"
+                        inputMode="decimal"
+                        placeholder="Alimentação (R$)"
+                        value={dia.alimentacao}
+                        onChange={e =>
+                          atualizarValor(index, "alimentacao", e.target.value)
+                        }
+                        className="calculo-de-custos-screen"
+                      />
+
+                      <input
+                        type="text"
+                        inputMode="decimal"
+                        placeholder="Lazer (R$)"
+                        value={dia.lazer}
+                        onChange={e =>
+                          atualizarValor(index, "lazer", e.target.value)
+                        }
+                        className="calculo-de-custos-screen"
+                      />
+
+                      <div className="subtotal calculo-de-custos-screen">
+                        Total do dia: R$ {subtotal.toFixed(2)}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            )}
-          </>
-        ) : (
-          <RotinaAutomatica setRotina={setRotina} />
-        )}
-      </div>
-    </main>
 
-    <RoteiroModal
-      open={showModal}
-      onClose={() => setShowModal(false)}
-      />
- 
-    {largura >= 1024 ? (
-      <AnuncioDesktop isTelaDeViagens={false} />
-    ) : (
-      <AnuncioMobile/>
-    )}  
+              <button
+                id="btn-adicionar-dias"
+                className={`${dias.length >= LIMITE_MAX_DIAS ? "desativado" : ""} calculo-de-custos-screen`}
+                onClick={adicionarDia}
+                disabled={dias.length >= LIMITE_MAX_DIAS}
+              >
+                + Adicionar dia
+              </button>
 
-  </div>
-);
+              <div id="total" className="calculo-de-custos-screen">
+                Custo total da viagem:
+                <br className="calculo-de-custos-screen" />
+                <span className="total calculo-de-custos-screen">
+                    R$ {totalGeral.toFixed(2)} 
+                </span>
+                <br />
+                <br />
+                <span style={{padding: 6}} className="bg-sky-700 shadow-[1px_1px_1px_#0000002a] rounded-full">
+                  <i onClick={() => setShowModal(true)} className="fa-solid fa-download text-2xl text-white text-shadow-[1px_1px_1px_#0000002a] cursor-pointer"></i>
+                </span>
+              </div>
+              <br />
+              {largura < 1024 && (
+                <div className="graficos calculo-de-custos-screen">
+                  <div className="grafico-dia calculo-de-custos-screen">
+                    <h3 className="calculo-de-custos-screen">Gastos por dia</h3>
+                    <canvas ref={canvas1} className="calculo-de-custos-screen"></canvas>
+                  </div>
 
+                  {dias.length > LIMITE_GRAFICO && (
+                    <div className="grafico-dia calculo-de-custos-screen">
+                      <h3 className="calculo-de-custos-screen">Gastos por dia (continuação)</h3>
+                      <canvas ref={canvas2} className="calculo-de-custos-screen"></canvas>
+                    </div>
+                  )}
 
+                  <div id="grafico-final" className="calculo-de-custos-screen">
+                    <h3 className="calculo-de-custos-screen">Gastos por categoria</h3>
+                    <canvas ref={canvasCategorias} className="calculo-de-custos-screen"></canvas>
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            <RotinaAutomatica setRotina={setRotina} />
+          )}
+        </div>
+      </main>
+
+      <RoteiroModal
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        onOpen={(nomeRoteiro) => handleSave(nomeRoteiro)}
+        />
+  
+      {largura >= 1024 ? (
+        <AnuncioDesktop isTelaDeViagens={false} />
+      ) : (
+        <AnuncioMobile/>
+      )}  
+
+    </div>
+  );
 }
-
