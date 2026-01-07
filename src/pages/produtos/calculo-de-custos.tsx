@@ -252,6 +252,19 @@ export default function CalculoDeCustos() {
   }
 
   const handleSave = async (nomeRoteiro: string) => {
+    setShowModal(false);
+    interface Calculator {
+      user_id: string;
+      name: string;
+      days: number;
+      days_cost: number[];
+      total_cost: number;
+      lodging: number[];
+      food: number[];
+      transportation: number[];
+      leisure: number[];
+    }
+
     if (!totalGeral) {
       setCondicaoInputs(true);
       setAvisoErro('Insira um valor para o Calculator funcionar.');
@@ -281,8 +294,8 @@ export default function CalculoDeCustos() {
       custoAlimentacao.push(alimentacao);
     });
 
-    const allInsert = {
-      user_id: user?.id,
+    const allInsert: Calculator = {
+      user_id: user?.id ?? '',
       name: nomeRoteiro,
       days: quantDias,
       days_cost: custoCadaDia,
@@ -292,8 +305,6 @@ export default function CalculoDeCustos() {
       transportation: custoTransporte,
       leisure: custoLazer,
     }
-
-    console.log('Insert', allInsert);
 
     const { error } = await supabase
       .from('calculator')

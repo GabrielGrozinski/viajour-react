@@ -1,10 +1,21 @@
 import { userAuth } from "../context/autenticacao"
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, X } from "lucide-react";
 
 
 export default function MensagemModal() {
-    const { avisoErro, avisoSucesso, condicaoInputs, setCondicaoInputs } = userAuth();
+    const { avisoErro, avisoSucesso, condicaoInputs, setCondicaoInputs, setAvisoErro, setAvisoSucesso } = userAuth();
+
+    useEffect(() => {
+        if (condicaoInputs) {
+            setTimeout(() => {
+                setCondicaoInputs(false);
+                setAvisoErro('');
+                setAvisoSucesso('');
+            }, 3000);
+        }
+    }, [condicaoInputs]);
 
     return (
             <AnimatePresence mode="wait">

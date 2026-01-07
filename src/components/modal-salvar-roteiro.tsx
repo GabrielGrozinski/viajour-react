@@ -40,6 +40,7 @@ export function RoteiroModal({ open, onClose, onOpen }: Props) {
         <p className="font-light">Escolha um nome para seu roteiro:</p>
 
         <input
+          maxLength={34}
           type="text"
           id="script-id"
           onClick={() => {

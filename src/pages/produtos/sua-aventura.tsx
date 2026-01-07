@@ -13,6 +13,7 @@ import MenuVertical from "../../components/menu-vertical";
 import AnuncioDesktop from "../../components/anuncio-desktop";
 import { userAuth } from "../../context/autenticacao";
 import MensagemModal from "../../components/mensagem-modal";
+import { ModalCalculator } from "../../components/modal-calculator-salvo";
 
 
 interface DiaRoteiro {
@@ -55,6 +56,7 @@ export default function MonteSuaAventura() {
       custo: '120'
     }
   ]
+  const [modalShow, setModalShow] = useState<boolean>(false);
   const [destino, setDestino] = useState<string>("");
   const [dataInicio, setDataInicio] = useState<string>("");
   const [custoDia, setCustoDia] = useState<custoDosDias[]>([{id: 1, custo: ''}]);
@@ -277,7 +279,6 @@ return (
         <input
           placeholder="Selecione entre 1-14 dias"
           type="number"
-          min={1}
           max={14}
           id="quant-dias"
           value={quantidadeDias > 0 ? quantidadeDias : ''}
@@ -293,6 +294,11 @@ return (
       <div className="dias-container sua-aventura-screen">
         {dias.map((dia) => (
           <div key={dia.id} className="card sua-aventura-screen">
+            <abbr title="Usar valores salvos do Calculator.">
+              <i 
+              onClick={() => setModalShow(true)}
+              className="fa-solid fa-file-import absolute top-2 right-2 text-blue-500 text-shadow-[1px_1px_3px_#2222222a] text-xl cursor-pointer"></i>
+              </abbr>
             <h2 className="sua-aventura-screen">Dia {dia.id}</h2>
 
             <label className="sua-aventura-screen">Tipo do dia:</label>
@@ -364,19 +370,20 @@ return (
             />
 
             {dias.length > 0 && dias.length === dia.id && (
-              <>
-                <button onClick={() => adicionarCustosAutomaticamente()} className="btn-custo-automatico sua-aventura-screen">
-                  Adicionar automaticamente os gastos da ferramenta Cálculo de Custos
-                </button>
                 <button className="btn-salvar sua-aventura-screen">
                   Salvar aventura
                 </button>
-              </>
             )}
           </div>
         ))}
       </div>
     </main>
+
+    <ModalCalculator 
+      open={modalShow}
+      onClose={() => setModalShow(false)}
+      onOpen={(calculatorEscolhido) => false}
+    />
 
     {largura >= 1024 && (
       <AnuncioDesktop isTelaDeViagens={false}/>
