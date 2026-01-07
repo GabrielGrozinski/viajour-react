@@ -29,6 +29,13 @@ interface custoDosDias {
   custo: string,
 }
 
+interface values_calculator {
+  name: string;
+  days: number;
+  days_cost: number[];
+  total_cost: number;
+}
+
 const opcoesTipo = [
     { value: "turismo", label: "Turismo" },
     { value: "compras", label: "Compras" },
@@ -38,24 +45,6 @@ const opcoesTipo = [
 export default function MonteSuaAventura() {
   const { dark } = useContext(TemaContext);
   const { setAvisoErro, setAvisoSucesso, setCondicaoInputs } = userAuth();
-  let custosSalvos = [
-    {
-      id: 1,
-      custo: '40'
-    },
-    {
-      id: 2,
-      custo: '22'
-    },
-    {
-      id: 3,
-      custo: '85'
-    },
-    {
-      id: 4,
-      custo: '120'
-    }
-  ]
   const [modalShow, setModalShow] = useState<boolean>(false);
   const [destino, setDestino] = useState<string>("");
   const [dataInicio, setDataInicio] = useState<string>("");
@@ -190,35 +179,33 @@ export default function MonteSuaAventura() {
     console.log(dias);
   }, [dias]);
 
-  function adicionarCustosAutomaticamente() {
-    if (dias.length !== custosSalvos.length) {
-      setCondicaoInputs(true);
+  function adicionarCustosAutomaticamente(calculatorEscolhido: values_calculator) {
+    setModalShow(false);
+    if (dias.length !== calculatorEscolhido.days) {
       const erroAtual = 
-        dias.length > custosSalvos.length ? 
-        `Seu número de dias atual é maior que o número de dias do Cálculo de Custos. Por favor, remova ${dias.length - custosSalvos.length} dia${dias.length - custosSalvos.length === 1 ? '' : 's'}.` 
+        dias.length > calculatorEscolhido.days ? 
+        `Seu número de dias atual é maior que o número de dias do Calculator. Remova ${dias.length - calculatorEscolhido.days} dia${dias.length - calculatorEscolhido.days === 1 ? '' : 's'}.` 
         : 
-        `Seu número de dias atual é menor que o número de dias do Cálculo de Custos. Por favor, adicione ${custosSalvos.length - dias.length} dia${custosSalvos.length - dias.length > 1 ? 's' : ''}.`;
+        `Seu número de dias atual é menor que o número de dias do Calculator. Adicione ${calculatorEscolhido.days - dias.length} dia${calculatorEscolhido.days - dias.length > 1 ? 's' : ''}.`;
+      setCondicaoInputs(true);
       setAvisoErro(erroAtual);
-      return setTimeout(() => {
-        setCondicaoInputs(false);
-        setAvisoErro('');
-      }, 3000);
+      return;
     }
 
     let custoDiaAutomatico = custoDia.slice();
     let diasAutomatico = dias.slice();
-    for (let i = 0; i < custoDia.length; i++) {
-      custoDiaAutomatico[i].custo = formatarCustoDia(custosSalvos[i].custo);
-      diasAutomatico[i].custoDia = parseInt(custosSalvos[i].custo);
+    for (let i = 0; i < custoDiaAutomatico.length; i++) {
+      custoDiaAutomatico[i].custo = 
+      formatarCustoDia(calculatorEscolhido.days_cost[i].toString());
+
+      diasAutomatico[i].custoDia = 
+      parseInt(calculatorEscolhido.days_cost[i].toString());
     }
+
     setCustoDia(custoDiaAutomatico);
     setDias(diasAutomatico);
     setCondicaoInputs(true);
     setAvisoSucesso('Seus custos foram adicionados com sucesso!');
-    return setTimeout(() => {
-      setCondicaoInputs(false);
-      setAvisoSucesso('');
-    }, 3000);
   }
 
 return (
@@ -382,7 +369,7 @@ return (
     <ModalCalculator 
       open={modalShow}
       onClose={() => setModalShow(false)}
-      onOpen={(calculatorEscolhido) => false}
+      onOpen={(calculatorEscolhido) => adicionarCustosAutomaticamente(calculatorEscolhido)}
     />
 
     {largura >= 1024 && (

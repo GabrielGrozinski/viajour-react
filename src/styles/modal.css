@@ -18,7 +18,8 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   position: relative;
   animation: modalIn 0.25s ease-out;
-  max-height: 400px;
+  max-height: 700px;
+  padding: 24px;
   overflow: hidden;
 }
 

@@ -26,7 +26,7 @@ export default function MensagemModal() {
                     animate={{ opacity: 1, y: 10 }}
                     exit={{ opacity: 0, y: 0 }}
                     transition={{ duration: 0.3}}
-                    style={{padding: '4px 10px'}}
+                    style={{padding: '8px 10px'}}
                     className='
                         fixed top-[2%] right-[3%] min-h-15 h-auto min-w-30 max-w-1/4 z-1 text-center flex justify-center items-center bg-gray-100 rounded-md shadow-[0px_0px_4px_#0000004a] text-slate-100 text-shadow-[1px_1px_1px_#0000001a]
                     '
@@ -40,7 +40,7 @@ export default function MensagemModal() {
                             <X size={20} />
                         </span>
                     )}
-                    <h2 style={{margin: '2px 50px 2px 8px'}} className='text-slate-800 text-shadow-[1px_1px_1px_#0000001a]'>
+                    <h2 style={{margin: '2px 50px 2px 12px'}} className='text-slate-800 text-shadow-[1px_1px_1px_#0000001a]'>
                         {avisoSucesso ? avisoSucesso : avisoErro}
                     </h2>
 

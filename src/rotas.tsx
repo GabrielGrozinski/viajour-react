@@ -23,12 +23,14 @@ import RoteiroAutomatico from "./pages/produtos/roteiro-automatico";
 import DestinoCerto from "./pages/produtos/destino-certo";
 import ChatAuxiliar from "./pages/produtos/chat-auxiliar";
 
+import TripPdfMock from "./components/gen-pdf";
 
 export default function Rotas() {
   return (
     <Providers>
       <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
+          <Route path="/teste" element={<TripPdfMock/>} />
           <Route path="/" element={<PaginaInicial />} />
 
           <Route path="/login" element={<LoginLayout />}>

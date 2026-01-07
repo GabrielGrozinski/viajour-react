@@ -25,12 +25,7 @@ export function ModalCalculator({ open, onClose, onOpen }: Props) {
   const { user, setCondicaoInputs, setAvisoErro } = userAuth();
   const [nomeCalculator, setNomeCalculator] = useState<string>('');
   const [calculators, setCalculators] = useState<values_calculator[] | null>(null);
-  const [calculatorEscolhido, setCalculatorEscolhido] = useState<values_calculator>({
-    name: '',
-    days: 0,
-    days_cost: [0],
-    total_cost: 0
-  });
+  const [calculatorEscolhido, setCalculatorEscolhido] = useState<values_calculator | null>(null);
 
   useEffect(() => {
     async function fetchCalculator() {
@@ -70,6 +65,7 @@ export function ModalCalculator({ open, onClose, onOpen }: Props) {
   return ReactDOM.createPortal(
     <div className="modal-overlay" onClick={onClose}>
       <main
+        style={{padding: 0}}
         className="modal-container"
         onClick={(e) => e.stopPropagation()}
       >
@@ -103,19 +99,19 @@ export function ModalCalculator({ open, onClose, onOpen }: Props) {
               <section
               onClick={() => setCalculatorEscolhido(calculator)} 
               key={index} 
-              style={{padding: 6, backgroundColor: calculatorEscolhido === calculator ? 'rgba(255, 223, 0, 0.12)' : '', border: calculatorEscolhido === calculator ? '2px solid #FFD234' : ''}} 
-              className={`flex max-h-80 min-w-3/4 min-h-20 bg-neutral-50 shadow-[1px_1px_1px_#0000002a] rounded-lg items-center justify-between transition-colors duration-200 ${calculator === calculatorEscolhido ? '' : 'hover:bg-gray-200 cursor-pointer'}`}>
+              style={{padding: 6, backgroundColor: calculatorEscolhido === calculator ? '#fde68a' : '', border: calculatorEscolhido === calculator ? '2px solid #FFD234' : ''}} 
+              className={`flex max-h-80 min-w-3/4 min-h-18 bg-neutral-50 shadow-[1px_1px_1px_#0000002a] rounded-lg items-center justify-between transition-colors duration-200 ${calculator === calculatorEscolhido ? '' : 'hover:bg-gray-200 cursor-pointer'}`}>
                 
-                <div className="flex flex-col items-start">
-                  <h1 style={{ padding: '4px 8px'}} className="text-sm">
+                <div style={{marginBottom: 4}} className="flex flex-col items-start">
+                  <h1 style={{ padding: '4px 8px'}} className="text-[16px] text-slate-900">
                     {calculator.name}
                   </h1>
-                  <h2 style={{padding: '4px 6px', marginLeft: 2}} className="bg-neutral-200 shadow-[1px_1px_1px_#0000002a] rounded-md text-center text-slate-900 text-sm">
+                  <h2 style={{padding: '4px 10px', marginLeft: 6}} className="bg-neutral-200 shadow-[1px_1px_1px_#0000002a] rounded-md text-center text-slate-900 text-sm">
                     {calculator.days} dias
                   </h2>
                 </div>
 
-                  <h2 className="text-green-900 text-sm">
+                  <h2 style={{marginRight: 6}} className="text-green-900 text-sm">
                     R${Math.floor(calculator.total_cost/calculator.days)}/dia
                   </h2>
               </section>
@@ -124,13 +120,14 @@ export function ModalCalculator({ open, onClose, onOpen }: Props) {
           }
         </div>
 
-        <div className="modal-actions">
+        <hr className="border-neutral-200" />
+        <div style={{padding: '0px 24px 20px 8px'}} className="modal-actions">
           <button className="cursor-pointer" onClick={onClose}>
             Cancelar
           </button>
           <button 
-            className="cursor-pointer" 
-            onClick={() => onOpen(calculatorEscolhido) 
+            className={`${calculatorEscolhido ? 'cursor-pointer' : 'opacity-40 cursor-not-allowed'}`} 
+            onClick={() => onOpen(calculatorEscolhido ?? {name: '', days: 0, days_cost: [0], total_cost: 0}) 
             }>
             Salvar
           </button>
