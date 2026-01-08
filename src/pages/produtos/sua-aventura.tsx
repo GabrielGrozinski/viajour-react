@@ -43,7 +43,6 @@ type TripData = {
   dias: TripDay[];
 }
 
-
 interface custoDosDias {
   id: number,
   custo: string,
@@ -65,7 +64,21 @@ const opcoesTipo = [
 export default function MonteSuaAventura() {
   const { dark } = useContext(TemaContext);
   const { setAvisoErro, setAvisoSucesso, setCondicaoInputs } = userAuth();
-  const [viagemPDF, setViagemPDF] = useState<TripData | null>(null);
+  const [viagemPDF, setViagemPDF] = useState<TripData>({
+    nomeViagem: '',
+    dataInicial: '',
+    dataFinal: '',
+    duracaoDias: 0,
+    dias: [
+      {
+        dia: '',
+        data: '',
+        tipo: '',
+        custo: 0,
+        notas: ['']
+      }
+    ]
+  });
   const [downloadPdf, setDownloadPdf] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [modalShow, setModalShow] = useState<boolean>(false);
@@ -256,7 +269,7 @@ export default function MonteSuaAventura() {
         dia: dia.dia,
         data: data_dos_dias[index],
         tipo: dia.tipo,
-        custo: dia.custoDia,
+        custo: dia.custoDia || 0,
         notas: notasArrumado2
       });
     })
@@ -272,6 +285,7 @@ export default function MonteSuaAventura() {
     setTimeout(() => {
       setLoading(false);
       setDownloadPdf(true);
+      console.log('viagem', viagemPDF)
     }, 3000);
 
   }
@@ -441,13 +455,11 @@ export default function MonteSuaAventura() {
         </div>
       </main>
       
-      {viagemPDF && (
         <GenPdf 
             open={downloadPdf}
             trip={viagemPDF}
             onFinish={() => setDownloadPdf(false)}
         />
-      )}
 
       <ModalCalculator
         open={modalShow}

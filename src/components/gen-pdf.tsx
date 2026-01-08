@@ -39,11 +39,16 @@ export default function GenPdf({ open, trip, onFinish }: GenPdfProps) {
 
     const generatePdf = async () => {
       const container = document.createElement("div");
+      container.style.overflow = "hidden";
       container.style.position = "absolute";
       container.style.left = "-99999px";
       container.style.top = "0";
-      container.style.width = "1120px";
+      container.style.width = "1320px";
+      container.style.minWidth = "1320px";
+      container.style.maxWidth = "1320px";
+      container.style.minHeight = "1580px";
       container.style.background = "#fff";
+      container.style.boxSizing = "border-box";
       container.style.padding = "32px";
 
       document.body.appendChild(container);
@@ -52,11 +57,17 @@ export default function GenPdf({ open, trip, onFinish }: GenPdfProps) {
       root.render(<PDFContent trip={trip} />);
 
       // espera render + fontes
+      container.getBoundingClientRect();
+      await new Promise((r) => requestAnimationFrame(r));
       await new Promise((r) => setTimeout(r, 120));
+
 
       try {
         const canvas = await html2canvas(container, {
           scale: 3,
+          width: 1320,
+          windowWidth: 1320,
+          windowHeight: 1600,
           useCORS: true,
         });
 
@@ -72,7 +83,21 @@ export default function GenPdf({ open, trip, onFinish }: GenPdfProps) {
         });
 
         pdf.addImage(imgData, "PNG", 0, 0, PDF_WIDTH, pdfHeight);
-        pdf.save("roteiro-viagem.pdf");
+        const pdfBlob = pdf.output("blob");
+        const pdfUrl = URL.createObjectURL(pdfBlob);
+        if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
+          // 📱 MOBILE → abre o PDF
+          window.open(pdfUrl, "_blank");
+        } else {
+          // 💻 DESKTOP → baixa direto
+          const a = document.createElement("a");
+          a.href = pdfUrl;
+          a.download = "roteiro-viagem.pdf";
+          a.click();
+        }
+
+        URL.revokeObjectURL(pdfUrl);
+        
       } catch (err) {
         console.error("Erro ao gerar PDF:", err);
       } finally {
@@ -97,7 +122,13 @@ function PDFContent({ trip }: { trip: TripData }) {
   const total = trip.dias.reduce((acc, d) => acc + d.custo, 0);
 
   return (
-    <>
+    <div
+      style={{
+        width: "100%",
+        minWidth: "1120px",
+        boxSizing: "border-box",
+      }}
+    >
       <h1
         className="text-center font-bold tracking-wide text-3xl"
         style={{ marginBottom: "16px" }}
@@ -164,7 +195,7 @@ function PDFContent({ trip }: { trip: TripData }) {
       </h2>
 
       <div
-        className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm"
+        className="grid grid-cols-2 gap-6 text-sm"
         style={{ marginBottom: "40px" }}
       >
         {trip.dias.map((d, i) => (
@@ -183,7 +214,7 @@ function PDFContent({ trip }: { trip: TripData }) {
       >
         FIM DO DOCUMENTO
       </p>
-    </>
+    </div>
   );
 }
 
@@ -221,4 +252,3 @@ function DayCard({
     </div>
   );
 }
-
