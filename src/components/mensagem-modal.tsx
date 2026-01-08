@@ -28,7 +28,7 @@ export default function MensagemModal() {
                     transition={{ duration: 0.3}}
                     style={{padding: '8px 10px'}}
                     className='
-                        fixed top-[2%] right-[3%] min-h-15 h-auto min-w-30 max-w-1/4 z-1 text-center flex justify-center items-center bg-gray-100 rounded-md shadow-[0px_0px_4px_#0000004a] text-slate-100 text-shadow-[1px_1px_1px_#0000001a]
+                        fixed top-[2%] right-[3%] min-h-15 h-auto min-w-30 max-w-[90%] xl:max-w-1/4 z-1 text-center flex justify-center items-center bg-gray-100 rounded-md shadow-[0px_0px_4px_#0000004a] text-slate-100 text-shadow-[1px_1px_1px_#0000001a]
                     '
                     >
                     {avisoSucesso ? (

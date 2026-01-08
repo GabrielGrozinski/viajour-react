@@ -14,15 +14,35 @@ import AnuncioDesktop from "../../components/anuncio-desktop";
 import { userAuth } from "../../context/autenticacao";
 import MensagemModal from "../../components/mensagem-modal";
 import { ModalCalculator } from "../../components/modal-calculator-salvo";
+import GenPdf from "../../components/gen-pdf";
+import{ ClipLoader } from "react-spinners";
 
 
 interface DiaRoteiro {
   id: number;
+  dia: string;
   tipo: string;
   adicionarNota: boolean;
   nota: string;
   custoDia: number;
 }
+
+type TripDay = {
+  dia: string;
+  data: string;
+  tipo: string;
+  custo: number;
+  notas: string[];
+}
+
+type TripData = {
+  nomeViagem: string;
+  dataInicial: string;
+  dataFinal: string;
+  duracaoDias: number;
+  dias: TripDay[];
+}
+
 
 interface custoDosDias {
   id: number,
@@ -37,42 +57,46 @@ interface values_calculator {
 }
 
 const opcoesTipo = [
-    { value: "turismo", label: "Turismo" },
-    { value: "compras", label: "Compras" },
-    { value: "trabalho", label: "Trabalho" },
+  { value: "turismo", label: "Turismo" },
+  { value: "compras", label: "Compras" },
+  { value: "trabalho", label: "Trabalho" },
 ];
 
 export default function MonteSuaAventura() {
   const { dark } = useContext(TemaContext);
   const { setAvisoErro, setAvisoSucesso, setCondicaoInputs } = userAuth();
+  const [viagemPDF, setViagemPDF] = useState<TripData | null>(null);
+  const [downloadPdf, setDownloadPdf] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [modalShow, setModalShow] = useState<boolean>(false);
   const [destino, setDestino] = useState<string>("");
   const [dataInicio, setDataInicio] = useState<string>("");
-  const [custoDia, setCustoDia] = useState<custoDosDias[]>([{id: 1, custo: ''}]);
+  const [custoDia, setCustoDia] = useState<custoDosDias[]>([{ id: 1, custo: '' }]);
   const [quantidadeDias, setQuantidadeDias] = useState<number>(0);
   const [largura, setLargura] = useState(window.innerWidth);
   const [dias, setDias] = useState<DiaRoteiro[]>([]);
   const inputRefData = useRef<HTMLInputElement | null>(null);
   const pickerRef = useRef<any>(null);
 
+
   const customStyles = {
     control: (base: any) => ({
-        ...base,
-        backgroundColor: dark ? "#e2e8f0" : "white",
-        borderColor: dark ? "#555" : "#ccc",
+      ...base,
+      backgroundColor: dark ? "#e2e8f0" : "white",
+      borderColor: dark ? "#555" : "#ccc",
     }),
     menu: (base: any) => ({
-        ...base,
-        backgroundColor: dark ? "#1e293b" : "white",
+      ...base,
+      backgroundColor: dark ? "#1e293b" : "white",
     }),
     option: (base: any, state: any) => ({
-        ...base,
-        backgroundColor: state.isSelected
+      ...base,
+      backgroundColor: state.isSelected
         ? (dark ? "#6c63ff" : "#6c63ff")
         : state.isFocused
-        ? (dark ? "#94a3b8" : "#eee")
-        : (dark ? "#e2e8f0" : "white"),
-        
+          ? (dark ? "#94a3b8" : "#eee")
+          : (dark ? "#e2e8f0" : "white"),
+
     }),
   };
 
@@ -81,6 +105,7 @@ export default function MonteSuaAventura() {
       { length: quantidadeDias },
       (_, i) => ({
         id: i + 1,
+        dia: `Dia ${i + 1}`,
         tipo: "turismo",
         adicionarNota: false,
         nota: "",
@@ -112,12 +137,12 @@ export default function MonteSuaAventura() {
     const inputDia: HTMLInputElement | null = window.document.getElementById('quant-dias') as HTMLInputElement;
 
     function handleInputDia() {
-        if (!inputDia) return;
-        const max = inputDia.max;
-        const min = inputDia.min;
-        const value = inputDia.value;
-        if (Number(max) < Number(value)) inputDia.value = String(max);
-        if (Number(min) > Number(value)) inputDia.value = String(min);
+      if (!inputDia) return;
+      const max = inputDia.max;
+      const min = inputDia.min;
+      const value = inputDia.value;
+      if (Number(max) < Number(value)) inputDia.value = String(max);
+      if (Number(min) > Number(value)) inputDia.value = String(min);
     }
 
     inputDia?.addEventListener('input', handleInputDia);
@@ -134,21 +159,21 @@ export default function MonteSuaAventura() {
 
   useEffect(() => {
     if (inputRefData.current) {
-        flatpickr(inputRefData.current, {
-          allowInput: true,
-          dateFormat: 'd/m/Y',
-          locale: Portuguese,
-          defaultDate: dataInicio,
-          onChange: (_, dateStr) => {
-            setDataInicio(dateStr);
-          }
-        });
+      flatpickr(inputRefData.current, {
+        allowInput: true,
+        dateFormat: 'd/m/Y',
+        locale: Portuguese,
+        defaultDate: dataInicio,
+        onChange: (_, dateStr) => {
+          setDataInicio(dateStr);
+        }
+      });
     }
   }, []);
 
   useEffect(() => {
     if (pickerRef.current) {
-        pickerRef.current.setDate(dataInicio, false);
+      pickerRef.current.setDate(dataInicio, false);
     }
   }, [dataInicio]);
 
@@ -171,22 +196,18 @@ export default function MonteSuaAventura() {
 
   function handleChangeCusto(e: React.ChangeEvent<HTMLInputElement>, id_do_dia: Number) {
 
-    setCustoDia((prev) => prev.map((c) => c.id === id_do_dia ? { ...c, custo: formatarCustoDia(e.target.value)} : c
+    setCustoDia((prev) => prev.map((c) => c.id === id_do_dia ? { ...c, custo: formatarCustoDia(e.target.value) } : c
     ));
   }
-
-  useEffect(() => {
-    console.log(dias);
-  }, [dias]);
 
   function adicionarCustosAutomaticamente(calculatorEscolhido: values_calculator) {
     setModalShow(false);
     if (dias.length !== calculatorEscolhido.days) {
-      const erroAtual = 
-        dias.length > calculatorEscolhido.days ? 
-        `Seu número de dias atual é maior que o número de dias do Calculator. Remova ${dias.length - calculatorEscolhido.days} dia${dias.length - calculatorEscolhido.days === 1 ? '' : 's'}.` 
-        : 
-        `Seu número de dias atual é menor que o número de dias do Calculator. Adicione ${calculatorEscolhido.days - dias.length} dia${calculatorEscolhido.days - dias.length > 1 ? 's' : ''}.`;
+      const erroAtual =
+        dias.length > calculatorEscolhido.days ?
+          `Seu número de dias atual é maior que o número de dias do Calculator. Remova ${dias.length - calculatorEscolhido.days} dia${dias.length - calculatorEscolhido.days === 1 ? '' : 's'}.`
+          :
+          `Seu número de dias atual é menor que o número de dias do Calculator. Adicione ${calculatorEscolhido.days - dias.length} dia${calculatorEscolhido.days - dias.length > 1 ? 's' : ''}.`;
       setCondicaoInputs(true);
       setAvisoErro(erroAtual);
       return;
@@ -195,11 +216,11 @@ export default function MonteSuaAventura() {
     let custoDiaAutomatico = custoDia.slice();
     let diasAutomatico = dias.slice();
     for (let i = 0; i < custoDiaAutomatico.length; i++) {
-      custoDiaAutomatico[i].custo = 
-      formatarCustoDia(calculatorEscolhido.days_cost[i].toString());
+      custoDiaAutomatico[i].custo =
+        formatarCustoDia(calculatorEscolhido.days_cost[i].toString());
 
-      diasAutomatico[i].custoDia = 
-      parseInt(calculatorEscolhido.days_cost[i].toString());
+      diasAutomatico[i].custoDia =
+        parseInt(calculatorEscolhido.days_cost[i].toString());
     }
 
     setCustoDia(custoDiaAutomatico);
@@ -208,174 +229,236 @@ export default function MonteSuaAventura() {
     setAvisoSucesso('Seus custos foram adicionados com sucesso!');
   }
 
-return (
-  <div
-    id="body" 
-    style={{backgroundImage: dark ? `url(${fundoDark})` : `url(${fundo})`}} 
-    className="sua-aventura-screen"
-  >
+  function salvarTrip() {
+    setLoading(true);
+    const datasSeparadas = dataInicio.split("/");
+    let dataFinal = (Number(datasSeparadas[0]) + 7).toString();
+    dataFinal = `${dataFinal}/${datasSeparadas[1]}/${datasSeparadas[2]}`
+    
+    const data_dos_dias: string[] = [];
 
-    <MensagemModal/>
-
-    {largura >= 1024 ? (
-      <MenuLateral expandirMargem={expandirMargem}/>
-    ) : 
-    (
-      <MenuVertical />
-    )
+    for (let index = 0; index < dias.length; index++) {
+      data_dos_dias.push(`${(Number(datasSeparadas[0]) + index).toString()}/${datasSeparadas[1]}/${datasSeparadas[2]}`);
     }
 
-    <h1 className="titulo sua-aventura-screen">Monte sua Aventura</h1>
+    const newDays: TripDay[] = [];
 
-    {/* Dados iniciais */}
-    <main className="sua-aventura-screen">
-      <form 
-        onSubmit={(e) => {
-          e.preventDefault();
-          gerarDias();
-          }} 
-        className="card sua-aventura-screen">
-        <label htmlFor="destino-viagem" className="sua-aventura-screen">Destino da viagem:</label>
-        <input
-          placeholder="Escolha um destino"
-          id="destino-viagem"
-          required
-          className="sua-aventura-screen"
-          type="text"
-          value={destino}
-          onChange={(e) => setDestino(e.target.value)}
-        />
+    dias.forEach((dia: DiaRoteiro, index) => {
+      const notasArrumado = dia.nota.trim().split('.');
+      let notasArrumado2 = notasArrumado.filter((nota) => nota !== '').map((nota) => {
+        const n = nota.trim();
+        const finais = [".", "?", "!", "%", "/"];
+        const termina = finais.some(f => n.endsWith(f));
+        return termina ? n : `${n}.`
+      });
 
-        <label htmlFor="data-viagem" className="sua-aventura-screen">Data de início:</label>
-        <input
-          onInvalid={(e) => {
-            if (e.currentTarget.id === 'data-viagem') {
+      newDays.push({
+        dia: dia.dia,
+        data: data_dos_dias[index],
+        tipo: dia.tipo,
+        custo: dia.custoDia,
+        notas: notasArrumado2
+      });
+    })
+
+    setViagemPDF({
+      nomeViagem: destino,
+      dataInicial: dataInicio,
+      dataFinal: dataFinal,
+      duracaoDias: dias.length,
+      dias: newDays
+    });
+
+    setTimeout(() => {
+      setLoading(false);
+      setDownloadPdf(true);
+    }, 3000);
+
+  }
+
+
+  return (
+    <div
+      id="body"
+      style={{ backgroundImage: dark ? `url(${fundoDark})` : `url(${fundo})` }}
+      className="sua-aventura-screen"
+    >
+
+      <MensagemModal />
+
+      {largura >= 1024 ? (
+        <MenuLateral expandirMargem={expandirMargem} />
+      ) :
+        (
+          <MenuVertical />
+        )
+      }
+
+      <h1 className="titulo sua-aventura-screen">Monte sua Aventura</h1>
+
+      {/* Dados iniciais */}
+      <main className="sua-aventura-screen">
+        <form
+          onSubmit={(e) => {
             e.preventDefault();
-            e.currentTarget.reportValidity();
-            }
+            gerarDias();
           }}
-          id="data-viagem"
-          required
-          ref={inputRefData}
-          type="text"
-          placeholder="Selecione uma data"
-          className="sua-aventura-screen"
-        />
+          className="card sua-aventura-screen">
+          <label htmlFor="destino-viagem" className="sua-aventura-screen">Destino da viagem:</label>
+          <input
+            placeholder="Escolha um destino"
+            id="destino-viagem"
+            required
+            className="sua-aventura-screen"
+            type="text"
+            value={destino}
+            onChange={(e) => setDestino(e.target.value)}
+          />
 
-        <label htmlFor="quant-dias" className="sua-aventura-screen">Quantidade de dias:</label>
-        <input
-          placeholder="Selecione entre 1-14 dias"
-          type="number"
-          max={14}
-          id="quant-dias"
-          value={quantidadeDias > 0 ? quantidadeDias : ''}
-          className="sua-aventura-screen"
-          onChange={(e) => setQuantidadeDias(Number(e.target.value))}
-        />
+          <label htmlFor="data-viagem" className="sua-aventura-screen">Data de início:</label>
+          <input
+            onInvalid={(e) => {
+              if (e.currentTarget.id === 'data-viagem') {
+                e.preventDefault();
+                e.currentTarget.reportValidity();
+              }
+            }}
+            id="data-viagem"
+            required
+            ref={inputRefData}
+            type="text"
+            placeholder="Selecione uma data"
+            className="sua-aventura-screen"
+          />
 
-        <label htmlFor="btn-montar-aventura" className="sua-aventura-screen"></label>
-        <input className="btn-montar sua-aventura-screen" id="btn-montar-aventura" type="submit" value="Montar Aventura" />
-      </form>
+          <label htmlFor="quant-dias" className="sua-aventura-screen">Quantidade de dias:</label>
+          <input
+            placeholder="Selecione entre 1-14 dias"
+            type="number"
+            max={14}
+            id="quant-dias"
+            value={quantidadeDias > 0 ? quantidadeDias : ''}
+            className="sua-aventura-screen"
+            onChange={(e) => setQuantidadeDias(Number(e.target.value))}
+          />
 
-      {/* Dias */}
-      <div className="dias-container sua-aventura-screen">
-        {dias.map((dia) => (
-          <div key={dia.id} className="card sua-aventura-screen">
-            <abbr title="Usar valores salvos do Calculator.">
-              <i 
-              onClick={() => setModalShow(true)}
-              className="fa-solid fa-file-import absolute top-2 right-2 text-blue-500 text-shadow-[1px_1px_3px_#2222222a] text-xl cursor-pointer"></i>
+          <label htmlFor="btn-montar-aventura" className="sua-aventura-screen"></label>
+          <input className="btn-montar sua-aventura-screen" id="btn-montar-aventura" type="submit" value="Montar Aventura" />
+        </form>
+
+        {/* Dias */}
+        <div className="dias-container sua-aventura-screen">
+          {dias.map((dia) => (
+            <div key={dia.dia} className="card sua-aventura-screen">
+              <abbr title="Usar valores salvos do Calculator.">
+                <i
+                  onClick={() => setModalShow(true)}
+                  className="fa-solid fa-file-import absolute top-2 right-2 text-blue-500 text-shadow-[1px_1px_3px_#2222222a] text-xl cursor-pointer"></i>
               </abbr>
-            <h2 className="sua-aventura-screen">Dia {dia.id}</h2>
+              <h2 className="sua-aventura-screen">Dia {dia.id}</h2>
 
-            <label className="sua-aventura-screen">Tipo do dia:</label>
-            <Select
-              styles={customStyles}
-              options={opcoesTipo}
-              value={opcoesTipo.find((opt) => opt.value === dia.tipo)}
-              onChange={(opcao) => atualizarDia(dia.id, "tipo", opcao?.value)}
-              className="sua-aventura-screen"
-            />
+              <label className="sua-aventura-screen">Tipo do dia:</label>
+              <Select
+                styles={customStyles}
+                options={opcoesTipo}
+                value={opcoesTipo.find((opt) => opt.value === dia.tipo)}
+                onChange={(opcao) => atualizarDia(dia.id, "tipo", opcao?.value)}
+                className="sua-aventura-screen"
+              />
 
-            <label
-            id="label-anotacao" className="sua-aventura-screen">Adicionar nota?</label>
-            <div className="radio-group sua-aventura-screen">
-              <label className="sua-aventura-screen">
-                <input
-                  type="radio"
-                  checked={!dia.adicionarNota}
-                  onChange={() =>
-                    atualizarDia(dia.id, "adicionarNota", false)
-                  }
-                  className="sua-aventura-screen"
-                />
-                Não
-              </label>
-              <label className="sua-aventura-screen">
-                <input
-                  type="radio"
-                  checked={dia.adicionarNota}
-                  onChange={() =>
-                    atualizarDia(dia.id, "adicionarNota", true)
-                  }
-                  className="sua-aventura-screen"
-                />
-                Sim
-              </label>
-            </div>
+              <label
+                id="label-anotacao" className="sua-aventura-screen">Adicionar nota?</label>
+              <div className="radio-group sua-aventura-screen">
+                <label className="sua-aventura-screen">
+                  <input
+                    type="radio"
+                    checked={!dia.adicionarNota}
+                    onChange={() =>
+                      atualizarDia(dia.id, "adicionarNota", false)
+                    }
+                    className="sua-aventura-screen"
+                  />
+                  Não
+                </label>
+                <label className="sua-aventura-screen">
+                  <input
+                    type="radio"
+                    checked={dia.adicionarNota}
+                    onChange={() =>
+                      atualizarDia(dia.id, "adicionarNota", true)
+                    }
+                    className="sua-aventura-screen"
+                  />
+                  Sim
+                </label>
+              </div>
 
-            {dia.adicionarNota && (
-              <>
-                <label className="sua-aventura-screen">Nota do dia:</label>
-                <textarea
-                  placeholder="Adicione alguma informação importante para sua viagem aqui."
-                  value={dia.nota}
-                  onChange={(e) => {
-                    atualizarDia(dia.id, "nota", e.target.value);
-                    autoResize(e);
-                  }}
-                  className="sua-aventura-screen"
-                />
-              </>
-            )}
+              {dia.adicionarNota && (
+                <>
+                  <label className="sua-aventura-screen">Nota do dia:</label>
+                  <textarea
+                    placeholder="Adicione alguma informação importante para sua viagem aqui."
+                    value={dia.nota}
+                    onChange={(e) => {
+                      atualizarDia(dia.id, "nota", e.target.value);
+                      autoResize(e);
+                    }}
+                    className="sua-aventura-screen"
+                  />
+                </>
+              )}
 
-            <label htmlFor="custo-dias" className="sua-aventura-screen">Custo do dia:</label>
-            <input
-              type="Text"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              min={1}
-              max={100000}
-              id="custo-dias"
-              value={custoDia[dia.id - 1].custo}
-              placeholder={`Quanto você pretende gastar${largura < 1024 ? '?' : ' nesse dia?'}`}
-              className="sua-aventura-screen"
-              onChange={(e) => {
-                atualizarDia(dia.id, "custoDia", e.target.value);
-                handleChangeCusto(e, dia.id);
-              }}
-            />
+              <label htmlFor="custo-dias" className="sua-aventura-screen">Custo do dia:</label>
+              <input
+                type="Text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                min={1}
+                max={100000}
+                id="custo-dias"
+                value={custoDia[dia.id - 1].custo}
+                placeholder={`Quanto você pretende gastar${largura < 1024 ? '?' : ' nesse dia?'}`}
+                className="sua-aventura-screen"
+                onChange={(e) => {
+                  atualizarDia(dia.id, "custoDia", e.target.value);
+                  handleChangeCusto(e, dia.id);
+                }}
+              />
 
-            {dias.length > 0 && dias.length === dia.id && (
-                <button className="btn-salvar sua-aventura-screen">
+              {dias.length > 0 && dias.length === dia.id && (
+                loading ? 
+                <div style={{marginTop: 14}} className="flex items-center justify-center">
+                  <ClipLoader color="#000" size={30} />
+                </div>
+                :
+                <button onClick={() => salvarTrip()} className="btn-salvar sua-aventura-screen">
                   Salvar aventura
                 </button>
-            )}
-          </div>
-        ))}
-      </div>
-    </main>
+                
+              )}
+            </div>
+          ))}
+        </div>
+      </main>
+      
+      {viagemPDF && (
+        <GenPdf 
+            open={downloadPdf}
+            trip={viagemPDF}
+            onFinish={() => setDownloadPdf(false)}
+        />
+      )}
 
-    <ModalCalculator 
-      open={modalShow}
-      onClose={() => setModalShow(false)}
-      onOpen={(calculatorEscolhido) => adicionarCustosAutomaticamente(calculatorEscolhido)}
-    />
+      <ModalCalculator
+        open={modalShow}
+        onClose={() => setModalShow(false)}
+        onOpen={(calculatorEscolhido) => adicionarCustosAutomaticamente(calculatorEscolhido)}
+      />
 
-    {largura >= 1024 && (
-      <AnuncioDesktop isTelaDeViagens={false}/>
-    )}
-  </div>
-);
+      {largura >= 1024 && (
+        <AnuncioDesktop isTelaDeViagens={false} />
+      )}
+    </div>
+  );
 
 }
