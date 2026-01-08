@@ -84,7 +84,11 @@ export default function GenPdf({ open, trip, onFinish }: GenPdfProps) {
 
         pdf.addImage(imgData, "PNG", 0, 0, PDF_WIDTH, pdfHeight);
         const pdfBlob = pdf.output("blob");
-        const pdfUrl = URL.createObjectURL(pdfBlob);
+        const file = new File([pdfBlob], "roteiro-viagem.pdf", {
+          type: "application/pdf",
+        });
+
+        const pdfUrl = URL.createObjectURL(file);
         if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
           // 📱 MOBILE → abre o PDF
           window.open(pdfUrl, "_blank");
@@ -97,7 +101,7 @@ export default function GenPdf({ open, trip, onFinish }: GenPdfProps) {
         }
 
         URL.revokeObjectURL(pdfUrl);
-        
+
       } catch (err) {
         console.error("Erro ao gerar PDF:", err);
       } finally {
