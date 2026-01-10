@@ -23,6 +23,7 @@ export default function MenuLateral({ expandirMargem }: {expandirMargem: () => v
             <div id="div-menu-fechado" className="menu-lateral-component">
                 <abbr title="Início"><i onClick={() => navigate('/principal')} className="fa-solid fa-house"></i></abbr>
                 <abbr title="Usuário"><i onClick={() => navigate('/usuario')} className="fa-solid fa-circle-user"></i></abbr>
+                <abbr title="Suas viagens"><i onClick={() => navigate('/suas-viagens')} className="fa-solid fa-passport"></i></abbr>
                 <div id='temas' className="menu-lateral-component">
                     <BotaoTema/>
                 </div>

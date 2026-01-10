@@ -1,7 +1,6 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Providers from "./context/Providers";
 import RotaPrivada from "./auth/rota-privada";
-
 import PaginaInicial from './pages/pagina-inicial';
 import LoginLayout from './pages/login-layout';
 import TelaLogin from "./pages/login";
@@ -21,7 +20,7 @@ import ResetPassword from './pages/usuario/reset-password';
 import Assinaturas from "./pages/usuario/assinaturas";
 import RoteiroAutomatico from "./pages/produtos/roteiro-automatico";
 import DestinoCerto from "./pages/produtos/destino-certo";
-import ChatAuxiliar from "./pages/produtos/chat-auxiliar";
+import SuasViagens from "./pages/suas-viagens";
 
 export default function Rotas() {
   return (
@@ -58,8 +57,6 @@ export default function Rotas() {
 
           <Route path="/destino-certo" element={<DestinoCerto />} />
 
-          <Route path="/chat-auxiliar" element={<ChatAuxiliar />} />
-
           <Route path="/usuario" element={<TelaDeUsuario />}>
             <Route index element={<Geral />} />
             <Route path="autenticacao" element={<Autenticacao />} />
@@ -68,6 +65,8 @@ export default function Rotas() {
           </Route>
 
           <Route path="/reset-password" element={<ResetPassword />} />
+
+          <Route path="/suas-viagens" element={<SuasViagens />} />
         </Routes>
       </HashRouter>
     </Providers>

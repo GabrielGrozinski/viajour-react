@@ -1,0 +1,412 @@
+@reference "tailwindcss";
+
+/* -----------------------------------------------------------
+   FONTES
+----------------------------------------------------------- */
+@font-face {
+  font-family: 'Majesty';
+  src: url(../../assets/fonts/majesty.otf);
+}
+
+/* -----------------------------------------------------------
+   RESET GLOBAL
+----------------------------------------------------------- */
+* {
+  @apply box-border m-0 p-0;
+}
+
+/* -----------------------------------------------------------
+   LAYOUT GERAL DA PAGE
+----------------------------------------------------------- */
+div#body.suas-viagens-screen {
+  @apply relative min-h-screen grid grid-rows-[auto_1fr_auto] grid-cols-[4vw_1fr_200px];
+  background: white fixed no-repeat;
+  background-size: cover;
+  row-gap: 5vh;
+}
+
+/* -----------------------------------------------------------
+   HEADER (TOPO)
+----------------------------------------------------------- */
+header.suas-viagens-screen {
+  @apply row-1 sticky top-0 left-0 pl-4 border-b bg-white border-neutral-300
+         pb-6 pt-4 col-[2/-1] flex justify-between items-center pr-4
+         transition-all duration-300;
+}
+
+/* Header quando menu lateral abre */
+header.suas-viagens-screen.menu-lateral-expandido {
+  @apply pl-[9vw];
+}
+
+/* -----------------------------------------------------------
+   TÍTULOS
+----------------------------------------------------------- */
+header.suas-viagens-screen > h1 {
+  @apply font-['Majesty'] text-4xl text-[#222222] font-[100] text-center;
+}
+
+header.suas-viagens-screen > h1.titulo.suas-viagens-screen > .subtitulo.suas-viagens-screen {
+  @apply text-neutral-600 font-normal text-shadow-[1px_1px_1px_#2222221a] text-center text-sm mt-1;
+}
+
+/* -----------------------------------------------------------
+   ÁREA DE FILTROS
+----------------------------------------------------------- */
+div.filtros.suas-viagens-screen {
+  @apply flex gap-4;
+}
+
+/* ------------------ BUSCA ------------------ */
+div.filtro-busca.suas-viagens-screen {
+  @apply shadow-[0px_0px_2px_#0000008a] p-1.5 px-4 flex items-center justify-between
+         min-w-[340px] rounded-4xl overflow-hidden transition-all duration-300;
+}
+
+/* Input escondido */
+input#searchViagem.suas-viagens-screen {
+  @apply max-h-0 max-w-0 opacity-0;
+}
+
+/* Input expandido */
+input#searchViagem.suas-viagens-screen.ativado {
+  @apply max-w-[80%] min-w-[80%] bg-white opacity-100 pl-4
+         mr-1 min-h-[70%] max-h-[70%] rounded-xl
+         border border-[#2222227a] shadow-[1px_1px_2px_#2222223a];
+}
+
+/* Placeholder do Input */
+input#searchViagem.suas-viagens-screen.ativado::placeholder {
+  @apply text-neutral-400 text-shadow-[1px_1px_1px_#2222221a];
+}
+
+/* Focus */
+input#searchViagem.suas-viagens-screen.ativado:focus {
+  @apply outline-none;
+}
+
+/* Hover caixa busca */
+div.filtro-busca.suas-viagens-screen:hover {
+  @apply shadow-[0px_0px_3px_#0000008a];
+}
+
+/* Ícone de busca */
+div.filtro-busca.suas-viagens-screen > div.icone {
+  @apply bg-[#34d399] cursor-pointer p-1.5 px-2 rounded-full;
+}
+
+div.filtro-busca.suas-viagens-screen > div.icone > i {
+  @apply translate-y-[-10%] text-white text-shadow-[1px_1px_1px_#2222222a];
+}
+
+/* ------------------ BOTÕES DE FILTRO ------------------ */
+
+.btn-filtro.suas-viagens-screen {
+  @apply text-sm font-normal cursor-pointer transition-[0.2s]
+         px-3 py-1.5 rounded-xl bg-white;
+}
+
+.btn-filtro:hover.suas-viagens-screen {
+  background: #f1f5f9;
+}
+
+hr.hr-vertical.suas-viagens-screen {
+  @apply border-none h-[90%] w-0.5 bg-neutral-400;
+}
+
+/* Ativo */
+div.filtro-busca.suas-viagens-screen > .btn-ativo.suas-viagens-screen {
+  @apply text-white bg-[#34d399];
+}
+
+.btn-ativo:hover.suas-viagens-screen {
+  @apply bg-[#34d399];
+}
+
+/* ------------------ FILTRO DE PREÇO ------------------ */
+
+div.filtro-preco.suas-viagens-screen {
+  @apply flex flex-col justify-between items-center
+         p-1.5 min-w-[340px] rounded-4xl transition-all duration-300;
+}
+
+div.custo-estimado.suas-viagens-screen {
+  @apply flex justify-between w-full;
+}
+
+/* -----------------------------------------------------------
+   CONTEÚDO PRINCIPAL
+----------------------------------------------------------- */
+.pagina-natal.suas-viagens-screen { 
+  @apply w-full row-2 col-2 grid grid-cols-[5%_1fr_5%] gap-6
+         pt-0 transition-all duration-300;
+}
+
+.pagina-natal.suas-viagens-screen.menu-lateral-expandido {
+  @apply pl-[8vw];
+}
+
+/* -----------------------------------------------------------
+   LISTA + CARDS DE VIAGENS
+----------------------------------------------------------- */
+.lista-viagens.suas-viagens-screen {
+  @apply flex gap-8 col-2 flex-wrap min-w-auto;
+}
+
+.card-viagem.suas-viagens-screen {
+  @apply cursor-pointer overflow-hidden bg-white
+         max-w-[31%] min-w-[25%] grid grid-rows-[2fr_1fr] justify-items-center
+         rounded-2xl transition-[0.2s]
+         hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)]
+         active:shadow-[0_4px_16px_rgba(0,0,0,0.12)];
+}
+
+.card-img.suas-viagens-screen {
+  @apply object-cover min-w-full min-h-full;
+}
+
+.card-info.suas-viagens-screen {
+  @apply flex flex-col justify-between p-4;
+}
+
+.card-titulo.suas-viagens-screen {
+  @apply text-lg font-semibold md:text-xl;
+}
+
+.card-descricao.suas-viagens-screen {
+  @apply text-sm text-slate-900 mt-1.5;
+}
+
+.card-custo.suas-viagens-screen {
+  @apply text-sm text-slate-600 mt-1.5;
+}
+
+.card-custo span.suas-viagens-screen {
+  @apply font-semibold;
+}
+
+.tag-natalina.suas-viagens-screen {
+  @apply text-[12px] text-white text-shadow-[1px_1px_1px_#2222223a] bg-[#34d399] w-fit mt-3 px-3 py-1.5 rounded-full;
+}
+
+/* Imagem lateral fixa (desktop) */
+div.imagem-desktop.suas-viagens-screen {
+  @apply fixed right-[1%] top-[50%] translate-y-[-40%]
+         bg-cover bg-no-repeat cursor-pointer
+         col-3 row-span-full
+         min-w-[200px] min-h-[550px]
+         max-w-[200px] max-h-[550px];
+}
+
+/* -----------------------------------------------------------
+   ANÚNCIO FIXO NO RODAPÉ
+----------------------------------------------------------- */
+.ad-container {
+  @apply fixed bottom-0 left-1/2 -translate-x-1/2 z-1
+         w-full max-w-[900px] bg-white overflow-hidden
+         h-[50px] rounded-t-xl
+         shadow-[0_-8px_25px_rgba(0,0,0,0.18)]
+         transition-all duration-300 ease-in-out;
+}
+
+/* Quando abre */
+.ad-container.open {
+  @apply h-[230px] shadow-[0_-12px_40px_rgba(0,0,0,0.25)];
+}
+
+/* Header do anúncio */
+.ad-header {
+  @apply w-full h-[60px] cursor-pointer flex justify-center items-start
+         bg-white relative;
+}
+
+/* Seta */
+.ad-arrow {
+  @apply text-[28px] text-[#444] transition duration-300 ease-in-out;
+}
+
+/* Conteúdo */
+.ad-content {
+  @apply w-full h-[200px] p-3 flex justify-center items-center;
+}
+
+.ad-content img {
+  @apply max-w-[90%] max-h-[90px] rounded-xl;
+}
+
+/* -----------------------------------------------------------
+   LOADERS DO INFINITE SCROLL
+----------------------------------------------------------- */
+.loader-carregando.suas-viagens-screen,
+.loader-fim.suas-viagens-screen {
+  @apply w-full text-center text-sm text-gray-500 mb-10;
+}
+
+.loader-carregando.suas-viagens-screen {
+  @apply animate-pulse;
+}
+
+@media screen and (max-width: 1024px) {
+  
+/* -----------------------------------------------------------
+   LAYOUT GERAL DA PAGE
+----------------------------------------------------------- */
+div#body.suas-viagens-screen {
+  @apply flex flex-col gap-4;
+  row-gap: 0;
+}
+
+/* -----------------------------------------------------------
+   HEADER (TOPO)
+----------------------------------------------------------- */
+header.suas-viagens-screen {
+  @apply pb-2 pt-2 grid grid-cols-1 grid-rows-[auto_auto] justify-center gap-2 items-start pr-2 pl-2;
+}
+
+/* Título principal do header */
+header.suas-viagens-screen > h1.titulo.suas-viagens-screen {
+  @apply font-[700];
+}
+
+.aparecer {
+  @apply opacity-100;
+}
+
+.sumir {
+  @apply opacity-0 pointer-events-none absolute;
+}
+
+/* -----------------------------------------------------------
+   ÁREA DE FILTROS
+----------------------------------------------------------- */
+div.filtros.suas-viagens-screen {
+  @apply grid grid-rows-2 gap-2;
+}
+
+/* ------------------ BUSCA ------------------ */
+div.filtro-busca.suas-viagens-screen {
+  @apply min-w-[80%] max-w-full scale-90 gap-3;
+}
+
+/* Ícone de busca */
+div.filtro-busca.suas-viagens-screen > div.icone {
+  @apply p-1 px-1.5;
+}
+
+div.filtro-busca.suas-viagens-screen > div.icone > i {
+  @apply text-sm;
+}
+
+/* ------------------ BOTÕES DE FILTRO ------------------ */
+.btn-filtro.suas-viagens-screen {
+  @apply text-sm px-[4%] py-[2%];
+}
+
+/* ------------------ FILTRO DE PREÇO ------------------ */
+div.filtro-preco.suas-viagens-screen {
+  @apply min-w-[80%] max-w-full scale-90;
+}
+
+/* -----------------------------------------------------------
+   CONTEÚDO PRINCIPAL
+----------------------------------------------------------- */
+main.pagina-natal.suas-viagens-screen { 
+  @apply w-full flex gap-6;
+}
+
+/* -----------------------------------------------------------
+   LISTA + CARDS DE VIAGENS
+----------------------------------------------------------- */
+.lista-viagens.suas-viagens-screen {
+  @apply grid grid-cols-[1%_1fr_1fr_1%] gap-6 mt-4 ;
+}
+
+.card-viagem.suas-viagens-screen {
+  @apply max-w-full min-w-full max-h-[600px] grid-rows-[auto_1fr];
+}
+
+.card-viagem.suas-viagens-screen:nth-child(odd) {
+  @apply col-2
+}
+
+.card-viagem.suas-viagens-screen:nth-child(even) {
+  @apply col-3
+}
+
+.card-img.suas-viagens-screen {
+  @apply min-w-full min-h-[200px] max-h-[200px];
+}
+
+/* -----------------------------------------------------------
+   LOADERS DO INFINITE SCROLL
+----------------------------------------------------------- */
+.loader-carregando.suas-viagens-screen,
+.loader-fim.suas-viagens-screen {
+  @apply min-w-full max-w-full col-3 translate-x-[-50%] mb-[100px];
+}
+}
+
+/* -----------------------------------------------------------
+   Modo Dark
+----------------------------------------------------------- */
+
+html.dark div#body.suas-viagens-screen {
+  background: url(../../assets/imagens/fundo-dark.png) fixed no-repeat;
+}
+
+html.dark header.suas-viagens-screen {
+  @apply bg-[#171c28];
+}
+
+html.dark header.suas-viagens-screen > h1 {
+  @apply text-slate-200;
+}
+
+html.dark header.suas-viagens-screen > h1.titulo.suas-viagens-screen > .subtitulo.suas-viagens-screen {
+  @apply text-neutral-400;
+}
+
+html.dark .btn-filtro.suas-viagens-screen {
+  @apply bg-[#1e293b] text-slate-100;
+}
+
+html.dark .btn-filtro:hover.suas-viagens-screen {
+  @apply bg-[#283243];
+}
+
+html.dark .btn-ativo:hover.suas-viagens-screen {
+  @apply bg-[#34d399];
+}
+
+html.dark div.filtro-busca.suas-viagens-screen {
+  @apply shadow-[0px_0px_2px_#e2e8f0];
+}
+
+html.dark input#searchViagem.suas-viagens-screen.ativado {
+  @apply text-slate-800 text-shadow-[1px_1px_1px_#2222221a];
+}
+
+html.dark div.filtro-busca:hover.suas-viagens-screen {
+  @apply shadow-[0px_0px_3px_#f8fafc];
+}
+
+html.dark .custo-estimado.suas-viagens-screen {
+  @apply text-slate-200;
+}
+
+html.dark .card-viagem.suas-viagens-screen {
+  @apply bg-[#171c28] transition-shadow duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)] active:shadow-[0_4px_16px_rgba(0,0,0,0.4)];
+}
+
+html.dark .card-titulo.suas-viagens-screen {
+  @apply text-slate-100;
+}
+
+html.dark .card-descricao.suas-viagens-screen {
+  @apply text-slate-300;
+}
+
+html.dark .card-custo.suas-viagens-screen {
+  @apply text-neutral-300;
+}
+
