@@ -136,13 +136,21 @@ export default function MenuAberto({ fechar }: {fechar: () => void}) {
         classeIconeDireita: 'icones-planejamento',
     },
     {
+        rota: '/suas-viagens',
+        classeArticle: 'itens-do-viajour itens-planejamento menu-aberto-screen',
+        iconeEsquerda: 'fa-solid fa-passport',
+        texto: 'Suas Viagens',
+        iconeDireita: 'fa-regular fa-pen-to-square',
+        classeIconeDireita: 'icones-planejamento',
+    },
+    {
         rota: '/viagens-de-natal',
         classeArticle: 'itens-do-viajour itens-planejamento menu-aberto-screen',
         iconeEsquerda: 'fa-solid fa-gift',
         texto: 'Viagens de Natal',
         iconeDireita: 'fa-regular fa-pen-to-square',
         classeIconeDireita: 'icones-planejamento',
-    },
+    }
     ];
     const [moedaAtual, setMoedaAtual] = useState<Moeda>({
         id: 'pt-br',
