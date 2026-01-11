@@ -81,7 +81,7 @@ export default function Autenticacao() {
 
   async function handlePassword() {
     const { error } = await supabase.auth.resetPasswordForEmail(user?.email ?? '', {
-      redirectTo: 'http://localhost:5173/#/reset-password'
+      redirectTo: 'https://gabrielgrozinski.github.io/viajour-react/#/reset-password'
     });
     setCondicaoInputs(true);
       if (error) {

@@ -20,7 +20,7 @@
 ----------------------------------------------------------- */
 div#body.viagens-romanticas-screen {
   @apply relative min-h-screen grid grid-rows-[auto_1fr_auto] grid-cols-[4vw_1fr_200px];
-  background: white fixed no-repeat;
+  background: url(../../assets/imagens/fundo-claro.png) fixed no-repeat;
   background-size: cover;
   row-gap: 5vh;
 }

@@ -51,14 +51,7 @@ export default function SuasViagens() {
   const [pesquisaAtiva, setPesquisaAtiva] = useState<boolean>(false);
   const [pesquisaAtual, setPesquisaAtual] = useState<string>('');
   const [largura, setLargura] = useState(window.innerWidth);
-  const [value, setValue] = useState([0, 4000]);
-  useEffect(() => {
-    if (filtro === 'nacional') {
-        setValue([0, 4000]);
-    } else {
-        setValue([0, 10000])
-    }
-  }, [filtro]);
+  const [value, setValue] = useState([1000, 10000]);
   const [menuExpandidoH1, setMenuExpandidoH1] = useState<boolean>(false);
 
   useEffect(() => {
@@ -255,7 +248,7 @@ export default function SuasViagens() {
               if (pesquisaAtiva) {ativarPesquisa()}
             } else return;
             }}
-            style={{backgroundColor: pesquisaAtiva ? '#f59e0b' : ''}} className="filtro-busca suas-viagens-screen">
+            style={{backgroundColor: pesquisaAtiva ? '#34d399' : ''}} className="filtro-busca suas-viagens-screen">
             <input onChange={(event) => {
               scrollToHeader();
               const textoDigitado = event.target.value;

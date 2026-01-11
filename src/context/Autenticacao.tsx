@@ -108,7 +108,7 @@ export default function AutenticacaoProvider({ children }: Props) {
         const { error } = await supabase.auth.signInWithOAuth({
             provider: "google",
             options: {
-            redirectTo: 'http://localhost:5173/#/principal'
+            redirectTo: 'https://gabrielgrozinski.github.io/viajour-react/#/principal'
             }
         });
 
