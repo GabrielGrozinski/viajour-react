@@ -4,6 +4,7 @@ import CartaoDeCredito from "../../components/usuario/cartao-de-credito";
 import { supabase } from "../../auth/supabase-client";
 import { motion, AnimatePresence } from "framer-motion";
 import { userAuth } from "../../context/autenticacao";
+import { ClipLoader } from "react-spinners";
 
 
 interface plansType {
@@ -22,9 +23,10 @@ interface plansType {
 
 
 export default function Assinaturas() {
-  const { user, alterarAssinatura, setCondicaoInputs, setAvisoSucesso } = userAuth();
+  const { alterarAssinatura, setCondicaoInputs, setAvisoSucesso } = userAuth();
   const [ativandoCartao, setAtivandoCartao] = useState<boolean>(false);
   const { topicoEscolhido }: any = useOutletContext();
+  const [loading, setLoading] = useState<boolean>(true);
   const [plans, setPlans] = useState<plansType[] | null>(null);
 
   useEffect(() => {
@@ -39,10 +41,6 @@ export default function Assinaturas() {
   }, [topicoEscolhido]);
 
   useEffect(() => {
-    console.log('user', user);
-  }, [user]);
-
-  useEffect(() => {
     async function fetchPlans() {
       const { data, error } = await supabase
         .from('plans')
@@ -54,6 +52,8 @@ export default function Assinaturas() {
       }
 
         setPlans(data as any);
+
+      setLoading(false);
     }
 
     fetchPlans();
@@ -89,7 +89,10 @@ return (
     id="escolher-plano"
     className="assinaturas-outlet flex justify-center items-center flex-col lg:flex-row lg:items-stretch gap-6"
   >
-    {!ativandoCartao ? (
+    {loading ? (
+      <ClipLoader size={30} color="#000" className="self-center" />
+    ) : (
+    !ativandoCartao ? (
       plans?.map((plan: plansType) => (
         <main
           key={plan.id}
@@ -192,6 +195,7 @@ return (
           />
         </motion.div>
       </AnimatePresence>
+    )
     )}
   </div>
 );

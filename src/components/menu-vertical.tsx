@@ -56,13 +56,6 @@ export default function MenuVertical() {
             </a>
             </article>
 
-            <article onClick={() => navigate('./chat-auxiliar')} className="itens-do-viajour-desktop menu-vertical-component">
-            <a className="menu-vertical-component">
-                <i className="fa-solid fa-brain menu-vertical-component" />
-                <p className="menu-vertical-component">Chat Auxiliar</p>
-            </a>
-            </article>
-
             <article onClick={() => navigate('/destino-certo')} className="itens-do-viajour-desktop menu-vertical-component">
             <a className="menu-vertical-component">
                 <i className="fa-solid fa-plane menu-vertical-component" />

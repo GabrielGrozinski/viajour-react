@@ -299,7 +299,7 @@ return (
 
       <nav className="pagina-inicial-screen">
         <h3 className="pagina-inicial-screen">
-          Descubra o mundo conosco <strong><span id="Viajour" className="pagina-inicial-screen">Viajour</span></strong><br />
+          Descubra o mundo conosco <strong><br /><span id="Viajour" className="pagina-inicial-screen">Viajour</span></strong><br />
           Descubra, Planeje, Viaje
         </h3>
         <ul className="pagina-inicial-screen">

@@ -18,6 +18,12 @@ interface sub_topicos {
 
 export default function Autenticacao() {
   const { setCondicaoInputs, setAvisoErro, setAvisoSucesso, user } = userAuth();
+  const [largura, setLargura] = useState(window.innerWidth);
+  useEffect(() => {
+      const handleResize = () => setLargura(window.innerWidth);
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const { dark } = useContext(TemaContext);
   const [phone, setPhone] = useState<string>('');
   const [code, setCode] = useState<string>('');
@@ -227,7 +233,7 @@ return (
                   <>
                   <button
                   onClick={() => updatePhone(phone)}
-                  style={{padding: '4px 6px', marginLeft: 10}}
+                  style={{padding: '4px 6px', margin: largura < 768 ? '10px 0px 0px 0px' : '0px 0px 0px 10px'}}
                   className="inline min-h-9 min-w-12 bg-amber-700 cursor-pointer rounded-lg text-slate-100 text-shadow-[1px_0px_0px_#0000001a]"
                   >
                     Enviar código de segurança

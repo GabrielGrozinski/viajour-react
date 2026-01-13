@@ -76,14 +76,6 @@ export default function MenuAberto({ fechar }: {fechar: () => void}) {
         classeIconeDireita: 'icones-ia',
     },
     {
-        rota: './chat-auxiliar',
-        classeArticle: 'itens-do-viajour itens-ia menu-aberto-screen',
-        iconeEsquerda: 'fa-solid fa-brain',
-        texto: 'Chat Auxiliar',
-        iconeDireita: 'fa-solid fa-robot',
-        classeIconeDireita: 'icones-ia',
-    },
-    {
         rota: '/destino-certo',
         classeArticle: 'itens-do-viajour itens-ia menu-aberto-screen',
         iconeEsquerda: 'fa-solid fa-plane',
