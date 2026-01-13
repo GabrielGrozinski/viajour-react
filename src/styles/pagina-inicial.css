@@ -231,10 +231,8 @@ html.dark #main.pagina-inicial-screen {
    IMAGEM DE DESTAQUE
 ----------------------------------------------------------- */
 #main.pagina-inicial-screen > section.imagem.pagina-inicial-screen {
-  @apply col-[span_3] row-1 w-full h-full bg-cover;
-  background: var(--texto)
-    url(https://cdn.pixabay.com/photo/2021/12/13/07/06/airplane-6867678_1280.jpg)
-    center center no-repeat fixed;
+  @apply col-[span_3] row-1 w-full h-full bg-cover bg-no-repeat bg-center;
+  background-image: url(https://cdn.pixabay.com/photo/2017/02/17/08/23/giraffe-2073609_1280.jpg);
 }
 
 /* -----------------------------------------------------------
@@ -265,7 +263,7 @@ html.dark #produtos-section.pagina-inicial-screen p {
 }
 
 #produtos-section.pagina-inicial-screen img {
-  @apply max-h-2/3 max-w-2/3;
+  @apply max-h-2/3 max-w-2/3 self-center;
 }
 
 #produtos-section.pagina-inicial-screen article:nth-child(odd) {
