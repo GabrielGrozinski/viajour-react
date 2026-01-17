@@ -47,7 +47,7 @@ export default function TelaLogin() {
 
     async function handlePassword() {
         const { error } = await supabase.auth.resetPasswordForEmail(email ?? '', {
-        redirectTo: 'https://gabrielgrozinski.github.io/viajour-react/#/reset-password'
+        redirectTo: 'https://gabrielgrozinski.github.io/viajour-dist/#/reset-password'
         });
         setCondicaoInputs(true);
         if (error) {
